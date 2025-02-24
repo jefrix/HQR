@@ -6,6 +6,8 @@
     <title>Holonomic Quantum Reality (HQR)</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Add p5.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
 </head>
 <body>
     <!-- Header Section -->
@@ -68,39 +70,35 @@
             <h2>Supporting Evidence</h2>
             <p>HQR builds on established research:</p>
             <ul>
-                <li><strong>Nikolić (2006)</strong>: Extends Bohmian Mechanics to string theory, supporting deterministic behavior in higher dimensions. <a href="https://arxiv.org/pdf/hep-th/0610138" target="_blank">[Link]</a></li>
-                <li><strong>Tangpanitanon et al. (2018)</strong>: Demonstrates hidden order in photonic lattices, aligning with HQR’s quantum foundations. <a href="https://arxiv.org/abs/1806.10762" target="_blank">[Link]</a></li>
-                <li><strong>Maldacena (1998)</strong>: Introduces AdS/CFT, underpinning HQR’s holographic principle. <a href="https://www.intlpress.com/site/pub/files/_fulltext/journals/atmp/1998/0002/0002/ATMP-1998-0002-0002-a001.pdf" target="_blank">[Link]</a></li>
+                <li><strong>Nikolić (2006)</strong>: Extends Bohmian Mechanics to string theory. <a href="https://arxiv.org/pdf/hep-th/0610138" target="_blank">[Link]</a></li>
+                <li><strong>Tangpanitanon et al. (2018)</strong>: Demonstrates hidden order in photonic lattices. <a href="https://arxiv.org/abs/1806.10762" target="_blank">[Link]</a></li>
+                <li><strong>Maldacena (1998)</strong>: Introduces AdS/CFT for holography. <a href="https://www.intlpress.com/site/pub/files/_fulltext/journals/atmp/1998/0002/0002/ATMP-1998-0002-0002-a001.pdf" target="_blank">[Link]</a></li>
             </ul>
         </section>
 
-        <!-- Visuals Section -->
+        <!-- Visuals Section with Animated Canvases -->
         <section id="visuals">
             <h2>Visualizing HQR</h2>
             <div class="visual-grid">
                 <div class="visual-card">
                     <h3>The 11D Universe</h3>
-                    <!-- Placeholder for Visual 1 -->
-                    <div class="visual-placeholder">[Diagram: A 4D cube within an 11D sphere with strings and branes]</div>
-                    <p>Our 4D reality as a slice of an 11-dimensional M-theory cosmos.</p>
+                    <div class="visual-placeholder">[Static Diagram Placeholder]</div>
+                    <p>Our 4D reality as a slice of an 11D M-theory cosmos.</p>
                 </div>
                 <div class="visual-card">
                     <h3>Hidden Order Projection</h3>
-                    <!-- Placeholder for Visual 2 -->
-                    <div class="visual-placeholder">[Illustration: Strings in 11D projecting hidden order onto a 4D grid]</div>
-                    <p>Hidden order as shadows from higher dimensions.</p>
+                    <div id="hidden-order-canvas" class="visual-canvas"></div>
+                    <p>Hidden order as shadows from higher dimensions (interactive).</p>
                 </div>
                 <div class="visual-card">
                     <h3>Pilot Wave Guidance</h3>
-                    <!-- Placeholder for Visual 3 -->
-                    <div class="visual-placeholder">[Flow Diagram: Pilot wave guiding particles in 4D]</div>
+                    <div class="visual-placeholder">[Static Diagram Placeholder]</div>
                     <p>Bohmian Mechanics directing particle motion from 11D.</p>
                 </div>
                 <div class="visual-card">
                     <h3>Holographic Reality</h3>
-                    <!-- Placeholder for Visual 4 -->
-                    <div class="visual-placeholder">[3D Diagram: 4D boundary of an 11D bulk]</div>
-                    <p>Our universe as a holographic boundary.</p>
+                    <div id="holographic-canvas" class="visual-canvas"></div>
+                    <p>Our universe as a holographic boundary (animated).</p>
                 </div>
             </div>
         </section>
@@ -110,9 +108,9 @@
             <h2>Implications of HQR</h2>
             <p>HQR offers profound insights:</p>
             <ul>
-                <li><strong>Quantum Gravity</strong>: Bridges quantum mechanics and gravity via hidden order.</li>
+                <li><strong>Quantum Gravity</strong>: Bridges quantum mechanics and gravity.</li>
                 <li><strong>Unification</strong>: Unifies forces in an 11D framework.</li>
-                <li><strong>Determinism</strong>: Resolves quantum randomness with a deterministic pilot wave.</li>
+                <li><strong>Determinism</strong>: Resolves quantum randomness.</li>
             </ul>
         </section>
 
@@ -120,18 +118,19 @@
         <section id="references">
             <h2>References</h2>
             <ul>
-                <li>Maldacena, J. (1998). <em>The large N limit of superconformal field theories and supergravity.</em> Advances in Theoretical and Mathematical Physics, 2(2), 231-252.</li>
-                <li>Nikolić, H. (2006). <em>Bohmian mechanics in relativistic quantum mechanics, quantum field theory and string theory.</em> arXiv:hep-th/0610138.</li>
-                <li>Tangpanitanon, J., et al. (2018). <em>Hidden Order in Quantum Many-body Dynamics of Driven-Dissipative Nonlinear Photonic Lattices.</em> arXiv:1806.10762.</li>
+                <li>Maldacena, J. (1998). <em>The large N limit of superconformal field theories and supergravity.</em></li>
+                <li>Nikolić, H. (2006). <em>Bohmian mechanics in relativistic quantum mechanics.</em></li>
+                <li>Tangpanitanon, J., et al. (2018). <em>Hidden Order in Quantum Many-body Dynamics.</em></li>
             </ul>
         </section>
     </main>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 HQR Team | Hosted on GitHub | Contact: <a href="mailto:hqr@example.com">hqr@example.com</a></p>
+        <p>© 2025 HQR Team | Hosted on GitHub | Contact: <a href="mailto:hqr@example.com">hqr@example.com</a></p>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Load Sketch.js -->
+    <script src="sketch.js"></script>
 </body>
 </html>
