@@ -1,0 +1,163 @@
+/* Reset and General Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #1a1a2e;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 50px 20px;
+    background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+}
+
+header h1 {
+    font-size: 3rem;
+    color: #e94560;
+    text-transform: uppercase;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #a2a8d3;
+    margin-top: 10px;
+}
+
+/* Navigation */
+nav {
+    background-color: #0f3460;
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+nav a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #e94560;
+}
+
+/* Main Content */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 50px;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #e94560;
+    margin-bottom: 20px;
+}
+
+p, ul {
+    font-size: 1.1rem;
+}
+
+ul {
+    list-style: disc;
+    margin-left: 20px;
+}
+
+/* Component Grid */
+.component-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.component-card {
+    background-color: #16213e;
+    padding: 20px;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.component-card:hover {
+    transform: scale(1.05);
+}
+
+.component-card h3 {
+    color: #a2a8d3;
+    margin-bottom: 10px;
+}
+
+/* Visuals Section */
+.visual-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.visual-card {
+    background-color: #16213e;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.visual-placeholder {
+    height: 150px;
+    background-color: #0f3460;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #e0e0e0;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #0f3460;
+    color: #a2a8d3;
+}
+
+footer a {
+    color: #e94560;
+    text-decoration: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+}
