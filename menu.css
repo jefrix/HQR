@@ -21,6 +21,8 @@
     list-style: none;
     display: none;
     flex-direction: column;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-list.active {
@@ -33,6 +35,7 @@
     padding: 15px;
     display: block;
     font-size: 16px;
+    white-space: nowrap; /* Prevent text wrapping within items */
 }
 
 .nav-list li a:hover {
@@ -51,27 +54,29 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        margin: 0;
-        padding: 0;
+        flex-wrap: wrap; /* Allow items to wrap if screen is too narrow */
+        gap: 15px; /* Reduce gap to prevent overflow */
+        padding: 0 20px; /* Add horizontal padding for better spacing */
     }
 
     .nav-list li {
-        margin-right: 20px;
-    }
-
-    .nav-list li:last-child {
-        margin-right: 0;
+        margin: 0; /* Remove margin to prevent overflow */
     }
 
     .nav-list li a {
-        padding: 10px 15px;
-        font-size: 16px;
+        padding: 10px 12px; /* Reduce padding to fit more items */
+        font-size: 14px; /* Slightly smaller font for desktop to fit more items */
+    }
+
+    .nav-list li a:hover {
+        background-color: #0f3460;
+        color: #a2a8d3;
     }
 }
 
-/* Ensure sections are not obscured by fixed nav */
+/* Ensure menu height is accounted for in content */
 section {
-    scroll-margin-top: 60px;
+    scroll-margin-top: 70px; /* Increased to account for menu height + slight buffer */
 }
 
 /* Smooth scrolling */
