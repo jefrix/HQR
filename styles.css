@@ -16,8 +16,10 @@ body {
 /* Header */
 header {
     text-align: center;
-    padding: 50px 20px;
+    padding: 70px 20px 50px; /* Increased top padding to 70px to match menu height */
     background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+    position: relative; /* Ensure header content stays below fixed nav */
+    z-index: 900; /* Below nav z-index */
 }
 
 header h1 {
@@ -112,7 +114,7 @@ main {
 
 section {
     margin-bottom: 50px;
-    scroll-margin-top: 60px; /* Adjust for fixed nav */
+    scroll-margin-top: 70px; /* Ensure sections aren’t obscured by fixed nav */
 }
 
 /* Headings and Text */
