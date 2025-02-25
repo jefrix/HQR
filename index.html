@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Holonomic Quantum Reality (HQR) - Quantum Physics & M-Theory</title>
     <meta name="description" content="Explore Holonomic Quantum Reality (HQR), a 30% likely theory unifying hidden order (\( \langle O(x) O(y) \rangle \)), string theory, M-theory (\( ds^2 = g_{\mu\nu} dx^\mu dx^\nu, \mu, \nu = 0, \dots, 10 \)), and Bohmian Mechanics (\( \Psi = R e^{iS/\hbar}, \frac{dx}{dt} = \frac{\nabla S}{m} \)). HQR posits our 4D universe as a projection of 11D, offering insights into quantum gravity via AdS/CFT (\( Z_{\text{CFT}} = \int \mathcal{D}\phi \, e^{-S_{\text{bulk}}[\phi]} \)).">
-    <meta name="keywords" content="Holonomic Quantum Reality, tensor networks, MERA, AdS/CFT, HQR, quantum physics, string theory, M-theory, Bohmian Mechanics, hidden order, quantum gravity, 11-dimensional universe, likelihood of HQR, quantum many-body systems, AdS/CFT, theoretical physics">
+    <meta name="keywords" content="Holonomic Quantum Reality, HQR, quantum physics, string theory, M-theory, Bohmian Mechanics, hidden order, quantum gravity, 11-dimensional universe, tensor networks, MERA, AdS/CFT, theoretical physics">
     <meta name="robots" content="index, follow">
     <meta property="og:title" content="Holonomic Quantum Reality (HQR) - Quantum Physics & M-Theory">
-    <meta property="og:description" content="Discover HQR, a unified theory of hidden order, string theory, and deterministic quantum mechanics, exploring 11-dimensional reality and quantum gravity, with a 30% likelihood of being our reality.">
+    <meta property="og:description" content="Discover HQR, a unified theory of hidden order, string theory, and deterministic quantum mechanics, exploring 11-dimensional reality and quantum gravity, with a possibility of being our reality.">
     <meta property="og:image" content="https://jefrix.github.io/HQR/11d_universe.png">
     <meta property="og:url" content="https://jefrix.github.io/HQR">
     <meta property="og:type" content="website">
@@ -17,6 +17,7 @@
     <meta name="twitter:description" content="Explore HQR, a theory unifying hidden order, string theory, and Bohmian Mechanics in an 11D universe.">
     <meta name="twitter:image" content="https://jefrix.github.io/HQR/11d_universe.png">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="menu.css"> <!-- New CSS for menu -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
 </head>
@@ -27,46 +28,47 @@
         <p class="subtitle">A Unified Theory of Hidden Order, String Theory, and Deterministic Quantum Mechanics</p>
     </header>
 
-    <!-- Navigation Bar -->
-<nav class="mobile-nav">
-    <div class="menu-toggle">☰</div>
-    <ul class="nav-list">
-        <li><a href="#abstract">Abstract</a></li>
-        <li><a href="#overview">Overview</a></li>
-        <li><a href="#key-points">Key Points</a></li>
-        <li><a href="#components">Key Components</a></li>
-        <li><a href="#tensor-networks">Tensor Networks</a></li>
-        <li><a href="#mathematical-foundations">Mathematical Foundations</a></li>
-        <li><a href="#evidence">Supporting Evidence</a></li>
-        <li><a href="#visuals">Visuals</a></li>
-        <li><a href="#implications">Implications</a></li>
-        <li><a href="#experiments">Experiments</a></li>
-        <li><a href="#references">References</a></li>
-    </ul>
-</nav>
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+        <div class="menu-toggle" aria-label="Toggle navigation menu">☰</div>
+        <ul class="nav-list">
+            <li><a href="#abstract">Abstract</a></li>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#key-points">Key Points</a></li>
+            <li><a href="#components">Key Components</a></li>
+            <li><a href="#tensor-networks">Tensor Networks</a></li>
+            <li><a href="#mathematical-foundations">Mathematical Foundations</a></li>
+            <li><a href="#evidence">Supporting Evidence</a></li>
+            <li><a href="#visuals">Visuals</a></li>
+            <li><a href="#implications">Implications</a></li>
+            <li><a href="#experiments">Experiments</a></li>
+            <li><a href="#references">References</a></li>
+        </ul>
+    </nav>
 
     <!-- Main Content -->
     <main>
-            <!-- Executive Summary -->
-    <section id="executive-summary" class="executive-summary-section">
-        <h2>Welcome to HQR</h2>
-        <p>Our world may be a small part of a much bigger, hidden universe with 11 dimensions. Holonomic Quantum Reality (HQR) is an idea that suggests secret patterns in nature—called Hidden Order—might come from this larger reality, potentially solving how gravity fits with quantum physics.</p>
-    </section>
-    <!-- Abstract Section -->
-    <section id="abstract" class="abstract-section">
-        <h2>Abstract</h2>
-        <p><strong>Holonomic Quantum Reality (HQR)</strong> proposes a novel theoretical framework that synthesizes hidden order in quantum many-body systems, string theory, M-theory, and Bohmian mechanics to describe our 4D universe as a projection from an 11-dimensional M-theory structure. In M-theory, the universe is fundamentally 11-dimensional, with the metric tensor generalized to:</p>
-        <p>\[ ds^2 = g_{\mu\nu} dx^\mu dx^\nu, \quad \mu, \nu = 0, 1, \dots, 10, \]</p>
-        <p>where the extra dimensions are compactified, accommodating strings and higher-dimensional branes. Hidden order, observed as subtle, long-range correlations in systems like uranium ditelluride (UTe₂), is modeled through correlation functions:</p>
-        <p>\[ \langle O(x) O(y) \rangle, \]</p>
-        <p>posited to arise from higher-dimensional dynamics, such as string vibrational modes or brane entanglement, projected into our 4D reality.</p>
-        <p>Bohmian mechanics provides a deterministic interpretation via the guiding equation:</p>
-        <p>\[ \frac{dx}{dt} = \frac{\nabla S}{m}, \]</p>
-        <p>where \( S \) is the phase of the wave function \( \Psi = R e^{iS/\hbar} \), rooted in 11D M-theory dynamics. This aligns with hidden order's structured patterns, suggesting the wave function translates higher-dimensional influences into particle trajectories. The holographic principle, via the AdS/CFT correspondence, posits that our 4D universe is dual to a higher-dimensional bulk, mathematically captured by:</p>
-        <p>\[ Z_{\text{CFT}} = \int \mathcal{D}\phi \, e^{-S_{\text{bulk}}[\phi]}, \]</p>
-        <p>linking gravitational theories in anti-de Sitter (AdS) space to conformal field theories (CFT) on the boundary.</p>
-        <p>While speculative, HQR offers a compelling synthesis of quantum mechanics and gravity, grounded in mathematical formulations from string theory, quantum field theory, and deterministic mechanics. It invites further exploration into its mathematical foundations and empirical validation, with a 30% likelihood of describing our reality based on current theoretical frameworks.</p>
-    </section>
+        <!-- Executive Summary -->
+        <section id="executive-summary" class="executive-summary-section">
+            <h2>Welcome to HQR</h2>
+            <p>Imagine our everyday world as just a small part of a much bigger, hidden universe with 11 dimensions! Holonomic Quantum Reality (HQR) is a fascinating idea that suggests secret patterns in nature—called hidden order—might come from this larger reality, potentially solving big mysteries like how gravity fits with quantum physics. Visit our page to explore this mind-bending theory and its scientific implications!</p>
+        </section>
+
+        <!-- Abstract Section -->
+        <section id="abstract" class="abstract-section">
+            <h2>Abstract</h2>
+            <p><strong>Holonomic Quantum Reality (HQR)</strong> proposes a novel theoretical framework that synthesizes hidden order in quantum many-body systems, string theory, M-theory, and Bohmian mechanics to describe our 4D universe as a projection from an 11-dimensional M-theory structure. In M-theory, the universe is fundamentally 11-dimensional, with the metric tensor generalized to:</p>
+            <p>\[ ds^2 = g_{\mu\nu} dx^\mu dx^\nu, \quad \mu, \nu = 0, 1, \dots, 10, \]</p>
+            <p>where the extra dimensions are compactified, accommodating strings and higher-dimensional branes. Hidden order, observed as subtle, long-range correlations in systems like uranium ditelluride (UTe₂), is modeled through correlation functions:</p>
+            <p>\[ \langle O(x) O(y) \rangle, \]</p>
+            <p>posited to arise from higher-dimensional dynamics, such as string vibrational modes or brane entanglement, projected into our 4D reality.</p>
+            <p>Bohmian mechanics provides a deterministic interpretation via the guiding equation:</p>
+            <p>\[ \frac{dx}{dt} = \frac{\nabla S}{m}, \]</p>
+            <p>where \( S \) is the phase of the wave function \( \Psi = R e^{iS/\hbar} \), rooted in 11D M-theory dynamics. This aligns with hidden order's structured patterns, suggesting the wave function translates higher-dimensional influences into particle trajectories. The holographic principle, via the AdS/CFT correspondence, posits that our 4D universe is dual to a higher-dimensional bulk, mathematically captured by:</p>
+            <p>\[ Z_{\text{CFT}} = \int \mathcal{D}\phi \, e^{-S_{\text{bulk}}[\phi]}, \]</p>
+            <p>linking gravitational theories in anti-de Sitter (AdS) space to conformal field theories (CFT) on the boundary.</p>
+            <p>While speculative, HQR offers a compelling synthesis of quantum mechanics and gravity, grounded in mathematical formulations from string theory, quantum field theory, and deterministic mechanics. It invites further exploration into its mathematical foundations and empirical validation, with the possibility of describing our reality based on current theoretical frameworks.</p>
+        </section>
 
         <!-- Overview Section -->
         <section id="overview">
@@ -78,7 +80,7 @@
                 <li><strong>String Theory & M-Theory</strong>: A higher-dimensional framework where fundamental entities are strings and branes in 11 dimensions, with extra dimensions compactified at unobservable scales.</li>
                 <li><strong>Bohmian Mechanics</strong>: A deterministic interpretation where particles have definite positions, guided by a pilot wave rooted in 11D M-theory dynamics.</li>
             </ul>
-            <p>HQR suggests that hidden order is a manifestation of higher-dimensional interactions, projected into our 4D reality, providing insights into unifying quantum mechanics with gravity. <a href="HQRabstract.pdf" download="HQRabstract.pdf" class="download-button">Download HQR Theory PDF</a></p>
+            <p>HQR suggests that hidden order is a manifestation of higher-dimensional interactions, projected into our 4D reality, providing insights into unifying quantum mechanics with gravity. <a href="HQR_Theory.pdf" download="HQR_Theory.pdf" class="download-button">Download HQR Theory PDF</a></p>
         </section>
 
         <!-- Key Points Section -->
@@ -115,18 +117,21 @@
                 </div>
             </div>
         </section>
-    <section id="tensor-networks" class="tensor-networks-section">
-        <h2>Tensor Networks and HQR</h2>
-        <p>Tensor networks, such as the Multi-scale Entanglement Renormalization Ansatz (MERA), provide a computational bridge between quantum entanglement and holographic gravity, offering insights into hidden order in quantum many-body systems. In HQR, tensor networks model how hidden order—subtle, long-range correlations—might encode higher-dimensional bulk information, mirroring the structure of the AdS/CFT correspondence. This suggests that quantum entanglement in our 4D universe could reflect the hierarchical, 11D dynamics of M-theory.</p>
-        <p>Key connections include:</p>
-    <ul>
-        <li>Tensor networks mimic the hyperbolic geometry of AdS space, aligning with HQR’s holographic principle.</li>
-        <li>Hidden order in quantum systems may correspond to tensor network patterns, potentially encoding 11D string vibrations or brane structures.</li>
-        <li>These structures could be tested via quantum simulations or material experiments, as outlined in our Experiments section.</li>
-    </ul>
-    <div id="tensor-network-canvas" class="visual-canvas"></div>
-    <p>Explore this interactive visualization to see how tensor networks represent entanglement patterns, reflecting hidden order in higher dimensions (click to pause/resume, move mouse to adjust).</p>
-</section>
+
+        <!-- Tensor Networks Section -->
+        <section id="tensor-networks" class="tensor-networks-section">
+            <h2>Tensor Networks and HQR</h2>
+            <p>Tensor networks, such as the Multi-scale Entanglement Renormalization Ansatz (MERA), provide a computational bridge between quantum entanglement and holographic gravity, offering insights into hidden order in quantum many-body systems. In HQR, tensor networks model how hidden order—subtle, long-range correlations—might encode higher-dimensional bulk information, mirroring the structure of the AdS/CFT correspondence. This suggests that quantum entanglement in our 4D universe could reflect the hierarchical, 11D dynamics of M-theory.</p>
+            <p>Key connections include:</p>
+            <ul>
+                <li>Tensor networks mimic the hyperbolic geometry of AdS space, aligning with HQR’s holographic principle.</li>
+                <li>Hidden order in quantum systems may correspond to tensor network patterns, potentially encoding 11D string vibrations or brane structures.</li>
+                <li>These structures could be tested via quantum simulations or material experiments, as outlined in our Experiments section.</li>
+            </ul>
+            <div id="tensor-network-canvas" class="visual-canvas" aria-label="Interactive visualization of tensor networks, representing quantum entanglement patterns in higher dimensions, adjustable by user input"></div>
+            <p>Explore this interactive visualization to see how tensor networks represent entanglement patterns, reflecting hidden order in higher dimensions (click to pause/resume, move mouse to adjust).</p>
+        </section>
+
         <!-- Mathematical Foundations Section -->
         <section id="mathematical-foundations" class="mathematical-foundations-section">
             <h2>Mathematical Foundations of HQR</h2>
@@ -160,35 +165,35 @@
             <h2>Supporting Evidence</h2>
             <p>HQR, while speculative, builds on established research in theoretical physics. The following studies provide theoretical and empirical foundations for its components, identified through web searches:</p>
             <ul>
-                <li><strong>Nikolić (2006): Bohmian Mechanics in String Theory</strong> – Extends Bohmian Mechanics to string theory, offering relativistic-covariant equations for particle trajectories and string quantization. This supports HQR’s use of Bohmian Mechanics to explain hidden order as a projection from M-theory’s 11 dimensions, demonstrating deterministic quantum behavior in higher-dimensional frameworks. <a href="https://arxiv.org/pdf/hep-th/0610138" target="_blank">[Link]</a></li>
-                <li><strong>Tangpanitanon et al. (2018): Hidden Order in Photonic Lattices</strong> – Demonstrates that long-range hidden order can emerge from the vacuum in driven-dissipative photonic lattices, resembling the Haldane insulator. This empirical evidence supports HQR’s view of hidden order as a fundamental quantum phenomenon, potentially linked to higher-dimensional structures. <a href="https://arxiv.org/abs/1806.10762" target="_blank">[Link]</a></li>
-                <li><strong>Maldacena (1998): AdS/CFT Correspondence</strong> – Introduces the AdS/CFT correspondence, linking gravitational theories in higher dimensions to quantum field theories on the boundary. This foundational work underpins HQR’s holographic principle, suggesting quantum many-body systems with hidden order could encode bulk dynamics in an 11D M-theory space. <a href="https://www.intlpress.com/site/pub/files/_fulltext/journals/atmp/1998/0002/0002/ATMP-1998-0002-0002-a001.pdf" target="_blank">[Link]</a></li>
+                <li><strong>Witten, E. (1995)</strong>: Extends string theory to M-theory, proposing an 11-dimensional framework. <a href="https://doi.org/10.1016/0550-3213(95)00158-O" target="_blank">[Link]</a></li>
+                <li><strong>Tangpanitanon, J., et al. (2018)</strong>: Demonstrates hidden order in photonic lattices, supporting HQR’s view of long-range correlations. <a href="https://doi.org/10.1103/PhysRevLett.120.170402" target="_blank">[Link]</a></li>
+                <li><strong>Maldacena, J. (1998)</strong>: Introduces AdS/CFT, linking gravitational theories to quantum field theories. <a href="https://arxiv.org/abs/hep-th/9711200" target="_blank">[Link]</a></li>
             </ul>
             <p>The search process involved exploring connections between Bohmian Mechanics, string theory, hidden order, and the AdS/CFT correspondence, revealing HQR as a novel synthesis. However, the lack of direct papers explicitly connecting hidden order to string theory highlights HQR’s speculative nature, requiring further empirical validation.</p>
         </section>
 
-        <!-- Visuals Section with Animated Canvases -->
+        <!-- Visuals Section -->
         <section id="visuals">
             <h2>Visualizing HQR</h2>
             <div class="visual-grid">
                 <div class="visual-card">
                     <h3>The 11D Universe</h3>
-                    <img src="11d_universe.png" alt="Our 4D reality as a slice of an 11D M-theory cosmos." class="visual-image">
+                    <img src="11d_universe.png" alt="Our 4D reality as a slice of an 11D M-theory cosmos." class="visual-image" loading="lazy">
                     <p>Our 4D reality as a slice of an 11D M-theory cosmos, illustrating strings, branes, and compactified dimensions.</p>
                 </div>
                 <div class="visual-card">
                     <h3>Hidden Order Projection</h3>
-                    <div id="hidden-order-canvas" class="visual-canvas"></div>
+                    <div id="hidden-order-canvas" class="visual-canvas" aria-label="Interactive visualization of hidden order in quantum many-body systems, showing particle correlations influenced by user input"></div>
                     <p>Hidden order as shadows from higher dimensions, interactively showing particle correlations influenced by user input (click to pause/resume, move mouse to adjust).</p>
                 </div>
                 <div class="visual-card">
                     <h3>Pilot Wave Guidance</h3>
-                    <img src="pilot_wave_guidance.png" alt="Bohmian Mechanics directing particle motion from 11D." class="visual-image">
+                    <img src="pilot_wave_guidance.png" alt="Bohmian Mechanics directing particle motion from 11D." class="visual-image" loading="lazy">
                     <p>Bohmian Mechanics directing particle motion from 11D, depicting a deterministic pilot wave guiding particles in a 4D grid.</p>
                 </div>
                 <div class="visual-card">
                     <h3>Holographic Reality</h3>
-                    <div id="holographic-canvas" class="visual-canvas"></div>
+                    <div id="holographic-canvas" class="visual-canvas" aria-label="Interactive visualization of holographic reality, depicting an 11D bulk sphere and 4D ripples adjustable by user input"></div>
                     <p>Our universe as a holographic boundary, animated with an 11D bulk sphere and 4D ripples, interactively adjustable by user input (click to pause/resume, move mouse to adjust).</p>
                 </div>
             </div>
@@ -205,46 +210,49 @@
             </ul>
         </section>
 
-    <!-- Experiments Section -->
-    <section id="experiments" class="experiments-section">
-        <h2>Experiments to Confirm or Refute HQR</h2>
-        <p>Holonomic Quantum Reality (HQR) can be tested through empirical experiments targeting hidden order, holography, and higher-dimensional effects. Below are the most feasible approaches to validate or challenge HQR:</p>
-        
-        <div class="experiment-card">
-            <h3>Probing Hidden Order in Quantum Materials</h3>
-            <p>Detect long-range quantum order in exotic materials like high-temperature superconductors, spin liquids, and topological insulators (e.g., Kitaev Spin Liquids, Fractional Quantum Hall States, Graphene Moiré Superlattices). Techniques such as Scanning Tunneling Microscopy (STM), Neutron Scattering, and Angle-Resolved Photoemission Spectroscopy (ARPES) can reveal non-random, repeating patterns in quantum correlations, potentially mirroring predictions from 11D string theory. If such patterns emerge, they could support HQR’s claim that hidden order reflects higher-dimensional structures.</p>
-        </div>
+        <!-- Experiments Section -->
+        <section id="experiments" class="experiments-section">
+            <h2>Experiments to Confirm or Refute HQR</h2>
+            <p>Holonomic Quantum Reality (HQR) can be tested through empirical experiments targeting hidden order, holography, and higher-dimensional effects. Below are the most feasible approaches to validate or challenge HQR:</p>
+            
+            <div class="experiment-card">
+                <h3>Probing Hidden Order in Quantum Materials</h3>
+                <p>Detect long-range quantum order in exotic materials like high-temperature superconductors, spin liquids, and topological insulators (e.g., Kitaev Spin Liquids, Fractional Quantum Hall States, Graphene Moiré Superlattices). Techniques such as Scanning Tunneling Microscopy (STM), Neutron Scattering, and Angle-Resolved Photoemission Spectroscopy (ARPES) can reveal non-random, repeating patterns in quantum correlations, potentially mirroring predictions from 11D string theory. If such patterns emerge, they could support HQR’s claim that hidden order reflects higher-dimensional structures.</p>
+            </div>
 
-        <div class="experiment-card">
-            <h3>Quantum Simulations of Holography</h3>
-            <p>Use quantum computers (e.g., IBM Qiskit, trapped ion systems) to simulate the AdS/CFT correspondence, testing how lower-dimensional quantum information maps onto a higher-dimensional bulk. Simulations could reveal hidden entanglement patterns resembling 11D string vibrations, supporting HQR’s holographic principle. Techniques include tensor network simulations (e.g., MERA) and superconducting qubits, offering early evidence despite current limitations in quantum computing fidelity and scalability.</p>
-        </div>
+            <div class="experiment-card">
+                <h3>Quantum Simulations of Holography</h3>
+                <p>Use quantum computers (e.g., IBM Qiskit, trapped ion systems) to simulate the AdS/CFT correspondence, testing how lower-dimensional quantum information maps onto a higher-dimensional bulk. Simulations could reveal hidden entanglement patterns resembling 11D string vibrations, supporting HQR’s holographic principle. Techniques include tensor network simulations (e.g., MERA) and superconducting qubits, offering early evidence despite current limitations in quantum computing fidelity and scalability.</p>
+            </div>
 
-        <div class="experiment-card">
-            <h3>Measuring Nonlocal Correlations in Quantum Entanglement</h3>
-            <p>Test the ER=EPR hypothesis by measuring long-range correlations in entangled quantum states, potentially revealing hidden geometric structures. Experiments using Bell Inequality Tests, Quantum Teleportation Networks, and Quantum Tomography can detect unexpected order in entanglement, hinting at higher-dimensional dynamics. If correlations resemble a geometric structure predicted by HQR, this could validate its higher-dimensional framework, though precision advancements are needed to distinguish HQR-specific effects.</p>
-        </div>
-    </section>
-<section id="references" class="references-section">
-    <h2>References</h2>
-    <p>Holonomic Quantum Reality (HQR) is grounded in the following foundational research, providing theoretical and empirical support for its components:</p>
-    <ul>
-        <li>Witten, E. (1995). <em>String Theory Dynamics in Various Dimensions</em>. *Nuclear Physics B*, 443(1-2), 85-126. <a href="https://doi.org/10.1016/0550-3213(95)00158-O" target="_blank">DOI</a> – Supports the 11D M-theory framework.</li>
-        <li>Greene, B. (1999). <em>The Elegant Universe: Superstrings, Hidden Dimensions, and the Quest for the Ultimate Theory</em>. W.W. Norton & Company. ISBN: 978-0-393-05858-1 – Contextualizes string theory and M-theory for HQR’s higher dimensions.</li>
-        <li>Sachdev, S. (2011). <em>Quantum Phase Transitions</em> (2nd ed.). Cambridge University Press. ISBN: 978-0-521-51468-2 – Explores quantum criticality and correlations, supporting HQR’s hidden order.</li>
-        <li>Tangpanitanon, J., et al. (2018). <em>Hidden Order in Quantum Many-body Dynamics of Driven-Dissipative Nonlinear Photonic Lattices</em>. *Physical Review Letters*, 120(17), 170402. <a href="https://doi.org/10.1103/PhysRevLett.120.170402" target="_blank">DOI</a> – Provides empirical evidence for hidden order in quantum systems.</li>
-        <li>Bohm, D. (1952). <em>A Suggested Interpretation of the Quantum Theory in Terms of "Hidden" Variables, I and II</em>. *Physical Review*, 85(2), 166-193. <a href="https://doi.org/10.1103/PhysRev.85.166" target="_blank">DOI</a> – Foundational for HQR’s deterministic Bohmian Mechanics.</li>
-        <li>Nikolić, H. (2006). <em>Bohmian Mechanics in Relativistic Quantum Mechanics, Quantum Field Theory, and String Theory</em>. *Journal of Physics: Conference Series*, 67, 012035. <a href="https://doi.org/10.1088/1742-6596/67/1/012035" target="_blank">DOI</a> – Extends Bohmian Mechanics to string theory, supporting HQR’s 11D framework.</li>
-        <li>Maldacena, J. (1998). <em>The Large N Limit of Superconformal Field Theories and Supergravity</em>. *Advances in Theoretical and Mathematical Physics*, 2(2), 231-252. <a href="https://arxiv.org/abs/hep-th/9711200" target="_blank">arXiv</a> – Establishes the AdS/CFT correspondence, key to HQR’s holography.</li>
-        <li>Susskind, L. (1995). <em>The World as a Hologram</em>. *Journal of Mathematical Physics*, 36(11), 6377-6396. <a href="https://doi.org/10.1063/1.531249" target="_blank">DOI</a> – Supports HQR’s holographic principle.</li>
-        <li>Rovelli, C. (2004). <em>Quantum Gravity</em>. Cambridge University Press. ISBN: 978-0-521-83733-0 – Contextualizes HQR’s quantum gravity unification efforts.</li>
-        <li>Hawking, S., & Mlodinow, L. (2010). <em>The Grand Design</em>. Bantam Books. ISBN: 978-0-553-80537-6 – Discusses M-theory and multiverse implications for HQR’s 11D framework.</li>
-        <li>Bell, J. S. (1964). <em>On the Einstein Podolsky Rosen Paradox</em>. *Physics*, 1(3), 195-200. <a href="https://doi.org/10.1103/PhysicsPhysiqueFizika.1.195" target="_blank">DOI</a> – Supports HQR’s hidden order via quantum entanglement.</li>
-        <li>Zeilinger, A. (2010). <em>Dance of the Photons: From Einstein to Quantum Teleportation</em>. Farrar, Straus and Giroux. ISBN: 978-0-374-23966-4 – Offers empirical insights into non-local quantum behavior relevant to HQR.</li>
-        <li>Dürr, D., & Teufel, S. (2009). <em>Bohmian Mechanics: The Physics and Mathematics of Quantum Theory</em>. Springer. ISBN: 978-3-540-89343-1 – Grounds HQR’s deterministic approach in a comprehensive framework.</li>
-        <li>Albert, D. Z. (1992). <em>Quantum Mechanics and Experience</em>. Harvard University Press. ISBN: 978-0-674-74113-3 – Provides philosophical context for HQR’s deterministic interpretation.</li>
-    </ul>
-</section>
+            <div class="experiment-card">
+                <h3>Measuring Nonlocal Correlations in Quantum Entanglement</h3>
+                <p>Test the ER=EPR hypothesis by measuring long-range correlations in entangled quantum states, potentially revealing hidden geometric structures. Experiments using Bell Inequality Tests, Quantum Teleportation Networks, and Quantum Tomography can detect unexpected order in entanglement, hinting at higher-dimensional dynamics. If correlations resemble a geometric structure predicted by HQR, this could validate its higher-dimensional framework, though precision advancements are needed to distinguish HQR-specific effects.</p>
+            </div>
+        </section>
+
+        <!-- References Section -->
+        <section id="references" class="references-section">
+            <h2>References</h2>
+            <p>Holonomic Quantum Reality (HQR) is grounded in the following foundational research, providing theoretical and empirical support for its components:</p>
+            <ul>
+                <li>Witten, E. (1995). <em>String Theory Dynamics in Various Dimensions</em>. *Nuclear Physics B*, 443(1-2), 85-126. <a href="https://doi.org/10.1016/0550-3213(95)00158-O" target="_blank">DOI</a> – Supports the 11D M-theory framework.</li>
+                <li>Greene, B. (1999). <em>The Elegant Universe: Superstrings, Hidden Dimensions, and the Quest for the Ultimate Theory</em>. W.W. Norton & Company. ISBN: 978-0-393-05858-1 – Contextualizes string theory and M-theory for HQR’s higher dimensions.</li>
+                <li>Sachdev, S. (2011). <em>Quantum Phase Transitions</em> (2nd ed.). Cambridge University Press. ISBN: 978-0-521-51468-2 – Explores quantum criticality and correlations, supporting HQR’s hidden order.</li>
+                <li>Tangpanitanon, J., et al. (2018). <em>Hidden Order in Quantum Many-body Dynamics of Driven-Dissipative Nonlinear Photonic Lattices</em>. *Physical Review Letters*, 120(17), 170402. <a href="https://doi.org/10.1103/PhysRevLett.120.170402" target="_blank">DOI</a> – Provides empirical evidence for hidden order in quantum systems.</li>
+                <li>Bohm, D. (1952). <em>A Suggested Interpretation of the Quantum Theory in Terms of "Hidden" Variables, I and II</em>. *Physical Review*, 85(2), 166-193. <a href="https://doi.org/10.1103/PhysRev.85.166" target="_blank">DOI</a> – Foundational for HQR’s deterministic Bohmian Mechanics.</li>
+                <li>Nikolić, H. (2006). <em>Bohmian Mechanics in Relativistic Quantum Mechanics, Quantum Field Theory, and String Theory</em>. *Journal of Physics: Conference Series*, 67, 012035. <a href="https://doi.org/10.1088/1742-6596/67/1/012035" target="_blank">DOI</a> – Extends Bohmian Mechanics to string theory, supporting HQR’s 11D framework.</li>
+                <li>Maldacena, J. (1998). <em>The Large N Limit of Superconformal Field Theories and Supergravity</em>. *Advances in Theoretical and Mathematical Physics*, 2(2), 231-252. <a href="https://arxiv.org/abs/hep-th/9711200" target="_blank">arXiv</a> – Establishes the AdS/CFT correspondence, key to HQR’s holography.</li>
+                <li>Susskind, L. (1995). <em>The World as a Hologram</em>. *Journal of Mathematical Physics*, 36(11), 6377-6396. <a href="https://doi.org/10.1063/1.531249" target="_blank">DOI</a> – Supports HQR’s holographic principle.</li>
+                <li>Rovelli, C. (2004). <em>Quantum Gravity</em>. Cambridge University Press. ISBN: 978-0-521-83733-0 – Contextualizes HQR’s quantum gravity unification efforts.</li>
+                <li>Hawking, S., & Mlodinow, L. (2010). <em>The Grand Design</em>. Bantam Books. ISBN: 978-0-553-80537-6 – Discusses M-theory and multiverse implications for HQR’s 11D framework.</li>
+                <li>Bell, J. S. (1964). <em>On the Einstein Podolsky Rosen Paradox</em>. *Physics*, 1(3), 195-200. <a href="https://doi.org/10.1103/PhysicsPhysiqueFizika.1.195" target="_blank">DOI</a> – Supports HQR’s hidden order via quantum entanglement.</li>
+                <li>Zeilinger, A. (2010). <em>Dance of the Photons: From Einstein to Quantum Teleportation</em>. Farrar, Straus and Giroux. ISBN: 978-0-374-23966-4 – Offers empirical insights into non-local quantum behavior relevant to HQR.</li>
+                <li>Dürr, D., & Teufel, S. (2009). <em>Bohmian Mechanics: The Physics and Mathematics of Quantum Theory</em>. Springer. ISBN: 978-3-540-89343-1 – Grounds HQR’s deterministic approach in a comprehensive framework.</li>
+                <li>Albert, D. Z. (1992). <em>Quantum Mechanics and Experience</em>. Harvard University Press. ISBN: 978-0-674-74113-3 – Provides philosophical context for HQR’s deterministic interpretation.</li>
+            </ul>
+        </section>
+
         <!-- Comments Section with Giscus -->
         <section id="comments" class="comments-section">
             <h2>Leave a Comment</h2>
@@ -274,7 +282,8 @@
         <p>© 2025 HQR Team | Hosted on GitHub | Contact: <a href="mailto:jefrix@gmail.com">jefrix@gmail.com</a></p>
     </footer>
 
-    <!-- Load Sketch.js and MathJax -->
+    <!-- Load Scripts -->
+    <script src="menu.js"></script> <!-- New JavaScript for menu -->
     <script src="sketch.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
