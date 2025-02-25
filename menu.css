@@ -7,6 +7,7 @@
     width: 100%;
     z-index: 1000;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    height: 70px; /* Explicitly set height for consistency */
 }
 
 .menu-toggle {
@@ -74,9 +75,9 @@
     }
 }
 
-/* Ensure menu height is accounted for in content */
+/* Ensure sections are not obscured by fixed nav */
 section {
-    scroll-margin-top: 70px; /* Increased to account for menu height + slight buffer */
+    scroll-margin-top: 80px; /* Updated to match default header padding */
 }
 
 /* Smooth scrolling */
