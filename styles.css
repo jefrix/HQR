@@ -144,6 +144,22 @@ ul {
     object-fit: contain;
     border-radius: 5px;
 }
+.abstract-section {
+    background-color: #16213e;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 50px;
+}
+
+.abstract-section h2 {
+    color: #e94560;
+    margin-bottom: 15px;
+}
+
+.abstract-section p {
+    color: #e0e0e0;
+    margin-bottom: 15px;
+}
 /* Footer */
 footer {
     text-align: center;
