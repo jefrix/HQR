@@ -19,16 +19,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Smooth scrolling for all navigation links
+    // Handle navigation for all links (both internal and external)
     document.querySelectorAll('.main-nav a').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const section = document.querySelector(this.getAttribute('href'));
-            if (section) {
-                section.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+            e.preventDefault(); // Prevent default link behavior
+            const href = this.getAttribute('href');
+
+            // Check if the link is an external URL or relative path (not starting with #)
+            if (href && !href.startsWith('#')) {
+                // Navigate to external/relative URL
+                window.location.href = href;
+            } else {
+                // Handle internal anchors (smooth scrolling)
+                const section = document.querySelector(href);
+                if (section) {
+                    section.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             }
         });
     });
