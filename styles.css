@@ -492,3 +492,77 @@ footer a:hover {
 html {
     scroll-behavior: smooth;
 }
+/* Reconciliation Section Styles */
+.reconciliation-section {
+    background-color: #16213e;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 50px;
+}
+
+.reconciliation-section h2 {
+    color: #e94560;
+    margin-bottom: 15px;
+}
+
+.reconciliation-section h3 {
+    color: #a2a8d3;
+    margin-bottom: 10px;
+}
+
+.reconciliation-section p {
+    color: #e0e0e0;
+    margin-bottom: 15px;
+}
+
+.reconciliation-section ul {
+    list-style: disc;
+    margin-left: 20px;
+    color: #e0e0e0;
+}
+
+/* Ensure visual-canvas fits within reconciliation section */
+.visual-canvas {
+    width: 100%;
+    max-width: 100%;
+    height: 200px;
+    max-height: 200px;
+    background-color: #0f3460;
+    border-radius: 5px;
+    margin: 10px auto;
+}
+
+/* Mobile-Specific Styles for Reconciliation */
+@media screen and (max-width: 767px) {
+    .visual-canvas {
+        height: 150px;
+        margin: 5px auto;
+    }
+
+    .reconciliation-section {
+        padding: 10px;
+    }
+
+    .reconciliation-section h2 {
+        font-size: 1.2rem;
+    }
+
+    .reconciliation-section h3 {
+        font-size: 1rem;
+    }
+
+    .reconciliation-section p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Desktop-Specific Enhancements */
+@media screen and (min-width: 768px) {
+    .reconciliation-section {
+        padding: 20px;
+    }
+
+    .visual-canvas {
+        margin: 15px auto;
+    }
+}
