@@ -1,5 +1,5 @@
 /* menu.css */
-.mobile-nav {
+.main-nav {
     background-color: #16213e;
     padding: 10px;
     position: fixed;
@@ -42,37 +42,30 @@
 
 /* Desktop Styles (Above 768px) */
 @media screen and (min-width: 768px) {
-    .mobile-nav {
-        display: none;
+    .menu-toggle {
+        display: none; /* Hide hamburger on desktop */
     }
 
-    nav ul {
+    .nav-list {
         display: flex;
-        list-style: none;
-        background-color: #16213e;
-        padding: 10px 0;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
         margin: 0;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 1000;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        padding: 0;
     }
 
-    nav ul li {
+    .nav-list li {
         margin-right: 20px;
     }
 
-    nav ul li a {
-        color: #e0e0e0;
-        text-decoration: none;
-        font-size: 16px;
-        padding: 10px 15px;
+    .nav-list li:last-child {
+        margin-right: 0;
     }
 
-    nav ul li a:hover {
-        background-color: #0f3460;
-        color: #a2a8d3;
+    .nav-list li a {
+        padding: 10px 15px;
+        font-size: 16px;
     }
 }
 
