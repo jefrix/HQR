@@ -204,12 +204,44 @@ ul {
 }
 
 /* Visuals Section */
+.visuals-section {
+    background-color: #16213e;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 50px;
+}
+
+.visuals-section h2 {
+    color: #e94560;
+    margin-bottom: 15px;
+}
+
+.visual-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.visual-card {
+    background-color: #16213e;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.visual-card:hover {
+    transform: scale(1.05);
+}
+
 .visual-canvas {
     width: 100%;
-    height: 200px;
+    max-width: 100%; /* Prevent overflow on desktop */
+    height: 200px; /* Default height for desktop */
+    max-height: 200px; /* Cap height to prevent expansion */
     background-color: #0f3460;
     border-radius: 5px;
-    margin: 20px 0;
+    margin: 10px auto; /* Center and reduce margin for better spacing */
 }
 
 .visual-image {
@@ -219,6 +251,43 @@ ul {
     border-radius: 5px;
 }
 
+.image-fallback {
+    color: #e0e0e0;
+    font-style: italic;
+    margin: 10px 0;
+    text-align: center;
+}
+
+/* Mobile-Specific Styles for Visuals */
+@media screen and (max-width: 767px) {
+    .visual-canvas {
+        height: 150px; /* Reduce height on mobile to prevent overlap with text */
+        margin: 5px auto; /* Further reduce margin for compactness */
+    }
+
+    .visual-image {
+        height: 150px; /* Match canvas height for consistency */
+    }
+
+    .visual-card {
+        padding: 10px; /* Reduce padding on mobile */
+    }
+
+    .visual-card p {
+        margin-top: 10px; /* Add space between canvas/image and text to prevent overlap */
+    }
+}
+
+/* Desktop-Specific Enhancements */
+@media screen and (min-width: 768px) {
+    .visual-canvas {
+        margin: 15px auto; /* Increase margin for better spacing on desktop */
+    }
+
+    .visual-card p {
+        margin-top: 15px; /* Ensure text isn’t obscured by canvas on desktop */
+    }
+}
 /* Section-Specific Styles */
 .executive-summary-section, .abstract-section, .key-points-section, .tensor-networks-section, .mathematical-foundations-section, .evidence-section, .visuals-section, .implications-section, .experiments-section, .references-section, .comments-section {
     background-color: #16213e;
