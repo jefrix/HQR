@@ -81,7 +81,93 @@ let hiddenOrderSketch = function(p) {
         }
     };
 };
+// Tensor Networks Sketch
+let tensorNetworkSketch = function(p) {
+    let nodes = [];
+    let connections = [];
+    let isPaused = false;
 
+    p.setup = function() {
+        let canvas = p.createCanvas(300, 200);
+        canvas.parent('tensor-network-canvas');
+        p.background(15, 52, 96); // Match #0f3460
+
+        // Initialize nodes (representing qubits or entanglement points)
+        for (let i = 0; i < 20; i++) {
+            nodes.push({
+                x: p.random(p.width),
+                y: p.random(p.height),
+                vx: 0,
+                vy: 0
+            });
+        }
+
+        // Initialize connections (randomly, based on entanglement)
+        for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+                if (p.random() < 0.3) { // 30% chance of connection (adjustable)
+                    connections.push({ from: i, to: j });
+                }
+            }
+        }
+    };
+
+    p.draw = function() {
+        if (!isPaused) {
+            p.background(15, 52, 96, 50); // Semi-transparent for trail effect
+
+            // Update nodes with subtle motion, influenced by mouse position
+            for (let node of nodes) {
+                let dx = node.x - p.width / 2;
+                let dy = node.y - p.height / 2;
+                let mouseInfluence = p.dist(node.x, node.y, p.mouseX, p.mouseY) / p.width;
+                let force = (0.05 + (1 - mouseInfluence) * 0.02); // Mouse affects motion
+
+                node.vx += dx * force;
+                node.vy += dy * force;
+                node.vx *= 0.95; // Damping
+                node.vy *= 0.95;
+
+                node.x += node.vx;
+                node.y += node.vy;
+
+                // Bounce off edges
+                if (node.x < 0 || node.x > p.width) node.vx *= -1;
+                if (node.y < 0 || node.y > p.height) node.vy *= -1;
+
+                p.fill(224, 224, 224); // #e0e0e0
+                p.noStroke();
+                p.ellipse(node.x, node.y, 5, 5);
+            }
+
+            // Draw connections (tensor network structure)
+            p.stroke(233, 69, 96, 100); // #e94560 with alpha (red for connections)
+            for (let connection of connections) {
+                let fromNode = nodes[connection.from];
+                let toNode = nodes[connection.to];
+                p.line(fromNode.x, fromNode.y, toNode.x, toNode.y);
+            }
+        }
+    };
+
+    // Pause/resume on click
+    p.mouseClicked = function() {
+        isPaused = !isPaused;
+        if (isPaused) {
+            p.background(15, 52, 96); // Clear canvas when paused
+        }
+    };
+
+    // Influence node movement with mouse position
+    p.mouseMoved = function() {
+        if (!isPaused) {
+            // Nodes subtly adjust based on mouse proximity (already in p.draw)
+        }
+    };
+};
+
+// Create p5 instance for tensor networks
+new p5(tensorNetworkSketch);
 // Holographic Reality Sketch (with Interactivity)
 let holographicSketch = function(p) {
     let angle = 0;
