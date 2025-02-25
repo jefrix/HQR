@@ -1,4 +1,4 @@
-/* Reset and General Styling */
+/* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -7,9 +7,10 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #1a1a2e;
+    background-color: #0f3460;
     color: #e0e0e0;
     line-height: 1.6;
+    margin: 0;
 }
 
 /* Header */
@@ -32,301 +33,14 @@ header h1 {
 }
 
 /* Navigation */
-nav {
-    background-color: #0f3460;
-    padding: 15px 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-}
-
-nav a {
-    color: #e0e0e0;
-    text-decoration: none;
-    font-weight: 700;
-    transition: color 0.3s;
-}
-
-nav a:hover {
-    color: #e94560;
-}
-
-/* Main Content */
-main {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-section {
-    margin-bottom: 50px;
-}
-
-h2 {
-    font-size: 2rem;
-    color: #e94560;
-    margin-bottom: 20px;
-}
-
-p, ul {
-    font-size: 1.1rem;
-}
-
-ul {
-    list-style: disc;
-    margin-left: 20px;
-}
-
-/* Component Grid */
-.component-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.component-card {
-    background-color: #16213e;
-    padding: 20px;
-    border-radius: 10px;
-    transition: transform 0.3s;
-}
-
-.component-card:hover {
-    transform: scale(1.05);
-}
-
-.component-card h3 {
-    color: #a2a8d3;
-    margin-bottom: 10px;
-}
-
-/* Visuals Section */
-.visual-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-.visual-card {
-    background-color: #16213e;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.visual-canvas {
-    width: 100%;
-    height: 200px;
-    background-color: #0f3460;
-    border-radius: 5px;
-}
-
-.visual-placeholder {
-    height: 200px;
-    background-color: #0f3460;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #e0e0e0;
-    font-style: italic;
-    margin-bottom: 10px;
-}
-.visual-image {
-    width: 100%;
-    height: 200px;
-    object-fit: contain;
-    border-radius: 5px;
-}
-.abstract-section {
-    background-color: #16213e;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 50px;
-}
-
-.abstract-section h2 {
-    color: #e94560;
-    margin-bottom: 15px;
-}
-
-.abstract-section p {
-    color: #e0e0e0;
-    margin-bottom: 15px;
-}
-}
-
-.mathematical-foundations-section {
-    background-color: #16213e;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 50px;
-}
-
-.mathematical-foundations-section h2 {
-    color: #e94560;
-    margin-bottom: 15px;
-}
-
-.mathematical-foundations-section p {
-    color: #a2a8d3;
-    margin-bottom: 15px;
-}
-
-.mathematical-foundations-section ul {
-    list-style: disc;
-    margin-left: 20px;
-    color: #e0e0e0;
-}
-
-.mathematical-foundations-section .math-equation {
-    color: #e0e0e0;
-    font-size: 1.1rem;
-    margin: 10px 0;
-    text-align: center;
-}
-.references-section {
-    background-color: #16213e;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 50px;
-}
-
-.references-section h2 {
-    color: #e94560;
-    margin-bottom: 15px;
-}
-
-.references-section p {
-    color: #a2a8d3;
-    margin-bottom: 15px;
-}
-
-.references-section ul {
-    list-style: disc;
-    margin-left: 20px;
-    color: #e0e0e0;
-}
-
-.references-section a {
-    color: #e94560;
-    text-decoration: underline;
-}
-
-.references-section a:hover {
-    color: #a2a8d3;
-}
-.experiments-section {
-    background-color: #16213e;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 50px;
-}
-
-.experiments-section h2 {
-    color: #e94560;
-    margin-bottom: 15px;
-}
-
-.experiments-section p {
-    color: #a2a8d3;
-    margin-bottom: 15px;
-}
-
-.experiment-card {
-    background-color: #0f3460;
-    padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    border-left: 5px solid #e94560;
-}
-
-.experiment-card h3 {
-    color: #e94560;
-    margin-top: 0;
-}
-
-.experiment-card p {
-    color: #e0e0e0;
-    margin: 10px 0;
-}
-.tensor-networks-section {
-    background-color: #16213e;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 50px;
-}
-
-.tensor-networks-section h2 {
-    color: #e94560;
-    margin-bottom: 15px;
-}
-
-.tensor-networks-section p {
-    color: #a2a8d3;
-    margin-bottom: 15px;
-}
-
-.tensor-networks-section ul {
-    list-style: disc;
-    margin-left: 20px;
-    color: #e0e0e0;
-}
-
-.visual-canvas {
-    width: 100%;
-    height: 200px;
-    background-color: #0f3460;
-    border-radius: 5px;
-    margin: 20px 0;
-}
-.executive-summary-section {
-    background-color: #16213e;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 50px;
-}
-
-.executive-summary-section h2 {
-    color: #e94560;
-    margin-bottom: 15px;
-}
-
-.executive-summary-section p {
-    color: #e0e0e0;
-    margin-bottom: 15px;
-    font-size: 1.1rem;
-    line-height: 1.5;
-}
-/* Reset and Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #0f3460;
-    color: #e0e0e0;
-    line-height: 1.6;
-    margin: 0;
-}
-
-/* Mobile Navigation */
-.mobile-nav {
+.main-nav {
     background-color: #16213e;
     padding: 10px;
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .menu-toggle {
@@ -334,6 +48,7 @@ body {
     cursor: pointer;
     color: #e94560;
     padding: 10px;
+    display: block;
 }
 
 .nav-list {
@@ -359,96 +74,188 @@ body {
     color: #a2a8d3;
 }
 
-/* General Sections */
-section {
-    padding: 15px;
-    margin-bottom: 20px;
+/* Desktop Navigation (Above 768px) */
+@media screen and (min-width: 768px) {
+    .menu-toggle {
+        display: none; /* Hide hamburger on desktop */
+    }
+
+    .nav-list {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-list li {
+        margin-right: 20px;
+    }
+
+    .nav-list li:last-child {
+        margin-right: 0;
+    }
+
+    .nav-list li a {
+        padding: 10px 15px;
+        font-size: 16px;
+    }
 }
 
+/* Main Content */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 50px;
+    scroll-margin-top: 60px; /* Adjust for fixed nav */
+}
+
+/* Headings and Text */
 h1, h2, h3 {
     color: #e94560;
 }
 
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
 p, ul {
+    font-size: 1.1rem;
     color: #a2a8d3;
 }
 
-/* Responsive Layout */
-@media screen and (min-width: 768px) {
-    .mobile-nav {
-        display: none;
-    }
-
-    nav ul {
-        display: flex;
-        list-style: none;
-        background-color: #16213e;
-        padding: 10px 0;
-        margin: 0;
-    }
-
-    nav ul li {
-        margin-right: 20px;
-    }
-
-    nav ul li a {
-        color: #e0e0e0;
-        text-decoration: none;
-        font-size: 16px;
-        padding: 10px 15px;
-    }
-
-    nav ul li a:hover {
-        background-color: #0f3460;
-        color: #a2a8d3;
-    }
-
-    .visual-grid, .component-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-    }
-
-    .visual-card, .component-card, .experiment-card {
-        padding: 20px;
-    }
+ul {
+    list-style: disc;
+    margin-left: 20px;
 }
 
-/* Mobile-Specific Styles */
-@media screen and (max-width: 767px) {
-    body {
-        font-size: 14px;
-    }
+/* Grids and Cards */
+.component-grid, .visual-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
 
-    h1 {
-        font-size: 1.5rem;
-    }
+.component-card, .visual-card, .experiment-card {
+    background-color: #16213e;
+    padding: 20px;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
 
-    h2 {
-        font-size: 1.2rem;
-    }
+.component-card:hover, .visual-card:hover, .experiment-card:hover {
+    transform: scale(1.05);
+}
 
-    h3 {
-        font-size: 1rem;
-    }
+.component-card h3, .visual-card h3, .experiment-card h3 {
+    color: #a2a8d3;
+    margin-top: 0;
+}
 
-    .visual-canvas, .cube-placeholder {
-        height: 150px;
-    }
+.component-card p, .visual-card p, .experiment-card p {
+    color: #e0e0e0;
+    margin: 10px 0;
+}
 
-    .visual-image {
-        width: 100%;
-        height: auto;
-    }
+/* Visuals Section */
+.visual-canvas {
+    width: 100%;
+    height: 200px;
+    background-color: #0f3460;
+    border-radius: 5px;
+    margin: 20px 0;
+}
 
-    .experiment-card, .component-card, .visual-card {
-        padding: 10px;
-    }
+.visual-image {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 5px;
+}
 
-    .download-button {
-        padding: 8px 12px;
-        font-size: 12px;
-    }
+/* Section-Specific Styles */
+.executive-summary-section, .abstract-section, .key-points-section, .tensor-networks-section, .mathematical-foundations-section, .evidence-section, .visuals-section, .implications-section, .experiments-section, .references-section, .comments-section {
+    background-color: #16213e;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 50px;
+}
+
+.executive-summary-section h2, .abstract-section h2, .key-points-section h2, .tensor-networks-section h2, .mathematical-foundations-section h2, .evidence-section h2, .visuals-section h2, .implications-section h2, .experiments-section h2, .references-section h2, .comments-section h2 {
+    color: #e94560;
+    margin-bottom: 15px;
+}
+
+.executive-summary-section p, .abstract-section p {
+    color: #e0e0e0;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.key-points-section p, .tensor-networks-section p, .mathematical-foundations-section p, .evidence-section p, .implications-section p, .experiments-section p, .references-section p {
+    color: #a2a8d3;
+    margin-bottom: 15px;
+}
+
+.key-points-section ul, .tensor-networks-section ul, .mathematical-foundations-section ul, .evidence-section ul, .references-section ul {
+    list-style: disc;
+    margin-left: 20px;
+    color: #e0e0e0;
+}
+
+.mathematical-foundations-section .math-equation, .abstract-section .math-equation {
+    color: #e0e0e0;
+    font-size: 1.1rem;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.experiment-card {
+    background-color: #0f3460;
+    border-left: 5px solid #e94560;
+}
+
+.references-section a {
+    color: #e94560;
+    text-decoration: underline;
+}
+
+.references-section a:hover {
+    color: #a2a8d3;
+}
+
+/* Download Button */
+.download-button {
+    background-color: #e94560;
+    color: #e0e0e0;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.download-button:hover {
+    background-color: #a2a8d3;
+    color: #0f3460;
 }
 
 /* Touch-Friendly Elements */
@@ -476,22 +283,75 @@ input[type="range"]:focus {
     outline: none;
 }
 
-/* Section-Specific Styles (Updated for Mobile) */
-.executive-summary-section, .abstract-section, .key-points-section, .components-section, .mathematical-foundations-section, .evidence-section, .visuals-section, .implications-section, .experiments-section, .references-section, .comments-section, .tensor-networks-section {
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 10px;
+/* Responsive Design */
+@media screen and (max-width: 767px) {
+    body {
+        font-size: 14px;
+    }
+
+    header {
+        padding: 30px 15px;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    h3 {
+        font-size: 1rem;
+    }
+
+    .visual-canvas, .cube-placeholder {
+        height: 150px;
+    }
+
+    .visual-image {
+        width: 100%;
+        height: auto;
+    }
+
+    .component-card, .visual-card, .experiment-card {
+        padding: 10px;
+    }
+
+    .download-button {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    .component-grid, .visual-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .component-card, .visual-card, .experiment-card {
+        flex: 1;
+        min-width: 200px;
+    }
 }
 
-.visual-grid, .component-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-}
+/* Desktop-Specific Enhancements */
+@media screen and (min-width: 768px) {
+    main {
+        padding: 40px;
+    }
 
-.visual-card, .component-card, .experiment-card {
-    flex: 1;
-    min-width: 200px;
+    .component-grid, .visual-grid {
+        gap: 30px;
+    }
+
+    .download-button {
+        font-size: 1.1rem;
+    }
 }
 
 /* Performance Optimization */
@@ -510,6 +370,7 @@ img[loading="lazy"]:loaded {
         animation: none !important;
     }
 }
+
 /* Footer */
 footer {
     text-align: center;
@@ -523,19 +384,11 @@ footer a {
     text-decoration: none;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-    }
+footer a:hover {
+    color: #a2a8d3;
+}
 
-    header h1 {
-        font-size: 2rem;
-    }
-
-    .subtitle {
-        font-size: 1rem;
-    }
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
 }
