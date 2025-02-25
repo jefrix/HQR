@@ -191,6 +191,37 @@ ul {
     margin: 10px 0;
     text-align: center;
 }
+.references-section {
+    background-color: #16213e;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 50px;
+}
+
+.references-section h2 {
+    color: #e94560;
+    margin-bottom: 15px;
+}
+
+.references-section p {
+    color: #a2a8d3;
+    margin-bottom: 15px;
+}
+
+.references-section ul {
+    list-style: disc;
+    margin-left: 20px;
+    color: #e0e0e0;
+}
+
+.references-section a {
+    color: #e94560;
+    text-decoration: underline;
+}
+
+.references-section a:hover {
+    color: #a2a8d3;
+}
 /* Footer */
 footer {
     text-align: center;
