@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HQR Visualizations - Holonomic Quantum Reality</title>
+    
+    <!-- Same meta tags as your main page -->
+    
+    <!-- React and visualization libraries -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/recharts@2.5.0/umd/Recharts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Link to your main stylesheet for consistent styling -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Visualization-specific styles -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .back-link {
+            margin: 1rem;
+            display: inline-block;
+        }
+        
+        .visualization-container {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Additional visualization styles here */
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>HQR Interactive Visualizations</h1>
+        <p>Explore the mathematical foundations of Holonomic Quantum Reality</p>
+    </div>
+    
+    <a href="index.html" class="back-link">← Back to Main Page</a>
+    
+    <div class="visualization-container">
+        <div id="hqr-visualization-root"></div>
+    </div>
+    
+    <!-- Inline React Component -->
+    <script type="text/babel">
+        // Paste the HQR visualization component code here
+        
+        // The HQRVisualization component definition...
+        
+        // Render the component
+        ReactDOM.render(
+          <HQRVisualization />,
+          document.getElementById('hqr-visualization-root')
+        );
+    </script>
+</body>
+</html>
