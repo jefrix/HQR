@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- React and ReactDOM -->
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+<!-- Recharts (for visualization) -->
+<script src="https://unpkg.com/recharts@2.5.0/umd/Recharts.min.js"></script>
+
+<!-- Math.js for mathematical operations -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js"></script>
+
+<!-- Babel for JSX transformation -->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <link rel="icon" type="image/jpg" href="HQR.jpg">
     <link rel="shortcut icon" href="HQR.ico">
     <meta charset="UTF-8">
@@ -169,7 +181,17 @@
         </ul>
         <p>The search process involved exploring connections between Bohmian Mechanics, string theory, hidden order, and the AdS/CFT correspondence, revealing HQR as a novel synthesis. However, the lack of direct papers explicitly connecting hidden order to string theory highlights HQR’s speculative nature, requiring further empirical validation.</p>
     </section>
-
+<section id="visualization" class="visualization-section">
+    <h2>Interactive HQR Visualization</h2>
+    <p>Explore the mathematical foundations of Holonomic Quantum Reality through this interactive visualization. Toggle between 4D and 11D representations to see how our reality might be a projection of higher-dimensional structures.</p>
+    
+    <!-- React root element -->
+    <div id="hqr-visualization-root"></div>
+    
+    <!-- HQR Visualization Component Script -->
+    <script type="text/babel" src="hqr-visualization.js"></script>
+</section>
+    
 <!-- Visuals Section -->
 <section id="visuals" class="visuals-section">
     <h2>Visualizing HQR</h2>
