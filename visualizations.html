@@ -3,665 +3,745 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HQR Visualizations - Holonomic Quantum Reality</title>
+    <title>HQR Simplified Visualizations</title>
     
-    <!-- Meta tags -->
-    <meta name="description" content="Interactive visualizations of Holonomic Quantum Reality (HQR) theory, showing mathematical foundations of hidden order, string theory, and Bohmian mechanics in 4D and 11D representations.">
-    <meta name="keywords" content="HQR, Holonomic Quantum Reality, quantum physics, string theory, M-theory, tensor networks, visualization">
-    
-    <!-- React and visualization libraries -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/recharts@2.5.0/umd/Recharts.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    
-    <!-- MathJax for equation rendering -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
-    <!-- Link to your main stylesheet for consistent styling -->
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    
-    <!-- Visualization-specific styles -->
+    <!-- Basic styling -->
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
-            color: #333;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
         }
         
         .header {
-            background-color: #1e3a8a;
-            color: white;
-            padding: 2rem 1rem;
-            text-align: center;
-        }
-        
-        .header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-        }
-        
-        .header p {
-            margin: 0.5rem 0 0;
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-        
-        .navigation {
-            background-color: #f0f4f8;
-            padding: 1rem;
-            border-bottom: 1px solid #ddd;
+            padding: 20px;
+            background-color: #0d1117;
+            border-bottom: 1px solid #30363d;
         }
         
         .back-link {
+            color: #58a6ff;
             text-decoration: none;
-            color: #1e3a8a;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
+            display: inline-block;
+            margin-bottom: 10px;
         }
         
         .back-link:hover {
             text-decoration: underline;
         }
         
-        .back-link:before {
-            content: "←";
-            margin-right: 0.5rem;
-        }
-        
-        .visualization-container {
-            padding: 2rem;
+        .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 20px;
         }
         
         .intro {
-            margin-bottom: 2rem;
+            margin-bottom: 30px;
             line-height: 1.6;
         }
         
-        .viz-loading {
-            text-align: center;
-            padding: 3rem;
-            font-style: italic;
-            color: #666;
+        .visualization-section {
+            background-color: #161b22;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid #30363d;
+        }
+        
+        h2 {
+            color: #58a6ff;
+            margin-top: 0;
+        }
+        
+        .visualization-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .visualization-card {
+            flex: 1 1 400px;
+            background-color: #0d1117;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #30363d;
+        }
+        
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        select {
+            background-color: #161b22;
+            color: #e0e0e0;
+            border: 1px solid #30363d;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+        
+        .chart-container {
+            height: 300px;
+            width: 100%;
+            background-color: #0d1117;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chart-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .equation-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .equation-card {
+            background-color: #0d1117;
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid #30363d;
+        }
+        
+        .equation-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #58a6ff;
+        }
+        
+        .equation {
+            font-family: 'Courier New', monospace;
+            padding: 10px;
+            background-color: #161b22;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        
+        .equation-description {
+            font-size: 0.9em;
+            color: #8b949e;
         }
         
         .error-message {
-            display: none;
-            padding: 1rem;
-            background-color: #fff3cd;
-            border: 1px solid #ffeeba;
+            background-color: #2d0b0b;
+            border: 1px solid #f85149;
+            color: #f85149;
+            padding: 10px;
             border-radius: 4px;
-            color: #856404;
-            margin: 1rem 0;
+            margin-bottom: 20px;
+            display: none;
         }
         
-        /* Additional styling for visualization components will be in the React code */
-        
-        /* Mobile responsiveness */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.8rem;
-            }
-            
-            .header p {
-                font-size: 1rem;
-            }
-            
-            .visualization-container {
-                padding: 1rem;
-            }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 1px solid #30363d;
+            color: #8b949e;
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>HQR Interactive Visualizations</h1>
-        <p>Explore the mathematical foundations of Holonomic Quantum Reality</p>
+        <a href="index.html" class="back-link">← Back to Main Page</a>
+        <h1>HQR Mathematical Visualizations</h1>
     </div>
     
-    <div class="navigation">
-        <a href="index.html" class="back-link">Back to Main Page</a>
-    </div>
-    
-    <div class="visualization-container">
+    <div class="container">
         <div class="intro">
-            <p>These interactive visualizations demonstrate the key mathematical components of Holonomic Quantum Reality (HQR) theory. Toggle between 4D and 11D representations to see how higher dimensions introduce additional complexity. Hover over elements to see detailed values and explore the relationships between different components of the theory.</p>
+            <p>These visualizations demonstrate the key mathematical components of Holonomic Quantum Reality (HQR) theory. Toggle between 4D and 11D representations to see how higher dimensions introduce additional complexity. Hover over elements to see detailed values and explore the relationships between different components of the theory.</p>
         </div>
         
         <div id="error-message" class="error-message">
             Unable to load interactive visualizations. Please ensure JavaScript is enabled in your browser.
         </div>
         
-        <div id="hqr-visualization-root">
-            <div class="viz-loading">Loading visualizations...</div>
+        <div class="visualization-section">
+            <h2>Wave Function & Hidden Order</h2>
+            
+            <div class="controls">
+                <div>
+                    <label for="dimension-select">Dimension: </label>
+                    <select id="dimension-select" onchange="updateDimension(this.value)">
+                        <option value="4D">4D Reality</option>
+                        <option value="11D">11D M-Theory</option>
+                    </select>
+                </div>
+                <div id="dimension-display">Currently viewing: 4D Reality</div>
+            </div>
+            
+            <div class="visualization-container">
+                <div class="visualization-card">
+                    <h3>Bohmian Mechanics Wave Function (Ψ = Re<sup>iS/ℏ</sup>)</h3>
+                    <p>Visualizing components of the wave function and velocity field from guiding equation: dx/dt = ∇S/m</p>
+                    <div class="chart-container">
+                        <canvas id="wave-function-canvas"></canvas>
+                    </div>
+                </div>
+                
+                <div class="visualization-card">
+                    <h3>Hidden Order Correlation</h3>
+                    <p>Visualizing correlation function ⟨O(x)O(y)⟩ as a projection from higher dimensions</p>
+                    <div class="chart-container">
+                        <canvas id="correlation-canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="visualization-section">
+            <h2>Holographic Principle: AdS/CFT Correspondence</h2>
+            <p>Visualizing the relationship between bulk AdS space and boundary CFT: Z<sub>CFT</sub> = ∫Dϕe<sup>-S<sub>bulk</sub>[ϕ]</sup></p>
+            
+            <div class="chart-container">
+                <canvas id="holographic-canvas"></canvas>
+            </div>
+        </div>
+        
+        <div class="visualization-section">
+            <h2>Key Equations of HQR</h2>
+            
+            <div class="equation-container">
+                <div class="equation-card">
+                    <div class="equation-title">M-Theory Metric</div>
+                    <div class="equation">ds² = g<sub>μν</sub>dx<sup>μ</sup>dx<sup>ν</sup>, μ,ν = 0,1,...,10</div>
+                    <div class="equation-description">Describes spacetime in 11 dimensions, where the extra dimensions are compactified at scales too small to observe directly.</div>
+                </div>
+                
+                <div class="equation-card">
+                    <div class="equation-title">Bohmian Mechanics Guiding Equation</div>
+                    <div class="equation">dx/dt = ∇S/m</div>
+                    <div class="equation">Where Ψ = Re<sup>iS/ℏ</sup></div>
+                    <div class="equation-description">Determines particle trajectories from the wave function, providing a deterministic interpretation of quantum mechanics.</div>
+                </div>
+                
+                <div class="equation-card">
+                    <div class="equation-title">Hidden Order Correlation</div>
+                    <div class="equation">⟨O(x)O(y)⟩</div>
+                    <div class="equation-description">Measures subtle, long-range quantum correlations in many-body systems, potentially arising from higher-dimensional dynamics.</div>
+                </div>
+                
+                <div class="equation-card">
+                    <div class="equation-title">AdS/CFT Correspondence</div>
+                    <div class="equation">Z<sub>CFT</sub> = ∫Dϕe<sup>-S<sub>bulk</sub>[ϕ]</sup></div>
+                    <div class="equation-description">Links boundary conformal field theory to bulk anti-de Sitter gravity, supporting the holographic principle in HQR.</div>
+                </div>
+            </div>
         </div>
     </div>
     
-    <script>
-        // Simple error handling
-        window.addEventListener('error', function() {
-            document.getElementById('error-message').style.display = 'block';
-        });
-    </script>
+    <footer>
+        © 2025 HQR Team | <a href="index.html" style="color: #58a6ff;">Return to Main Page</a>
+    </footer>
     
-    <!-- Inline React Component - THIS IS WHERE TO INSERT THE VISUALIZATION CODE -->
-    <script type="text/babel">
-        // HQR Visualization Component
-        const HQRVisualization = () => {
-          const [dimension, setDimension] = React.useState('4D');
-          
-          // Generate wave function data for Bohmian mechanics
-          const generateWaveFunction = (dimension) => {
-            const data = [];
-            for (let x = -10; x <= 10; x += 0.2) {
-              // Gaussian packet modulated by phase
-              const amplitude = Math.exp(-x*x / 4);
-              const phase = x*x / 2;
-              // Different complexity for different dimensions
-              const complexity = dimension === '4D' ? 1 : 2.5;
-              
-              // Wave function components R and S in Ψ = R e^(iS/ℏ)
-              const r = amplitude;
-              const s = phase * complexity;
-              
-              // Bohmian velocity from guiding equation dx/dt = ∇S/m
-              // Approximating ∇S with finite difference
-              const gradS = (x === -10) ? (s - 0) / 0.2 : (s - data[data.length-1].s) / 0.2;
-              const velocity = gradS / 1; // m = 1 for simplicity
-              
-              // Hidden order correlation
-              // Simulate correlation function with exponential decay modulated by oscillations
-              const hiddenOrder = amplitude * Math.cos(complexity * x / 2) * Math.exp(-Math.abs(x) / 5);
-              
-              data.push({
-                x,
-                r,
-                s,
-                velocity,
-                hiddenOrder,
-                // Real and imaginary parts of the wave function
-                realPart: r * Math.cos(s),
-                imagPart: r * Math.sin(s),
-                // Probability density
-                probability: r * r
-              });
+    <script>
+        // Simple JavaScript to handle dimension toggling and basic canvas drawing
+        let currentDimension = '4D';
+        
+        // Update dimension display and redraw visualizations
+        function updateDimension(dimension) {
+            currentDimension = dimension;
+            document.getElementById('dimension-display').textContent = 'Currently viewing: ' + dimension;
+            
+            // Redraw all visualizations with the new dimension
+            drawWaveFunction();
+            drawCorrelation();
+            drawHolographic();
+        }
+        
+        // Draw wave function visualization
+        function drawWaveFunction() {
+            const canvas = document.getElementById('wave-function-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas dimensions
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Background
+            ctx.fillStyle = '#0d1117';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw grid
+            ctx.strokeStyle = '#30363d';
+            ctx.lineWidth = 0.5;
+            
+            // Vertical grid lines
+            for (let x = 0; x <= canvas.width; x += 30) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
+                ctx.stroke();
             }
-            return data;
-          };
-
-          // Generate 2D projection of higher-dimensional manifold (simplified Calabi-Yau)
-          const generateManifoldData = (dimension) => {
-            const data = [];
+            
+            // Horizontal grid lines
+            for (let y = 0; y <= canvas.height; y += 30) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+            }
+            
+            // Center axes
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            
+            ctx.strokeStyle = '#8b949e';
+            ctx.lineWidth = 1;
+            
+            // X-axis
+            ctx.beginPath();
+            ctx.moveTo(0, centerY);
+            ctx.lineTo(canvas.width, centerY);
+            ctx.stroke();
+            
+            // Y-axis
+            ctx.beginPath();
+            ctx.moveTo(centerX, 0);
+            ctx.lineTo(centerX, canvas.height);
+            ctx.stroke();
+            
+            // Draw curves
+            const complexity = currentDimension === '4D' ? 1 : 2;
+            
+            // Real part curve
+            ctx.strokeStyle = '#8884d8';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            
+            for (let x = 0; x < canvas.width; x++) {
+                // Map canvas x to wave function domain [-10, 10]
+                const xValue = (x / canvas.width) * 20 - 10;
+                
+                // Calculate y from real part of wave function
+                const amplitude = Math.exp(-xValue*xValue / 4);
+                const phase = xValue*xValue / 2 * complexity;
+                const realPart = amplitude * Math.cos(phase);
+                
+                // Map to canvas coordinates
+                const y = centerY - realPart * (canvas.height * 0.4);
+                
+                if (x === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.stroke();
+            
+            // Imaginary part curve
+            ctx.strokeStyle = '#82ca9d';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            
+            for (let x = 0; x < canvas.width; x++) {
+                const xValue = (x / canvas.width) * 20 - 10;
+                const amplitude = Math.exp(-xValue*xValue / 4);
+                const phase = xValue*xValue / 2 * complexity;
+                const imagPart = amplitude * Math.sin(phase);
+                const y = centerY - imagPart * (canvas.height * 0.4);
+                
+                if (x === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.stroke();
+            
+            // Hidden order correlation (dashed line)
+            ctx.strokeStyle = '#ff0000';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            
+            for (let x = 0; x < canvas.width; x++) {
+                const xValue = (x / canvas.width) * 20 - 10;
+                const amplitude = Math.exp(-xValue*xValue / 4);
+                const hiddenOrder = amplitude * Math.cos(complexity * xValue / 2) * Math.exp(-Math.abs(xValue) / 5);
+                const y = centerY - hiddenOrder * (canvas.height * 0.4);
+                
+                if (x === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.stroke();
+            
+            // Reset line dash
+            ctx.setLineDash([]);
+            
+            // Legend
+            const legendItems = [
+                { color: '#8884d8', label: 'Real Part (Re[Ψ])' },
+                { color: '#82ca9d', label: 'Imaginary Part (Im[Ψ])' },
+                { color: '#ff0000', label: 'Hidden Order ⟨O(x)O(0)⟩' }
+            ];
+            
+            ctx.font = '12px Arial';
+            let legendY = 20;
+            
+            legendItems.forEach(item => {
+                // Color box
+                ctx.fillStyle = item.color;
+                ctx.fillRect(10, legendY, 15, 15);
+                
+                // Label
+                ctx.fillStyle = '#e0e0e0';
+                ctx.fillText(item.label, 35, legendY + 12);
+                
+                legendY += 25;
+            });
+        }
+        
+        // Draw correlation visualization
+        function drawCorrelation() {
+            const canvas = document.getElementById('correlation-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas dimensions
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Background
+            ctx.fillStyle = '#0d1117';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw grid
+            ctx.strokeStyle = '#30363d';
+            ctx.lineWidth = 0.5;
+            
+            // Vertical grid lines
+            for (let x = 0; x <= canvas.width; x += 30) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
+                ctx.stroke();
+            }
+            
+            // Horizontal grid lines
+            for (let y = 0; y <= canvas.height; y += 30) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+            }
+            
+            // Center axes
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            
+            ctx.strokeStyle = '#8b949e';
+            ctx.lineWidth = 1;
+            
+            // X-axis
+            ctx.beginPath();
+            ctx.moveTo(0, centerY);
+            ctx.lineTo(canvas.width, centerY);
+            ctx.stroke();
+            
+            // Y-axis
+            ctx.beginPath();
+            ctx.moveTo(centerX, 0);
+            ctx.lineTo(centerX, canvas.height);
+            ctx.stroke();
+            
+            // Draw correlation points
+            const complexity = currentDimension === '4D' ? 1 : 2;
             const resolution = 20;
-            const scale = dimension === '4D' ? 1 : 2;
             
             for (let i = 0; i <= resolution; i++) {
-              const u = (i / resolution) * Math.PI * 2;
-              for (let j = 0; j <= resolution; j++) {
-                const v = (j / resolution) * Math.PI;
+                const u = (i / resolution) * Math.PI * 2;
+                for (let j = 0; j <= resolution; j++) {
+                    const v = (j / resolution) * Math.PI;
+                    
+                    // Parametric equations for projection
+                    let x, y;
+                    
+                    if (currentDimension === '4D') {
+                        x = Math.sin(u) * Math.sin(v);
+                        y = Math.sin(u) * Math.cos(v);
+                    } else {
+                        x = Math.sin(u) * Math.sin(v) + 0.3 * Math.sin(3 * u);
+                        y = Math.sin(u) * Math.cos(v) + 0.3 * Math.cos(2 * v);
+                    }
+                    
+                    // Scale to canvas
+                    x = centerX + x * (canvas.width * 0.4);
+                    y = centerY - y * (canvas.height * 0.4);
+                    
+                    // Correlation intensity determines color
+                    const correlation = Math.pow(Math.cos(complexity * u) * Math.sin(complexity * v), 2);
+                    
+                    // Blue color with varying intensity
+                    const blue = Math.floor(150 + correlation * 105);
+                    ctx.fillStyle = `rgb(50, 50, ${blue})`;
+                    
+                    // Draw point
+                    ctx.beginPath();
+                    ctx.arc(x, y, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+            
+            // Legend
+            ctx.font = '12px Arial';
+            
+            // Color gradient legend
+            const gradientWidth = 150;
+            const gradientHeight = 15;
+            const gradientX = 10;
+            const gradientY = 20;
+            
+            for (let i = 0; i < gradientWidth; i++) {
+                const ratio = i / gradientWidth;
+                const blue = Math.floor(150 + ratio * 105);
+                ctx.fillStyle = `rgb(50, 50, ${blue})`;
+                ctx.fillRect(gradientX + i, gradientY, 1, gradientHeight);
+            }
+            
+            // Legend labels
+            ctx.fillStyle = '#e0e0e0';
+            ctx.fillText('Weak Correlation', gradientX, gradientY + gradientHeight + 15);
+            ctx.fillText('Strong Correlation', gradientX + gradientWidth - 100, gradientY + gradientHeight + 15);
+        }
+        
+        // Draw holographic visualization
+        function drawHolographic() {
+            const canvas = document.getElementById('holographic-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas dimensions
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Background
+            ctx.fillStyle = '#0d1117';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Center and radius
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = Math.min(canvas.width, canvas.height) * 0.4;
+            
+            // Draw boundary circle (CFT)
+            ctx.strokeStyle = '#ef4444';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+            ctx.stroke();
+            
+            // Draw concentric circles (AdS bulk)
+            const circles = [0.8, 0.6, 0.4, 0.2];
+            
+            circles.forEach((scale, idx) => {
+                ctx.strokeStyle = '#3b82f6';
+                ctx.lineWidth = 1 + (1-scale) * 2;
+                ctx.globalAlpha = 0.4 + ((1-scale) * 0.6);
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, radius * scale, 0, Math.PI * 2);
+                ctx.stroke();
+            });
+            
+            // Reset opacity
+            ctx.globalAlpha = 1;
+            
+            // Draw radial lines
+            const angles = [0, 45, 90, 135, 180, 225, 270, 315];
+            
+            angles.forEach(angle => {
+                const radian = angle * Math.PI / 180;
+                const x = centerX + Math.cos(radian) * radius;
+                const y = centerY + Math.sin(radian) * radius;
                 
-                // Parametric equations for a simplified projection of higher dimensional space
-                let x, y, z;
-                
-                if (dimension === '4D') {
-                  // Simpler 4D projection
-                  x = Math.sin(u) * Math.sin(v);
-                  y = Math.sin(u) * Math.cos(v);
-                  z = Math.cos(u);
+                ctx.strokeStyle = '#93c5fd';
+                ctx.lineWidth = 1;
+                ctx.globalAlpha = 0.6;
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.lineTo(x, y);
+                ctx.stroke();
+            });
+            
+            // Reset opacity
+            ctx.globalAlpha = 1;
+            
+            // Draw central point (deep bulk)
+            ctx.fillStyle = '#1d4ed8';
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 8, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Draw MERA tensor network for 11D
+            if (currentDimension === '11D') {
+                drawTensorNetwork(ctx, centerX, centerY, radius);
+            }
+            
+            // Legend
+            const legendItems = [
+                { color: '#ef4444', label: 'CFT Boundary (Our 4D Reality)', type: 'line' },
+                { color: '#1d4ed8', label: 'AdS Bulk (Higher Dimensions)', type: 'circle' }
+            ];
+            
+            if (currentDimension === '11D') {
+                legendItems.push({ color: '#93c5fd', label: 'MERA Tensor Network', type: 'line' });
+            }
+            
+            ctx.font = '12px Arial';
+            let legendY = 20;
+            
+            legendItems.forEach(item => {
+                if (item.type === 'line') {
+                    // Line
+                    ctx.strokeStyle = item.color;
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(10, legendY + 7);
+                    ctx.lineTo(25, legendY + 7);
+                    ctx.stroke();
                 } else {
-                  // More complex 11D projection with extra modulations
-                  x = Math.sin(u) * Math.sin(v) + 0.3 * Math.sin(3 * u);
-                  y = Math.sin(u) * Math.cos(v) + 0.3 * Math.cos(2 * v);
-                  z = Math.cos(u) + 0.2 * Math.sin(5 * v);
+                    // Circle
+                    ctx.fillStyle = item.color;
+                    ctx.beginPath();
+                    ctx.arc(17, legendY + 7, 7, 0, Math.PI * 2);
+                    ctx.fill();
                 }
                 
-                // Correlation function value as color intensity
-                const correlation = Math.pow(Math.cos(scale * u) * Math.sin(scale * v), 2);
+                // Label
+                ctx.fillStyle = '#e0e0e0';
+                ctx.fillText(item.label, 35, legendY + 12);
                 
-                data.push({ x: x * 10, y: y * 10, z: z * 5, value: correlation });
-              }
-            }
-            return data;
-          };
-
-          // Generate data for AdS/CFT correspondence visualization (simplified)
-          const generateAdSCFTData = (dimension) => {
-            const data = [];
-            const bulkPoints = 50;
-            const boundaryPoints = 30;
-            const complexity = dimension === '4D' ? 1 : 3;
+                legendY += 25;
+            });
+        }
+        
+        // Helper function to draw tensor network
+        function drawTensorNetwork(ctx, centerX, centerY, radius) {
+            ctx.globalAlpha = 0.4;
             
-            // Generate boundary CFT points
-            for (let i = 0; i < boundaryPoints; i++) {
-              const theta = (i / boundaryPoints) * Math.PI * 2;
-              const boundaryX = Math.cos(theta) * 10;
-              const boundaryY = Math.sin(theta) * 10;
-              const boundaryField = Math.cos(complexity * theta) * Math.sin(complexity * theta / 2);
-              
-              data.push({
-                isBoundary: true,
-                x: boundaryX,
-                y: boundaryY,
-                z: 0,
-                field: boundaryField,
-                radius: 0.8,
-              });
-            }
+            // Define levels of the network
+            const levels = [0, 1, 2, 3];
             
-            // Generate bulk AdS points
-            for (let r = 1; r < 10; r += 2) {
-              for (let i = 0; i < bulkPoints; i++) {
-                const theta = (i / bulkPoints) * Math.PI * 2;
-                const bulkX = Math.cos(theta) * r;
-                const bulkY = Math.sin(theta) * r;
-                const bulkZ = (10 - r) / 2; // Higher z as we go toward center
+            // Draw nodes at each level
+            levels.forEach(level => {
+                const levelRadius = (level === 0) ? 10 : radius * (0.2 + level * 0.2);
+                const nodesAtLevel = 4 + level * 2;
                 
-                // Bulk field related to boundary values through AdS/CFT correspondence
-                const bulkField = Math.exp(-bulkZ/2) * Math.cos(complexity * theta) * Math.sin(complexity * theta / 2);
-                
-                data.push({
-                  isBoundary: false,
-                  x: bulkX,
-                  y: bulkY,
-                  z: bulkZ,
-                  field: bulkField,
-                  radius: 0.3,
-                });
-              }
-            }
+                for (let i = 0; i < nodesAtLevel; i++) {
+                    const angle = (i / nodesAtLevel) * Math.PI * 2;
+                    const x = centerX + levelRadius * Math.cos(angle);
+                    const y = centerY + levelRadius * Math.sin(angle);
+                    
+                    // Node color based on level
+                    if (level === 0) {
+                        ctx.fillStyle = '#1d4ed8';
+                    } else if (level === 3) {
+                        ctx.fillStyle = '#ef4444';
+                    } else {
+                        ctx.fillStyle = '#3b82f6';
+                    }
+                    
+                    // Draw node
+                    ctx.beginPath();
+                    ctx.arc(x, y, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            });
             
-            return data;
-          };
-
-          // Generate data based on the selected dimension
-          const waveData = generateWaveFunction(dimension);
-          const manifoldData = generateManifoldData(dimension);
-          const adsCftData = generateAdSCFTData(dimension);
-          
-          // Customize the tooltip for wave function data
-          const WaveFunctionTooltip = ({ active, payload }) => {
-            if (active && payload && payload.length) {
-              return (
-                <div style={{backgroundColor: 'white', border: '1px solid #ccc', padding: '10px', borderRadius: '5px', boxShadow: '0 2px 5px rgba(0,0,0,0.1)'}}>
-                  <p style={{margin: '0', fontSize: '12px', fontWeight: 'bold'}}>{`Position (x): ${payload[0].payload.x.toFixed(2)}`}</p>
-                  <p style={{margin: '0', fontSize: '12px'}}>{`Amplitude (R): ${payload[0].payload.r.toFixed(4)}`}</p>
-                  <p style={{margin: '0', fontSize: '12px'}}>{`Phase (S): ${payload[0].payload.s.toFixed(4)}`}</p>
-                  <p style={{margin: '0', fontSize: '12px'}}>{`Velocity (∇S/m): ${payload[0].payload.velocity.toFixed(4)}`}</p>
-                  <p style={{margin: '0', fontSize: '12px'}}>{`Hidden Order: ${payload[0].payload.hiddenOrder.toFixed(4)}`}</p>
-                </div>
-              );
-            }
-            return null;
-          };
-
-          // Get Recharts components
-          const { 
-            LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, 
-            ResponsiveContainer, ScatterChart, Scatter, ZAxis 
-          } = Recharts;
-
-          return (
-            <div style={{fontFamily: 'Roboto, sans-serif', margin: '20px 0'}}>
-              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap'}}>
-                <h2 style={{color: '#1e3a8a', fontSize: '24px', margin: '0 0 10px 0'}}>Holonomic Quantum Reality (HQR) Mathematical Visualization</h2>
-                <div style={{display: 'flex', alignItems: 'center'}}>
-                  <span style={{marginRight: '10px', fontSize: '14px', fontWeight: '500'}}>Dimension:</span>
-                  <select 
-                    value={dimension} 
-                    onChange={(e) => setDimension(e.target.value)}
-                    style={{padding: '8px 12px', borderRadius: '4px', fontSize: '14px', border: '1px solid #ddd'}}
-                  >
-                    <option value="4D">4D Reality</option>
-                    <option value="11D">11D M-Theory</option>
-                  </select>
-                </div>
-              </div>
-              
-              <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))', gap: '20px'}}>
-                {/* Bohmian Mechanics Visualization */}
-                <div style={{backgroundColor: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)'}}>
-                  <h3 style={{color: '#1e40af', fontSize: '18px', marginTop: '0'}}>
-                    Bohmian Mechanics Wave Function (Ψ = Re<sup>iS/ℏ</sup>)
-                  </h3>
-                  <p style={{fontSize: '14px', color: '#666', marginBottom: '15px'}}>
-                    Visualizing components of the wave function and velocity field from guiding equation: dx/dt = ∇S/m
-                  </p>
-                  <div style={{height: '300px'}}>
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={waveData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                        <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                        <XAxis 
-                          dataKey="x" 
-                          label={{ value: 'Position (x)', position: 'insideBottomRight', offset: -5 }} 
-                        />
-                        <YAxis 
-                          label={{ value: 'Value', angle: -90, position: 'insideLeft' }} 
-                          domain={[-1.2, 1.2]}
-                        />
-                        <Tooltip content={<WaveFunctionTooltip />} />
-                        <Legend verticalAlign="top" />
-                        <Line 
-                          type="monotone" 
-                          dataKey="realPart" 
-                          stroke="#8884d8" 
-                          name="Real Part (Re[Ψ])" 
-                          dot={false} 
-                          strokeWidth={2} 
-                        />
-                        <Line 
-                          type="monotone" 
-                          dataKey="imagPart" 
-                          stroke="#82ca9d" 
-                          name="Imaginary Part (Im[Ψ])" 
-                          dot={false}
-                          strokeWidth={2} 
-                        />
-                        <Line 
-                          type="monotone" 
-                          dataKey="velocity" 
-                          stroke="#ff7300" 
-                          name="Bohmian Velocity (∇S/m)" 
-                          dot={false}
-                          strokeWidth={2} 
-                        />
-                        <Line 
-                          type="monotone" 
-                          dataKey="hiddenOrder" 
-                          stroke="#ff0000" 
-                          name="Hidden Order ⟨O(x)O(0)⟩" 
-                          dot={false}
-                          strokeWidth={2}
-                          strokeDasharray="3 3" 
-                        />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  </div>
-                </div>
+            // Draw connections between adjacent levels
+            for (let level = 0; level < 3; level++) {
+                const innerRadius = (level === 0) ? 10 : radius * (0.2 + level * 0.2);
+                const outerRadius = radius * (0.2 + (level + 1) * 0.2);
+                const innerNodes = 4 + level * 2;
+                const outerNodes = 4 + (level + 1) * 2;
                 
-                {/* Hidden Order Correlation and 11D Projection */}
-                <div style={{backgroundColor: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)'}}>
-                  <h3 style={{color: '#1e40af', fontSize: '18px', marginTop: '0'}}>
-                    Hidden Order Correlation in {dimension} Space
-                  </h3>
-                  <p style={{fontSize: '14px', color: '#666', marginBottom: '15px'}}>
-                    Visualizing correlation function ⟨O(x)O(y)⟩ as a projection from {dimension === '4D' ? '4D' : '11D'} space
-                  </p>
-                  <div style={{height: '300px'}}>
-                    <ResponsiveContainer width="100%" height="100%">
-                      <ScatterChart margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                        <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                        <XAxis 
-                          type="number" 
-                          dataKey="x" 
-                          name="x" 
-                          label={{ value: 'Dimension 1', position: 'insideBottomRight', offset: -5 }} 
-                          domain={[-12, 12]}
-                        />
-                        <YAxis 
-                          type="number" 
-                          dataKey="y" 
-                          name="y" 
-                          label={{ value: 'Dimension 2', angle: -90, position: 'insideLeft' }} 
-                          domain={[-12, 12]}
-                        />
-                        <ZAxis 
-                          type="number" 
-                          dataKey="z" 
-                          range={[0, 500]} 
-                          name="z" 
-                        />
-                        <Tooltip 
-                          cursor={{ strokeDasharray: '3 3' }} 
-                          formatter={(value) => value.toFixed(3)}
-                        />
-                        <Scatter 
-                          name="Manifold Points" 
-                          data={manifoldData} 
-                          fill="#8884d8" 
-                          shape="circle"
-                        />
-                      </ScatterChart>
-                    </ResponsiveContainer>
-                  </div>
-                  <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '10px'}}>
-                    <div style={{display: 'flex', alignItems: 'center', marginRight: '20px'}}>
-                      <div style={{width: '12px', height: '12px', backgroundColor: '#1e3a8a', borderRadius: '50%', marginRight: '5px'}}></div>
-                      <span style={{fontSize: '12px'}}>Strong Correlation</span>
-                    </div>
-                    <div style={{display: 'flex', alignItems: 'center'}}>
-                      <div style={{width: '12px', height: '12px', backgroundColor: '#bfdbfe', borderRadius: '50%', marginRight: '5px'}}></div>
-                      <span style={{fontSize: '12px'}}>Weak Correlation</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* AdS/CFT Correspondence Visualization */}
-              <div style={{backgroundColor: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', marginTop: '20px'}}>
-                <h3 style={{color: '#1e40af', fontSize: '18px', marginTop: '0'}}>
-                  Holographic Principle: AdS/CFT Correspondence
-                </h3>
-                <p style={{fontSize: '14px', color: '#666', marginBottom: '15px'}}>
-                  Visualizing the relationship between bulk AdS space and boundary CFT: Z<sub>CFT</sub> = ∫Dϕe<sup>-S<sub>bulk</sub>[ϕ]</sup>
-                </p>
-                <div style={{width: '100%', height: '300px', backgroundColor: '#eff6ff', borderRadius: '8px', position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                  <div style={{position: 'relative', width: '280px', height: '280px'}}>
-                    {/* Boundary circle (CFT) */}
-                    <div style={{
-                      position: 'absolute', 
-                      top: '0', 
-                      left: '0', 
-                      width: '100%', 
-                      height: '100%', 
-                      border: '4px solid #ef4444', 
-                      borderRadius: '50%'
-                    }}></div>
+                for (let i = 0; i < innerNodes; i++) {
+                    const innerAngle = (i / innerNodes) * Math.PI * 2;
+                    const x1 = centerX + innerRadius * Math.cos(innerAngle);
+                    const y1 = centerY + innerRadius * Math.sin(innerAngle);
                     
-                    {/* AdS bulk visualization with concentric circles */}
-                    {[0.8, 0.6, 0.4, 0.2].map((scale, idx) => (
-                      <div 
-                        key={idx}
-                        style={{
-                          position: 'absolute',
-                          top: '0',
-                          left: '0',
-                          width: '100%',
-                          height: '100%',
-                          borderRadius: '50%',
-                          border: `${1 + (1-scale) * 3}px solid #3b82f6`,
-                          transform: `scale(${scale})`,
-                          opacity: 0.4 + ((1-scale) * 0.6)
-                        }}
-                      ></div>
-                    ))}
-                    
-                    {/* Radial lines representing connections between bulk and boundary */}
-                    {[0, 45, 90, 135, 180, 225, 270, 315].map((angle) => (
-                      <div 
-                        key={angle}
-                        style={{
-                          position: 'absolute',
-                          top: '50%',
-                          left: '50%',
-                          height: '1px',
-                          width: '50%',
-                          backgroundColor: '#93c5fd',
-                          transform: `rotate(${angle}deg)`,
-                          transformOrigin: 'left center',
-                          opacity: 0.6
-                        }}
-                      ></div>
-                    ))}
-                    
-                    {/* Central point representing deep bulk */}
-                    <div style={{
-                      position: 'absolute',
-                      top: '50%',
-                      left: '50%',
-                      width: '16px',
-                      height: '16px',
-                      backgroundColor: '#1d4ed8',
-                      borderRadius: '50%',
-                      transform: 'translate(-50%, -50%)'
-                    }}></div>
-                    
-                    {/* MERA Tensor Network representation for 11D */}
-                    {dimension === '11D' && (
-                      <div style={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        width: '100%',
-                        height: '100%',
-                        opacity: 0.4
-                      }}>
-                        <svg width="280" height="280" viewBox="-140 -140 280 280">
-                          <g>
-                            {/* Simplified tensor network - nodes at different levels */}
-                            {[0, 1, 2, 3].map((level) => {
-                              const radius = 20 + level * 30;
-                              const nodesAtLevel = 4 + level * 2;
-                              return Array.from({ length: nodesAtLevel }).map((_, i) => {
-                                const angle = (i / nodesAtLevel) * Math.PI * 2;
-                                const x = radius * Math.cos(angle);
-                                const y = radius * Math.sin(angle);
-                                return (
-                                  <circle 
-                                    key={`${level}-${i}`} 
-                                    cx={x} 
-                                    cy={y} 
-                                    r={3} 
-                                    fill={level === 0 ? "#1d4ed8" : (level === 3 ? "#ef4444" : "#3b82f6")} 
-                                  />
-                                );
-                              });
-                            })}
+                    // Connect each inner node to two outer nodes
+                    for (let j of [i*2, i*2+1]) {
+                        if (j < outerNodes) {
+                            const outerAngle = (j / outerNodes) * Math.PI * 2;
+                            const x2 = centerX + outerRadius * Math.cos(outerAngle);
+                            const y2 = centerY + outerRadius * Math.sin(outerAngle);
                             
-                            {/* Connections between levels */}
-                            {[0, 1, 2].map((level) => {
-                              const innerRadius = 20 + level * 30;
-                              const outerRadius = 20 + (level + 1) * 30;
-                              const innerNodes = 4 + level * 2;
-                              const outerNodes = 4 + (level + 1) * 2;
-                              
-                              return Array.from({ length: innerNodes }).flatMap((_, i) => {
-                                const innerAngle = (i / innerNodes) * Math.PI * 2;
-                                const x1 = innerRadius * Math.cos(innerAngle);
-                                const y1 = innerRadius * Math.sin(innerAngle);
-                                
-                                return [i*2, i*2+1].map((j) => {
-                                  if (j < outerNodes) {
-                                    const outerAngle = (j / outerNodes) * Math.PI * 2;
-                                    const x2 = outerRadius * Math.cos(outerAngle);
-                                    const y2 = outerRadius * Math.sin(outerAngle);
-                                    
-                                    return (
-                                      <line 
-                                        key={`${level}-${i}-${j}`}
-                                        x1={x1} 
-                                        y1={y1} 
-                                        x2={x2} 
-                                        y2={y2} 
-                                        stroke={level === 2 ? "#fca5a5" : "#93c5fd"}
-                                        strokeWidth={1}
-                                      />
-                                    );
-                                  }
-                                  return null;
-                                }).filter(Boolean);
-                              });
-                            })}
-                          </g>
-                        </svg>
-                      </div>
-                    )}
-                  </div>
-                  
-                  <div style={{position: 'absolute', bottom: '10px', left: '10px', fontSize: '12px'}}>
-                    <div style={{display: 'flex', alignItems: 'center', marginBottom: '5px'}}>
-                      <div style={{width: '12px', height: '12px', border: '2px solid #ef4444', borderRadius: '50%', marginRight: '5px'}}></div>
-                      <span>CFT Boundary (Our 4D Reality)</span>
-                    </div>
-                    <div style={{display: 'flex', alignItems: 'center'}}>
-                      <div style={{width: '12px', height: '12px', backgroundColor: '#1d4ed8', borderRadius: '50%', marginRight: '5px'}}></div>
-                      <span>AdS Bulk (Higher Dimensions)</span>
-                    </div>
-                    {dimension === '11D' && (
-                      <div style={{display: 'flex', alignItems: 'center', marginTop: '5px'}}>
-                        <div style={{width: '12px', height: '12px', border: '1px solid #93c5fd', borderRadius: '50%', marginRight: '5px'}}></div>
-                        <span>MERA Tensor Network</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-              
-              {/* Key Equations Section */}
-              <div style={{backgroundColor: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', marginTop: '20px'}}>
-                <h3 style={{color: '#1e40af', fontSize: '18px', marginTop: '0'}}>
-                  Key Equations of HQR
-                </h3>
-                <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '15px', fontSize: '14px'}}>
-                  <div style={{padding: '15px', border: '1px solid #e5e7eb', borderRadius: '4px'}}>
-                    <p style={{fontWeight: '500', margin: '0 0 5px 0'}}>M-Theory Metric:</p>
-                    <p style={{fontFamily: 'monospace', margin: '0'}}>ds² = g<sub>μν</sub>dx<sup>μ</sup>dx<sup>ν</sup>, μ,ν = 0,1,...,10</p>
-                    <p style={{fontSize: '12px', color: '#666', marginTop: '8px'}}>Describes spacetime in 11 dimensions</p>
-                  </div>
-                  <div style={{padding: '15px', border: '1px solid #e5e7eb', borderRadius: '4px'}}>
-                    <p style={{fontWeight: '500', margin: '0 0 5px 0'}}>Bohmian Mechanics Guiding Equation:</p>
-                    <p style={{fontFamily: 'monospace', margin: '0'}}>dx/dt = ∇S/m</p>
-                    <p style={{fontFamily: 'monospace', margin: '5px 0 0 0'}}>Where Ψ = Re<sup>iS/ℏ</sup></p>
-                    <p style={{fontSize: '12px', color: '#666', marginTop: '8px'}}>Determines particle trajectories from wave function</p>
-                  </div>
-                  <div style={{padding: '15px', border: '1px solid #e5e7eb', borderRadius: '4px'}}>
-                    <p style={{fontWeight: '500', margin: '0 0 5px 0'}}>Hidden Order Correlation:</p>
-                    <p style={{fontFamily: 'monospace', margin: '0'}}>⟨O(x)O(y)⟩</p>
-                    <p style={{fontSize: '12px', color: '#666', marginTop: '8px'}}>Measures subtle, long-range quantum correlations</p>
-                  </div>
-                  <div style={{padding: '15px', border: '1px solid #e5e7eb', borderRadius: '4px'}}>
-                    <p style={{fontWeight: '500', margin: '0 0 5px 0'}}>AdS/CFT Correspondence:</p>
-                    <p style={{fontFamily: 'monospace', margin: '0'}}>Z<sub>CFT</sub> = ∫Dϕe<sup>-S<sub>bulk</sub>[ϕ]</sup></p>
-                    <p style={{fontSize: '12px', color: '#666', marginTop: '8px'}}>Links boundary CFT to bulk AdS gravity</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div style={{marginTop: '20px', backgroundColor: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)'}}>
-                <h3 style={{color: '#1e40af', fontSize: '18px', marginTop: '0'}}>About These Visualizations</h3>
-                <p style={{fontSize: '14px', lineHeight: '1.6'}}>
-                  These visualizations provide a simplified representation of the complex mathematical frameworks in HQR theory. The 11D visualizations use projections to represent higher-dimensional structures in a lower-dimensional space. Toggle between 4D and 11D modes to see how additional dimensions introduce more complex patterns and interactions, mirroring how our 4D reality might be a projection of higher-dimensional phenomena.
-                </p>
-                <div style={{marginTop: '15px', padding: '10px', backgroundColor: '#f0f9ff', borderLeft: '4px solid #3b82f6', borderRadius: '4px'}}>
-                  <p style={{margin: '0', fontSize: '14px'}}>
-                    <strong>Note:</strong> In HQR theory, hidden order in quantum many-body systems may be interpreted as a manifestation of higher-dimensional dynamics projected into our 4D reality. These visualizations aim to make these abstract mathematical concepts more accessible.
-                  </p>
-                </div>
-              </div>
-            </div>
-          );
-        };
-
-        // Remove loading indicator once React is rendering
-        document.querySelector('.viz-loading').style.display = 'none';
-
-        // Render the component to the DOM
-        ReactDOM.render(
-          <HQRVisualization />,
-          document.getElementById('hqr-visualization-root')
-        );
+                            // Connection color
+                            ctx.strokeStyle = (level === 2) ? '#fca5a5' : '#93c5fd';
+                            ctx.lineWidth = 1;
+                            
+                            // Draw connection
+                            ctx.beginPath();
+                            ctx.moveTo(x1, y1);
+                            ctx.lineTo(x2, y2);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+            
+            // Reset opacity
+            ctx.globalAlpha = 1;
+        }
+        
+        // Initialize visualizations
+        function initVisualizations() {
+            try {
+                drawWaveFunction();
+                drawCorrelation();
+                drawHolographic();
+                
+                // Handle window resize
+                window.addEventListener('resize', () => {
+                    drawWaveFunction();
+                    drawCorrelation();
+                    drawHolographic();
+                });
+                
+                // Hide error message if successful
+                document.getElementById('error-message').style.display = 'none';
+            } catch (error) {
+                console.error('Visualization error:', error);
+                document.getElementById('error-message').style.display = 'block';
+            }
+        }
+        
+        // Call initialization when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initVisualizations);
     </script>
-    
-    <footer style="margin-top: 3rem; padding: 2rem; background-color: #1e3a8a; color: white; text-align: center;">
-        <p>© 2025 HQR Team | <a href="index.html" style="color: white;">Return to Main Page</a></p>
-    </footer>
 </body>
 </html>
