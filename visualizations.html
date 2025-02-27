@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HQR Simplified Visualizations</title>
     
+    <!-- Required libraries for React visualization -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.1.9/Recharts.js"></script>
+    
     <!-- Basic styling -->
     <style>
         body {
@@ -110,6 +116,7 @@
         canvas {
             width: 100%;
             height: 100%;
+            display: block; /* Ensures no extra space */
         }
         
         .equation-container {
@@ -161,6 +168,40 @@
             margin-top: 40px;
             border-top: 1px solid #30363d;
             color: #8b949e;
+        }
+        
+        /* React component container styling */
+        #hidden-order-visualization-root {
+            padding: 20px;
+            background-color: #0d1117;
+            border-radius: 8px;
+            border: 1px solid #30363d;
+            margin-top: 20px;
+        }
+        
+        /* Override default React component styles for dark theme */
+        #hidden-order-visualization-root div {
+            background-color: #161b22 !important;
+            color: #e0e0e0 !important;
+        }
+        
+        #hidden-order-visualization-root h2,
+        #hidden-order-visualization-root h3 {
+            color: #58a6ff !important;
+        }
+        
+        #hidden-order-visualization-root p,
+        #hidden-order-visualization-root ul {
+            color: #8b949e !important;
+        }
+        
+        #hidden-order-visualization-root .recharts-cartesian-grid-horizontal line,
+        #hidden-order-visualization-root .recharts-cartesian-grid-vertical line {
+            stroke: #30363d !important;
+        }
+        
+        #hidden-order-visualization-root .recharts-text {
+            fill: #8b949e !important;
         }
     </style>
 </head>
@@ -251,6 +292,15 @@
                 </div>
             </div>
         </div>
+        
+        <!-- New section for Hidden Order Parameter Visualization -->
+        <div class="visualization-section">
+            <h2>Hidden Order Parameter Analysis</h2>
+            <p>Interactive visualization of hidden order parameters, entropy components, and phase transitions in quantum systems.</p>
+            
+            <!-- This is where the React component will be mounted -->
+            <div id="hidden-order-visualization-root"></div>
+        </div>
     </div>
     
     <footer>
@@ -275,11 +325,20 @@
         // Draw wave function visualization
         function drawWaveFunction() {
             const canvas = document.getElementById('wave-function-canvas');
-            const ctx = canvas.getContext('2d');
+            if (!canvas) {
+                console.error('Canvas element wave-function-canvas not found');
+                return;
+            }
             
-            // Set canvas dimensions
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
+            const ctx = canvas.getContext('2d');
+            if (!ctx) {
+                console.error('Could not get 2D context for wave-function-canvas');
+                return;
+            }
+            
+            // Set canvas dimensions correctly - this is crucial
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
             
             // Clear canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -424,11 +483,20 @@
         // Draw correlation visualization
         function drawCorrelation() {
             const canvas = document.getElementById('correlation-canvas');
-            const ctx = canvas.getContext('2d');
+            if (!canvas) {
+                console.error('Canvas element correlation-canvas not found');
+                return;
+            }
             
-            // Set canvas dimensions
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
+            const ctx = canvas.getContext('2d');
+            if (!ctx) {
+                console.error('Could not get 2D context for correlation-canvas');
+                return;
+            }
+            
+            // Set canvas dimensions correctly
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
             
             // Clear canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -532,18 +600,27 @@
             
             // Legend labels
             ctx.fillStyle = '#e0e0e0';
-            ctx.fillText('Weak Correlation', gradientX, gradientY + gradientHeight + 15);
-            ctx.fillText('Strong Correlation', gradientX + gradientWidth - 100, gradientY + gradientHeight + 15);
+            ctx.fillText('Weak', gradientX, gradientY + gradientHeight + 15);
+            ctx.fillText('Strong', gradientX + gradientWidth - 50, gradientY + gradientHeight + 15);
         }
         
         // Draw holographic visualization
         function drawHolographic() {
             const canvas = document.getElementById('holographic-canvas');
-            const ctx = canvas.getContext('2d');
+            if (!canvas) {
+                console.error('Canvas element holographic-canvas not found');
+                return;
+            }
             
-            // Set canvas dimensions
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
+            const ctx = canvas.getContext('2d');
+            if (!ctx) {
+                console.error('Could not get 2D context for holographic-canvas');
+                return;
+            }
+            
+            // Set canvas dimensions correctly
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
             
             // Clear canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -695,21 +772,20 @@
                     
                     // Connect each inner node to two outer nodes
                     for (let j of [i*2, i*2+1]) {
-                        if (j < outerNodes) {
-                            const outerAngle = (j / outerNodes) * Math.PI * 2;
-                            const x2 = centerX + outerRadius * Math.cos(outerAngle);
-                            const y2 = centerY + outerRadius * Math.sin(outerAngle);
-                            
-                            // Connection color
-                            ctx.strokeStyle = (level === 2) ? '#fca5a5' : '#93c5fd';
-                            ctx.lineWidth = 1;
-                            
-                            // Draw connection
-                            ctx.beginPath();
-                            ctx.moveTo(x1, y1);
-                            ctx.lineTo(x2, y2);
-                            ctx.stroke();
-                        }
+                        j = j % outerNodes; // Ensure we don't go out of bounds
+                        const outerAngle = (j / outerNodes) * Math.PI * 2;
+                        const x2 = centerX + outerRadius * Math.cos(outerAngle);
+                        const y2 = centerY + outerRadius * Math.sin(outerAngle);
+                        
+                        // Connection color
+                        ctx.strokeStyle = (level === 2) ? '#fca5a5' : '#93c5fd';
+                        ctx.lineWidth = 1;
+                        
+                        // Draw connection
+                        ctx.beginPath();
+                        ctx.moveTo(x1, y1);
+                        ctx.lineTo(x2, y2);
+                        ctx.stroke();
                     }
                 }
             }
@@ -721,15 +797,55 @@
         // Initialize visualizations
         function initVisualizations() {
             try {
+                console.log("Initializing visualizations...");
+                
+                // Check if canvas elements exist
+                const waveFunctionCanvas = document.getElementById('wave-function-canvas');
+                const correlationCanvas = document.getElementById('correlation-canvas');
+                const holographicCanvas = document.getElementById('holographic-canvas');
+                
+                if (!waveFunctionCanvas) console.error("wave-function-canvas not found");
+                if (!correlationCanvas) console.error("correlation-canvas not found");
+                if (!holographicCanvas) console.error("holographic-canvas not found");
+                
+                // Force a minimum size for the chart containers
+                document.querySelectorAll('.chart-container').forEach(container => {
+                    if (container.clientHeight < 300) {
+                        container.style.height = "300px";
+                    }
+                });
+                
+                // Initialize canvas sizes before drawing
+                if (waveFunctionCanvas) {
+                    waveFunctionCanvas.width = waveFunctionCanvas.parentElement.clientWidth;
+                    waveFunctionCanvas.height = waveFunctionCanvas.parentElement.clientHeight;
+                }
+                
+                if (correlationCanvas) {
+                    correlationCanvas.width = correlationCanvas.parentElement.clientWidth;
+                    correlationCanvas.height = correlationCanvas.parentElement.clientHeight;
+                }
+                
+                if (holographicCanvas) {
+                    holographicCanvas.width = holographicCanvas.parentElement.clientWidth;
+                    holographicCanvas.height = holographicCanvas.parentElement.clientHeight;
+                }
+                
+                // Now draw the visualizations
                 drawWaveFunction();
                 drawCorrelation();
                 drawHolographic();
                 
-                // Handle window resize
-                window.addEventListener('resize', () => {
-                    drawWaveFunction();
-                    drawCorrelation();
-                    drawHolographic();
+                // Handle window resize with debounce
+                let resizeTimeout;
+                window.addEventListener('resize', function() {
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(function() {
+                        console.log("Window resized, redrawing visualizations...");
+                        drawWaveFunction();
+                        drawCorrelation();
+                        drawHolographic();
+                    }, 250);
                 });
                 
                 // Hide error message if successful
@@ -737,402 +853,448 @@
             } catch (error) {
                 console.error('Visualization error:', error);
                 document.getElementById('error-message').style.display = 'block';
+                document.getElementById('error-message').textContent = 'Error initializing visualizations: ' + error.message;
             }
         }
         
         // Call initialization when DOM is loaded
-        document.addEventListener('DOMContentLoaded', initVisualizations);
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initVisualizations);
+        } else {
+            // DOM already loaded, initialize immediately
+            initVisualizations();
+        }
+        
+        // Fallback timer in case the DOMContentLoaded event already fired or doesn't trigger properly
+        setTimeout(function() {
+            console.log("Fallback timer triggered for initialization");
+            initVisualizations();
+        }, 500);
     </script>
+    
+    <!-- React component for Hidden Order Parameter Visualization -->
+    <script type="text/babel">
+        // Hidden Order Parameter Visualization Component
+        const HiddenOrderParameterVisualization = () => {
+          // Get Recharts components from the global Recharts object
+          const { 
+            LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, 
+            ResponsiveContainer, ScatterChart, Scatter, ZAxis 
+          } = window.Recharts;
+          
+          const [separationMode, setSeparationMode] = React.useState('distance');
+          const [orderMode, setOrderMode] = React.useState('standard');
+          
+          // Generate data showing how mutual information (hidden order parameter H) 
+          // varies with distance or entanglement between regions
+          const generateHiddenOrderData = (mode, orderType) => {
+            const data = [];
+            
+            // Parameters that control the behavior of the hidden order
+            const entropyBase = orderType === 'standard' ? 1.0 : 2.0;
+            const decayRate = orderType === 'standard' ? 0.4 : 0.1;
+            const fluctuation = orderType === 'standard' ? 0.0 : 0.2;
+            
+            for (let x = 0.1; x <= 10; x += 0.2) {
+              // Calculate entanglement entropies based on the distance or entanglement
+              const size = mode === 'distance' ? 1.0 : (1.5 + Math.sin(x));
+              
+              // Entanglement entropy of region A
+              const entropyA = entropyBase * Math.log(size);
+              
+              // Entanglement entropy of region B
+              const entropyB = entropyBase * Math.log(size);
+              
+              // Entanglement entropy of the union, which increases with distance
+              // and has a slower growth than the sum of individual entropies
+              let entropyUnion;
+              if (mode === 'distance') {
+                // For distance mode: mutual information decreases with distance
+                entropyUnion = entropyA + entropyB - entropyBase * Math.exp(-decayRate * x);
+              } else {
+                // For entanglement mode: mutual information correlates with entanglement
+                entropyUnion = entropyA + entropyB - entropyBase * (1 - Math.exp(-decayRate * x));
+              }
+              
+              // Add some quantum fluctuations to the data if in "quantum" mode
+              const randomFluctuation = orderType === 'quantum' ? 
+                fluctuation * (Math.random() - 0.5) * Math.exp(-x/5) : 0;
+              
+              // Calculate the hidden order parameter H = I(A:B) = S_A + S_B - S_{A∪B}
+              const hiddenOrderH = entropyA + entropyB - entropyUnion + randomFluctuation;
+              
+              data.push({
+                x: x,
+                entropyA: entropyA,
+                entropyB: entropyB,
+                entropyUnion: entropyUnion,
+                hiddenOrderH: hiddenOrderH,
+                // Include values for additional plots
+                theoretical: mode === 'distance' ? 
+                  entropyBase * Math.exp(-decayRate * x) : 
+                  entropyBase * (1 - Math.exp(-decayRate * x))
+              });
+            }
+            
+            return data;
+          };
+          
+          // Generate the data based on current mode
+          const hiddenOrderData = generateHiddenOrderData(separationMode, orderMode);
+          
+          // Create another dataset for the phase transition
+          const generatePhaseTransitionData = () => {
+            const data = [];
+            
+            // Parameter that controls the transition point
+            const criticalPoint = 5.0;
+            const sharpness = 3.0;
+            
+            for (let x = 0.1; x <= 10; x += 0.2) {
+              const beforeTransition = 0.05 + 0.8 / (1 + Math.exp(sharpness * (x - criticalPoint)));
+              
+              // Add some quantum fluctuations near the critical point
+              const criticalFluctuations = 0.1 * Math.exp(-2 * Math.pow(x - criticalPoint, 2));
+              
+              data.push({
+                x: x,
+                hiddenOrderH: beforeTransition + (orderMode === 'quantum' ? criticalFluctuations : 0),
+                criticalPoint: x === criticalPoint ? beforeTransition / 2 : null,
+              });
+            }
+            
+            return data;
+          };
+          
+          const phaseTransitionData = generatePhaseTransitionData();
 
+          return (
+            <div style={{ padding: '20px', borderRadius: '8px' }}>
+              <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>
+                Hidden Order Parameter Visualization
+              </h2>
+              
+              <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px', gap: '20px' }}>
+                <div>
+                  <label style={{ marginRight: '10px', fontWeight: 'bold' }}>Separation Type:</label>
+                  <select 
+                    value={separationMode} 
+                    onChange={(e) => setSeparationMode(e.target.value)}
+                    style={{ padding: '5px', borderRadius: '4px', backgroundColor: '#30363d', color: '#e0e0e0', border: '1px solid #58a6ff' }}
+                  >
+                    <option value="distance">Spatial Distance</option>
+                    <option value="entanglement">Entanglement Strength</option>
+                  </select>
+                </div>
+                <div>
+                  <label style={{ marginRight: '10px', fontWeight: 'bold' }}>Order Type:</label>
+                  <select 
+                    value={orderMode} 
+                    onChange={(e) => setOrderMode(e.target.value)}
+                    style={{ padding: '5px', borderRadius: '4px', backgroundColor: '#30363d', color: '#e0e0e0', border: '1px solid #58a6ff' }}
+                  >
+                    <option value="standard">Standard</option>
+                    <option value="quantum">Quantum Fluctuations</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                {/* Hidden Order Parameter vs Distance/Entanglement */}
+                <div style={{ backgroundColor: '#0d1117', padding: '15px', borderRadius: '8px', border: '1px solid #30363d' }}>
+                  <h3 style={{ marginTop: '0', color: '#58a6ff' }}>
+                    Hidden Order Parameter (H = I(A:B))
+                  </h3>
+                  <p style={{ fontSize: '14px', color: '#8b949e' }}>
+                    H = S<sub>A</sub> + S<sub>B</sub> - S<sub>A∪B</sub> where S is the entanglement entropy
+                  </p>
+                  <div style={{ height: '300px' }}>
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart data={hiddenOrderData} margin={{ top: 5, right: 30, left: 20, bottom: 40 }}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="#30363d" />
+                        <XAxis 
+                          dataKey="x" 
+                          stroke="#8b949e"
+                          label={{ 
+                            value: separationMode === 'distance' ? 'Spatial Separation' : 'Entanglement Strength', 
+                            position: 'insideBottom', 
+                            offset: -5,
+                            style: { textAnchor: 'middle', fill: '#8b949e' }
+                          }}
+                        />
+                        <YAxis 
+                          stroke="#8b949e"
+                          label={{ 
+                            value: 'Hidden Order Parameter (H)', 
+                            angle: -90, 
+                            position: 'insideLeft',
+                            style: { textAnchor: 'middle', fill: '#8b949e' } 
+                          }}
+                        />
+                        <Tooltip 
+                          formatter={(value) => value.toFixed(3)}
+                          contentStyle={{ backgroundColor: '#0d1117', border: '1px solid #30363d', color: '#e0e0e0' }}
+                        />
+                        <Legend verticalAlign="top" />
+                        <Line 
+                          type="monotone" 
+                          dataKey="hiddenOrderH" 
+                          stroke="#8884d8" 
+                          name="Hidden Order (H)" 
+                          strokeWidth={2}
+                          dot={false}
+                        />
+                        <Line 
+                          type="monotone" 
+                          dataKey="theoretical" 
+                          stroke="#82ca9d" 
+                          name="Theoretical Model" 
+                          strokeWidth={2}
+                          strokeDasharray="5 5"
+                          dot={false}
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                  <p style={{ fontSize: '12px', color: '#8b949e', marginTop: '10px' }}>
+                    {separationMode === 'distance' ? 
+                      "As spatial separation increases, hidden order (mutual information) decreases exponentially, demonstrating the decay of quantum correlations with distance." :
+                      "As entanglement strength increases, hidden order increases, showing how stronger quantum correlations enhance the hidden order parameter."}
+                  </p>
+                </div>
+                
+                {/* Entanglement Entropy Components Graph */}
+                <div style={{ backgroundColor: '#0d1117', padding: '15px', borderRadius: '8px', border: '1px solid #30363d' }}>
+                  <h3 style={{ marginTop: '0', color: '#58a6ff' }}>
+                    Entanglement Entropy Components
+                  </h3>
+                  <p style={{ fontSize: '14px', color: '#8b949e' }}>
+                    Showing S<sub>A</sub>, S<sub>B</sub>, and S<sub>A∪B</sub> used to calculate H
+                  </p>
+                  <div style={{ height: '300px' }}>
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart data={hiddenOrderData} margin={{ top: 5, right: 30, left: 20, bottom: 40 }}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="#30363d" />
+                        <XAxis 
+                          dataKey="x" 
+                          stroke="#8b949e"
+                          label={{ 
+                            value: separationMode === 'distance' ? 'Spatial Separation' : 'Entanglement Strength', 
+                            position: 'insideBottom', 
+                            offset: -5,
+                            style: { fill: '#8b949e' }
+                          }}
+                        />
+                        <YAxis 
+                          stroke="#8b949e"
+                          label={{ 
+                            value: 'Entanglement Entropy', 
+                            angle: -90, 
+                            position: 'insideLeft',
+                            style: { fill: '#8b949e' }
+                          }}
+                        />
+                        <Tooltip 
+                          formatter={(value) => value.toFixed(3)}
+                          contentStyle={{ backgroundColor: '#0d1117', border: '1px solid #30363d', color: '#e0e0e0' }}
+                        />
+                        <Legend verticalAlign="top" />
+                        <Line 
+                          type="monotone" 
+                          dataKey="entropyA" 
+                          stroke="#ff7300" 
+                          name="S_A (Region A)" 
+                          dot={false}
+                          strokeWidth={2}
+                        />
+                        <Line 
+                          type="monotone" 
+                          dataKey="entropyB" 
+                          stroke="#0088fe" 
+                          name="S_B (Region B)" 
+                          dot={false}
+                          strokeWidth={2}
+                        />
+                        <Line 
+                          type="monotone" 
+                          dataKey="entropyUnion" 
+                          stroke="#00C49F" 
+                          name="S_A∪B (Union)" 
+                          dot={false}
+                          strokeWidth={2}
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                  <p style={{ fontSize: '12px', color: '#8b949e', marginTop: '10px' }}>
+                    The difference between the sum of individual entropies (S<sub>A</sub> + S<sub>B</sub>) and the union entropy (S<sub>A∪B</sub>) 
+                    represents the hidden order parameter H. When the difference is large, strong quantum correlations exist between regions.
+                  </p>
+                </div>
+                
+                {/* Phase Transition */}
+                <div style={{ backgroundColor: '#0d1117', padding: '15px', borderRadius: '8px', border: '1px solid #30363d' }}>
+                  <h3 style={{ marginTop: '0', color: '#58a6ff' }}>
+                    Hidden Order Phase Transition
+                  </h3>
+                  <p style={{ fontSize: '14px', color: '#8b949e' }}>
+                    Showing how a system transitions between ordered and disordered phases
+                  </p>
+                  <div style={{ height: '300px' }}>
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart data={phaseTransitionData} margin={{ top: 5, right: 30, left: 20, bottom: 40 }}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="#30363d" />
+                        <XAxis 
+                          dataKey="x" 
+                          stroke="#8b949e"
+                          label={{ 
+                            value: 'System Parameter (e.g., Temperature)', 
+                            position: 'insideBottom', 
+                            offset: -5,
+                            style: { fill: '#8b949e' }
+                          }}
+                        />
+                        <YAxis 
+                          stroke="#8b949e"
+                          label={{ 
+                            value: 'Hidden Order Parameter (H)', 
+                            angle: -90, 
+                            position: 'insideLeft',
+                            style: { fill: '#8b949e' }
+                          }}
+                        />
+                        <Tooltip 
+                          formatter={(value) => value !== null ? value.toFixed(3) : 'N/A'}
+                          contentStyle={{ backgroundColor: '#0d1117', border: '1px solid #30363d', color: '#e0e0e0' }}
+                        />
+                        <Legend verticalAlign="top" />
+                        <Line 
+                          type="monotone" 
+                          dataKey="hiddenOrderH" 
+                          stroke="#8884d8" 
+                          name="Hidden Order (H)" 
+                          dot={false}
+                          strokeWidth={2}
+                        />
+                        <Scatter
+                          name="Critical Point"
+                          data={phaseTransitionData.filter(item => item.criticalPoint !== null)}
+                          fill="red"
+                          shape="star"
+                          dataKey="criticalPoint"
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                  <p style={{ fontSize: '12px', color: '#8b949e', marginTop: '10px' }}>
+                    As the system parameter increases, the hidden order parameter undergoes a phase transition. 
+                    Below the critical point, strong correlations exist (high hidden order). Above it, the system transitions 
+                    to a disordered state with minimal hidden order.
+                  </p>
+                </div>
+                
+                {/* 3D Visualization */}
+                <div style={{ backgroundColor: '#0d1117', padding: '15px', borderRadius: '8px', border: '1px solid #30363d' }}>
+                  <h3 style={{ marginTop: '0', color: '#58a6ff' }}>
+                    Hidden Order in 3D Parameter Space
+                  </h3>
+                  <p style={{ fontSize: '14px', color: '#8b949e' }}>
+                    Visualizing how hidden order varies with multiple parameters
+                  </p>
+                  <div style={{ height: '300px' }}>
+                    <ResponsiveContainer width="100%" height="100%">
+                      <ScatterChart margin={{ top: 20, right: 20, bottom: 40, left: 20 }}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="#30363d" />
+                        <XAxis 
+                          type="number" 
+                          dataKey="x" 
+                          name="Parameter 1" 
+                          domain={[0, 10]}
+                          stroke="#8b949e"
+                          label={{ value: 'Parameter 1', position: 'insideBottom', offset: -5, style: { fill: '#8b949e' } }}
+                        />
+                        <YAxis 
+                          type="number" 
+                          dataKey="hiddenOrderH" 
+                          name="Hidden Order (H)" 
+                          stroke="#8b949e"
+                          label={{ value: 'Hidden Order (H)', angle: -90, position: 'insideLeft', style: { fill: '#8b949e' } }}
+                        />
+                        <ZAxis 
+                          type="number" 
+                          dataKey="theoretical" 
+                          range={[20, 200]} 
+                          name="Parameter 2" 
+                        />
+                        <Tooltip 
+                          cursor={{ strokeDasharray: '3 3' }} 
+                          formatter={(value, name) => [value.toFixed(3), name]}
+                          contentStyle={{ backgroundColor: '#0d1117', border: '1px solid #30363d', color: '#e0e0e0' }}
+                        />
+                        <Legend />
+                        <Scatter 
+                          name="Hidden Order in Parameter Space" 
+                          data={hiddenOrderData} 
+                          fill="#8884d8"
+                        />
+                      </ScatterChart>
+                    </ResponsiveContainer>
+                  </div>
+                  <p style={{ fontSize: '12px', color: '#8b949e', marginTop: '10px' }}>
+                    This 3D visualization shows how hidden order varies across multiple parameters. 
+                    The size of each point represents a third parameter value, showing regions of parameter 
+                    space where hidden order is maximized (larger points indicate stronger correlation with 
+                    the theoretical model).
+                  </p>
+                </div>
+              </div>
+              
+              <div style={{ backgroundColor: '#0d1117', padding: '15px', borderRadius: '8px', border: '1px solid #30363d', marginTop: '20px' }}>
+                <h3 style={{ marginTop: '0', color: '#58a6ff' }}>Key Insights about Hidden Order Parameter</h3>
+                <ul style={{ fontSize: '14px', color: '#8b949e' }}>
+                  <li><strong>Definition:</strong> H = I(A:B) = S<sub>A</sub> + S<sub>B</sub> - S<sub>A∪B</sub> captures non-local quantum correlations</li>
+                  <li><strong>Physical Meaning:</strong> When H > 0, regions A and B share information despite spatial separation</li>
+                  <li><strong>Decay Properties:</strong> Hidden order typically decays with distance but can be enhanced by entanglement</li>
+                  <li><strong>Phase Transitions:</strong> Systems can transition between ordered (H > 0) and disordered (H ≈ 0) phases</li>
+                  <li><strong>Quantum Fluctuations:</strong> Can lead to local variations in hidden order strength, especially near critical points</li>
+                  <li><strong>Experimental Detection:</strong> Can be measured through mutual information in quantum many-body systems</li>
+                </ul>
+              </div>
+            </div>
+          );
+        };
 
-    // new stufffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-    
-<!-- Add this script block after your existing visualization section -->
-<script type="text/babel">
-// Hidden Order Parameter Visualization Component
-const HiddenOrderParameterVisualization = () => {
-  const [separationMode, setSeparationMode] = React.useState('distance');
-  const [orderMode, setOrderMode] = React.useState('standard');
-  
-  // Generate data showing how mutual information (hidden order parameter H) 
-  // varies with distance or entanglement between regions
-  const generateHiddenOrderData = (mode, orderType) => {
-    const data = [];
-    
-    // Parameters that control the behavior of the hidden order
-    const entropyBase = orderType === 'standard' ? 1.0 : 2.0;
-    const decayRate = orderType === 'standard' ? 0.4 : 0.1;
-    const fluctuation = orderType === 'standard' ? 0.0 : 0.2;
-    
-    for (let x = 0.1; x <= 10; x += 0.2) {
-      // Calculate entanglement entropies based on the distance or entanglement
-      const size = mode === 'distance' ? 1.0 : (1.5 + Math.sin(x));
-      
-      // Entanglement entropy of region A
-      const entropyA = entropyBase * Math.log(size);
-      
-      // Entanglement entropy of region B
-      const entropyB = entropyBase * Math.log(size);
-      
-      // Entanglement entropy of the union, which increases with distance
-      // and has a slower growth than the sum of individual entropies
-      let entropyUnion;
-      if (mode === 'distance') {
-        // For distance mode: mutual information decreases with distance
-        entropyUnion = entropyA + entropyB - entropyBase * Math.exp(-decayRate * x);
-      } else {
-        // For entanglement mode: mutual information correlates with entanglement
-        entropyUnion = entropyA + entropyB - entropyBase * (1 - Math.exp(-decayRate * x));
-      }
-      
-      // Add some quantum fluctuations to the data if in "quantum" mode
-      const randomFluctuation = orderType === 'quantum' ? 
-        fluctuation * (Math.random() - 0.5) * Math.exp(-x/5) : 0;
-      
-      // Calculate the hidden order parameter H = I(A:B) = S_A + S_B - S_{A∪B}
-      const hiddenOrderH = entropyA + entropyB - entropyUnion + randomFluctuation;
-      
-      data.push({
-        x: x,
-        entropyA: entropyA,
-        entropyB: entropyB,
-        entropyUnion: entropyUnion,
-        hiddenOrderH: hiddenOrderH,
-        // Include values for additional plots
-        theoretical: mode === 'distance' ? 
-          entropyBase * Math.exp(-decayRate * x) : 
-          entropyBase * (1 - Math.exp(-decayRate * x))
-      });
-    }
-    
-    return data;
-  };
-  
-  // Generate the data based on current mode
-  const hiddenOrderData = generateHiddenOrderData(separationMode, orderMode);
-  
-  // Create another dataset for the phase transition
-  const generatePhaseTransitionData = () => {
-    const data = [];
-    
-    // Parameter that controls the transition point
-    const criticalPoint = 5.0;
-    const sharpness = 3.0;
-    
-    for (let x = 0.1; x <= 10; x += 0.2) {
-      const beforeTransition = 0.05 + 0.8 / (1 + Math.exp(sharpness * (x - criticalPoint)));
-      
-      // Add some quantum fluctuations near the critical point
-      const criticalFluctuations = 0.1 * Math.exp(-2 * Math.pow(x - criticalPoint, 2));
-      
-      data.push({
-        x: x,
-        hiddenOrderH: beforeTransition + (orderMode === 'quantum' ? criticalFluctuations : 0),
-        criticalPoint: x === criticalPoint ? beforeTransition / 2 : null,
-      });
-    }
-    
-    return data;
-  };
-  
-  const phaseTransitionData = generatePhaseTransitionData();
-
-  // Get Recharts components
-  const { 
-    LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, 
-    ResponsiveContainer, ScatterChart, Scatter, ZAxis 
-  } = Recharts;
-
-  return (
-    <div style={{ fontFamily: 'Arial, sans-serif', padding: '20px', backgroundColor: '#f5f5f5', borderRadius: '8px' }}>
-      <h2 style={{ color: '#333', textAlign: 'center', marginBottom: '20px' }}>
-        Hidden Order Parameter Visualization
-      </h2>
-      
-      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px', gap: '20px' }}>
-        <div>
-          <label style={{ marginRight: '10px', fontWeight: 'bold' }}>Separation Type:</label>
-          <select 
-            value={separationMode} 
-            onChange={(e) => setSeparationMode(e.target.value)}
-            style={{ padding: '5px', borderRadius: '4px' }}
-          >
-            <option value="distance">Spatial Distance</option>
-            <option value="entanglement">Entanglement Strength</option>
-          </select>
-        </div>
-        <div>
-          <label style={{ marginRight: '10px', fontWeight: 'bold' }}>Order Type:</label>
-          <select 
-            value={orderMode} 
-            onChange={(e) => setOrderMode(e.target.value)}
-            style={{ padding: '5px', borderRadius: '4px' }}
-          >
-            <option value="standard">Standard</option>
-            <option value="quantum">Quantum Fluctuations</option>
-          </select>
-        </div>
-      </div>
-      
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-        {/* Hidden Order Parameter vs Distance/Entanglement */}
-        <div style={{ backgroundColor: 'white', padding: '15px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
-          <h3 style={{ color: '#333', marginTop: '0' }}>
-            Hidden Order Parameter (H = I(A:B))
-          </h3>
-          <p style={{ fontSize: '14px', color: '#666' }}>
-            H = S<sub>A</sub> + S<sub>B</sub> - S<sub>A∪B</sub> where S is the entanglement entropy
-          </p>
-          <div style={{ height: '300px' }}>
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={hiddenOrderData} margin={{ top: 5, right: 30, left: 20, bottom: 40 }}>
-                <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                <XAxis 
-                  dataKey="x" 
-                  label={{ 
-                    value: separationMode === 'distance' ? 'Spatial Separation' : 'Entanglement Strength', 
-                    position: 'insideBottom', 
-                    offset: -5,
-                    style: { textAnchor: 'middle' }
-                  }}
-                />
-                <YAxis 
-                  label={{ 
-                    value: 'Hidden Order Parameter (H)', 
-                    angle: -90, 
-                    position: 'insideLeft',
-                    style: { textAnchor: 'middle' } 
-                  }}
-                />
-                <Tooltip formatter={(value) => value.toFixed(3)} />
-                <Legend verticalAlign="top" />
-                <Line 
-                  type="monotone" 
-                  dataKey="hiddenOrderH" 
-                  stroke="#8884d8" 
-                  name="Hidden Order (H)" 
-                  strokeWidth={2}
-                  dot={false}
-                />
-                <Line 
-                  type="monotone" 
-                  dataKey="theoretical" 
-                  stroke="#82ca9d" 
-                  name="Theoretical Model" 
-                  strokeWidth={2}
-                  strokeDasharray="5 5"
-                  dot={false}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-          <p style={{ fontSize: '12px', color: '#666', marginTop: '10px' }}>
-            {separationMode === 'distance' ? 
-              "As spatial separation increases, hidden order (mutual information) decreases exponentially, demonstrating the decay of quantum correlations with distance." :
-              "As entanglement strength increases, hidden order increases, showing how stronger quantum correlations enhance the hidden order parameter."}
-          </p>
-        </div>
+        // Render the React component when the DOM is fully loaded
+        function initReactComponent() {
+          if (typeof React !== 'undefined' && typeof ReactDOM !== 'undefined' && typeof Recharts !== 'undefined') {
+            console.log("All libraries loaded, rendering React component");
+            try {
+              ReactDOM.render(
+                <HiddenOrderParameterVisualization />,
+                document.getElementById('hidden-order-visualization-root')
+              );
+            } catch (error) {
+              console.error("Error rendering React component:", error);
+              document.getElementById('hidden-order-visualization-root').innerHTML = 
+                '<div style="color: #e0e0e0; padding: 20px; text-align: center;">Error loading visualization component. Please refresh the page.</div>';
+            }
+          } else {
+            console.error("Required libraries not loaded yet, retrying in 1 second");
+            setTimeout(initReactComponent, 1000);
+          }
+        }
         
-        {/* Entanglement Entropy Components Graph */}
-        <div style={{ backgroundColor: 'white', padding: '15px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
-          <h3 style={{ color: '#333', marginTop: '0' }}>
-            Entanglement Entropy Components
-          </h3>
-          <p style={{ fontSize: '14px', color: '#666' }}>
-            Showing S<sub>A</sub>, S<sub>B</sub>, and S<sub>A∪B</sub> used to calculate H
-          </p>
-          <div style={{ height: '300px' }}>
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={hiddenOrderData} margin={{ top: 5, right: 30, left: 20, bottom: 40 }}>
-                <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                <XAxis 
-                  dataKey="x" 
-                  label={{ 
-                    value: separationMode === 'distance' ? 'Spatial Separation' : 'Entanglement Strength', 
-                    position: 'insideBottom', 
-                    offset: -5 
-                  }}
-                />
-                <YAxis 
-                  label={{ 
-                    value: 'Entanglement Entropy', 
-                    angle: -90, 
-                    position: 'insideLeft' 
-                  }}
-                />
-                <Tooltip formatter={(value) => value.toFixed(3)} />
-                <Legend verticalAlign="top" />
-                <Line 
-                  type="monotone" 
-                  dataKey="entropyA" 
-                  stroke="#ff7300" 
-                  name="S_A (Region A)" 
-                  dot={false}
-                  strokeWidth={2}
-                />
-                <Line 
-                  type="monotone" 
-                  dataKey="entropyB" 
-                  stroke="#0088fe" 
-                  name="S_B (Region B)" 
-                  dot={false}
-                  strokeWidth={2}
-                />
-                <Line 
-                  type="monotone" 
-                  dataKey="entropyUnion" 
-                  stroke="#00C49F" 
-                  name="S_A∪B (Union)" 
-                  dot={false}
-                  strokeWidth={2}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-          <p style={{ fontSize: '12px', color: '#666', marginTop: '10px' }}>
-            The difference between the sum of individual entropies (S<sub>A</sub> + S<sub>B</sub>) and the union entropy (S<sub>A∪B</sub>) 
-            represents the hidden order parameter H. When the difference is large, strong quantum correlations exist between regions.
-          </p>
-        </div>
+        // Try to initialize immediately if DOM is already loaded
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+          setTimeout(initReactComponent, 500); // Short delay to ensure libraries are loaded
+        } else {
+          document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(initReactComponent, 500);
+          });
+        }
         
-        {/* Phase Transition */}
-        <div style={{ backgroundColor: 'white', padding: '15px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
-          <h3 style={{ color: '#333', marginTop: '0' }}>
-            Hidden Order Phase Transition
-          </h3>
-          <p style={{ fontSize: '14px', color: '#666' }}>
-            Showing how a system transitions between ordered and disordered phases
-          </p>
-          <div style={{ height: '300px' }}>
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={phaseTransitionData} margin={{ top: 5, right: 30, left: 20, bottom: 40 }}>
-                <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                <XAxis 
-                  dataKey="x" 
-                  label={{ 
-                    value: 'System Parameter (e.g., Temperature)', 
-                    position: 'insideBottom', 
-                    offset: -5 
-                  }}
-                />
-                <YAxis 
-                  label={{ 
-                    value: 'Hidden Order Parameter (H)', 
-                    angle: -90, 
-                    position: 'insideLeft' 
-                  }}
-                />
-                <Tooltip formatter={(value) => value !== null ? value.toFixed(3) : 'N/A'} />
-                <Legend verticalAlign="top" />
-                <Line 
-                  type="monotone" 
-                  dataKey="hiddenOrderH" 
-                  stroke="#8884d8" 
-                  name="Hidden Order (H)" 
-                  dot={false}
-                  strokeWidth={2}
-                />
-                <Scatter
-                  name="Critical Point"
-                  data={phaseTransitionData.filter(item => item.criticalPoint !== null)}
-                  fill="red"
-                  shape="star"
-                  dataKey="criticalPoint"
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-          <p style={{ fontSize: '12px', color: '#666', marginTop: '10px' }}>
-            As the system parameter increases, the hidden order parameter undergoes a phase transition. 
-            Below the critical point, strong correlations exist (high hidden order). Above it, the system transitions 
-            to a disordered state with minimal hidden order.
-          </p>
-        </div>
-        
-        {/* 3D Visualization */}
-        <div style={{ backgroundColor: 'white', padding: '15px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
-          <h3 style={{ color: '#333', marginTop: '0' }}>
-            Hidden Order in 3D Parameter Space
-          </h3>
-          <p style={{ fontSize: '14px', color: '#666' }}>
-            Visualizing how hidden order varies with multiple parameters
-          </p>
-          <div style={{ height: '300px' }}>
-            <ResponsiveContainer width="100%" height="100%">
-              <ScatterChart margin={{ top: 20, right: 20, bottom: 40, left: 20 }}>
-                <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                <XAxis 
-                  type="number" 
-                  dataKey="x" 
-                  name="Parameter 1" 
-                  domain={[0, 10]}
-                  label={{ value: 'Parameter 1', position: 'insideBottom', offset: -5 }}
-                />
-                <YAxis 
-                  type="number" 
-                  dataKey="hiddenOrderH" 
-                  name="Hidden Order (H)" 
-                  label={{ value: 'Hidden Order (H)', angle: -90, position: 'insideLeft' }}
-                />
-                <ZAxis 
-                  type="number" 
-                  dataKey="theoretical" 
-                  range={[20, 200]} 
-                  name="Parameter 2" 
-                />
-                <Tooltip 
-                  cursor={{ strokeDasharray: '3 3' }} 
-                  formatter={(value, name) => [value.toFixed(3), name]}
-                />
-                <Legend />
-                <Scatter 
-                  name="Hidden Order in Parameter Space" 
-                  data={hiddenOrderData} 
-                  fill="#8884d8"
-                />
-              </ScatterChart>
-            </ResponsiveContainer>
-          </div>
-          <p style={{ fontSize: '12px', color: '#666', marginTop: '10px' }}>
-            This 3D visualization shows how hidden order varies across multiple parameters. 
-            The size of each point represents a third parameter value, showing regions of parameter 
-            space where hidden order is maximized (larger points indicate stronger correlation with 
-            the theoretical model).
-          </p>
-        </div>
-      </div>
-      
-      <div style={{ backgroundColor: 'white', padding: '15px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', marginTop: '20px' }}>
-        <h3 style={{ color: '#333', marginTop: '0' }}>Key Insights about Hidden Order Parameter</h3>
-        <ul style={{ fontSize: '14px', color: '#333' }}>
-          <li><strong>Definition:</strong> H = I(A:B) = S<sub>A</sub> + S<sub>B</sub> - S<sub>A∪B</sub> captures non-local quantum correlations</li>
-          <li><strong>Physical Meaning:</strong> When H > 0, regions A and B share information despite spatial separation</li>
-          <li><strong>Decay Properties:</strong> Hidden order typically decays with distance but can be enhanced by entanglement</li>
-          <li><strong>Phase Transitions:</strong> Systems can transition between ordered (H > 0) and disordered (H ≈ 0) phases</li>
-          <li><strong>Quantum Fluctuations:</strong> Can lead to local variations in hidden order strength, especially near critical points</li>
-          <li><strong>Experimental Detection:</strong> Can be measured through mutual information in quantum many-body systems</li>
-        </ul>
-      </div>
-    </div>
-  );
-};
-
-// Render the hidden order visualization
-ReactDOM.render(
-  <HiddenOrderParameterVisualization />,
-  document.getElementById('hidden-order-visualization-root')
-);
-</script>
-
-
-    <div id="hidden-order-visualization-root"></div>
-</div>
-
-</body>
-</html>
-
-    <div id="hidden-order-visualization-root"></div>
-</div>
-
+        // Fallback initialization after 2 seconds regardless of DOM/library state
+        setTimeout(initReactComponent, 2000);
+    </script>
 </body>
 </html>
