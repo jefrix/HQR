@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HQR Simplified Visualizations</title>
-    
+    <link rel="stylesheet" href="visualization.css">
     <!-- Required libraries for React visualization -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.1.9/Recharts.js"></script>
+
+    <!-- Correct paths for root directory -->
+<script src="visualization.js"></script>
+<script src="hqr-visualization.js"></script>
     
     <!-- Custom stylesheets -->
     <link rel="stylesheet" href="visualization.css">
@@ -1236,5 +1240,32 @@
 
     <!-- Load our improved HQR visualization JavaScript -->
     <script src="hqr-visualization.js"></script>
+    <script>
+  // Check if components are loading
+  document.addEventListener('DOMContentLoaded', function() {
+    // Check for loading spinners that persist too long
+    setTimeout(function() {
+      const spinners = document.querySelectorAll('.loading-spinner');
+      spinners.forEach(spinner => {
+        // If a spinner is still visible after 10 seconds, show error
+        if (spinner.offsetParent !== null) {
+          const container = spinner.parentNode;
+          container.innerHTML = `
+            <div style="background-color: #2d0b0b; color: #f85149; padding: 15px; border-radius: 8px; border: 1px solid #f85149;">
+              <h3 style="margin-top: 0;">Component Failed to Load</h3>
+              <p>Check console for errors. Possible issues:</p>
+              <ul>
+                <li>JavaScript files not found - check file paths</li>
+                <li>React/Recharts libraries not loading properly</li>
+                <li>JavaScript errors in your component code</li>
+              </ul>
+              <button onclick="location.reload()" style="background: #30363d; color: #e0e0e0; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer;">Reload Page</button>
+            </div>
+          `;
+        }
+      });
+    }, 10000); // 10 second timeout
+  });
+</script>
 </body>
 </html>
