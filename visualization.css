@@ -383,7 +383,10 @@ ReactDOM.render(
   document.getElementById('hqr-visualization-root')
 );
 
-
+<div class="visualization-container">
+    <h2>Hidden Order Parameter Visualization</h2>
+    <p>This visualization demonstrates the behavior of the Hidden Order Parameter (H) defined as H = I(A:B) = S<sub>A</sub> + S<sub>B</sub> - S<sub>A∪B</sub>, where I(A:B) is the mutual information between regions A and B, and S represents entanglement entropy.</p>
+    
 
 
 import React, { useState } from 'react';
@@ -751,3 +754,6 @@ const HiddenOrderParameterVisualization = () => {
 };
 
 export default HiddenOrderParameterVisualization;
+
+    <div id="hidden-order-visualization-root"></div>
+</div>
