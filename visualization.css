@@ -225,16 +225,16 @@ const HQRVisualization = () => {
               </ScatterChart>
             </ResponsiveContainer>
           </div>
-          <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '10px'}}>
-            <div style={{display: 'flex', alignItems: 'center', marginRight: '20px'}}>
-              <div style={{width: '12px', height: '12px', backgroundColor: '#1e3a8a', borderRadius: '50%', marginRight: '5px'}}></div>
-              <span style={{fontSize: '12px'}}>Strong Correlation</span>
-            </div>
-            <div style={{display: 'flex', alignItems: 'center'}}>
-              <div style={{width: '12px', height: '12px', backgroundColor: '#bfdbfe', borderRadius: '50%', marginRight: '5px'}}></div>
-              <span style={{fontSize: '12px'}}>Weak Correlation</span>
-            </div>
-          </div>
+<div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '10px'}}>
+  <div style={{display: 'flex', alignItems: 'center'}}>
+    <div style={{width: '12px', height: '12px', backgroundColor: '#1e3a8a', borderRadius: '50%', marginRight: '5px'}}></div>
+    <span style={{fontSize: '12px'}}>Strong Correlation</span>
+  </div>
+  <div style={{display: 'flex', alignItems: 'center'}}>
+    <div style={{width: '12px', height: '12px', backgroundColor: '#bfdbfe', borderRadius: '50%', marginRight: '5px'}}></div>
+    <span style={{fontSize: '12px'}}>Weak Correlation</span>
+  </div>
+</div>
         </div>
       </div>
       
