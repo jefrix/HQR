@@ -387,14 +387,20 @@ ReactDOM.render(
     <h2>Hidden Order Parameter Visualization</h2>
     <p>This visualization demonstrates the behavior of the Hidden Order Parameter (H) defined as H = I(A:B) = S<sub>A</sub> + S<sub>B</sub> - S<sub>A∪B</sub>, where I(A:B) is the mutual information between regions A and B, and S represents entanglement entropy.</p>
     
+<!-- Add this section to your visualizations.html page -->
+<div class="visualization-container">
+    <h2>Hidden Order Parameter Visualization</h2>
+    <p>This visualization demonstrates the behavior of the Hidden Order Parameter (H) defined as H = I(A:B) = S<sub>A</sub> + S<sub>B</sub> - S<sub>A∪B</sub>, where I(A:B) is the mutual information between regions A and B, and S represents entanglement entropy.</p>
+    
+    <div id="hidden-order-visualization-root"></div>
+</div>
 
-
-import React, { useState } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ScatterChart, Scatter, ZAxis, Label } from 'recharts';
-
+<!-- Add this script block after your existing visualization section -->
+<script type="text/babel">
+// Hidden Order Parameter Visualization Component
 const HiddenOrderParameterVisualization = () => {
-  const [separationMode, setSeparationMode] = useState('distance');
-  const [orderMode, setOrderMode] = useState('standard');
+  const [separationMode, setSeparationMode] = React.useState('distance');
+  const [orderMode, setOrderMode] = React.useState('standard');
   
   // Generate data showing how mutual information (hidden order parameter H) 
   // varies with distance or entanglement between regions
@@ -478,6 +484,12 @@ const HiddenOrderParameterVisualization = () => {
   };
   
   const phaseTransitionData = generatePhaseTransitionData();
+
+  // Get Recharts components
+  const { 
+    LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, 
+    ResponsiveContainer, ScatterChart, Scatter, ZAxis 
+  } = Recharts;
 
   return (
     <div style={{ fontFamily: 'Arial, sans-serif', padding: '20px', backgroundColor: '#f5f5f5', borderRadius: '8px' }}>
@@ -753,7 +765,13 @@ const HiddenOrderParameterVisualization = () => {
   );
 };
 
-export default HiddenOrderParameterVisualization;
+// Render the hidden order visualization
+ReactDOM.render(
+  <HiddenOrderParameterVisualization />,
+  document.getElementById('hidden-order-visualization-root')
+);
+</script>
+
 
     <div id="hidden-order-visualization-root"></div>
 </div>
