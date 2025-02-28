@@ -4,7 +4,110 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Holonomic Quantum Reality - Glossary</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --primary-bg: #151e3f;
+            --secondary-bg: #0e1229;
+            --text-color: #e0e0e0;
+            --accent-blue: #00ccff;
+            --accent-purple: #9370db;
+            --accent-gold: #ffd700;
+            --accent-green: #4caf50;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg));
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab:hover, .tab.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .glossary-list, .equation-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .glossary-item, .equation-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .term {
+            color: var(--accent-blue);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -16,72 +119,28 @@
                 <div class="tab active" onclick="switchTab('terms')">Terminology</div>
                 <div class="tab" onclick="switchTab('equations')">Equations</div>
             </div>
-            
-            <div class="search-container">
-                <input type="text" id="search" class="search-box" placeholder="Search the glossary..." oninput="filterGlossary()">
-            </div>
         </header>
         
         <main>
-            <!-- Terms Tab -->
             <div id="terms" class="tab-content active">
                 <div class="glossary-list">
-                    <!-- Inserted glossary terms here -->
-                    <div class="glossary-item">
-                        <div class="term">11-dimensional reality</div>
-                        <p>In M-Theory, the universe is posited to have 11 dimensions, with seven compactified into small scales, leaving the four spacetime dimensions we experience.</p>
-                    </div>
-                    <div class="glossary-item">
-                        <div class="term">110 LQG and HQG Quantum Entanglement</div>
-                        <p>The entanglement of quantum states between Loop Quantum Gravity (LQG) and Holographic Quantum Gravity (HQG), facilitated by the reconciliation process in HQR.</p>
-                    </div>
-                    <div class="glossary-item">
-                        <div class="term">AdS/CFT correspondence</div>
-                        <p>A conjectured equivalence between quantum gravity in anti-de Sitter (AdS) space and a conformal field theory (CFT) on its boundary, central to Holographic Quantum Gravity (HQG) and the Holographic Principle.</p>
-                    </div>
-                    <!-- More terms added accordingly -->
+                    <!-- Insert glossary terms dynamically -->
                 </div>
             </div>
-            
-            <!-- Equations Tab -->
             <div id="equations" class="tab-content">
                 <div class="equation-list">
-                    <h3>Higher-Dimensional Geometry</h3>
-                    <div class="equation-card geometry">
-                        <h4>Spacetime Metric</h4>
-                        <div class="equation">ds² = g<sub>μν</sub> dx<sup>μ</sup> dx<sup>ν</sup></div>
-                        <div class="equation-description">Defines distance in the 11-dimensional manifold, where g<sub>μν</sub> encodes the shape and curvature of space.</div>
-                    </div>
-                    <div class="equation-card geometry">
-                        <h4>Extended Spacetime Interval</h4>
-                        <div class="equation">ds² = -c²dt² + dx² + dy² + dz² + g<sub>ab</sub> dx<sup>a</sup> dx<sup>b</sup></div>
-                        <div class="equation-description">Expands the familiar 4D Minkowski metric to include extra dimensions (indices a,b).</div>
-                    </div>
-                    <div class="equation-card geometry">
-                        <h4>Christoffel Symbols</h4>
-                        <div class="equation">Γⁱ<sub>kl</sub> = ½g<sup>im</sup>(∂<sub>l</sub>g<sub>km</sub> + ∂<sub>k</sub>g<sub>lm</sub> - ∂<sub>m</sub>g<sub>kl</sub>)</div>
-                        <div class="equation-description">These connection coefficients describe how coordinate systems change across the manifold.</div>
-                    </div>
-                    <!-- Additional equations included accordingly -->
+                    <!-- Insert equations dynamically -->
                 </div>
             </div>
         </main>
     </div>
-    
+
     <script>
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             document.querySelector(`.tab[onclick="switchTab('${tabId}')"]`).classList.add('active');
-        }
-        
-        function filterGlossary() {
-            let searchValue = document.getElementById('search').value.toLowerCase();
-            document.querySelectorAll('.glossary-item').forEach(item => {
-                let term = item.querySelector('.term').textContent.toLowerCase();
-                item.style.display = term.includes(searchValue) ? 'block' : 'none';
-            });
         }
     </script>
 </body>
