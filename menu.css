@@ -1,4 +1,4 @@
-/* menu.css */
+/* Updated menu.css */
 .main-nav {
     background-color: #16213e;
     padding: 10px;
@@ -7,9 +7,8 @@
     width: 100%;
     z-index: 1000;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    height: 70px; /* Explicitly set height for consistency */
+    height: 70px;
 }
-
 .menu-toggle {
     font-size: 24px;
     cursor: pointer;
@@ -17,7 +16,6 @@
     padding: 10px;
     display: block;
 }
-
 .nav-list {
     list-style: none;
     display: none;
@@ -25,62 +23,52 @@
     margin: 0;
     padding: 0;
 }
-
 .nav-list.active {
     display: flex;
 }
-
 .nav-list li a {
-    color: #e0e0e0;
+    color: #ff7f00; /* Updated to orange for visibility */
     text-decoration: none;
-    padding: 15px;
+    padding: 10px;
     display: block;
     font-size: 16px;
-    white-space: nowrap; /* Prevent text wrapping within items */
+    white-space: nowrap;
 }
-
 .nav-list li a:hover {
     background-color: #0f3460;
     color: #a2a8d3;
 }
-
 /* Desktop Styles (Above 768px) */
 @media screen and (min-width: 768px) {
     .menu-toggle {
-        display: none; /* Hide hamburger on desktop */
+        display: none;
     }
-
     .nav-list {
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        flex-wrap: wrap; /* Allow items to wrap if screen is too narrow */
-        gap: 15px; /* Reduce gap to prevent overflow */
-        padding: 0 20px; /* Add horizontal padding for better spacing */
+        flex-wrap: wrap;
+        gap: 10px; /* Reduced spacing to fit menu */
+        padding: 0 10px;
     }
-
     .nav-list li {
-        margin: 0; /* Remove margin to prevent overflow */
+        margin: 0;
     }
-
     .nav-list li a {
-        padding: 10px 12px; /* Reduce padding to fit more items */
-        font-size: 14px; /* Slightly smaller font for desktop to fit more items */
+        padding: 8px 10px;
+        font-size: 14px;
     }
-
     .nav-list li a:hover {
         background-color: #0f3460;
         color: #a2a8d3;
     }
 }
-
 /* Ensure sections are not obscured by fixed nav */
 section {
-    scroll-margin-top: 80px; /* Updated to match default header padding */
+    scroll-margin-top: 80px;
 }
-
 /* Smooth scrolling */
 html {
     scroll-behavior: smooth;
-}
+} 
