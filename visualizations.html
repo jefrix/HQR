@@ -2135,6 +2135,258 @@
     
     <text x="400" y="300" font-size="16" text-anchor="middle" filter="url(#text-glow)" font-weight="bold">4
 
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Background with gradient -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#151e3f" />
+      <stop offset="100%" stop-color="#0e1229" />
+    </linearGradient>
     
+    <!-- Text effects -->
+    <filter id="text-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feFlood flood-color="#ffffff" flood-opacity="0.3" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <!-- Glow effects -->
+    <filter id="blue-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#00ccff" flood-opacity="0.4" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <filter id="green-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#4caf50" flood-opacity="0.4" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <filter id="purple-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#9370db" flood-opacity="0.4" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <!-- Metric tensor gradient -->
+    <radialGradient id="metric-gradient" cx="0.5" cy="0.5" r="0.7">
+      <stop offset="0%" stop-color="#00ccff" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#00ccff" stop-opacity="0"/>
+    </radialGradient>
+    
+    <!-- Arrow markers -->
+    <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#00ccff" />
+    </marker>
+    
+    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4caf50" />
+    </marker>
+    
+    <marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#9370db" />
+    </marker>
+    
+    <marker id="arrow-white" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ffffff" />
+    </marker>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="800" height="600" fill="url(#bg-gradient)" />
+  
+  <!-- Title -->
+  <text x="400" y="40" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" filter="url(#text-glow)" font-weight="bold">Tensor Calculus in Higher Dimensions</text>
+  <text x="400" y="70" fill="#ffffff" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" filter="url(#text-glow)">Geometric Foundations of Holonomic Quantum Reality</text>
+  
+  <!-- Main 3-part diagram structure -->
+  <!-- 1. Manifold and Metric Tensor (Left) -->
+  <g transform="translate(200, 200)">
+    <!-- Curved manifold representation -->
+    <g id="manifold">
+      <!-- Base manifold surface -->
+      <path d="M-120,-40 C-80,-80 -40,-60 0,-40 C40,-20 80,-40 120,-20 C80,0 40,20 0,40 C-40,60 -80,40 -120,20 Z" 
+            fill="none" stroke="#00ccff" stroke-width="1.5" opacity="0.6" />
+            
+      <!-- Coordinate grid on manifold -->
+      <path d="M-100,-30 C-60,-60 -20,-40 20,-20 C60,0 100,-20 100,-20" fill="none" stroke="#00ccff" stroke-width="0.5" opacity="0.4" />
+      <path d="M-80,-20 C-40,-40 0,-20 40,0 C80,20 100,0 100,0" fill="none" stroke="#00ccff" stroke-width="0.5" opacity="0.4" />
+      <path d="M-60,-10 C-20,-20 20,0 60,20 C100,40 100,20 100,20" fill="none" stroke="#00ccff" stroke-width="0.5" opacity="0.4" />
+      
+      <path d="M-100,-30 C-80,0 -60,30 -40,50" fill="none" stroke="#00ccff" stroke-width="0.5" opacity="0.4" />
+      <path d="M-60,-60 C-40,-30 -20,0 0,30" fill="none" stroke="#00ccff" stroke-width="0.5" opacity="0.4" />
+      <path d="M-20,-40 C0,-10 20,20 40,50" fill="none" stroke="#00ccff" stroke-width="0.5" opacity="0.4" />
+      <path d="M20,-20 C40,10 60,40 80,70" fill="none" stroke="#00ccff" stroke-width="0.5" opacity="0.4" />
+      <path d="M60,0 C80,30 100,60 120,90" fill="none" stroke="#00ccff" stroke-width="0.5" opacity="0.4" />
+    </g>
+    
+    <!-- Metric tensor representation -->
+    <g id="metric-tensor">
+      <!-- Point on manifold -->
+      <circle cx="0" cy="0" r="6" fill="#00ccff" filter="url(#blue-glow)" />
+      
+      <!-- Metric tensor ellipse -->
+      <ellipse cx="0" cy="0" rx="40" ry="20" transform="rotate(-30)" fill="url(#metric-gradient)" opacity="0.6" />
+      
+      <!-- Tangent vectors at point -->
+      <line x1="0" y1="0" x2="30" y2="-20" stroke="#00ccff" stroke-width="2" marker-end="url(#arrow-blue)" />
+      <line x1="0" y1="0" x2="-10" y2="25" stroke="#00ccff" stroke-width="2" marker-end="url(#arrow-blue)" />
+      
+      <!-- Labels -->
+      <text x="40" y="-25" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)">e₁</text>
+      <text x="-20" y="30" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)">e₂</text>
+      <text x="0" y="-40" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">gₘₙ</text>
+    </g>
+    
+    <!-- Section label -->
+    <text x="0" y="90" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle" font-weight="bold">Curved Manifold &amp; Metric Tensor</text>
+    <text x="0" y="110" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle" font-style="italic">Higher-dimensional space with distance measure</text>
+  </g>
+  
+  <!-- 2. Curvature and Christoffel Symbols (Center) -->
+  <g transform="translate(400, 350)">
+    <!-- Riemann curvature representation -->
+    <g id="riemann-curvature">
+      <!-- Point on manifold -->
+      <circle cx="0" cy="0" r="6" fill="#4caf50" filter="url(#green-glow)" />
+      
+      <!-- Curved path (loop) -->
+      <path d="M0,0 C20,-20 40,-10 30,10 C20,30 -10,20 0,0" fill="none" stroke="#4caf50" stroke-width="2" opacity="0.8" />
+      
+      <!-- Vector being transported -->
+      <line x1="0" y1="0" x2="15" y2="-10" stroke="#4caf50" stroke-width="2" marker-end="url(#arrow-green)" />
+      <line x1="30" y1="10" x2="45" y2="15" stroke="#4caf50" stroke-width="1.5" opacity="0.6" marker-end="url(#arrow-green)" />
+      <line x1="0" y1="0" x2="10" y2="5" stroke="#4caf50" stroke-width="1.5" opacity="0.4" stroke-dasharray="3,2" marker-end="url(#arrow-green)" />
+      
+      <!-- Riemann tensor symbol -->
+      <text x="50" y="-15" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)">Rᵖσᵤᵥ</text>
+    </g>
+    
+    <!-- Christoffel symbols representation -->
+    <g id="christoffel-symbols" transform="translate(0, -60)">
+      <!-- Coordinate transformation -->
+      <path d="M-40,-20 C-20,-30 20,-30 40,-20" fill="none" stroke="#4caf50" stroke-width="1" opacity="0.6" />
+      <path d="M-40,0 C-20,0 20,0 40,0" fill="none" stroke="#4caf50" stroke-width="1" opacity="0.6" />
+      <path d="M-40,20 C-20,30 20,30 40,20" fill="none" stroke="#4caf50" stroke-width="1" opacity="0.6" />
+      
+      <path d="M-40,-20 C-40,0 -40,20 -40,20" fill="none" stroke="#4caf50" stroke-width="1" opacity="0.6" />
+      <path d="M0,-20 C0,0 0,20 0,20" fill="none" stroke="#4caf50" stroke-width="1" opacity="0.6" />
+      <path d="M40,-20 C40,0 40,20 40,20" fill="none" stroke="#4caf50" stroke-width="1" opacity="0.6" />
+      
+      <!-- Connection effect -->
+      <path d="M-20,0 C-10,-10 10,10 20,0" fill="none" stroke="#4caf50" stroke-width="2" opacity="0.8" marker-end="url(#arrow-green)" />
+      
+      <!-- Christoffel symbol -->
+      <text x="0" y="-40" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">Γⁱₖₗ</text>
+    </g>
+    
+    <!-- Section label -->
+    <text x="0" y="80" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle" font-style="italic">Path dependence &amp; geodesic deviation</text>
+  </g>
+  
+  <!-- 3. Entanglement as Geometry (Right) -->
+  <g transform="translate(600, 200)">
+    <!-- Wormhole/ER bridge representation -->
+    <g id="entanglement-geometry">
+      <!-- Wormhole throat -->
+      <path d="M-80,0 C-60,-40 -30,-50 0,-30 C30,-10 60,-40 80,0 C60,40 30,50 0,30 C-30,10 -60,40 -80,0 Z" 
+            fill="none" stroke="#9370db" stroke-width="1.5" opacity="0.7" />
+      
+      <!-- Curved sheet (higher dimension) -->
+      <path d="M-70,-10 C-50,-40 -20,-50 0,-30 C20,-10 50,-30 70,-10" 
+            fill="none" stroke="#9370db" stroke-width="1" opacity="0.5" />
+      <path d="M-70,10 C-50,40 -20,50 0,30 C20,10 50,30 70,10" 
+            fill="none" stroke="#9370db" stroke-width="1" opacity="0.5" />
+      
+      <!-- Entangled particles -->
+      <circle cx="-70" cy="0" r="8" fill="#9370db" filter="url(#purple-glow)" />
+      <circle cx="70" cy="0" r="8" fill="#9370db" filter="url(#purple-glow)" />
+      
+      <!-- ER=EPR connection -->
+      <path d="M-62,0 C-40,-20 40,-20 62,0" fill="none" stroke="#9370db" stroke-width="2" opacity="0.7" stroke-dasharray="4,2" />
+      <path d="M-62,0 C-40,20 40,20 62,0" fill="none" stroke="#9370db" stroke-width="2" opacity="0.7" stroke-dasharray="4,2" />
+      
+      <!-- Field equation -->
+      <text x="0" y="-50" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">Gᵤᵥ = κQᵤᵥ</text>
+    </g>
+    
+    <!-- Section label -->
+    <text x="0" y="90" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle" font-weight="bold">Quantum Geometry</text>
+    <text x="0" y="110" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle" font-style="italic">Entanglement as higher-dimensional connection</text>
+  </g>
+  
+  <!-- Mathematical equations -->
+  <g transform="translate(400, 500)">
+    <rect x="-300" y="-30" width="600" height="100" fill="rgba(10, 20, 40, 0.5)" rx="10" ry="10" stroke="#ffffff" stroke-width="1" opacity="0.7" />
+    
+    <!-- Key equations -->
+    <text x="-250" y="0" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">ds² = gᵤᵥdxᵘdxᵛ</text>
+    <text x="-90" y="0" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">Γⁱₖₗ = ½gⁱᵐ(∂ₗgₖₘ + ∂ₖgₗₘ - ∂ₘgₖₗ)</text>
+    <text x="120" y="0" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">Rᵖσᵤᵥ = ∂ᵤΓᵖσᵥ - ∂ᵥΓᵖσᵤ + ΓᵖₗᵤΓˡσᵥ - ΓᵖₗᵥΓˡσᵤ</text>
+    <text x="250" y="0" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">Rᵤᵥ = Rᵏᵤₖᵥ</text>
+    
+    <!-- Equation descriptors -->
+    <text x="-250" y="25" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">Metric Tensor</text>
+    <text x="-90" y="25" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">Christoffel Symbols</text>
+    <text x="120" y="25" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">Riemann Curvature</text>
+    <text x="250" y="25" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">Ricci Tensor</text>
+  </g>
+  
+  <!-- Spin network visualization -->
+  <g transform="translate(400, 170)">
+    <!-- Spin network nodes and edges -->
+    <g id="spin-network">
+      <!-- Nodes -->
+      <circle cx="-150" cy="0" r="6" fill="#ffffff" opacity="0.8" />
+      <circle cx="-100" cy="-40" r="6" fill="#ffffff" opacity="0.8" />
+      <circle cx="-50" cy="20" r="6" fill="#ffffff" opacity="0.8" />
+      <circle cx="0" cy="-30" r="6" fill="#ffffff" opacity="0.8" />
+      <circle cx="50" cy="20" r="6" fill="#ffffff" opacity="0.8" />
+      <circle cx="100" cy="-40" r="6" fill="#ffffff" opacity="0.8" />
+      <circle cx="150" cy="0" r="6" fill="#ffffff" opacity="0.8" />
+      
+      <!-- Edges -->
+      <line x1="-150" y1="0" x2="-100" y2="-40" stroke="#ffffff" stroke-width="1.5" opacity="0.6" />
+      <line x1="-100" y1="-40" x2="-50" y2="20" stroke="#ffffff" stroke-width="1.5" opacity="0.6" />
+      <line x1="-50" y1="20" x2="0" y2="-30" stroke="#ffffff" stroke-width="1.5" opacity="0.6" />
+      <line x1="0" y1="-30" x2="50" y2="20" stroke="#ffffff" stroke-width="1.5" opacity="0.6" />
+      <line x1="50" y1="20" x2="100" y2="-40" stroke="#ffffff" stroke-width="1.5" opacity="0.6" />
+      <line x1="100" y1="-40" x2="150" y2="0" stroke="#ffffff" stroke-width="1.5" opacity="0.6" />
+      
+      <!-- Cross-connections -->
+      <line x1="-100" y1="-40" x2="0" y2="-30" stroke="#ffffff" stroke-width="1" opacity="0.4" stroke-dasharray="4,2" />
+      <line x1="-50" y1="20" x2="50" y2="20" stroke="#ffffff" stroke-width="1" opacity="0.4" stroke-dasharray="4,2" />
+      <line x1="0" y1="-30" x2="100" y2="-40" stroke="#ffffff" stroke-width="1" opacity="0.4" stroke-dasharray="4,2" />
+    </g>
+    
+    <!-- Potential energy equation -->
+    <text x="0" y="-60" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">V(x) = ⟨ψᵢ|HQR|ψᵢ⟩</text>
+    
+    <!-- Label -->
+    <text x="0" y="50" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">Spin Network &amp; Potential Energy</text>
+  </g>
+  
+  <!-- Legend -->
+  <g transform="translate(120, 450)">
+    <rect x="-80" y="-70" width="160" height="140" fill="rgba(10, 20, 40, 0.7)" rx="10" ry="10" stroke="#ffffff" stroke-width="1" opacity="0.7" />
+    <text x="0" y="-50" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle" font-weight="bold">Legend</text>
+    
+    <circle cx="-60" cy="-20" r="5" fill="#00ccff" filter="url(#blue-glow)" />
+    <text x="-50" y="-16" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" dx="5">Metric Tensor</text>
+    
+    <circle cx="-60" cy="10" r="5" fill="#4caf50" filter="url(#green-glow)" />
+    <text x="-50" y="14" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" dx="5">Riemann Curvature</text>
+    
+    <circle cx="-60" cy="40" r="5" fill="#9370db" filter="url(#purple-glow)" />
+    <text x="-50" y="44" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" dx="5">Quantum Geometry</text>
+  </g>
+</svg>
+
+        
 </body>
 </html>
