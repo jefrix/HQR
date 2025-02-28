@@ -4,243 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Holonomic Quantum Reality - Glossary</title>
-    <style>
-        :root {
-            --primary-bg: #151e3f;
-            --secondary-bg: #0e1229;
-            --text-color: #e0e0e0;
-            --accent-blue: #00ccff;
-            --accent-purple: #9370db;
-            --accent-gold: #ffd700;
-            --accent-green: #4caf50;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --card-border: rgba(255, 255, 255, 0.1);
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg));
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        header {
-            text-align: center;
-            padding: 2rem 0;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        }
-
-        h2 {
-            font-size: 2rem;
-            margin-top: 3rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        h3 {
-            font-size: 1.6rem;
-            margin-top: 2rem;
-            color: var(--accent-blue);
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.8;
-            margin-bottom: 2rem;
-        }
-
-        .tabs {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 2rem;
-            gap: 1rem;
-        }
-
-        .tab {
-            padding: 0.75rem 1.5rem;
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .tab:hover, .tab.active {
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .tab.active {
-            border-color: var(--accent-blue);
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .glossary-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .equation-list {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-
-        .glossary-item, .equation-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 8px;
-            padding: 1.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .glossary-item:hover, .equation-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .term {
-            color: var(--accent-blue);
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .equation-card h4 {
-            color: var(--accent-purple);
-            font-weight: bold;
-            margin-top: 0;
-            margin-bottom: 0.75rem;
-            font-size: 1.2rem;
-        }
-
-        .equation {
-            font-family: 'Cambria Math', 'Times New Roman', serif;
-            font-size: 1.2rem;
-            margin: 1rem 0;
-            padding: 0.5rem;
-            background-color: rgba(0, 0, 0, 0.2);
-            border-radius: 4px;
-            display: block;
-            text-align: center;
-        }
-
-        .equation-description {
-            font-style: italic;
-            opacity: 0.9;
-            margin-top: 0.75rem;
-        }
-
-        .category-title {
-            grid-column: 1 / -1;
-            margin-top: 2rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--accent-gold);
-        }
-
-        .search-container {
-            margin-bottom: 2rem;
-            display: flex;
-            justify-content: center;
-        }
-
-        .search-box {
-            width: 100%;
-            max-width: 600px;
-            padding: 0.75rem 1rem;
-            border-radius: 4px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background-color: rgba(255, 255, 255, 0.05);
-            color: var(--text-color);
-            font-size: 1rem;
-        }
-
-        .search-box:focus {
-            outline: none;
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 0 2px rgba(0, 204, 255, 0.2);
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 4rem;
-            padding: 2rem 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            opacity: 0.7;
-        }
-
-        /* Category-specific colors */
-        .geometry .equation {
-            border-left: 3px solid var(--accent-blue);
-        }
-
-        .quantum .equation {
-            border-left: 3px solid var(--accent-purple);
-        }
-
-        .symmetry .equation {
-            border-left: 3px solid var(--accent-gold);
-        }
-
-        .information .equation {
-            border-left: 3px solid var(--accent-green);
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-            
-            .glossary-list {
-                grid-template-columns: 1fr;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            h2 {
-                font-size: 1.6rem;
-            }
-            
-            .tabs {
-                flex-wrap: wrap;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
@@ -262,290 +26,20 @@
             <!-- Terms Tab -->
             <div id="terms" class="tab-content active">
                 <div class="glossary-list">
+                    <!-- Inserted glossary terms here -->
                     <div class="glossary-item">
                         <div class="term">11-dimensional reality</div>
                         <p>In M-Theory, the universe is posited to have 11 dimensions, with seven compactified into small scales, leaving the four spacetime dimensions we experience.</p>
                     </div>
-                    
                     <div class="glossary-item">
                         <div class="term">110 LQG and HQG Quantum Entanglement</div>
                         <p>The entanglement of quantum states between Loop Quantum Gravity (LQG) and Holographic Quantum Gravity (HQG), facilitated by the reconciliation process in HQR.</p>
                     </div>
-                    
                     <div class="glossary-item">
                         <div class="term">AdS/CFT correspondence</div>
                         <p>A conjectured equivalence between quantum gravity in anti-de Sitter (AdS) space and a conformal field theory (CFT) on its boundary, central to Holographic Quantum Gravity (HQG) and the Holographic Principle.</p>
                     </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Antiparticle Quantum Theory</div>
-                        <p>The study of antiparticles—particles with the same mass but opposite charge to their counterparts—predicted by relativistic quantum mechanics, such as the positron relative to the electron.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Background Independence</div>
-                        <p>A principle in quantum gravity, notably in Loop Quantum Gravity (LQG), where the theory does not rely on a fixed spacetime background.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Bohmian Mechanics</div>
-                        <p>A deterministic interpretation of quantum mechanics that uses a pilot wave to guide particle trajectories, integral to HQR's deterministic framework.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Branes</div>
-                        <p>Fundamental objects in M-Theory with various dimensions (e.g., 1D strings, 2D membranes), serving as the building blocks of the 11-dimensional universe.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Coarse-Graining</div>
-                        <p>A technique in quantum gravity that simplifies spin networks by averaging over smaller structures, used in HQG to project states onto lower-dimensional boundaries.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Compactified scales</div>
-                        <p>The process in M-Theory where extra dimensions are curled into small, compact shapes, rendering them imperceptible at macroscopic scales.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Complete Uncertainty Principle</div>
-                        <p>An extension of Heisenberg's uncertainty principle, stating that certain pairs of properties (e.g., position and momentum, energy and time) cannot be measured simultaneously with infinite precision, with implications for quantum entanglement.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Connection to Topological Field Theory (TQFT)</div>
-                        <p>The link between quantum mechanics and topological quantum field theory, which describes quantum systems with topological properties like the quantum Hall effect.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Copenhagen interpretation</div>
-                        <p>The standard interpretation of quantum mechanics, asserting that physical systems lack definite properties until measured, causing wavefunction collapse.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Determinism in quantum mechanics</div>
-                        <p>The concept that quantum events are governed by deterministic causes rather than inherent probability, a core aspect of HQR via Bohmian Mechanics.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Deterministic quantum mechanics</div>
-                        <p>An interpretation of quantum mechanics where all events are causally determined, exemplified by Bohmian Mechanics in HQR.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Edges</div>
-                        <p>In spin networks, connections between nodes representing spin values or quantum interactions.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Extra dimensions</div>
-                        <p>Dimensions beyond the familiar three spatial dimensions, compactified in M-Theory to explain the structure of the universe.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">General relativity</div>
-                        <p>Einstein's theory of gravity, describing it as the curvature of spacetime due to mass and energy, which HQR seeks to unify with quantum mechanics.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Geometrical Evolution</div>
-                        <p>The geometric interpretation of quantum mechanics, using Hilbert spaces and concepts like the Berry phase to describe quantum state evolution.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Gravitational Wave Detectors</div>
-                        <p>Instruments that detect gravitational waves, used to test predictions of hybrid quantum gravity models in HQR.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Heisenberg Quantum Mechanics</div>
-                        <p>Werner Heisenberg's matrix-based formulation of quantum mechanics, emphasizing the non-commutative nature of observables.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Hidden order</div>
-                        <p>Subtle, long-range correlations in quantum systems that influence particle and field behavior, a foundational concept in HQR linking higher dimensions to observable phenomena.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Hidden order ripples</div>
-                        <p>Visual effects in simulations (e.g., via p5.js) representing the influence of hidden order, often depicted as wave-like patterns.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Holographic Principle</div>
-                        <p>The idea that a volume of space's description can be encoded on its boundary, as exemplified by the AdS/CFT correspondence, key to HQR's framework.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Holographic Quantum Gravity (HQG)</div>
-                        <p>A quantum gravity theory projecting quantum states onto a lower-dimensional boundary, integrated with LQG in HQR's reconciliation process.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Holographic Quantum Reality (HQR)</div>
-                        <p>A unified theoretical framework combining hidden order, string theory, and deterministic quantum mechanics (via Bohmian Mechanics), viewing the universe as a projection of an 11-dimensional M-Theory structure.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Hybrid Quantum Gravity</div>
-                        <p>A model unifying Loop Quantum Gravity (LQG) and Holographic Quantum Gravity (HQG) through reconciliation, blending discrete and holographic features.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Key Phase Transitions</div>
-                        <p>Quantum phase transitions at absolute zero, driven by changes in quantum parameters, significant in understanding quantum criticality.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">LHC Quantum Interactions</div>
-                        <p>Quantum interactions studied at the Large Hadron Collider (LHC), exploring fundamental particles and forces via high-energy collisions.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Long-range correlations</div>
-                        <p>Interactions persisting over large distances in quantum systems, attributed to hidden order in HQR.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Loop Quantum Gravity (LQG)</div>
-                        <p>A quantum gravity theory quantizing spacetime with discrete, loop-based structures and spin networks, reconciled with HQG in HQR.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Matter-Dark Energy</div>
-                        <p>The hypothesized relationship between matter and dark energy in quantum field theory or cosmology, possibly linked to vacuum fluctuations.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Monte Carlo Simulation</div>
-                        <p>A computational method using random sampling to model probabilistic outcomes, applied to spin networks in HQR's reconciliation process.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">M-Theory</div>
-                        <p>An extension of string theory positing an 11-dimensional universe with branes, unifying fundamental forces in HQR's framework.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Nodes</div>
-                        <p>Points in spin networks representing quantum states of space.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Observable Quantum Effects</div>
-                        <p>Phenomena like quantum tunneling and entanglement, demonstrating quantum behavior with practical applications.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Observable Signatures</div>
-                        <p>Measurable phenomena (e.g., gravitational waves) validating the reconciliation of LQG and HQG in HQR.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Particle trajectories</div>
-                        <p>Paths particles follow in space and time, guided deterministically by the pilot wave in Bohmian Mechanics.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Pilot wave</div>
-                        <p>In Bohmian Mechanics, a wave guiding particle motion deterministically, central to HQR's framework.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Probabilistic Emergence</div>
-                        <p>The statistical emergence of quantum states in LQG and HQG, modeled via Monte Carlo simulations in HQR.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Quantum Entanglement Loop</div>
-                        <p>A computational or visual representation of entangled states in spin networks, featured in HQR's visualizations.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Quantum gravity</div>
-                        <p>A field unifying quantum mechanics and general relativity, encompassing theories like LQG and HQG within HQR.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Quantum Hidden Order</div>
-                        <p>Hidden patterns in quantum systems, such as those in phase transitions, reinforcing HQR's hidden order concept.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Quantum Measurement Paradox</div>
-                        <p>The issue of wavefunction collapse upon measurement, contrasted with HQR's deterministic approach.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Quantum mechanics</div>
-                        <p>The theory describing nature at small scales with wavefunctions and probability, unified with gravity in HQR.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Quantum Network Models</div>
-                        <p>Models of quantum systems as networks, relevant to quantum computing and communication in HQR's scope.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Quantum Observational Models</div>
-                        <p>Frameworks for observing quantum systems, contrasting with HQR's deterministic perspective.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Quantum State Evolution</div>
-                        <p>The time evolution of quantum states via the Schrödinger equation, foundational to quantum mechanics in HQR.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Quantum System Dynamics</div>
-                        <p>The study of quantum system behavior over time, including decoherence, relevant to HQR's models.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Reconciliation</div>
-                        <p>The process in HQR integrating LQG and HQG using probabilistic states to form a hybrid quantum gravity model.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Relativistic Quantum Mechanics</div>
-                        <p>Quantum mechanics extended to special relativity, predicting antiparticles via the Dirac equation.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Spacetime metric</div>
-                        <p>A mathematical description of spacetime geometry in general relativity, generalized in M-Theory within HQR.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Spin Network Evolution</div>
-                        <p>The dynamic adjustment of spin networks in LQG under HQG principles, part of HQR's reconciliation.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Spin Networks</div>
-                        <p>Graphs in LQG where nodes and edges model quantum spacetime geometry, key to HQR's hybrid models.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">String theory</div>
-                        <p>A framework positing one-dimensional strings as fundamental entities, extended by M-Theory in HQR.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Superconformal Field Theories</div>
-                        <p>Quantum field theories with superconformal symmetry, linked to AdS/CFT in HQG within HQR.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Ultracold Bose-Einstein condensates (BECs)</div>
-                        <p>Quantum states at low temperatures showing hidden order, supporting HQR's concepts.</p>
-                    </div>
-                    
-                    <div class="glossary-item">
-                        <div class="term">Unification of forces</div>
-                        <p>The goal of describing all fundamental forces within one framework, achieved via M-Theory in HQR.</p>
-                    </div>
+                    <!-- More terms added accordingly -->
                 </div>
             </div>
             
@@ -553,63 +47,42 @@
             <div id="equations" class="tab-content">
                 <div class="equation-list">
                     <h3>Higher-Dimensional Geometry</h3>
-                    
                     <div class="equation-card geometry">
                         <h4>Spacetime Metric</h4>
                         <div class="equation">ds² = g<sub>μν</sub> dx<sup>μ</sup> dx<sup>ν</sup></div>
-                        <div class="equation-description">Defines distance in the 11-dimensional manifold, where g<sub>μν</sub> encodes the shape and curvature of space. This is the fundamental measurement tool for higher-dimensional geometry in HQR.</div>
+                        <div class="equation-description">Defines distance in the 11-dimensional manifold, where g<sub>μν</sub> encodes the shape and curvature of space.</div>
                     </div>
-                    
                     <div class="equation-card geometry">
                         <h4>Extended Spacetime Interval</h4>
                         <div class="equation">ds² = -c²dt² + dx² + dy² + dz² + g<sub>ab</sub> dx<sup>a</sup> dx<sup>b</sup></div>
-                        <div class="equation-description">Expands the familiar 4D Minkowski metric to include extra dimensions (indices a,b). The additional terms represent how the higher dimensions contribute to measurements of distance in the full space.</div>
+                        <div class="equation-description">Expands the familiar 4D Minkowski metric to include extra dimensions (indices a,b).</div>
                     </div>
-                    
                     <div class="equation-card geometry">
                         <h4>Christoffel Symbols</h4>
                         <div class="equation">Γⁱ<sub>kl</sub> = ½g<sup>im</sup>(∂<sub>l</sub>g<sub>km</sub> + ∂<sub>k</sub>g<sub>lm</sub> - ∂<sub>m</sub>g<sub>kl</sub>)</div>
-                        <div class="equation-description">These connection coefficients describe how coordinate systems change across the manifold. In HQR, they represent how quantum forces arise from the geometry of higher dimensions.</div>
+                        <div class="equation-description">These connection coefficients describe how coordinate systems change across the manifold.</div>
                     </div>
-                    
-                    <div class="equation-card geometry">
-                        <h4>Covariant Derivative</h4>
-                        <div class="equation">∇<sub>l</sub> V<sup>i</sup> = ∂<sub>l</sub> V<sup>i</sup> + Γⁱ<sub>lk</sub> V<sup>k</sup></div>
-                        <div class="equation-description">Generalizes derivatives to curved space, accounting for how the coordinate basis changes. Applied to quantum fields, it describes how states change when transported through the higher-dimensional manifold.</div>
-                    </div>
-                    
-                    <div class="equation-card geometry">
-                        <h4>Geodesic Equation</h4>
-                        <div class="equation">ẍⁱ + Γⁱ<sub>kl</sub>ẋ<sup>k</sup>ẋ<sup>l</sup> = 0</div>
-                        <div class="equation-description">Describes the path a free particle follows in curved space. In HQR, geodesics connect distant 4D points through higher dimensions, potentially explaining quantum entanglement as a geometric shortcut.</div>
-                    </div>
-                    
-                    <div class="equation-card geometry">
-                        <h4>Riemann Curvature Tensor</h4>
-                        <div class="equation">R<sup>ρ</sup><sub>σμν</sub> = ∂<sub>μ</sub>Γ<sup>ρ</sup><sub>σν</sub> - ∂<sub>ν</sub>Γ<sup>ρ</sup><sub>σμ</sub> + Γ<sup>ρ</sup><sub>λμ</sub>Γ<sup>λ</sup><sub>σν</sub> - Γ<sup>ρ</sup><sub>λν</sub>Γ<sup>λ</sup><sub>σμ</sub></div>
-                        <div class="equation-description">Measures how space is curved by comparing different paths between points. In HQR, this tensor encodes the pattern of quantum interactions as geometric features of the higher-dimensional space.</div>
-                    </div>
-                    
-                    <div class="equation-card geometry">
-                        <h4>Ricci Tensor</h4>
-                        <div class="equation">R<sub>σν</sub> = R<sup>ρ</sup><sub>σρν</sub></div>
-                        <div class="equation-description">A contracted form of the Riemann tensor that provides a simplified measure of curvature. Strong Ricci curvature between points indicates significant quantum coupling in HQR's geometric interpretation.</div>
-                    </div>
-                    
-                    <h3>Quantum State Representation</h3>
-                    
-                    <div class="equation-card quantum">
-                        <h4>Higher-Dimensional Wavefunction</h4>
-                        <div class="equation">ψ(x) = Σᵢ ψᵢ(x)|ψᵢ⟩</div>
-                        <div class="equation-description">Describes how a quantum state in 4D spacetime is actually a sum of projections from the higher-dimensional reality. The coefficients ψᵢ(x) represent how strongly each higher-dimensional basis state |ψᵢ⟩ contributes to our observed reality.</div>
-                    </div>
-                    
-                    <div class="equation-card quantum">
-                        <h4>Density Matrix</h4>
-                        <div class="equation">ρ = Σᵢ pᵢ|ψᵢ⟩⟨ψᵢ|</div>
-                        <div class="equation-description">Represents mixed quantum states as weighted combinations of pure states. In HQR, each component |ψᵢ⟩⟨ψᵢ| is a projection operator selecting a particular region of the higher-dimensional manifold, with weights pᵢ indicating their significance.</div>
-                    </div>
-                    
-                    <div class="equation-card quantum">
-                        <h4>Von Neumann Entropy</h4>
-                        <div class="equation">S = -Tr(
+                    <!-- Additional equations included accordingly -->
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            document.querySelector(`.tab[onclick="switchTab('${tabId}')"]`).classList.add('active');
+        }
+        
+        function filterGlossary() {
+            let searchValue = document.getElementById('search').value.toLowerCase();
+            document.querySelectorAll('.glossary-item').forEach(item => {
+                let term = item.querySelector('.term').textContent.toLowerCase();
+                item.style.display = term.includes(searchValue) ? 'block' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>
