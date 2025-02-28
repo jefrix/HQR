@@ -4,26 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HQR Simplified Visualizations</title>
-    <link rel="stylesheet" href="visualization.css">
+    
     <!-- Required libraries for React visualization -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.1.9/Recharts.js"></script>
-
-    <!-- Correct paths for root directory -->
-    <script src="visualization.js"></script>
-    <!-- Load HQR visualization JS only once -->
-    <script src="hqr-visualization.js"></script>
-    
-    <!-- Custom stylesheets -->
-    <link rel="stylesheet" href="visualization.css">
     
     <!-- Base styles that should remain in HTML -->
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            margin: 0; /* Fixed from La0 to 0 */
+            margin: 0;
             padding: 0;
             background-color: #1a1a1a;
             color: #e0e0e0;
@@ -127,7 +119,111 @@
             width: 100%;
             position: relative;
         }
+
+        /* Visualization container and cards */
+        .visualization-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .visualization-card {
+            background-color: #161b22;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Equation container and cards */
+        .equation-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .equation-card {
+            background-color: #161b22;
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid #30363d;
+        }
+
+        .equation-title {
+            color: #58a6ff;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .equation {
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+        }
+
+        .equation-description {
+            font-size: 0.9rem;
+            color: #8b949e;
+            margin-top: 10px;
+        }
+
+        /* Controls styling */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            background-color: #161b22;
+            padding: 10px 15px;
+            border-radius: 8px;
+            align-items: center;
+        }
+
+        #dimension-select {
+            background-color: #0d1117;
+            color: #e0e0e0;
+            border: 1px solid #30363d;
+            border-radius: 4px;
+            padding: 5px 10px;
+        }
+
+        /* Debug console styling */
+        #debug-console {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background-color: rgba(10, 10, 10, 0.9);
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            padding: 10px;
+            overflow-y: auto;
+            z-index: 1000;
+            border-top: 2px solid #30363d;
+            transform: translateY(150px);
+            transition: transform 0.3s ease;
+        }
+        
+        #debug-console.visible {
+            transform: translateY(0);
+        }
+        
+        #debug-toggle {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: #161b22;
+            color: #e0e0e0;
+            border: 1px solid #30363d;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+            z-index: 1001;
+        }
     </style>
+    
+    <!-- Custom stylesheets (external CSS file if needed) -->
+    <link rel="stylesheet" href="visualization.css">
 </head>
 <body class="dark-theme">
     <div class="header">
@@ -248,567 +344,94 @@
         © 2025 HQR Team | <a href="index.html" style="color: #58a6ff;">Return to Main Page</a>
     </footer>
     
-    <!-- Load regular canvas-based visualizations -->
+    <!-- Debug console for troubleshooting -->
+    <div id="debug-console"></div>
+    <button id="debug-toggle">Show Debug Console</button>
+    
+    <!-- Load visualization scripts -->
+    <script src="visualization.js"></script>
+    <script src="hqr-visualization.js"></script>
+    
+    <!-- Debug script to help identify issues -->
     <script>
-        // Simple JavaScript to handle dimension toggling and basic canvas drawing
-        let currentDimension = '4D';
+        // Debugging utilities
+        const debugConsole = document.getElementById('debug-console');
+        const debugToggle = document.getElementById('debug-toggle');
         
-        // Update dimension display and redraw visualizations
-        function updateDimension(dimension) {
-            currentDimension = dimension;
-            document.getElementById('dimension-display').textContent = 'Currently viewing: ' + dimension;
-            
-            // Redraw all visualizations with the new dimension
-            drawWaveFunction();
-            drawCorrelation();
-            drawHolographic();
+        // Toggle debug console visibility
+        debugToggle.addEventListener('click', function() {
+            debugConsole.classList.toggle('visible');
+            debugToggle.textContent = debugConsole.classList.contains('visible') ? 'Hide Debug Console' : 'Show Debug Console';
+        });
+        
+        // Custom debug log function
+        function debugLog(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.textContent = `[${timestamp}] ${message}`;
+            debugConsole.appendChild(logEntry);
+            debugConsole.scrollTop = debugConsole.scrollHeight;
+            console.log(`[DEBUG] ${message}`);
         }
         
-        // Draw wave function visualization
-        function drawWaveFunction() {
-            const canvas = document.getElementById('wave-function-canvas');
-            if (!canvas) {
-                console.error('Canvas element wave-function-canvas not found');
-                return;
+        // Check if external JS files are loaded correctly
+        window.addEventListener('load', function() {
+            debugLog('Page fully loaded');
+            
+            // Check for React and Recharts
+            debugLog(`React exists: ${typeof React !== 'undefined'}`);
+            debugLog(`ReactDOM exists: ${typeof ReactDOM !== 'undefined'}`);
+            debugLog(`Recharts exists: ${typeof Recharts !== 'undefined'}`);
+            
+            // Check for visualization functions
+            debugLog(`drawWaveFunction exists: ${typeof drawWaveFunction === 'function'}`);
+            debugLog(`drawCorrelation exists: ${typeof drawCorrelation === 'function'}`);
+            debugLog(`drawHolographic exists: ${typeof drawHolographic === 'function'}`);
+            
+            // Check for canvas elements
+            const waveFunctionCanvas = document.getElementById('wave-function-canvas');
+            const correlationCanvas = document.getElementById('correlation-canvas');
+            const holographicCanvas = document.getElementById('holographic-canvas');
+            
+            debugLog(`Wave function canvas exists: ${waveFunctionCanvas !== null}`);
+            if (waveFunctionCanvas) {
+                debugLog(`Wave function canvas dimensions: ${waveFunctionCanvas.width}x${waveFunctionCanvas.height}`);
             }
             
-            const ctx = canvas.getContext('2d');
-            if (!ctx) {
-                console.error('Could not get 2D context for wave-function-canvas');
-                return;
+            debugLog(`Correlation canvas exists: ${correlationCanvas !== null}`);
+            if (correlationCanvas) {
+                debugLog(`Correlation canvas dimensions: ${correlationCanvas.width}x${correlationCanvas.height}`);
             }
             
-            // Set canvas dimensions correctly - this is crucial
-            canvas.width = canvas.parentElement.clientWidth;
-            canvas.height = canvas.parentElement.clientHeight;
-            
-            // Clear canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Background
-            ctx.fillStyle = '#0d1117';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Draw grid
-            ctx.strokeStyle = '#30363d';
-            ctx.lineWidth = 0.5;
-            
-            // Vertical grid lines
-            for (let x = 0; x <= canvas.width; x += 30) {
-                ctx.beginPath();
-                ctx.moveTo(x, 0);
-                ctx.lineTo(x, canvas.height);
-                ctx.stroke();
+            debugLog(`Holographic canvas exists: ${holographicCanvas !== null}`);
+            if (holographicCanvas) {
+                debugLog(`Holographic canvas dimensions: ${holographicCanvas.width}x${holographicCanvas.height}`);
             }
             
-            // Horizontal grid lines
-            for (let y = 0; y <= canvas.height; y += 30) {
-                ctx.beginPath();
-                ctx.moveTo(0, y);
-                ctx.lineTo(canvas.width, y);
-                ctx.stroke();
-            }
+            // Check for React component containers
+            debugLog(`Hidden order visualization root exists: ${document.getElementById('hidden-order-visualization-root') !== null}`);
+            debugLog(`HQR visualization root exists: ${document.getElementById('hqr-visualization-root') !== null}`);
             
-            // Center axes
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
-            
-            ctx.strokeStyle = '#8b949e';
-            ctx.lineWidth = 1;
-            
-            // X-axis
-            ctx.beginPath();
-            ctx.moveTo(0, centerY);
-            ctx.lineTo(canvas.width, centerY);
-            ctx.stroke();
-            
-            // Y-axis
-            ctx.beginPath();
-            ctx.moveTo(centerX, 0);
-            ctx.lineTo(centerX, canvas.height);
-            ctx.stroke();
-            
-            // Draw curves
-            const complexity = currentDimension === '4D' ? 1 : 2;
-            
-            // Real part curve
-            ctx.strokeStyle = '#8884d8';
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            
-            for (let x = 0; x < canvas.width; x++) {
-                // Map canvas x to wave function domain [-10, 10]
-                const xValue = (x / canvas.width) * 20 - 10;
-                
-                // Calculate y from real part of wave function
-                const amplitude = Math.exp(-xValue*xValue / 4);
-                const phase = xValue*xValue / 2 * complexity;
-                const realPart = amplitude * Math.cos(phase);
-                
-                // Map to canvas coordinates
-                const y = centerY - realPart * (canvas.height * 0.4);
-                
-                if (x === 0) {
-                    ctx.moveTo(x, y);
-                } else {
-                    ctx.lineTo(x, y);
-                }
-            }
-            ctx.stroke();
-            
-            // Imaginary part curve
-            ctx.strokeStyle = '#82ca9d';
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            
-            for (let x = 0; x < canvas.width; x++) {
-                const xValue = (x / canvas.width) * 20 - 10;
-                const amplitude = Math.exp(-xValue*xValue / 4);
-                const phase = xValue*xValue / 2 * complexity;
-                const imagPart = amplitude * Math.sin(phase);
-                const y = centerY - imagPart * (canvas.height * 0.4);
-                
-                if (x === 0) {
-                    ctx.moveTo(x, y);
-                } else {
-                    ctx.lineTo(x, y);
-                }
-            }
-            ctx.stroke();
-            
-            // Hidden order correlation (dashed line)
-            ctx.strokeStyle = '#ff0000';
-            ctx.lineWidth = 2;
-            ctx.setLineDash([5, 5]);
-            ctx.beginPath();
-            
-            for (let x = 0; x < canvas.width; x++) {
-                const xValue = (x / canvas.width) * 20 - 10;
-                const amplitude = Math.exp(-xValue*xValue / 4);
-                const hiddenOrder = amplitude * Math.cos(complexity * xValue / 2) * Math.exp(-Math.abs(xValue) / 5);
-                const y = centerY - hiddenOrder * (canvas.height * 0.4);
-                
-                if (x === 0) {
-                    ctx.moveTo(x, y);
-                } else {
-                    ctx.lineTo(x, y);
-                }
-            }
-            ctx.stroke();
-            
-            // Reset line dash
-            ctx.setLineDash([]);
-            
-            // Legend
-            const legendItems = [
-                { color: '#8884d8', label: 'Real Part (Re[Ψ])' },
-                { color: '#82ca9d', label: 'Imaginary Part (Im[Ψ])' },
-                { color: '#ff0000', label: 'Hidden Order ⟨O(x)O(0)⟩' }
-            ];
-            
-            ctx.font = '12px Arial';
-            let legendY = 20;
-            
-            legendItems.forEach(item => {
-                // Color box
-                ctx.fillStyle = item.color;
-                ctx.fillRect(10, legendY, 15, 15);
-                
-                // Label
-                ctx.fillStyle = '#e0e0e0';
-                ctx.fillText(item.label, 35, legendY + 12);
-                
-                legendY += 25;
-            });
-        }
+            // Log any errors that might occur
+            const errorMsg = document.getElementById('error-message');
+            debugLog(`Error message visibility: ${errorMsg.style.display !== 'none' ? 'visible' : 'hidden'}`);
+        });
         
-        // Draw correlation visualization
-        function drawCorrelation() {
-            const canvas = document.getElementById('correlation-canvas');
-            if (!canvas) {
-                console.error('Canvas element correlation-canvas not found');
-                return;
-            }
-            
-            const ctx = canvas.getContext('2d');
-            if (!ctx) {
-                console.error('Could not get 2D context for correlation-canvas');
-                return;
-            }
-            
-            // Set canvas dimensions correctly
-            canvas.width = canvas.parentElement.clientWidth;
-            canvas.height = canvas.parentElement.clientHeight;
-            
-            // Clear canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Background
-            ctx.fillStyle = '#0d1117';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Draw grid
-            ctx.strokeStyle = '#30363d';
-            ctx.lineWidth = 0.5;
-            
-            // Vertical grid lines
-            for (let x = 0; x <= canvas.width; x += 30) {
-                ctx.beginPath();
-                ctx.moveTo(x, 0);
-                ctx.lineTo(x, canvas.height);
-                ctx.stroke();
-            }
-            
-            // Horizontal grid lines
-            for (let y = 0; y <= canvas.height; y += 30) {
-                ctx.beginPath();
-                ctx.moveTo(0, y);
-                ctx.lineTo(canvas.width, y);
-                ctx.stroke();
-            }
-            
-            // Center axes
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
-            
-            ctx.strokeStyle = '#8b949e';
-            ctx.lineWidth = 1;
-            
-            // X-axis
-            ctx.beginPath();
-            ctx.moveTo(0, centerY);
-            ctx.lineTo(canvas.width, centerY);
-            ctx.stroke();
-            
-            // Y-axis
-            ctx.beginPath();
-            ctx.moveTo(centerX, 0);
-            ctx.lineTo(centerX, canvas.height);
-            ctx.stroke();
-            
-            // Draw correlation points
-            const complexity = currentDimension === '4D' ? 1 : 2;
-            const resolution = 20;
-            
-            for (let i = 0; i <= resolution; i++) {
-                const u = (i / resolution) * Math.PI * 2;
-                for (let j = 0; j <= resolution; j++) {
-                    const v = (j / resolution) * Math.PI;
-                    
-                    // Parametric equations for projection
-                    let x, y;
-                    
-                    if (currentDimension === '4D') {
-                        x = Math.sin(u) * Math.sin(v);
-                        y = Math.sin(u) * Math.cos(v);
-                    } else {
-                        x = Math.sin(u) * Math.sin(v) + 0.3 * Math.sin(3 * u);
-                        y = Math.sin(u) * Math.cos(v) + 0.3 * Math.cos(2 * v);
-                    }
-                    
-                    // Scale to canvas
-                    x = centerX + x * (canvas.width * 0.4);
-                    y = centerY - y * (canvas.height * 0.4);
-                    
-                    // Correlation intensity determines color
-                    const correlation = Math.pow(Math.cos(complexity * u) * Math.sin(complexity * v), 2);
-                    
-                    // Blue color with varying intensity
-                    const blue = Math.floor(150 + correlation * 105);
-                    ctx.fillStyle = `rgb(50, 50, ${blue})`;
-                    
-                    // Draw point
-                    ctx.beginPath();
-                    ctx.arc(x, y, 3, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-            }
-            
-            // Legend
-            ctx.font = '12px Arial';
-            
-            // Color gradient legend
-            const gradientWidth = 150;
-            const gradientHeight = 15;
-            const gradientX = 10;
-            const gradientY = 20;
-            
-            for (let i = 0; i < gradientWidth; i++) {
-                const ratio = i / gradientWidth;
-                const blue = Math.floor(150 + ratio * 105);
-                ctx.fillStyle = `rgb(50, 50, ${blue})`;
-                ctx.fillRect(gradientX + i, gradientY, 1, gradientHeight);
-            }
-            
-            // Legend labels
-            ctx.fillStyle = '#e0e0e0';
-            ctx.fillText('Weak', gradientX, gradientY + gradientHeight + 15);
-            ctx.fillText('Strong', gradientX + gradientWidth - 50, gradientY + gradientHeight + 15);
-        }
+        // Monitor JavaScript errors
+        window.addEventListener('error', function(event) {
+            debugLog(`ERROR: ${event.message} at ${event.filename}:${event.lineno}`);
+        });
         
-        // Draw holographic visualization
-        function drawHolographic() {
-            const canvas = document.getElementById('holographic-canvas');
-            if (!canvas) {
-                console.error('Canvas element holographic-canvas not found');
-                return;
-            }
-            
-            const ctx = canvas.getContext('2d');
-            if (!ctx) {
-                console.error('Could not get 2D context for holographic-canvas');
-                return;
-            }
-            
-            // Set canvas dimensions correctly
-            canvas.width = canvas.parentElement.clientWidth;
-            canvas.height = canvas.parentElement.clientHeight;
-            
-            // Clear canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Background
-            ctx.fillStyle = '#0d1117';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Center and radius
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
-            const radius = Math.min(canvas.width, canvas.height) * 0.4;
-            
-            // Draw boundary circle (CFT)
-            ctx.strokeStyle = '#ef4444';
-            ctx.lineWidth = 3;
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-            ctx.stroke();
-            
-            // Draw concentric circles (AdS bulk)
-            const circles = [0.8, 0.6, 0.4, 0.2];
-            
-            circles.forEach((scale, idx) => {
-                ctx.strokeStyle = '#3b82f6';
-                ctx.lineWidth = 1 + (1-scale) * 2;
-                ctx.globalAlpha = 0.4 + ((1-scale) * 0.6);
-                ctx.beginPath();
-                ctx.arc(centerX, centerY, radius * scale, 0, Math.PI * 2);
-                ctx.stroke();
-            });
-            
-            // Reset opacity
-            ctx.globalAlpha = 1;
-            
-            // Draw radial lines
-            const angles = [0, 45, 90, 135, 180, 225, 270, 315];
-            
-            angles.forEach(angle => {
-                const radian = angle * Math.PI / 180;
-                const x = centerX + Math.cos(radian) * radius;
-                const y = centerY + Math.sin(radian) * radius;
-                
-                ctx.strokeStyle = '#93c5fd';
-                ctx.lineWidth = 1;
-                ctx.globalAlpha = 0.6;
-                ctx.beginPath();
-                ctx.moveTo(centerX, centerY);
-                ctx.lineTo(x, y);
-                ctx.stroke();
-            });
-            
-            // Reset opacity
-            ctx.globalAlpha = 1;
-            
-            // Draw central point (deep bulk)
-            ctx.fillStyle = '#1d4ed8';
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, 8, 0, Math.PI * 2);
-            ctx.fill();
-            
-            // Draw MERA tensor network for 11D
-            if (currentDimension === '11D') {
-                drawTensorNetwork(ctx, centerX, centerY, radius);
-            }
-            
-            // Legend
-            const legendItems = [
-                { color: '#ef4444', label: 'CFT Boundary (Our 4D Reality)', type: 'line' },
-                { color: '#1d4ed8', label: 'AdS Bulk (Higher Dimensions)', type: 'circle' }
-            ];
-            
-            if (currentDimension === '11D') {
-                legendItems.push({ color: '#93c5fd', label: 'MERA Tensor Network', type: 'line' });
-            }
-            
-            ctx.font = '12px Arial';
-            let legendY = 20;
-            
-            legendItems.forEach(item => {
-                if (item.type === 'line') {
-                    // Line
-                    ctx.strokeStyle = item.color;
-                    ctx.lineWidth = 2;
-                    ctx.beginPath();
-                    ctx.moveTo(10, legendY + 7);
-                    ctx.lineTo(25, legendY + 7);
-                    ctx.stroke();
-                } else {
-                    // Circle
-                    ctx.fillStyle = item.color;
-                    ctx.beginPath();
-                    ctx.arc(17, legendY + 7, 7, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-                
-                // Label
-                ctx.fillStyle = '#e0e0e0';
-                ctx.fillText(item.label, 35, legendY + 12);
-                
-                legendY += 25;
-            });
-        }
-        
-        // Helper function to draw tensor network
-        function drawTensorNetwork(ctx, centerX, centerY, radius) {
-            ctx.globalAlpha = 0.4;
-            
-            // Define levels of the network
-            const levels = [0, 1, 2, 3];
-            
-            // Draw nodes at each level
-            levels.forEach(level => {
-                const levelRadius = (level === 0) ? 10 : radius * (0.2 + level * 0.2);
-                const nodesAtLevel = 4 + level * 2;
-                
-                for (let i = 0; i < nodesAtLevel; i++) {
-                    const angle = (i / nodesAtLevel) * Math.PI * 2;
-                    const x = centerX + levelRadius * Math.cos(angle);
-                    const y = centerY + levelRadius * Math.sin(angle);
-                    
-                    // Node color based on level
-                    if (level === 0) {
-                        ctx.fillStyle = '#1d4ed8';
-                    } else if (level === 3) {
-                        ctx.fillStyle = '#ef4444';
-                    } else {
-                        ctx.fillStyle = '#3b82f6';
-                    }
-                    
-                    // Draw node
-                    ctx.beginPath();
-                    ctx.arc(x, y, 3, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-            });
-            
-            // Draw connections between adjacent levels
-            for (let level = 0; level < 3; level++) {
-                const innerRadius = (level === 0) ? 10 : radius * (0.2 + level * 0.2);
-                const outerRadius = radius * (0.2 + (level + 1) * 0.2);
-                const innerNodes = 4 + level * 2;
-                const outerNodes = 4 + (level + 1) * 2;
-                
-                for (let i = 0; i < innerNodes; i++) {
-                    const innerAngle = (i / innerNodes) * Math.PI * 2;
-                    const x1 = centerX + innerRadius * Math.cos(innerAngle);
-                    const y1 = centerY + innerRadius * Math.sin(innerAngle);
-                    
-                    // Connect each inner node to two outer nodes
-                    for (let j of [i*2, i*2+1]) {
-                        j = j % outerNodes; // Ensure we don't go out of bounds
-                        const outerAngle = (j / outerNodes) * Math.PI * 2;
-                        const x2 = centerX + outerRadius * Math.cos(outerAngle);
-                        const y2 = centerY + outerRadius * Math.sin(outerAngle);
-                        
-                        // Connection color
-                        ctx.strokeStyle = (level === 2) ? '#fca5a5' : '#93c5fd';
-                        ctx.lineWidth = 1;
-                        
-                        // Draw connection
-                        ctx.beginPath();
-                        ctx.moveTo(x1, y1);
-                        ctx.lineTo(x2, y2);
-                        ctx.stroke();
-                    }
-                }
-            }
-            
-            // Reset opacity
-            ctx.globalAlpha = 1;
-        }
-        
-        // Initialize visualizations
-        function initVisualizations() {
-            try {
-                console.log("Initializing canvas visualizations...");
-                
-                // Check if canvas elements exist
-                const waveFunctionCanvas = document.getElementById('wave-function-canvas');
-                const correlationCanvas = document.getElementById('correlation-canvas');
-                const holographicCanvas = document.getElementById('holographic-canvas');
-                
-                if (!waveFunctionCanvas) console.error("wave-function-canvas not found");
-                if (!correlationCanvas) console.error("correlation-canvas not found");
-                if (!holographicCanvas) console.error("holographic-canvas not found");
-                
-                // Force a minimum size for the chart containers
-                document.querySelectorAll('.chart-container').forEach(container => {
-                    if (container.clientHeight < 300) {
-                        container.style.height = "300px";
-                    }
-                });
-                
-                // Now draw the visualizations
-                drawWaveFunction();
-                drawCorrelation();
-                drawHolographic();
-                
-                // Handle window resize with debounce
-                let resizeTimeout;
-                window.addEventListener('resize', function() {
-                    clearTimeout(resizeTimeout);
-                    resizeTimeout = setTimeout(function() {
-                        console.log("Window resized, redrawing visualizations...");
-                        drawWaveFunction();
-                        drawCorrelation();
-                        drawHolographic();
-                    }, 250);
-                });
-                
-                // Animate in sections
-                animateSections();
-                
-                // Hide error message if successful
-                document.getElementById('error-message').style.display = 'none';
-            } catch (error) {
-                console.error('Visualization error:', error);
-                document.getElementById('error-message').style.display = 'block';
-                document.getElementById('error-message').textContent = 'Error initializing visualizations: ' + error.message;
-            }
-        }
-        
-        // Animation for sections
-        function animateSections() {
-            const sections = document.querySelectorAll('.visualization-section');
-            
-            sections.forEach(section => {
-                const delay = parseInt(section.getAttribute('data-animation-delay')) || 0;
-                
-                setTimeout(() => {
-                    section.classList.add('loaded');
-                }, delay);
-            });
-        }
-        
-        // Call initialization when DOM is loaded
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initVisualizations);
-        } else {
-            // DOM already loaded, initialize immediately
-            initVisualizations();
-        }
-        
-        // Fallback timer in case the DOMContentLoaded event already fired or doesn't trigger properly
+        // Force initialization after a delay if visualizations aren't showing
         setTimeout(function() {
-            console.log("Fallback timer triggered for initialization");
-            initVisualizations();
-        }, 500);
+            const canvas = document.getElementById('wave-function-canvas');
+            if (canvas && (!canvas.width || !canvas.height || canvas.width < 10)) {
+                debugLog('Forcing visualization initialization due to missing or zero-size canvases');
+                if (typeof initVisualizations === 'function') {
+                    initVisualizations();
+                }
+            }
+        }, 2000);
+    </script>
+</body>
+</html>
