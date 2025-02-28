@@ -2601,7 +2601,36 @@
   <!-- Legend -->
   <g transform="translate(100, 500)">
     <rect x="-80" y="-70" width="160" height="110" fill="rgba(10, 20, 40, 0.7)" rx="10" ry="10" stroke="#ffffff" stroke-width="1" opacity="0.7" />
-    <text x="0" y="-50" font-family="Arial,
-        
+    <text x="0" y="-50" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle" font-weight="bold">Legend</text>
+    
+    <line x1="-60" y1="-30" x2="-40" y2="-30" stroke="#9370db" stroke-width="2" filter="url(#quantum-glow)" />
+    <text x="-20" y="-26" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" dx="5">Quantum State</text>
+    
+    <path d="M-60,-5 C-55,-15 -45,-15 -40,-5" fill="none" stroke="#9370db" stroke-width="1.5" opacity="0.6" stroke-dasharray="4,2" />
+    <text x="-20" y="-1" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" dx="5">Correlation/Entanglement</text>
+    
+    <circle cx="-50" cy="20" r="5" fill="#ffffff" opacity="0.8" />
+    <text x="-20" y="24" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" dx="5">Observer</text>
+  </g>
+  
+  <!-- Density Matrix Box -->
+  <g transform="translate(130, 220)">
+    <rect x="-80" y="-50" width="160" height="100" fill="rgba(10, 20, 40, 0.7)" rx="10" ry="10" stroke="#9370db" stroke-width="1.5" opacity="0.7" />
+    <text x="0" y="-30" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle" font-weight="bold">Density Matrix</text>
+    
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">ρ = Σᵢ pᵢ|ψᵢ⟩⟨ψᵢ|</text>
+    
+    <text x="0" y="30" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">S = -Tr(ρ log ρ)</text>
+  </g>
+  
+  <!-- Tensor Network Box -->
+  <g transform="translate(670, 480)">
+    <rect x="-80" y="-40" width="160" height="80" fill="rgba(10, 20, 40, 0.7)" rx="10" ry="10" stroke="#00ccff" stroke-width="1.5" opacity="0.7" />
+    <text x="0" y="-20" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle" font-weight="bold">Tensor Networks</text>
+    
+    <text x="0" y="10" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">MERA hierarchical</text>
+    <text x="0" y="30" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">quantum information</text>
+  </g>
+</svg>
 </body>
 </html>
