@@ -1267,5 +1267,148 @@
     }, 10000); // 10 second timeout
   });
 </script>
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- Background -->
+  <rect width="800" height="500" fill="#0a0a1a" />
+  
+  <!-- Title -->
+  <text x="400" y="40" fill="#ffffff" font-family="Arial" font-size="24" text-anchor="middle">Projection of 11D M-Theory Space onto 4D Spacetime</text>
+  
+  <!-- Higher dimension representation (Calabi-Yau inspired structure) -->
+  <g transform="translate(250, 200)">
+    <!-- 11D representation (stylized Calabi-Yau manifold) -->
+    <g id="higher-dim">
+      <!-- Complex structure representation -->
+      <path d="M0,0 C30,-40 70,-40 100,0 C130,40 170,40 200,0 C230,-40 270,-40 300,0" 
+            fill="none" stroke="#5050ff" stroke-width="2" opacity="0.6" />
+      <path d="M0,0 C30,40 70,40 100,0 C130,-40 170,-40 200,0 C230,40 270,40 300,0" 
+            fill="none" stroke="#5050ff" stroke-width="2" opacity="0.6" />
+            
+      <!-- Cross-sections -->
+      <path d="M50,0 C65,20 85,20 100,0 C115,-20 135,-20 150,0" 
+            fill="none" stroke="#7070ff" stroke-width="1.5" opacity="0.6" />
+      <path d="M50,0 C65,-20 85,-20 100,0 C115,20 135,20 150,0" 
+            fill="none" stroke="#7070ff" stroke-width="1.5" opacity="0.6" />
+            
+      <path d="M150,0 C165,20 185,20 200,0 C215,-20 235,-20 250,0" 
+            fill="none" stroke="#7070ff" stroke-width="1.5" opacity="0.6" />
+      <path d="M150,0 C165,-20 185,-20 200,0 C215,20 235,20 250,0" 
+            fill="none" stroke="#7070ff" stroke-width="1.5" opacity="0.6" />
+            
+      <!-- Additional complexity elements -->
+      <g>
+        <!-- Small circles representing nodes in the structure -->
+        <circle cx="0" cy="0" r="5" fill="#6a4bc8" />
+        <circle cx="100" cy="0" r="5" fill="#6a4bc8" />
+        <circle cx="200" cy="0" r="5" fill="#6a4bc8" />
+        <circle cx="300" cy="0" r="5" fill="#6a4bc8" />
+        
+        <!-- Inner structure -->
+        <ellipse cx="150" cy="0" rx="150" ry="60" fill="none" stroke="#8a6ad8" stroke-width="1" opacity="0.4" />
+        <ellipse cx="150" cy="0" rx="130" ry="45" fill="none" stroke="#8a6ad8" stroke-width="1" opacity="0.4" />
+        <ellipse cx="150" cy="0" rx="100" ry="35" fill="none" stroke="#8a6ad8" stroke-width="1" opacity="0.4" />
+      </g>
+      
+      <!-- Dimensional fibers -->
+      <g opacity="0.6">
+        <path d="M50,-30 Q75,-60 100,-30" fill="none" stroke="#9685eb" stroke-width="1" />
+        <path d="M50,30 Q75,60 100,30" fill="none" stroke="#9685eb" stroke-width="1" />
+        <path d="M150,-30 Q175,-60 200,-30" fill="none" stroke="#9685eb" stroke-width="1" />
+        <path d="M150,30 Q175,60 200,30" fill="none" stroke="#9685eb" stroke-width="1" />
+        
+        <!-- Add some complexity with crossed fibers -->
+        <path d="M120,-20 Q150,-40 180,-20" fill="none" stroke="#9685eb" stroke-width="1" />
+        <path d="M120,20 Q150,40 180,20" fill="none" stroke="#9685eb" stroke-width="1" />
+        <path d="M60,-20 Q90,-40 120,-20" fill="none" stroke="#9685eb" stroke-width="1" />
+        <path d="M60,20 Q90,40 120,20" fill="none" stroke="#9685eb" stroke-width="1" />
+      </g>
+      
+      <!-- Animation effect for higher dimensions -->
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="60s" repeatCount="indefinite" />
+    </g>
+
+    <!-- Projection rays -->
+    <g id="projection-rays">
+      <line x1="50" y1="0" x2="50" y2="150" stroke="#ffffff" stroke-width="0.5" opacity="0.3" />
+      <line x1="100" y1="0" x2="100" y2="150" stroke="#ffffff" stroke-width="0.5" opacity="0.3" />
+      <line x1="150" y1="0" x2="150" y2="150" stroke="#ffffff" stroke-width="0.5" opacity="0.3" />
+      <line x1="200" y1="0" x2="200" y2="150" stroke="#ffffff" stroke-width="0.5" opacity="0.3" />
+      <line x1="250" y1="0" x2="250" y2="150" stroke="#ffffff" stroke-width="0.5" opacity="0.3" />
+    </g>
+  </g>
+  
+  <!-- 4D Projection (represented as 3D+time) -->
+  <g transform="translate(250, 350)">
+    <!-- 4D spacetime representation -->
+    <rect x="0" y="0" width="300" height="80" fill="none" stroke="#5df" stroke-width="2" opacity="0.7" />
+    
+    <!-- Time dimension representation -->
+    <line x1="0" y1="40" x2="300" y2="40" stroke="#ff5599" stroke-width="2" opacity="0.7" />
+    <text x="310" y="45" fill="#ff5599" font-family="Arial" font-size="14">t</text>
+    
+    <!-- Projected phenomena from higher dimensions -->
+    <g fill="none" stroke="#5df" stroke-width="1.5">
+      <path d="M50,40 Q100,10 150,40 Q200,70 250,40" />
+      <circle cx="100" cy="40" r="3" fill="#5df" />
+      <circle cx="200" cy="40" r="3" fill="#5df" />
+    </g>
+    
+    <!-- Quantum wavefunction representation -->
+    <path d="M50,60 Q75,50 100,60 Q125,70 150,60 Q175,50 200,60 Q225,70 250,60" 
+          fill="none" stroke="#5df" stroke-width="1" stroke-dasharray="3,2" />
+          
+    <!-- Coordinate labels -->
+    <text x="155" y="95" fill="#ffffff" font-family="Arial" font-size="16" text-anchor="middle">4D Spacetime (x, y, z, t)</text>
+  </g>
+  
+  <!-- Labels and annotations -->
+  <g font-family="Arial" font-size="14" fill="#ffffff">
+    <text x="150" y="200" text-anchor="middle">11-Dimensional</text>
+    <text x="150" y="220" text-anchor="middle">M-Theory Space</text>
+    
+    <text x="400" y="130" text-anchor="middle" font-style="italic">Compactified</text>
+    <text x="400" y="150" text-anchor="middle" font-style="italic">Dimensions</text>
+    
+    <text x="650" y="200" text-anchor="middle" font-style="italic">Holographic</text>
+    <text x="650" y="220" text-anchor="middle" font-style="italic">Projection</text>
+    
+    <!-- Arrows indicating the projection process -->
+    <path d="M400,250 L400,300" fill="none" stroke="#ffffff" stroke-width="1.5" marker-end="url(#arrowhead)" />
+    
+    <!-- Entanglement representation -->
+    <g transform="translate(650, 250)">
+      <circle cx="-50" cy="0" r="8" fill="#5df" />
+      <circle cx="50" cy="0" r="8" fill="#5df" />
+      <path d="M-42,0 Q0,-20 42,0" stroke="#5df" stroke-width="1.5" fill="none" />
+      <text x="0" y="30" text-anchor="middle" font-size="12">Entangled Particles</text>
+      <text x="0" y="48" text-anchor="middle" font-size="10" fill="#aaaaaa">Connected through</text>
+      <text x="0" y="62" text-anchor="middle" font-size="10" fill="#aaaaaa">higher dimensions</text>
+    </g>
+  </g>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ffffff" />
+    </marker>
+  </defs>
+  
+  <!-- Legend -->
+  <g transform="translate(650, 400)">
+    <rect x="0" y="0" width="120" height="80" fill="#0a0a1a" stroke="#444444" stroke-width="1" />
+    <text x="60" y="20" font-family="Arial" font-size="12" fill="#ffffff" text-anchor="middle">Legend</text>
+    
+    <line x1="10" y1="35" x2="30" y2="35" stroke="#5050ff" stroke-width="2" />
+    <text x="35" y="40" font-family="Arial" font-size="10" fill="#ffffff">Higher dimensions</text>
+    
+    <line x1="10" y1="55" x2="30" y2="55" stroke="#5df" stroke-width="2" />
+    <text x="35" y="60" font-family="Arial" font-size="10" fill="#ffffff">4D projection</text>
+    
+    <line x1="10" y1="75" x2="30" y2="75" stroke="#ff5599" stroke-width="2" />
+    <text x="35" y="80" font-family="Arial" font-size="10" fill="#ffffff">Time dimension</text>
+  </g>
+</svg>
+    
 </body>
 </html>
