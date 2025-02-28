@@ -2632,5 +2632,317 @@
     <text x="0" y="30" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">quantum information</text>
   </g>
 </svg>
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Background with gradient -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#151e3f" />
+      <stop offset="100%" stop-color="#0e1229" />
+    </linearGradient>
+    
+    <!-- Text effects -->
+    <filter id="text-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feFlood flood-color="#ffffff" flood-opacity="0.3" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <!-- Glow effects -->
+    <filter id="blue-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#00ccff" flood-opacity="0.4" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <filter id="gold-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#ffd700" flood-opacity="0.4" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <filter id="green-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#4caf50" flood-opacity="0.4" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <filter id="purple-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#9370db" flood-opacity="0.4" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <filter id="red-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#ff6347" flood-opacity="0.4" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <!-- Animation paths -->
+    <path id="lorentz-path" d="M-60,0 C-40,-40 40,-40 60,0 C40,40 -40,40 -60,0 Z" />
+    
+    <!-- Hypergradient -->
+    <radialGradient id="hyper-gradient" cx="0.5" cy="0.5" r="0.7">
+      <stop offset="0%" stop-color="#00ccff" stop-opacity="0.7"/>
+      <stop offset="60%" stop-color="#00ccff" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#00ccff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="800" height="600" fill="url(#bg-gradient)" />
+  
+  <!-- Title -->
+  <text x="400" y="40" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" filter="url(#text-glow)" font-weight="bold">Symmetry and Invariance in Higher Dimensions</text>
+  <text x="400" y="70" fill="#ffffff" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" filter="url(#text-glow)">Lorentz Invariance Extended to Higher Dimensions</text>
+  
+  <!-- 1. Extended Lorentz Transformations (Top Left) -->
+  <g transform="translate(200, 200)">
+    <!-- Higher-dimensional light cone -->
+    <g id="light-cone">
+      <!-- 4D cone structure -->
+      <path d="M0,-80 L-60,0 L-42,42 L0,60 L42,42 L60,0 Z" fill="none" stroke="#00ccff" stroke-width="1.5" opacity="0.7" />
+      <path d="M0,-80 L-60,0 L-42,-42 L0,-60 L42,-42 L60,0 Z" fill="none" stroke="#00ccff" stroke-width="1.5" opacity="0.7" />
+      
+      <!-- Extra dimensions represented -->
+      <ellipse cx="0" cy="0" rx="60" ry="30" fill="none" stroke="#00ccff" stroke-width="1" opacity="0.4" />
+      <ellipse cx="0" cy="0" rx="30" ry="60" fill="none" stroke="#00ccff" stroke-width="1" opacity="0.4" transform="rotate(45)" />
+      
+      <!-- Light cone interior -->
+      <path d="M0,-60 L-42,0 L0,60 L42,0 Z" fill="url(#hyper-gradient)" opacity="0.2" />
+      
+      <!-- Spacetime interval representation -->
+      <circle cx="0" cy="0" r="7" fill="#00ccff" filter="url(#blue-glow)" />
+    </g>
+    
+    <!-- Lorentz boost visualization -->
+    <g id="lorentz-boost">
+      <!-- Reference frame A -->
+      <line x1="-70" y1="-70" x2="70" y2="70" stroke="#ffd700" stroke-width="2" opacity="0.7" filter="url(#gold-glow)" />
+      <line x1="-70" y1="70" x2="70" y2="-70" stroke="#ffd700" stroke-width="1" opacity="0.5" stroke-dasharray="5,3" />
+      
+      <!-- Reference frame B (boosted) -->
+      <line x1="-85" y1="-50" x2="85" y2="50" stroke="#ff6347" stroke-width="2" opacity="0.7" filter="url(#red-glow)" />
+      <line x1="-50" y1="85" x2="50" y2="-85" stroke="#ff6347" stroke-width="1" opacity="0.5" stroke-dasharray="5,3" />
+      
+      <!-- Moving particle in both frames -->
+      <circle cx="30" cy="30" r="5" fill="#ffffff" opacity="0.9">
+        <animateMotion dur="4s" repeatCount="indefinite">
+          <mpath href="#lorentz-path" />
+        </animateMotion>
+      </circle>
+    </g>
+    
+    <!-- Lorentz invariant measure -->
+    <text x="0" y="-100" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">ds² = -c²dt² + dx² + dy² + dz² + g_ab dx^a dx^b</text>
+    
+    <!-- Labels -->
+    <text x="0" y="100" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle" font-weight="bold">Extended Lorentz Transformations</text>
+    <text x="-70" y="-60" font-family="Arial, sans-serif" font-size="12" fill="#ffd700" filter="url(#gold-glow)" text-anchor="middle">Frame A</text>
+    <text x="-90" y="-40" font-family="Arial, sans-serif" font-size="12" fill="#ff6347" filter="url(#red-glow)" text-anchor="middle">Frame B</text>
+  </g>
+  
+  <!-- 2. Symmetry Groups (Top Right) -->
+  <g transform="translate(600, 200)">
+    <!-- Nested symmetry groups -->
+    <g id="symmetry-groups">
+      <!-- SO(1,n-1) - Extended Lorentz group -->
+      <ellipse cx="0" cy="0" rx="100" ry="80" fill="none" stroke="#00ccff" stroke-width="2" opacity="0.8" filter="url(#blue-glow)" />
+      <text x="0" y="-65" font-family="Arial, sans-serif" font-size="14" fill="#00ccff" filter="url(#blue-glow)" text-anchor="middle">SO(1,n-1)</text>
+      
+      <!-- SO(1,3) - 4D Lorentz group -->
+      <ellipse cx="-20" cy="0" rx="60" ry="50" fill="none" stroke="#ffd700" stroke-width="2" opacity="0.8" filter="url(#gold-glow)" />
+      <text x="-20" y="-20" font-family="Arial, sans-serif" font-size="12" fill="#ffd700" filter="url(#gold-glow)" text-anchor="middle">SO(1,3)</text>
+      
+      <!-- SO(n-4) - Extra dimensions rotation group -->
+      <ellipse cx="30" cy="10" rx="40" ry="35" fill="none" stroke="#4caf50" stroke-width="2" opacity="0.8" filter="url(#green-glow)" />
+      <text x="30" y="0" font-family="Arial, sans-serif" font-size="12" fill="#4caf50" filter="url(#green-glow)" text-anchor="middle">SO(n-4)</text>
+      
+      <!-- SU(3)×SU(2)×U(1) - Standard Model gauge group -->
+      <ellipse cx="30" cy="10" rx="25" ry="20" fill="none" stroke="#ff6347" stroke-width="1.5" opacity="0.8" filter="url(#red-glow)" />
+      <text x="30" y="15" font-family="Arial, sans-serif" font-size="10" fill="#ff6347" filter="url(#red-glow)" text-anchor="middle">SU(3)×SU(2)×U(1)</text>
+    </g>
+    
+    <!-- Equation -->
+    <text x="0" y="-100" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">SO(1,n-1) ⊃ SO(1,3) × SO(n-4) × ...</text>
+    
+    <!-- Labels -->
+    <text x="0" y="100" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle" font-weight="bold">Nested Symmetry Groups</text>
+    <text x="0" y="120" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle" font-style="italic">Internal symmetries from higher dimensions</text>
+  </g>
+  
+  <!-- 3. Noether's Theorem and Conservation Laws (Bottom Left) -->
+  <g transform="translate(200, 450)">
+    <!-- Symmetry-conservation connection -->
+    <g id="noether-theorem">
+      <!-- Symmetry operations -->
+      <g id="symmetry-ops" transform="translate(-70, -40)">
+        <circle cx="0" cy="0" r="30" fill="none" stroke="#00ccff" stroke-width="1.5" opacity="0.7" />
+        <!-- Rotation arrows -->
+        <path d="M-20,-20 A30,30 0 0,1 20,-20" fill="none" stroke="#00ccff" stroke-width="2" opacity="0.8" marker-end="url(#arrow-blue)" />
+        <path d="M20,20 A30,30 0 0,1 -20,20" fill="none" stroke="#00ccff" stroke-width="2" opacity="0.8" marker-end="url(#arrow-blue)" />
+        <text x="0" y="0" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">Symmetry</text>
+      </g>
+      
+      <!-- Conservation laws -->
+      <g id="conservation-laws" transform="translate(70, -40)">
+        <rect x="-40" y="-25" width="80" height="50" fill="none" stroke="#4caf50" stroke-width="1.5" opacity="0.7" />
+        <!-- Conservation symbol -->
+        <text x="0" y="-5" font-family="Arial, sans-serif" font-size="14" fill="#4caf50" filter="url(#green-glow)" text-anchor="middle">∂μJμ = 0</text>
+        <text x="0" y="15" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">Conservation</text>
+      </g>
+      
+      <!-- Connection arrow -->
+      <path d="M-30,-40 L30,-40" stroke="#ffffff" stroke-width="2" opacity="0.8" marker-end="url(#arrow-white)" />
+      <text x="0" y="-50" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">Noether's Theorem</text>
+      
+      <!-- Examples -->
+      <g id="noether-examples" transform="translate(0, 30)">
+        <text x="-70" y="0" font-family="Arial, sans-serif" font-size="11" fill="#00ccff" filter="url(#blue-glow)" text-anchor="middle">Time Translation</text>
+        <text x="-70" y="15" font-family="Arial, sans-serif" font-size="11" fill="#4caf50" filter="url(#green-glow)" text-anchor="middle">Energy Conservation</text>
+        
+        <text x="0" y="0" font-family="Arial, sans-serif" font-size="11" fill="#00ccff" filter="url(#blue-glow)" text-anchor="middle">Space Translation</text>
+        <text x="0" y="15" font-family="Arial, sans-serif" font-size="11" fill="#4caf50" filter="url(#green-glow)" text-anchor="middle">Momentum Conservation</text>
+        
+        <text x="70" y="0" font-family="Arial, sans-serif" font-size="11" fill="#00ccff" filter="url(#blue-glow)" text-anchor="middle">Extra Dim. Rotation</text>
+        <text x="70" y="15" font-family="Arial, sans-serif" font-size="11" fill="#4caf50" filter="url(#green-glow)" text-anchor="middle">Charge Conservation</text>
+      </g>
+    </g>
+    
+    <!-- Labels -->
+    <text x="0" y="80" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle" font-weight="bold">Noether's Theorem</text>
+    <text x="0" y="100" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle" font-style="italic">Symmetries yield conservation laws</text>
+  </g>
+  
+  <!-- 4. Diffeomorphism Invariance (Bottom Right) -->
+  <g transform="translate(600, 450)">
+    <!-- Different coordinate systems -->
+    <g id="diffeomorphism">
+      <!-- Base manifold -->
+      <path d="M-80,-50 C-40,-70 40,-70 80,-50 C100,-20 100,20 80,50 C40,70 -40,70 -80,50 C-100,20 -100,-20 -80,-50 Z" 
+            fill="none" stroke="#9370db" stroke-width="1.5" opacity="0.7" />
+      
+      <!-- Coordinate grid A -->
+      <g id="coord-system-A" stroke="#ffd700" stroke-width="1" opacity="0.6">
+        <path d="M-60,-30 C-20,-40 20,-40 60,-30" />
+        <path d="M-60,0 C-20,0 20,0 60,0" />
+        <path d="M-60,30 C-20,40 20,40 60,30" />
+        
+        <path d="M-60,-30 C-60,0 -60,30 -60,30" />
+        <path d="M0,-40 C0,0 0,40 0,40" />
+        <path d="M60,-30 C60,0 60,30 60,30" />
+      </g>
+      
+      <!-- Coordinate grid B -->
+      <g id="coord-system-B" stroke="#ff6347" stroke-width="1" opacity="0.4" stroke-dasharray="3,2">
+        <path d="M-70,-30 C-50,-10 -30,-30 -10,-10 C10,10 30,-10 50,10 C70,30 70,30 70,30" />
+        <path d="M-70,0 C-50,20 -30,0 -10,20 C10,40 30,20 50,40 C70,60 70,60 70,60" />
+        <path d="M-70,30 C-50,50 -30,30 -10,50 C10,50 30,50 50,50 C70,50 70,50 70,50" />
+        
+        <path d="M-70,-30 C-70,0 -70,30 -70,30" />
+        <path d="M-30,-30 C-30,0 -30,30 -30,30" />
+        <path d="M10,-10 C10,20 10,50 10,50" />
+        <path d="M50,10 C50,30 50,50 50,50" />
+      </g>
+      
+      <!-- Invariant structure -->
+      <circle cx="0" cy="0" r="15" fill="#9370db" opacity="0.7" filter="url(#purple-glow)" />
+      <text x="0" y="5" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">ds²</text>
+    </g>
+    
+    <!-- Equation -->
+    <text x="0" y="-80" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">xᵘ → x'ᵘ(x⁰,x¹,...,xⁿ⁻¹)</text>
+    
+    <!-- Labels -->
+    <text x="0" y="80" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle" font-weight="bold">Diffeomorphism Invariance</text>
+    <text x="0" y="100" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle" font-style="italic">Physics independent of coordinate system</text>
+    <text x="-70" y="-60" font-family="Arial, sans-serif" font-size="12" fill="#ffd700" filter="url(#gold-glow)" text-anchor="middle">Coords A</text>
+    <text x="70" y="-60" font-family="Arial, sans-serif" font-size="12" fill="#ff6347" filter="url(#red-glow)" text-anchor="middle">Coords B</text>
+  </g>
+  
+  <!-- C, P, T Discrete Symmetries (Center) -->
+  <g transform="translate(400, 330)">
+    <rect x="-120" y="-40" width="240" height="80" fill="rgba(10, 20, 40, 0.7)" rx="10" ry="10" stroke="#ffffff" stroke-width="1" opacity="0.7" />
+    <text x="0" y="-20" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle" font-weight="bold">Discrete Symmetries</text>
+    
+    <g transform="translate(-80, 10)">
+      <circle cx="0" cy="0" r="15" fill="#00ccff" opacity="0.6" filter="url(#blue-glow)" />
+      <text x="0" y="5" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">C</text>
+      <text x="0" y="30" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">Charge</text>
+    </g>
+    
+    <g transform="translate(0, 10)">
+      <circle cx="0" cy="0" r="15" fill="#4caf50" opacity="0.6" filter="url(#green-glow)" />
+      <text x="0" y="5" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">P</text>
+      <text x="0" y="30" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">Parity</text>
+    </g>
+    
+    <g transform="translate(80, 10)">
+      <circle cx="0" cy="0" r="15" fill="#ff6347" opacity="0.6" filter="url(#red-glow)" />
+      <text x="0" y="5" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">T</text>
+      <text x="0" y="30" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">Time</text>
+    </g>
+  </g>
+  
+  <!-- Scale Invariance (Top Center) -->
+  <g transform="translate(400, 150)">
+    <rect x="-100" y="-40" width="200" height="60" fill="rgba(10, 20, 40, 0.7)" rx="10" ry="10" stroke="#ffffff" stroke-width="1" opacity="0.7" />
+    <text x="0" y="-15" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle" font-weight="bold">Renormalization Group Flow</text>
+    <text x="0" y="10" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">Extra dimension ↔ energy scale</text>
+  </g>
+  
+  <!-- Legend -->
+  <g transform="translate(400, 550)">
+    <rect x="-300" y="-30" width="600" height="60" fill="rgba(10, 20, 40, 0.7)" rx="10" ry="10" stroke="#ffffff" stroke-width="1" opacity="0.7" />
+    
+    <!-- Legend items -->
+    <g transform="translate(-250, 0)">
+      <circle cx="0" cy="0" r="5" fill="#00ccff" filter="url(#blue-glow)" />
+      <text x="10" y="5" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" dx="5">Extended Lorentz Group</text>
+    </g>
+    
+    <g transform="translate(-70, 0)">
+      <circle cx="0" cy="0" r="5" fill="#ffd700" filter="url(#gold-glow)" />
+      <text x="10" y="5" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" dx="5">4D Symmetries</text>
+    </g>
+    
+    <g transform="translate(70, 0)">
+      <circle cx="0" cy="0" r="5" fill="#4caf50" filter="url(#green-glow)" />
+      <text x="10" y="5" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" dx="5">Conservation Laws</text>
+    </g>
+    
+    <g transform="translate(230, 0)">
+      <circle cx="0" cy="0" r="5" fill="#9370db" filter="url(#purple-glow)" />
+      <text x="10" y="5" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" dx="5">Invariant Structures</text>
+    </g>
+  </g>
+  
+  <!-- Arrow definitions -->
+  <defs>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#00ccff" />
+    </marker>
+    
+    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4caf50" />
+    </marker>
+    
+    <marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#9370db" />
+    </marker>
+    
+    <marker id="arrow-white" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ffffff" />
+    </marker>
+  </defs>
+</svg>
+        
 </body>
 </html>
