@@ -1409,6 +1409,218 @@
     <text x="35" y="80" font-family="Arial" font-size="10" fill="#ffffff">Time dimension</text>
   </g>
 </svg>
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- Background with gradient -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#151e3f" />
+      <stop offset="100%" stop-color="#0e1229" />
+    </linearGradient>
     
+    <!-- Text effects -->
+    <filter id="text-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feFlood flood-color="#ffffff" flood-opacity="0.3" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <!-- Glow effects -->
+    <filter id="purple-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#9932cc" flood-opacity="0.4" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <filter id="particle-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feFlood flood-color="#ffffff" flood-opacity="0.4" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <!-- Entanglement ribbon effect -->
+    <linearGradient id="ribbon-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#9370db" stop-opacity="0.2" />
+      <stop offset="50%" stop-color="#9370db" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#9370db" stop-opacity="0.2" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="800" height="500" fill="url(#bg-gradient)" />
+  
+  <!-- Title -->
+  <text x="400" y="40" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" filter="url(#text-glow)" font-weight="bold">Quantum Entanglement as Hyperdimensional Connections</text>
+  
+  <!-- Higher-dimensional representation (top half) -->
+  <g transform="translate(400, 170)">
+    <!-- Higher dimensions represented as a torus/donut shape -->
+    <g id="higher-dimensions">
+      <!-- Outer structure -->
+      <ellipse cx="0" cy="0" rx="180" ry="70" fill="none" stroke="#6a4bc8" stroke-width="1" opacity="0.4" />
+      <ellipse cx="0" cy="0" rx="180" ry="70" fill="none" stroke="#6a4bc8" stroke-width="1" opacity="0.4" transform="rotate(60)" />
+      <ellipse cx="0" cy="0" rx="180" ry="70" fill="none" stroke="#6a4bc8" stroke-width="1" opacity="0.4" transform="rotate(120)" />
+      
+      <!-- Inner structure suggesting higher dimensions -->
+      <ellipse cx="0" cy="0" rx="100" ry="40" fill="none" stroke="#8a6ad8" stroke-width="1" opacity="0.5" />
+      <ellipse cx="0" cy="0" rx="100" ry="40" fill="none" stroke="#8a6ad8" stroke-width="1" opacity="0.5" transform="rotate(60)" />
+      <ellipse cx="0" cy="0" rx="100" ry="40" fill="none" stroke="#8a6ad8" stroke-width="1" opacity="0.5" transform="rotate(120)" />
+      
+      <!-- Additional dimensional hints -->
+      <path d="M-150,-20 C-100,-60 -50,-70 0,-60 C50,-70 100,-60 150,-20" fill="none" stroke="#9932cc" stroke-width="1" opacity="0.5" />
+      <path d="M-150,20 C-100,60 -50,70 0,60 C50,70 100,60 150,20" fill="none" stroke="#9932cc" stroke-width="1" opacity="0.5" />
+      
+      <!-- Spin network representation -->
+      <g id="spin-network" opacity="0.7">
+        <!-- Nodes -->
+        <circle cx="-120" cy="-20" r="6" fill="#9932cc" filter="url(#purple-glow)" />
+        <circle cx="-60" cy="30" r="6" fill="#9932cc" filter="url(#purple-glow)" />
+        <circle cx="0" cy="-40" r="6" fill="#9932cc" filter="url(#purple-glow)" />
+        <circle cx="60" cy="30" r="6" fill="#9932cc" filter="url(#purple-glow)" />
+        <circle cx="120" cy="-20" r="6" fill="#9932cc" filter="url(#purple-glow)" />
+        
+        <!-- Connections -->
+        <line x1="-120" y1="-20" x2="-60" y2="30" stroke="#9932cc" stroke-width="2" opacity="0.6" />
+        <line x1="-60" y1="30" x2="0" y2="-40" stroke="#9932cc" stroke-width="2" opacity="0.6" />
+        <line x1="0" y1="-40" x2="60" y2="30" stroke="#9932cc" stroke-width="2" opacity="0.6" />
+        <line x1="60" y1="30" x2="120" y2="-20" stroke="#9932cc" stroke-width="2" opacity="0.6" />
+        <line x1="-120" y1="-20" x2="0" y2="-40" stroke="#9932cc" stroke-width="2" opacity="0.6" />
+        <line x1="-60" y1="30" x2="60" y2="30" stroke="#9932cc" stroke-width="2" opacity="0.6" />
+        <line x1="0" y1="-40" x2="120" y2="-20" stroke="#9932cc" stroke-width="2" opacity="0.6" />
+      </g>
+      
+      <!-- Entangled particles in higher dimensions -->
+      <g id="entangled-particles-higher">
+        <!-- Particle pair A - directly adjacent in higher dimensions -->
+        <circle cx="-100" cy="0" r="10" fill="#ff5599" stroke="#ffffff" stroke-width="1" filter="url(#particle-glow)">
+          <animate attributeName="opacity" values="0.9;1;0.9" dur="3s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="100" cy="0" r="10" fill="#ff5599" stroke="#ffffff" stroke-width="1" filter="url(#particle-glow)">
+          <animate attributeName="opacity" values="1;0.9;1" dur="3s" repeatCount="indefinite" />
+        </circle>
+        
+        <!-- Higher dimensional connection - direct pathway -->
+        <path d="M-90,0 C-30,-40 30,-40 90,0" fill="none" stroke="#ff5599" stroke-width="3" opacity="0.7" stroke-dasharray="5,3" />
+        
+        <!-- Unified entity in higher dimensions -->
+        <ellipse cx="0" cy="0" rx="150" ry="15" fill="url(#ribbon-gradient)" opacity="0.4" />
+      </g>
+    </g>
+  </g>
+  
+  <!-- Projection rays -->
+  <g stroke="#ffffff" stroke-width="0.5" opacity="0.2">
+    <line x1="300" y1="170" x2="200" y2="350" />
+    <line x1="500" y1="170" x2="600" y2="350" />
+  </g>
+  
+  <!-- 4D spacetime representation (bottom half) -->
+  <g transform="translate(400, 370)">
+    <!-- 4D spacetime representation -->
+    <rect x="-300" y="-40" width="600" height="80" fill="none" stroke="#00ccff" stroke-width="2" opacity="0.7" />
+    
+    <!-- Grid for 4D space -->
+    <g stroke="#00ccff" stroke-width="0.5" opacity="0.2">
+      <line x1="-300" y1="-20" x2="300" y2="-20" />
+      <line x1="-300" y1="0" x2="300" y2="0" />
+      <line x1="-300" y1="20" x2="300" y2="20" />
+      
+      <line x1="-240" y1="-40" x2="-240" y2="40" />
+      <line x1="-180" y1="-40" x2="-180" y2="40" />
+      <line x1="-120" y1="-40" x2="-120" y2="40" />
+      <line x1="-60" y1="-40" x2="-60" y2="40" />
+      <line x1="0" y1="-40" x2="0" y2="40" />
+      <line x1="60" y1="-40" x2="60" y2="40" />
+      <line x1="120" y1="-40" x2="120" y2="40" />
+      <line x1="180" y1="-40" x2="180" y2="40" />
+      <line x1="240" y1="-40" x2="240" y2="40" />
+    </g>
+    
+    <!-- Projections of entangled particles in 4D spacetime -->
+    <g id="entangled-particles-4d">
+      <!-- Particle pair A - widely separated in 4D -->
+      <circle cx="-200" cy="0" r="10" fill="#ff5599" stroke="#ffffff" stroke-width="1" filter="url(#particle-glow)">
+        <animate attributeName="opacity" values="0.9;1;0.9" dur="3s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="200" cy="0" r="10" fill="#ff5599" stroke="#ffffff" stroke-width="1" filter="url(#particle-glow)">
+        <animate attributeName="opacity" values="1;0.9;1" dur="3s" repeatCount="indefinite" />
+      </circle>
+      
+      <!-- Quantum states visualization -->
+      <g id="quantum-states" opacity="0.8">
+        <path d="M-210,0 C-207,7 -203,10 -200,10 C-197,10 -193,7 -190,0 C-187,-7 -183,-10 -180,-10 C-177,-10 -173,-7 -170,0" fill="none" stroke="#ff5599" stroke-width="1.5" opacity="0.6" />
+        <path d="M170,0 C173,7 177,10 180,10 C183,10 187,7 190,0 C193,-7 197,-10 200,-10 C203,-10 207,-7 210,0" fill="none" stroke="#ff5599" stroke-width="1.5" opacity="0.6" />
+      </g>
+      
+      <!-- "Spooky action" connection -->
+      <path d="M-190,0 C-50,40 50,-40 190,0" fill="none" stroke="#ff5599" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.6" />
+    </g>
+    
+    <!-- Speed of light representation -->
+    <g id="speed-of-light">
+      <!-- Light cone suggestion -->
+      <path d="M-80,0 L-150,-40 M-80,0 L-150,40" stroke="#ffffff" stroke-width="0.8" opacity="0.3" />
+      <path d="M80,0 L150,-40 M80,0 L150,40" stroke="#ffffff" stroke-width="0.8" opacity="0.3" />
+      
+      <!-- Light beam representation -->
+      <line x1="-80" y1="0" x2="80" y2="0" stroke="#ffff00" stroke-width="2" opacity="0.5">
+        <animate attributeName="x2" values="-60;60;-60" dur="2s" repeatCount="indefinite" />
+      </line>
+    </g>
+  </g>
+  
+  <!-- Bell's inequality representation -->
+  <g transform="translate(400, 260)" opacity="0.8">
+    <path d="M-150,-10 L-80,10 L0,-10 L80,10 L150,-10" fill="none" stroke="#00ccff" stroke-width="2" opacity="0.7" />
+    <path d="M-150,10 L-80,-10 L0,10 L80,-10 L150,10" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.4" stroke-dasharray="5,3" />
+    <text x="0" y="30" fill="#ffffff" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" filter="url(#text-glow)">Bell's Inequality Violated</text>
+  </g>
+  
+  <!-- Labels and explanations -->
+  <g font-family="Arial, sans-serif" fill="#ffffff">
+    <!-- Top section labels -->
+    <text x="400" y="90" font-size="16" text-anchor="middle" filter="url(#text-glow)" font-weight="bold">11-Dimensional Space</text>
+    <text x="200" y="120" font-size="12" text-anchor="middle" filter="url(#text-glow)" font-style="italic">Particles adjacent in higher dimensions</text>
+    <text x="600" y="120" font-size="12" text-anchor="middle" filter="url(#text-glow)" font-style="italic">Direct connection through extra dimensions</text>
+    
+    <!-- Middle section label -->
+    <text x="270" y="290" font-size="12" text-anchor="middle" filter="url(#text-glow)" font-style="italic">Dimensional projection</text>
+    <text x="530" y="290" font-size="12" text-anchor="middle" filter="url(#text-glow)" font-style="italic">appears as non-local correlation</text>
+    
+    <!-- Bottom section labels -->
+    <text x="400" y="470" font-size="16" text-anchor="middle" filter="url(#text-glow)" font-weight="bold">4D Spacetime</text>
+    <text x="200" y="420" font-size="12" text-anchor="middle" filter="url(#text-glow)" font-style="italic">"Spooky action at a distance"</text>
+    <text x="600" y="420" font-size="12" text-anchor="middle" filter="url(#text-glow)" font-style="italic">Faster than light correlation</text>
+    
+    <!-- Key equation -->
+    <g transform="translate(130, 220)">
+      <rect x="-80" y="-25" width="160" height="50" rx="10" ry="10" fill="rgba(21, 30, 63, 0.7)" stroke="#6a7cb2" stroke-width="1" />
+      <text x="0" y="-5" font-size="14" text-anchor="middle" filter="url(#text-glow)" font-style="italic">Density Matrix:</text>
+      <text x="0" y="15" font-size="14" text-anchor="middle" filter="url(#text-glow)" font-style="italic">ρ = Σᵢ pᵢ|ψᵢ⟩⟨ψᵢ|</text>
+    </g>
+  </g>
+  
+  <!-- Legend -->
+  <g transform="translate(670, 200)">
+    <rect x="0" y="0" width="110" height="100" fill="rgba(21, 30, 63, 0.8)" stroke="#6a7cb2" stroke-width="1.5" rx="5" ry="5" />
+    <text x="55" y="20" font-family="Arial, sans-serif" font-weight="bold" font-size="12" fill="#ffffff" text-anchor="middle" filter="url(#text-glow)">Legend</text>
+    
+    <circle cx="15" cy="35" r="5" fill="#ff5599" filter="url(#particle-glow)" />
+    <text x="25" y="38" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" dx="5" filter="url(#text-glow)">Entangled particles</text>
+    
+    <circle cx="15" cy="55" r="5" fill="#9932cc" filter="url(#purple-glow)" />
+    <text x="25" y="58" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" dx="5" filter="url(#text-glow)">Spin network nodes</text>
+    
+    <line x1="10" y1="75" x2="20" y2="75" stroke="#9932cc" stroke-width="2" opacity="0.7" />
+    <text x="25" y="78" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" dx="5" filter="url(#text-glow)">Network connections</text>
+    
+    <line x1="10" y1="95" x2="20" y2="95" stroke="#ff5599" stroke-width="1.5" stroke-dasharray="4,2" />
+    <text x="25" y="98" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" dx="5" filter="url(#text-glow)">Entanglement</text>
+  </g>
+</svg>
+ 
 </body>
 </html>
