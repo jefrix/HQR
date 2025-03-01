@@ -69,6 +69,7 @@
             const geometry = new THREE.BufferGeometry();
             const points = [];
             const numPoints = 1000;
+            const colors = [];
 
             for (let i = 0; i < numPoints; i++) {
                 let theta = Math.random() * Math.PI * 2;
@@ -78,10 +79,23 @@
                 let y = r * Math.sin(phi) * Math.sin(theta);
                 let z = r * Math.cos(phi);
                 points.push(x, y, z);
+
+                // Initial colors based on mode
+                if (observerEffect && entropy) {
+                    colors.push(1, 0, 0); // Red (Full Model)
+                } else if (entropy) {
+                    colors.push(1, 0.6, 0); // Orange (Entropy)
+                } else if (observerEffect) {
+                    colors.push(0, 1, 0); // Green (Observer Effects)
+                } else {
+                    colors.push(0, 0.8, 1); // Cyan (Base Projection)
+                }
             }
 
             geometry.setAttribute('position', new THREE.Float32BufferAttribute(points, 3));
-            const material = new THREE.PointsMaterial({ color: 0x00ccff, size: 0.02 });
+            geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+
+            const material = new THREE.PointsMaterial({ vertexColors: true, size: 0.02 });
             const particles = new THREE.Points(geometry, material);
             group.add(particles);
 
@@ -90,7 +104,31 @@
             function animate() {
                 requestAnimationFrame(animate);
                 
-                // Observer effect: Modify rotation dynamically
+                let colorArray = geometry.attributes.color.array;
+                let positionArray = geometry.attributes.position.array;
+
+                for (let i = 0; i < numPoints; i++) {
+                    let index = i * 3;
+
+                    // Observer effect: dynamically shift hues
+                    if (observerEffect) {
+                        colorArray[index] = 0.5 + 0.5 * Math.sin(Date.now() * 0.001);  // Red component shifts
+                        colorArray[index + 1] = 0.5 + 0.5 * Math.cos(Date.now() * 0.001); // Green component shifts
+                    }
+
+                    // Entropy effect: Gradual color change
+                    if (entropy) {
+                        colorArray[index + 2] = Math.abs(Math.sin(Date.now() * 0.0005)); // Blue fades over time
+                        positionArray[index] *= (1 + 0.0003 * Math.sin(Date.now() * 0.0005)); // Expand positions
+                        positionArray[index + 1] *= (1 + 0.0003 * Math.sin(Date.now() * 0.0005));
+                        positionArray[index + 2] *= (1 + 0.0003 * Math.sin(Date.now() * 0.0005));
+                    }
+                }
+
+                geometry.attributes.color.needsUpdate = true;
+                geometry.attributes.position.needsUpdate = true;
+
+                // Rotational effects
                 if (observerEffect) {
                     group.rotation.x += 0.005 * Math.sin(Date.now() * 0.001);
                     group.rotation.y += 0.005 * Math.cos(Date.now() * 0.001);
@@ -98,21 +136,13 @@
                     group.rotation.x += 0.002;
                     group.rotation.y += 0.003;
                 }
-                
-                // Entropy effect: Expand points over time
-                if (entropy) {
-                    geometry.attributes.position.array = geometry.attributes.position.array.map((val, index) => {
-                        return val * (1 + 0.0005 * Math.sin(Date.now() * 0.0005));
-                    });
-                    geometry.attributes.position.needsUpdate = true;
-                }
-                
+
                 renderer.render(scene, camera);
             }
             animate();
         }
 
-        // Create four visualizations
+        // Create four visualizations with different effects
         createScene("canvas1", false, false); // Base Holographic Projection
         createScene("canvas2", true, false);  // Observer Effects
         createScene("canvas3", true, true);   // Entropy Evolution with Observer Effects
