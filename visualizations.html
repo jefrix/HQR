@@ -1050,9 +1050,254 @@
     <text x="35" y="78" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" dx="5" filter="url(#text-glow)">Causal event</text>
   </g>
 </svg>
+ <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Background with gradient -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0c2e" />
+      <stop offset="100%" stop-color="#03071a" />
+    </linearGradient>
+    
+    <!-- Text effects -->
+    <filter id="text-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feFlood flood-color="#ffffff" flood-opacity="0.3" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <!-- Glow effects -->
+    <filter id="blue-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#4080ff" flood-opacity="0.4" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <filter id="purple-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#9370db" flood-opacity="0.4" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <!-- Hidden order gradient -->
+    <radialGradient id="hidden-order-gradient" cx="0.5" cy="0.5" r="0.7">
+      <stop offset="0%" stop-color="#9370db" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#9370db" stop-opacity="0"/>
+    </radialGradient>
+    
+    <!-- Dark matter halo gradient -->
+    <radialGradient id="dark-matter-gradient" cx="0.5" cy="0.5" r="0.9">
+      <stop offset="0%" stop-color="#4080ff" stop-opacity="0.2"/>
+      <stop offset="70%" stop-color="#4080ff" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#4080ff" stop-opacity="0"/>
+    </radialGradient>
+    
+    <!-- Connection patterns -->
+    <pattern id="connection-pattern" patternUnits="userSpaceOnUse" width="60" height="60" patternTransform="scale(0.5)">
+      <path d="M0,30 L60,30 M30,0 L30,60" stroke="#9370db" stroke-width="0.5" opacity="0.2" />
+      <path d="M0,0 L60,60 M0,60 L60,0" stroke="#9370db" stroke-width="0.5" opacity="0.2" />
+    </pattern>
+    
+    <!-- Arrow marker -->
+    <marker id="arrow-white" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ffffff" />
+    </marker>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="800" height="600" fill="url(#bg-gradient)" />
+  
+  <!-- Title -->
+  <text x="400" y="40" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" filter="url(#text-glow)" font-weight="bold">Dark Matter as Hidden Order Projections</text>
+  
+  <!-- 1. Higher Dimensional Hidden Order (Top) -->
+  <g transform="translate(400, 150)">
+    <!-- Hidden order in higher dimensions -->
+    <g id="hidden-order">
+      <!-- Background pattern -->
+      <rect x="-180" y="-80" width="360" height="160" fill="url(#connection-pattern)" />
+      
+      <!-- Higher dimensional structure with connections -->
+      <g opacity="0.9">
+        <!-- Main nodes -->
+        <circle cx="-120" cy="-40" r="8" fill="#9370db" filter="url(#purple-glow)" />
+        <circle cx="-60" cy="20" r="8" fill="#9370db" filter="url(#purple-glow)" />
+        <circle cx="0" cy="-30" r="8" fill="#9370db" filter="url(#purple-glow)" />
+        <circle cx="60" cy="10" r="8" fill="#9370db" filter="url(#purple-glow)" />
+        <circle cx="120" cy="-20" r="8" fill="#9370db" filter="url(#purple-glow)" />
         
+        <!-- Secondary nodes -->
+        <circle cx="-90" cy="30" r="6" fill="#9370db" filter="url(#purple-glow)" opacity="0.7" />
+        <circle cx="-30" cy="-40" r="6" fill="#9370db" filter="url(#purple-glow)" opacity="0.7" />
+        <circle cx="30" cy="40" r="6" fill="#9370db" filter="url(#purple-glow)" opacity="0.7" />
+        <circle cx="90" cy="-50" r="6" fill="#9370db" filter="url(#purple-glow)" opacity="0.7" />
+        
+        <!-- Connections (primary) -->
+        <line x1="-120" y1="-40" x2="-60" y2="20" stroke="#9370db" stroke-width="2" opacity="0.7" />
+        <line x1="-60" y1="20" x2="0" y2="-30" stroke="#9370db" stroke-width="2" opacity="0.7" />
+        <line x1="0" y1="-30" x2="60" y2="10" stroke="#9370db" stroke-width="2" opacity="0.7" />
+        <line x1="60" y1="10" x2="120" y2="-20" stroke="#9370db" stroke-width="2" opacity="0.7" />
+        
+        <!-- Connections (secondary) -->
+        <line x1="-120" y1="-40" x2="-90" y2="30" stroke="#9370db" stroke-width="1" opacity="0.5" />
+        <line x1="-90" y1="30" x2="-30" y2="-40" stroke="#9370db" stroke-width="1" opacity="0.5" />
+        <line x1="-30" y1="-40" x2="30" y2="40" stroke="#9370db" stroke-width="1" opacity="0.5" />
+        <line x1="30" y1="40" x2="90" y2="-50" stroke="#9370db" stroke-width="1" opacity="0.5" />
+        <line x1="90" y1="-50" x2="120" y2="-20" stroke="#9370db" stroke-width="1" opacity="0.5" />
+      </g>
+      
+      <!-- Hidden order field -->
+      <circle cx="0" cy="0" r="150" fill="url(#hidden-order-gradient)" opacity="0.3" />
+    </g>
+    
+    <!-- Equation -->
+    <g transform="translate(0, -100)">
+      <rect x="-130" y="-20" width="260" height="40" rx="10" ry="10" fill="rgba(20, 30, 60, 0.5)" stroke="#9370db" stroke-width="1" opacity="0.8" />
+      <text x="0" y="5" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">ρₐₘ(x) = ∫ Ψ(yⁱ) Φ(xᵘ, yⁱ) d⁷y</text>
+    </g>
+    
+    <!-- Label -->
+    <text x="0" y="100" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle" font-weight="bold">Higher-Dimensional Hidden Order</text>
+  </g>
+  
+  <!-- Projection lines -->
+  <g id="projection-lines" stroke="#ffffff" stroke-width="0.5" opacity="0.2">
+    <line x1="280" y1="150" x2="220" y2="350" />
+    <line x1="340" y1="150" x2="300" y2="350" />
+    <line x1="400" y1="150" x2="400" y2="350" />
+    <line x1="460" y1="150" x2="500" y2="350" />
+    <line x1="520" y1="150" x2="580" y2="350" />
+  </g>
+  
+  <!-- 2. Galaxy with Dark Matter (Bottom) -->
+  <g transform="translate(400, 400)">
+    <!-- Dark matter halo -->
+    <circle cx="0" cy="0" r="180" fill="url(#dark-matter-gradient)" />
+    
+    <!-- Visible galaxy -->
+    <g id="visible-galaxy">
+      <!-- Galaxy core -->
+      <circle cx="0" cy="0" r="15" fill="#ffffff" opacity="0.8" />
+      
+      <!-- Galaxy arms -->
+      <path d="M0,0 C30,-50 70,-70 120,-60 C140,-55 160,-40 170,-20" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.6" />
+      <path d="M0,0 C50,-30 80,-10 100,20 C110,40 105,60 90,80" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.6" />
+      <path d="M0,0 C-30,-50 -70,-70 -120,-60 C-140,-55 -160,-40 -170,-20" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.6" />
+      <path d="M0,0 C-50,-30 -80,-10 -100,20 C-110,40 -105,60 -90,80" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.6" />
+      
+      <!-- Stars along arms -->
+      <g fill="#ffffff" opacity="0.9">
+        <circle cx="40" cy="-30" r="1.5" />
+        <circle cx="80" cy="-50" r="1.5" />
+        <circle cx="110" cy="-55" r="1.5" />
+        <circle cx="140" cy="-50" r="1.5" />
+        <circle cx="160" cy="-35" r="1.5" />
+        
+        <circle cx="40" cy="-15" r="1.5" />
+        <circle cx="60" cy="0" r="1.5" />
+        <circle cx="80" cy="15" r="1.5" />
+        <circle cx="95" cy="35" r="1.5" />
+        <circle cx="100" cy="60" r="1.5" />
+        
+        <circle cx="-40" cy="-30" r="1.5" />
+        <circle cx="-80" cy="-50" r="1.5" />
+        <circle cx="-110" cy="-55" r="1.5" />
+        <circle cx="-140" cy="-50" r="1.5" />
+        <circle cx="-160" cy="-35" r="1.5" />
+        
+        <circle cx="-40" cy="-15" r="1.5" />
+        <circle cx="-60" cy="0" r="1.5" />
+        <circle cx="-80" cy="15" r="1.5" />
+        <circle cx="-95" cy="35" r="1.5" />
+        <circle cx="-100" cy="60" r="1.5" />
+      </g>
+    </g>
+    
+    <!-- Orbital velocity curves -->
+    <g id="rotation-curves" transform="translate(0, 120)">
+      <!-- Axes -->
+      <line x1="-150" y1="0" x2="150" y2="0" stroke="#ffffff" stroke-width="1" opacity="0.7" />
+      <line x1="-150" y1="0" x2="-150" y2="-60" stroke="#ffffff" stroke-width="1" opacity="0.7" />
+      
+      <!-- Labels -->
+      <text x="0" y="20" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">Radius</text>
+      <text x="-170" y="-30" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle" transform="rotate(-90, -170, -30)">Velocity</text>
+      
+      <!-- Expected Newtonian curve -->
+      <path d="M-150,0 C-120,-30 -80,-40 -40,-30 C-20,-25 -10,-20 0,-15 C10,-12 30,-8 60,-5 C100,-3 120,-2 150,-1" fill="none" stroke="#ffffff" stroke-width="1" stroke-dasharray="5,3" opacity="0.6" />
+      <text x="-110" y="-45" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" filter="url(#text-glow)">Expected</text>
+      
+      <!-- Observed flat curve -->
+      <path d="M-150,0 C-120,-30 -80,-40 -40,-30 C-20,-25 -10,-20 0,-15 C10,-15 30,-15 60,-15 C100,-15 120,-15 150,-15" fill="none" stroke="#4080ff" stroke-width="2" opacity="0.8" filter="url(#blue-glow)" />
+      <text x="110" y="-25" font-family="Arial, sans-serif" font-size="10" fill="#ffffff" filter="url(#text-glow)">Observed</text>
+    </g>
+    
+    <!-- Modified rotation curve equation -->
+    <g transform="translate(0, -120)">
+      <rect x="-180" y="-25" width="360" height="50" rx="10" ry="10" fill="rgba(20, 30, 60, 0.5)" stroke="#4080ff" stroke-width="1" opacity="0.8" />
+      <text x="0" y="0" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle">v²(r) = GM(r)/r + (α/r)∫e⁻ᵝ|r-r'| ρₐₘ(r')dr'</text>
+    </g>
+    
+    <!-- Hidden order correlation effects -->
+    <g id="correlation-effects">
+      <!-- Long-range correlations in dark matter distribution -->
+      <line x1="-80" y1="-30" x2="60" y2="10" stroke="#9370db" stroke-width="1" opacity="0.4" stroke-dasharray="3,3" />
+      <line x1="-110" y1="-55" x2="95" y2="35" stroke="#9370db" stroke-width="1" opacity="0.4" stroke-dasharray="3,3" />
+      <line x1="40" y1="-30" x2="-95" y2="35" stroke="#9370db" stroke-width="1" opacity="0.4" stroke-dasharray="3,3" />
+      <line x1="160" y1="-35" x2="-60" y2="0" stroke="#9370db" stroke-width="1" opacity="0.4" stroke-dasharray="3,3" />
+    </g>
+    
+    <!-- Label -->
+    <text x="0" y="180" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle" font-weight="bold">Galactic Rotation Curve from Hidden Order</text>
+  </g>
+  
+  <!-- Explanation arrows and notes -->
+  <g font-family="Arial, sans-serif" fill="#ffffff" filter="url(#text-glow)">
+    <!-- Hidden order to dark matter -->
+    <path d="M400,220 L400,260" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.8" marker-end="url(#arrow-white)" />
+    <text x="410" y="250" font-size="12" text-anchor="left">Projection from higher dimensions</text>
+    
+    <!-- Dark matter distribution note -->
+    <text x="600" y="320" font-size="12" text-anchor="left">Non-local correlations</text>
+    <path d="M590,320 L540,370" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.6" marker-end="url(#arrow-white)" />
+    
+    <!-- Rotation curve note -->
+    <text x="200" y="490" font-size="12" text-anchor="right">Flat rotation curve</text>
+    <path d="M210,490 L250,505" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.6" marker-end="url(#arrow-white)" />
+  </g>
+  
+  <!-- Legend -->
+  <g transform="translate(180, 520)">
+    <rect x="-120" y="-25" width="240" height="80" rx="10" ry="10" fill="rgba(20, 30, 60, 0.7)" stroke="#ffffff" stroke-width="1" opacity="0.7" />
+    <text x="0" y="-5" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle" font-weight="bold">Legend</text>
+    
+    <circle cx="-90" y="15" r="6" fill="#9370db" filter="url(#purple-glow)" />
+    <text x="-75" y="18" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" dx="5">Hidden Order</text>
+    
+    <circle cx="-90" y="40" r="6" fill="#4080ff" filter="url(#blue-glow)" />
+    <text x="-75" y="43" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" dx="5">Dark Matter Effects</text>
+    
+    <circle cx="30" y="15" r="6" fill="#ffffff" opacity="0.8" />
+    <text x="45" y="18" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" dx="5">Visible Matter</text>
+    
+    <line x1="20" y1="40" x2="40" y2="40" stroke="#9370db" stroke-width="1" opacity="0.6" stroke-dasharray="3,3" />
+    <text x="45" y="43" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" dx="5">Correlations</text>
+  </g>
+  
+  <!-- Evidence box -->
+  <g transform="translate(620, 520)">
+    <rect x="-120" y="-25" width="240" height="80" rx="10" ry="10" fill="rgba(20, 30, 60, 0.7)" stroke="#ffffff" stroke-width="1" opacity="0.7" />
+    <text x="0" y="-5" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)" text-anchor="middle" font-weight="bold">Observable Evidence</text>
+    
+    <text x="-110" y="15" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" filter="url(#text-glow)" text-anchor="start">• Flat rotation curves</text>
+    <text x="-110" y="35" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" filter="url(#text-glow)" text-anchor="start">• Gravitational lensing anomalies</text>
+    <text x="-110" y="55" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" filter="url(#text-glow)" text-anchor="start">• Cosmic web structure</text>
+  </g>
+</svg>       
 <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->         
-
+<p></p>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
   <!-- Background with gradient -->
   <defs>
