@@ -48,7 +48,7 @@
     </div>
     <div class="canvas-container">
         <canvas id="canvas3"></canvas>
-        <div class="label">Entropy Evolution with Observer Effects</div>
+        <div class="label">Entropy Evolution</div> <!-- Updated Label -->
     </div>
     <div class="canvas-container">
         <canvas id="canvas4"></canvas>
@@ -84,7 +84,7 @@
                 if (observerEffect && entropy) {
                     colors.push(1, 0, 0); // Red (Full Model)
                 } else if (entropy) {
-                    colors.push(1, 0.6, 0); // Orange (Entropy)
+                    colors.push(1, 0.6, 0); // Orange (Entropy Only)
                 } else if (observerEffect) {
                     colors.push(0, 1, 0); // Green (Observer Effects)
                 } else {
@@ -110,13 +110,13 @@
                 for (let i = 0; i < numPoints; i++) {
                     let index = i * 3;
 
-                    // Observer effect: dynamically shift hues
+                    // Observer effect: dynamically shift hues (EXCLUDED FROM "Entropy Evolution" Visualization)
                     if (observerEffect) {
-                        colorArray[index] = 0.5 + 0.5 * Math.sin(Date.now() * 0.001);  // Red component shifts
-                        colorArray[index + 1] = 0.5 + 0.5 * Math.cos(Date.now() * 0.001); // Green component shifts
+                        colorArray[index] = 0.5 + 0.5 * Math.sin(Date.now() * 0.001);
+                        colorArray[index + 1] = 0.5 + 0.5 * Math.cos(Date.now() * 0.001);
                     }
 
-                    // Entropy effect: Gradual color change
+                    // Entropy effect: Gradual color change (ONLY INCLUDED IN THE RELEVANT VISUALIZATIONS)
                     if (entropy) {
                         colorArray[index + 2] = Math.abs(Math.sin(Date.now() * 0.0005)); // Blue fades over time
                         positionArray[index] *= (1 + 0.0003 * Math.sin(Date.now() * 0.0005)); // Expand positions
@@ -128,7 +128,7 @@
                 geometry.attributes.color.needsUpdate = true;
                 geometry.attributes.position.needsUpdate = true;
 
-                // Rotational effects
+                // Rotational effects (EXCLUDED FROM "Entropy Evolution" Visualization)
                 if (observerEffect) {
                     group.rotation.x += 0.005 * Math.sin(Date.now() * 0.001);
                     group.rotation.y += 0.005 * Math.cos(Date.now() * 0.001);
@@ -142,10 +142,10 @@
             animate();
         }
 
-        // Create four visualizations with different effects
+        // Create four visualizations with correct effects
         createScene("canvas1", false, false); // Base Holographic Projection
         createScene("canvas2", true, false);  // Observer Effects
-        createScene("canvas3", true, true);   // Entropy Evolution with Observer Effects
+        createScene("canvas3", false, true);  // **Entropy Evolution (NO Observer Effects)**
         createScene("canvas4", true, true);   // Full Model: Entropy + Observer Effects
     </script>
 </body>
