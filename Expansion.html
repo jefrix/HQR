@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HQR 11D to 4D Inflationary Expansion</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #151e3f;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        .title {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        label {
+            margin-bottom: 5px;
+        }
+        
+        .slider {
+            width: 200px;
+        }
+        
+        .phase-label {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            color: #00ccff;
+        }
+        
+        .canvas-container {
+            position: relative;
+            width: 100%;
+            flex-grow: 1;
+            max-height: calc(100vh - 200px);
+        }
+        
+        canvas {
+            background-color: #0a0c18;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .equation {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(10, 12, 24, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+        
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            margin-right: 5px;
+            border-radius: 50%;
+        }
+        
+        .button {
+            background-color: #00ccff;
+            color: #0a0c18;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .button:hover {
+            background-color: #00a6cc;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .slider {
+                width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">
+            <h1>HQR Inflationary Expansion: 11D to 4D Transition</h1>
+            <p>Visualizing how higher-dimensional energy drives cosmic inflation</p>
+        </div>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label for="extraDimVolume">Extra Dimension Volume</label>
+                <input type="range" id="extraDimVolume" class="slider" min="1" max="100" value="100">
+            </div>
+            
+            <div class="control-group">
+                <label for="vacuumEnergy">11D Vacuum Energy (Λ₁₁)</label>
+                <input type="range" id="vacuumEnergy" class="slider" min="1" max="100" value="50">
+            </div>
+            
+            <div class="control-group">
+                <label for="animationSpeed">Animation Speed</label>
+                <input type="range" id="animationSpeed" class="slider" min="1" max="100" value="50">
+            </div>
+            
+            <button id="resetButton" class="button">Reset Simulation</button>
+        </div>
+        
+        <div class="phase-label" id="phaseLabel">Pre-Big Bang: 11D Quantum Vacuum</div>
+        
+        <div class="canvas-container">
+            <canvas id="inflationCanvas"></canvas>
+            <div class="equation" id="currentEquation">
+                V_infl = Λ₁₁/V_extra
+            </div>
+        </div>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: white;"></div>
+                <span>4D Spacetime</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #9370db;"></div>
+                <span>Extra Dimensions</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #00ccff;"></div>
+                <span>Vacuum Energy</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #ff6347;"></div>
+                <span>Quantum Fluctuations</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Canvas setup
+        const canvas = document.getElementById("inflationCanvas");
+        const ctx = canvas.getContext("2d");
+        
+        // Control elements
+        const extraDimVolumeSlider = document.getElementById("extraDimVolume");
+        const vacuumEnergySlider = document.getElementById("vacuumEnergy");
+        const animationSpeedSlider = document.getElementById("animationSpeed");
+        const resetButton = document.getElementById("resetButton");
+        const phaseLabel = document.getElementById("phaseLabel");
+        const equationDisplay = document.getElementById("currentEquation");
+        
+        // Simulation parameters
+        let expansionFactor = 1;           // Size of the 4D universe
+        let extraDimSize = 100;            // Size of extra dimensions (will shrink)
+        let vacuumEnergy = 50;             // 11D vacuum energy
+        let animationSpeed = 0.03;         // Speed of the animation
+        let time = 0;                      // Simulation time
+        let inflatonPhase = 0;             // Phase of the inflaton field
+        let particleSystem = [];           // Particles for visualization
+        let extraDimParticles = [];        // Particles representing extra dimensions
+        let compactificationComplete = false; // Flag for phase transition
+        
+        // Simulation phases
+        const PHASES = {
+            PRE_BIG_BANG: "Pre-Big Bang: 11D Quantum Vacuum",
+            COMPACTIFICATION: "Dimensional Collapse: 7D → Compact",
+            INFLATION: "Inflation: Rapid 4D Expansion",
+            POST_INFLATION: "Post-Inflation: 4D Universe + Compact 7D"
+        };
+        
+        let currentPhase = PHASES.PRE_BIG_BANG;
+        
+        // Resize canvas to fit container
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+            
+            // Recalculate dimensions
+            maxSize = Math.min(canvas.width, canvas.height) * 0.4;
+        }
+        
+        // Initialize the simulation
+        function initialize() {
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            
+            // Read initial values from sliders
+            updateFromSliders();
+            
+            // Setup event listeners
+            extraDimVolumeSlider.addEventListener('input', updateFromSliders);
+            vacuumEnergySlider.addEventListener('input', updateFromSliders);
+            animationSpeedSlider.addEventListener('input', updateFromSliders);
+            resetButton.addEventListener('click', resetSimulation);
+            
+            // Initialize particles
+            createParticles();
+            
+            // Start animation
+            animate();
+        }
+        
+        // Update simulation parameters from sliders
+        function updateFromSliders() {
+            extraDimSize = parseFloat(extraDimVolumeSlider.value);
+            vacuumEnergy = parseFloat(vacuumEnergySlider.value);
+            animationSpeed = parseFloat(animationSpeedSlider.value) / 1000;
+            
+            if (compactificationComplete) {
+                // When in inflation phase, manual changes to extra dimensions have less effect
+                extraDimSize = Math.min(extraDimSize, 20);
+                extraDimVolumeSlider.value = extraDimSize;
+            }
+        }
+        
+        // Create particle system for visualization
+        function createParticles() {
+            particleSystem = [];
+            extraDimParticles = [];
+            
+            // Create particles for 4D space
+            for (let i = 0; i < 300; i++) {
+                particleSystem.push({
+                    angle: Math.random() * Math.PI * 2,
+                    radius: Math.random() * expansionFactor,
+                    size: Math.random() * 2 + 1,
+                    color: `rgba(255, 255, 255, ${Math.random() * 0.5 + 0.3})`,
+                    originalRadius: Math.random() * expansionFactor
+                });
+            }
+            
+            // Create particles for extra dimensions
+            for (let i = 0; i < 200; i++) {
+                extraDimParticles.push({
+                    angle: Math.random() * Math.PI * 2,
+                    radius: Math.random() * extraDimSize + maxSize * 0.5,
+                    size: Math.random() * 3 + 2,
+                    color: `rgba(147, 112, 219, ${Math.random() * 0.7 + 0.3})`, // Purple for extra dimensions
+                    speed: Math.random() * 0.5 + 0.5
+                });
+            }
+        }
+        
+        // Reset simulation to initial state
+        function resetSimulation() {
+            expansionFactor = 1;
+            time = 0;
+            compactificationComplete = false;
+            currentPhase = PHASES.PRE_BIG_BANG;
+            updatePhaseLabel();
+            createParticles();
+        }
+        
+        // Update phase label and equation display
+        function updatePhaseLabel() {
+            phaseLabel.textContent = currentPhase;
+            
+            // Update the equation displayed based on current phase
+            if (currentPhase === PHASES.PRE_BIG_BANG) {
+                equationDisplay.innerHTML = "Pre-Big Bang State: ds² = g<sub>MN</sub> dx<sup>M</sup> dx<sup>N</sup>";
+            } else if (currentPhase === PHASES.COMPACTIFICATION) {
+                equationDisplay.innerHTML = "Dimensional Collapse: S = ∫d<sup>11</sup>x √(-g)(R - ½|∂φ|² - V(φ))";
+            } else if (currentPhase === PHASES.INFLATION) {
+                equationDisplay.innerHTML = "V<sub>infl</sub> = Λ<sub>11</sub>/V<sub>extra</sub> = " + 
+                                           (vacuumEnergy / (extraDimSize/100)).toFixed(2);
+            } else {
+                equationDisplay.innerHTML = "H² = 8πG/3 (½φ̇² + V<sub>infl</sub>)";
+            }
+        }
+        
+        // Main animation loop
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Update time
+            time += animationSpeed * 10;
+            
+            // Center of canvas
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            
+            // Update phase based on time
+            updatePhase();
+            
+            // Draw extra dimensions (purple particles that will shrink)
+            drawExtraDimensions(centerX, centerY);
+            
+            // Draw 4D spacetime (white expanding circle)
+            drawSpacetime(centerX, centerY);
+            
+            // Draw vacuum energy transfer (blue particles)
+            drawVacuumEnergy(centerX, centerY);
+            
+            // Draw quantum fluctuations in inflaton field
+            drawQuantumFluctuations(centerX, centerY);
+            
+            // Request next frame
+            requestAnimationFrame(animate);
+        }
+        
+        // Update simulation phase based on time and parameters
+        function updatePhase() {
+            // Phase transition logic
+            if (time < 30) {
+                currentPhase = PHASES.PRE_BIG_BANG;
+            } else if (time < 60) {
+                currentPhase = PHASES.COMPACTIFICATION;
+                // During compactification, extra dimensions begin to shrink
+                if (extraDimSize > 20) {
+                    extraDimSize -= 0.5;
+                    extraDimVolumeSlider.value = extraDimSize;
+                }
+            } else if (time < 120) {
+                currentPhase = PHASES.INFLATION;
+                compactificationComplete = true;
+                
+                // During inflation, calculate expansion based on energy transfer
+                const inflationRate = (vacuumEnergy / extraDimSize) * 0.1;
+                expansionFactor *= (1 + inflationRate * animationSpeed);
+                
+                // Continue reducing extra dimensions but more slowly
+                if (extraDimSize > 10) {
+                    extraDimSize -= 0.1;
+                    extraDimVolumeSlider.value = extraDimSize;
+                }
+            } else {
+                currentPhase = PHASES.POST_INFLATION;
+                
+                // Slow expansion after inflation
+                expansionFactor *= (1 + 0.001 * animationSpeed);
+            }
+            
+            // Cap expansion at maximum size
+            expansionFactor = Math.min(expansionFactor, maxSize);
+            
+            // Update display
+            updatePhaseLabel();
+        }
+        
+        // Draw extra dimensions (purple particles)
+        function drawExtraDimensions(centerX, centerY) {
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            
+            // Update and draw extra dimension particles
+            for (let particle of extraDimParticles) {
+                // Shrink radius during compactification
+                if (currentPhase !== PHASES.PRE_BIG_BANG) {
+                    particle.radius *= 0.995;
+                    if (particle.radius < expansionFactor * 1.2) {
+                        particle.radius = expansionFactor * 1.2 + Math.random() * 10;
+                    }
+                }
+                
+                // Rotate around center
+                particle.angle += particle.speed * 0.01;
+                
+                // Calculate position
+                const x = Math.cos(particle.angle) * particle.radius;
+                const y = Math.sin(particle.angle) * particle.radius;
+                
+                // Draw particle
+                ctx.beginPath();
+                ctx.arc(x, y, particle.size, 0, Math.PI * 2);
+                ctx.fillStyle = particle.color;
+                ctx.fill();
+            }
+            
+            ctx.restore();
+        }
+        
+        // Draw 4D spacetime (expanding white circle)
+        function drawSpacetime(centerX, centerY) {
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            
+            // Draw expanding universe boundary
+            ctx.beginPath();
+            ctx.arc(0, 0, expansionFactor, 0, Math.PI * 2);
+            ctx.strokeStyle = "white";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            // Draw particles inside the 4D universe
+            for (let particle of particleSystem) {
+                // Scale particle positions with expansion
+                const scaleFactor = expansionFactor / Math.max(1, particle.originalRadius);
+                particle.radius = particle.originalRadius * scaleFactor;
+                
+                // Calculate position
+                const x = Math.cos(particle.angle) * particle.radius;
+                const y = Math.sin(particle.angle) * particle.radius;
+                
+                // Only draw if inside the universe
+                if (particle.radius <= expansionFactor) {
+                    ctx.beginPath();
+                    ctx.arc(x, y, particle.size, 0, Math.PI * 2);
+                    ctx.fillStyle = particle.color;
+                    ctx.fill();
+                }
+            }
+            
+            ctx.restore();
+        }
+        
+        // Draw vacuum energy transfer (blue particles flowing from extra dims to 4D)
+        function drawVacuumEnergy(centerX, centerY) {
+            if (currentPhase === PHASES.COMPACTIFICATION || currentPhase === PHASES.INFLATION) {
+                ctx.save();
+                ctx.translate(centerX, centerY);
+                
+                // Number of energy particles based on vacuum energy
+                const particleCount = Math.floor(vacuumEnergy / 10) + 5;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    // Calculate starting position (outside the 4D universe)
+                    const angle = (time * 0.1 + i * (Math.PI * 2 / particleCount)) % (Math.PI * 2);
+                    const outerRadius = expansionFactor * 1.5 + Math.random() * 20;
+                    const innerRadius = expansionFactor * Math.random() * 0.9;
+                    
+                    const x1 = Math.cos(angle) * outerRadius;
+                    const y1 = Math.sin(angle) * outerRadius;
+                    const x2 = Math.cos(angle) * innerRadius;
+                    const y2 = Math.sin(angle) * innerRadius;
+                    
+                    // Draw energy transfer line
+                    ctx.beginPath();
+                    ctx.moveTo(x1, y1);
+                    ctx.lineTo(x2, y2);
+                    ctx.strokeStyle = `rgba(0, 204, 255, ${Math.random() * 0.3 + 0.3})`;
+                    ctx.lineWidth = Math.random() * 2 + 1;
+                    ctx.stroke();
+                    
+                    // Draw energy particle
+                    ctx.beginPath();
+                    ctx.arc(x2, y2, Math.random() * 3 + 2, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(0, 204, 255, ${Math.random() * 0.5 + 0.5})`;
+                    ctx.fill();
+                }
+                
+                ctx.restore();
+            }
+        }
+        
+        // Draw quantum fluctuations in inflaton field (red wavey patterns)
+        function drawQuantumFluctuations(centerX, centerY) {
+            if (currentPhase === PHASES.INFLATION || currentPhase === PHASES.POST_INFLATION) {
+                ctx.save();
+                ctx.translate(centerX, centerY);
+                
+                // Update inflaton phase
+                inflatonPhase += 0.05;
+                
+                // Draw fluctuation waves
+                ctx.beginPath();
+                for (let angle = 0; angle < Math.PI * 2; angle += 0.1) {
+                    const fluctuation = Math.sin(angle * 6 + inflatonPhase) * 5;
+                    const radius = expansionFactor + fluctuation;
+                    const x = Math.cos(angle) * radius;
+                    const y = Math.sin(angle) * radius;
+                    
+                    if (angle === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+                ctx.closePath();
+                ctx.strokeStyle = "rgba(255, 99, 71, 0.7)"; // Tomato red
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                
+                // Draw fluctuation particles
+                for (let i = 0; i < 20; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const fluctuation = Math.sin(angle * 6 + inflatonPhase) * 5;
+                    const radius = expansionFactor + fluctuation;
+                    const x = Math.cos(angle) * radius;
+                    const y = Math.sin(angle) * radius;
+                    
+                    ctx.beginPath();
+                    ctx.arc(x, y, Math.random() * 2 + 1, 0, Math.PI * 2);
+                    ctx.fillStyle = "rgba(255, 99, 71, 0.8)";
+                    ctx.fill();
+                }
+                
+                ctx.restore();
+            }
+        }
+        
+        // Maximum size based on canvas
+        let maxSize = Math.min(window.innerWidth, window.innerHeight) * 0.4;
+        
+        // Initialize on load
+        window.onload = initialize;
+    </script>
+</body>
+</html>
