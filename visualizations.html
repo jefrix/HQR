@@ -282,36 +282,7 @@
             </div>
         </div>
         
-        <div class="visualization-section" data-animation-delay="300">
-            <h2>Key Equations of HQR</h2>
-            
-            <div class="equation-container">
-                <div class="equation-card">
-                    <div class="equation-title">M-Theory Metric</div>
-                    <div class="equation">ds² = g<sub>μν</sub>dx<sup>μ</sup>dx<sup>ν</sup>, μ,ν = 0,1,...,10</div>
-                    <div class="equation-description">Describes spacetime in 11 dimensions, where the extra dimensions are compactified at scales too small to observe directly.</div>
-                </div>
-                
-                <div class="equation-card">
-                    <div class="equation-title">Bohmian Mechanics Guiding Equation</div>
-                    <div class="equation">dx/dt = ∇S/m</div>
-                    <div class="equation">Where Ψ = Re<sup>iS/ℏ</sup></div>
-                    <div class="equation-description">Determines particle trajectories from the wave function, providing a deterministic interpretation of quantum mechanics.</div>
-                </div>
-                
-                <div class="equation-card">
-                    <div class="equation-title">Hidden Order Correlation</div>
-                    <div class="equation">⟨O(x)O(y)⟩</div>
-                    <div class="equation-description">Measures subtle, long-range quantum correlations in many-body systems, potentially arising from higher-dimensional dynamics.</div>
-                </div>
-                
-                <div class="equation-card">
-                    <div class="equation-title">AdS/CFT Correspondence</div>
-                    <div class="equation">Z<sub>CFT</sub> = ∫Dϕe<sup>-S<sub>bulk</sub>[ϕ]</sup></div>
-                    <div class="equation-description">Links boundary conformal field theory to bulk anti-de Sitter gravity, supporting the holographic principle in HQR.</div>
-                </div>
-            </div>
-        </div>
+
 <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX --> 
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
@@ -509,6 +480,108 @@
     <text x="35" y="100" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" dx="5" filter="url(#text-glow)">Trajectories</text>
   </g>
 </svg>
+
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->    
+ 
+    
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #151e3f;
+            color: #e0e0e0;
+        }
+        canvas {
+            background: black;
+            display: block;
+            margin: 20px auto;
+        }
+        .controls {
+            margin: 20px;
+        }
+        .slider {
+            width: 300px;
+        }
+    </style>
+
+    <h1>Gravitational Lensing: General Relativity vs. HQR</h1>
+    <p>Red: HQR Prediction | Blue: General Relativity</p>
+    
+    <div class="controls">
+        <label>Lens Mass:</label>
+        <input type="range" id="massSlider" class="slider" min="5000" max="20000" value="10000">
+        <span id="massValue">10000</span>
+    </div>
+
+    <canvas id="lensingCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById("lensingCanvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = 600;
+        canvas.height = 400;
+
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const lensRadius = 40;
+        const numLightRays = 20;
+        let massFactor = 10000; // Default mass factor
+
+        document.getElementById("massSlider").addEventListener("input", function() {
+            massFactor = this.value;
+            document.getElementById("massValue").innerText = this.value;
+            render();
+        });
+        
+        function drawLens() {
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, lensRadius, 0, Math.PI * 2);
+            ctx.fillStyle = "white";
+            ctx.fill();
+        }
+        
+        function drawLightPaths() {
+            for (let i = -numLightRays / 2; i < numLightRays / 2; i++) {
+                let startX = 50;
+                let startY = centerY + i * 8;
+                let endX = canvas.width - 50;
+                let endY = centerY + i * 8;
+
+                // GR Bending (blue)
+                ctx.beginPath();
+                ctx.moveTo(startX, startY);
+                for (let x = startX; x < endX; x += 10) {
+                    let curveFactor = massFactor / (Math.abs(x - centerX) + 100);
+                    let y = startY + curveFactor * (startY > centerY ? 1 : -1);
+                    ctx.lineTo(x, y);
+                }
+                ctx.strokeStyle = "blue";
+                ctx.stroke();
+
+                // HQR Bending (red, more deviation)
+                ctx.beginPath();
+                ctx.moveTo(startX, startY);
+                for (let x = startX; x < endX; x += 10) {
+                    let curveFactor = (massFactor * 1.2) / (Math.abs(x - centerX) + 100);
+                    let y = startY + curveFactor * (startY > centerY ? 1.1 : -1.1);
+                    ctx.lineTo(x, y);
+                }
+                ctx.strokeStyle = "red";
+                ctx.stroke();
+            }
+        }
+        
+        function render() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawLens();
+            drawLightPaths();
+        }
+
+        render();
+    </script>
+</body>
+</html>
+
 <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->         
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
@@ -1513,7 +1586,7 @@
     <text x="-50" y="44" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" filter="url(#text-glow)" dx="5">Quantum Geometry</text>
   </g>
 </svg>
-        
+<p></p>        
 <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->      
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
@@ -1883,5 +1956,6 @@
             }
         }, 2000);
     </script>
+    
 </body>
 </html>
