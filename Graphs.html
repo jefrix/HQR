@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holonomic Quantum Reality Equations</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        h1 {
+            color: #0d47a1;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #1565c0;
+            margin-top: 30px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .equation-section {
+            background-color: white;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .equation-container {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+        .latex-equation {
+            font-style: italic;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 18px;
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        .simplified-form {
+            font-style: italic;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .description {
+            margin: 15px 0;
+            line-height: 1.8;
+        }
+        .graph-container {
+            width: 100%;
+            height: 400px;
+            margin: 20px 0;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            font-size: 14px;
+            color: #666;
+        }
+        .constants-note {
+            margin-top: 40px;
+            padding: 15px;
+            background-color: #e3f2fd;
+            border-left: 5px solid #1565c0;
+            border-radius: 4px;
+        }
+        .math-symbol {
+            font-family: 'Times New Roman', Times, serif;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Holonomic Quantum Reality</h1>
+        <p>Visualizing the Simplified Unified Equations</p>
+    </header>
+
+    <div class="equation-section">
+        <h2>1. Initial Unified Equation in 4D</h2>
+        <div class="equation-container">
+            <div class="latex-equation">
+                R<sub>μν</sub> - (1/2)Rg<sub>μν</sub> = 8πG[1/(4G̅ħ)(δA<sub>proj</sub>/δg<sup>μν</sup>) - (δ/δg<sup>μν</sup>)Tr(ρlog⁡ρ)]
+            </div>
+            <div class="simplified-form">
+                Simplified Form: R(t) ~ (4πA<sub>0</sub>t)/ħ
+            </div>
+            <div class="description">
+                <p>This plot shows a linear increase in spacetime curvature (R(t)) over time, reflecting the holographic contribution from the growing boundary area A<sub>proj</sub>. In HQR, this illustrates how the universe's expansion, driven by higher-dimensional projections, increases curvature in 4D.</p>
+            </div>
+            <div class="graph-container">
+                <canvas id="graph1"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="equation-section">
+        <h2>2. Extended Unified Equation in 11D</h2>
+        <div class="equation-container">
+            <div class="latex-equation">
+                G<sup>11D</sup><sub>μν</sub> + Λg<sup>11D</sup><sub>μν</sub> = 8πG<sup>11D</sup>[1/(4G<sup>11D</sup>ħ)(δA<sub>proj</sub>/δg<sup>μν</sup><sub>11D</sub>) - (δ/δg<sup>μν</sup><sub>11D</sub>)Tr(ρ<sub>11D</sub>log⁡ρ<sub>11D</sub>)]
+            </div>
+            <div class="simplified-form">
+                Simplified Form: Effective energy density ρ<sup>11D</sup><sub>eff</sub>(t) = (A<sub>0</sub>t)/(2G<sup>11D</sup>ħ)
+            </div>
+            <div class="description">
+                <p>The plot shows a linear increase in the effective energy density in 11D, driven by the holographic term. In HQR, this reflects how the growth of a higher-dimensional boundary area contributes to the energy content affecting 11D spacetime curvature.</p>
+            </div>
+            <div class="graph-container">
+                <canvas id="graph2"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="equation-section">
+        <h2>3. Quantum Stress Tensor in 11D</h2>
+        <div class="equation-container">
+            <div class="latex-equation">
+                Q<sub>μν</sub> = 1/(4G<sup>11D</sup>ħ)(δA<sub>proj</sub>/δg<sup>μν</sup><sub>11D</sub>) - (δ/δg<sup>μν</sup><sub>11D</sub>)Tr(ρ<sub>11D</sub>log⁡ρ<sub>11D</sub>)
+            </div>
+            <div class="simplified-form">
+                Simplified Form: Scalar stress-energy Q(t) = (A<sub>0</sub>t)/(2G<sup>11D</sup>ħ)
+            </div>
+            <div class="description">
+                <p>This plot is identical to Equation 2, showing a linear increase in the scalar component of the quantum stress tensor. In HQR, this confirms that the quantum stress tensor sources 11D curvature through holographic projections, with entanglement as a constant offset.</p>
+            </div>
+            <div class="graph-container">
+                <canvas id="graph3"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="equation-section">
+        <h2>4. Approximated Entanglement Entropy Evolution in 11D</h2>
+        <div class="equation-container">
+            <div class="latex-equation">
+                d/dt(-Tr(ρ<sub>11D</sub>log⁡ρ<sub>11D</sub>)) ≈ -1/τ(A<sub>proj</sub>/(4G<sup>11D</sup>ħ) - Tr(ρ<sub>11D</sub>log⁡ρ<sub>11D</sub>)) + ξ(-Tr(ρ<sub>11D</sub>log⁡ρ<sub>11D</sub>))
+            </div>
+            <div class="simplified-form">
+                Simplified Form: S<sub>e</sub>(t) ~ S<sub>0</sub> + (A<sub>0</sub>t<sup>2</sup>)/(4G<sup>11D</sup>ħ)
+            </div>
+            <div class="description">
+                <p>The plot shows a parabolic increase in entanglement entropy over time, starting from an initial value S<sub>0</sub>. In HQR, this illustrates how quantum correlations in 11D grow with the holographic entropy, moderated by hidden-order effects, potentially stabilizing black hole entropy.</p>
+            </div>
+            <div class="graph-container">
+                <canvas id="graph4"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="equation-section">
+        <h2>5. Time-Dependent Unified Field Equation in 11D</h2>
+        <div class="equation-container">
+            <div class="latex-equation">
+                G<sup>11D</sup><sub>μν</sub>(t) + Λg<sup>11D</sup><sub>μν</sub>(t) = 8πG<sup>11D</sup>T<sup>info,11D</sup><sub>μν</sub>(t)<br>
+                T<sup>info,11D</sup><sub>μν</sub>(t) = (δ/δg<sup>μν</sup><sub>11D</sub>(t))(A<sub>proj</sub>(t)/(4G<sup>11D</sup>ħ) - Tr(ρ<sub>11D</sub>(t)log⁡ρ<sub>11D</sub>(t)))
+            </div>
+            <div class="simplified-form">
+                Simplified Form: Effective energy density T(t) ~ (A<sub>0</sub>t)/(2G<sup>11D</sup>ħ) - (δS<sub>e</sub>/δt)
+            </div>
+            <div class="description">
+                <p>Due to the simplified cancellation, the plot is approximately flat at 0, but if we adjust parameters (e.g., ξ ≠ 1/τ), T(t) would show a modified linear trend. In HQR, this reflects the dynamic balance between holographic growth and entanglement evolution in 11D.</p>
+            </div>
+            <div class="graph-container">
+                <canvas id="graph5"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="equation-section">
+        <h2>6. Holographic Stress-Energy Tensor</h2>
+        <div class="equation-container">
+            <div class="latex-equation">
+                T<sup>info,11D</sup><sub>μν</sub>(t) ~ δS<sub>bulk</sub>[Φ(t)]/δg<sup>μν</sup><sub>11D</sub>(t)
+            </div>
+            <div class="simplified-form">
+                Simplified Form: T(t) ~ (A<sub>0</sub>t)/(2G<sup>11D</sup>ħ)
+            </div>
+            <div class="description">
+                <p>The plot is identical to Equations 2 and 3, showing a linear increase. In HQR, this reinforces the holographic origin of the stress-energy tensor, connecting bulk dynamics to boundary effects via AdS/CFT.</p>
+            </div>
+            <div class="graph-container">
+                <canvas id="graph6"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="equation-section">
+        <h2>7. Projected Time-Dependent Unified Equation in 4D</h2>
+        <div class="equation-container">
+            <div class="latex-equation">
+                R<sub>μν</sub>(t) - (1/2)R(t)g<sub>μν</sub>(t) = 8πGT<sup>info</sup><sub>μν</sub>(t)<br>
+                T<sup>info</sup><sub>μν</sub>(t) = (δ/δg<sup>μν</sup>(t))(A<sub>proj</sub>(t)/(4Għ) - Tr(ρ(t)log⁡ρ(t)))
+            </div>
+            <div class="simplified-form">
+                Simplified Form: R(t) ~ 8πG((A<sub>0</sub>t)/(2Għ) - (δS<sub>e</sub>/δt))
+            </div>
+            <div class="description">
+                <p>The plot is flat at 0a due to the same cancellation as Equation 5, but with adjusted parameters, it would show a modified linear trend. In HQR, this shows how 4D curvature evolves as a projection of 11D dynamics, balancing holographic and entanglement effects.</p>
+            </div>
+            <div class="graph-container">
+                <canvas id="graph7"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="constants-note">
+        <h3>Notes on Simplifications</h3>
+        <p><strong>Constants:</strong> For simplicity, we set A<sub>0</sub> = 1, ħ = 1, G = 1, G<sup>11D</sup> = 1, and adjusted other parameters to make the trends clear. In a real model, these would depend on physical scales (e.g., Planck scale, compactification radius).</p>
+        <p><strong>Flat Graphs:</strong> Equations 5 and 7 appear flat due to the simplified cancellation, but in a full model with ξ ≠ 1/τ, they would show dynamic trends reflecting the interplay of holographic and entanglement terms.</p>
+        <p><strong>Context:</strong> These graphs are qualitative representations to illustrate the trends (linear, quadratic) predicted by HQR's equations, focusing on how holographic projections and entanglement influence curvature and energy over time.</p>
+    </div>
+
+    <footer>
+        <p>Holonomic Quantum Reality (HQR) - A Unified Theory of Physics, Consciousness, and Hyperdimensional Order</p>
+        <p>&copy; Jeff Ricks</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const equations = [
+                { id: 'graph1', label: 'Ricci Scalar in 4D', equation: t => (4 * Math.PI * 1 / 1) * t },
+                { id: 'graph2', label: 'Effective Energy Density in 11D', equation: t => (1 * t) / (2 * 1 * 1) },
+                { id: 'graph3', label: 'Quantum Stress Tensor in 11D', equation: t => (1 * t) / (2 * 1 * 1) },
+                { id: 'graph4', label: 'Entanglement Entropy Evolution in 11D', equation: t => 1 + (1 * t ** 2) / (4 * 1 * 1) },
+                { id: 'graph5', label: 'Time-Dependent Unified Field Equation in 11D', equation: t => (1 * t) / (2 * 1 * 1) - ((1 * t) / (2 * 1 * 1)) },
+                { id: 'graph6', label: 'Holographic Stress-Energy Tensor', equation: t => (1 * t) / (2 * 1 * 1) },
+                { id: 'graph7', label: 'Projected Unified Equation in 4D', equation: t => 8 * Math.PI * 1 * ((1 * t) / (2 * 1 * 1) - ((1 * t) / (2 * 1 * 1))) }
+            ];
+            
+            equations.forEach(({ id, label, equation }) => {
+                const ctx = document.getElementById(id).getContext('2d');
+                const tValues = Array.from({ length: 100 }, (_, i) => i / 10);
+                const yValues = tValues.map(equation);
+                
+                // Create the chart
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: tValues,
+                        datasets: [{
+                            label,
+                            data: yValues.map((y, i) => ({x: tValues[i], y})),
+                            borderColor: 'rgb(75, 192, 192)',
+                            backgroundColor: 'rgba(75, 192, 192, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: { 
+                                title: { 
+                                    display: true, 
+                                    text: 'Time (t)',
+                                    font: {
+                                        weight: 'bold'
+                                    }
+                                }
+                            },
+                            y: { 
+                                title: { 
+                                    display: true, 
+                                    text: label,
+                                    font: {
+                                        weight: 'bold'
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                                titleFont: {
+                                    size: 14
+                                },
+                                bodyFont: {
+                                    size: 14
+                                },
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.dataset.label}: ${context.parsed.y.toFixed(3)}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
