@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HQR Black Hole Model</title>
+
+    <!-- Load Required Libraries -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
+
+    <!-- Load HQR Black Hole Model Script -->
+    <script type="text/babel" src="hqr-blackhole.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0d1117;
+            color: #e0e0e0;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #ffcc00;
+        }
+        canvas {
+            display: block;
+            margin: 20px auto;
+            border: 2px solid #ffcc00;
+            background-color: black;
+        }
+        .error-message {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>HQR Black Hole Model</h1>
+    <p>Visualizing the black hole event horizon and quantum effects in HQR theory.</p>
+
+    <div id="blackhole-container">
+        <p class="error-message" id="error-message" style="display: none;">
+            Could not load the visualization. Please ensure JavaScript is enabled.
+        </p>
+    </div>
+
+    <script>
+        window.addEventListener('error', function() {
+            document.getElementById('error-message').style.display = 'block';
+        });
+    </script>
+
+</body>
+</html>
