@@ -1,205 +1,159 @@
-<div class="equation-section">
-        <h2>6. Holographic Stress-Energy Tensor</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holonomic Quantum Reality Equations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            background-color: #f1f8ff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        h1 {
+            color: #0d47a1;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #1565c0;
+            margin-top: 30px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            font-weight: 600;
+        }
+        .equation-section {
+            background-color: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+        .equation-section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .equation-container {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+        .latex-equation {
+            font-style: italic;
+            font-family: 'Merriweather', 'Times New Roman', Times, serif;
+            font-size: 18px;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-radius: 6px;
+            overflow-x: auto;
+            border-left: 4px solid #1565c0;
+        }
+        .simplified-form {
+            font-style: italic;
+            font-weight: bold;
+            margin: 15px 0;
+            color: #0d47a1;
+            font-family: 'Merriweather', 'Times New Roman', Times, serif;
+        }
+        .description {
+            margin: 15px 0;
+            line-height: 1.8;
+        }
+        .svg-container {
+            width: 100%;
+            height: 400px;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background-color: #fff;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            border-top: 1px solid #ddd;
+            font-size: 14px;
+            color: #666;
+            background-color: #f1f8ff;
+            border-radius: 8px;
+        }
+        .constants-note {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #e3f2fd;
+            border-left: 5px solid #1565c0;
+            border-radius: 6px;
+        }
+        .math-symbol {
+            font-family: 'Merriweather', 'Times New Roman', Times, serif;
+            font-style: italic;
+        }
+        .subtitle {
+            color: #455a64;
+            font-size: 1.1em;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Holonomic Quantum Reality</h1>
+        <p class="subtitle">A Unified Theory of Physics, Consciousness, and Hyperdimensional Order</p>
+    </header>
+
+    <div class="equation-section">
+        <h2>1. Initial Unified Equation in 4D</h2>
         <div class="equation-container">
             <div class="latex-equation">
-                T<sup>info,11D</sup><sub>μν</sub>(t) ~ δS<sub>bulk</sub>[Φ(t)]/δg<sup>μν</sup><sub>11D</sub>(t)
+                R<sub>μν</sub> - (1/2)Rg<sub>μν</sub> = 8πG[1/(4G̅ħ)(δA<sub>proj</sub>/δg<sup>μν</sup>) - (δ/δg<sup>μν</sup>)Tr(ρlog⁡ρ)]
             </div>
             <div class="simplified-form">
-                Simplified Form: T(t) ~ (A<sub>0</sub>t)/(2G<sup>11D</sup>ħ)
+                Simplified Form: R(t) ~ (4πA<sub>0</sub>t)/ħ
             </div>
             <div class="description">
-                <p>The Holographic Stress-Energy Tensor demonstrates multi-scale behavior with several overlapping periodic components. This visualization reveals how information flows across dimensional boundaries at different scales, with shorter wavelength oscillations corresponding to quantum-scale effects and longer wavelength patterns representing cosmological-scale phenomena. The linear trend represents the overall expansion of information content as the universe evolves.</p>
+                <p>The Ricci scalar R(t) shows a linear increase over time, reflecting the holographic contribution from the growing boundary area A<sub>proj</sub>. Unlike classical general relativity, quantum fluctuations create subtle variations around this linear trend, indicating the influence of hidden order from higher dimensions on spacetime curvature. These fluctuations represent the projection of deterministic 11D dynamics onto our 4D universe.</p>
             </div>
-            <div class="svg-container">
-                <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Axes -->
-                    <line x1="50" y1="350" x2="750" y2="350" stroke="black" stroke-width="2"/>
-                    <line x1="50" y1="50" x2="50" y2="350" stroke="black" stroke-width="2"/>
-                    
-                    <!-- Axis labels -->
-                    <text x="400" y="390" text-anchor="middle" font-size="16">Time (t)</text>
-                    <text x="20" y="200" text-anchor="middle" font-size="16" transform="rotate(-90, 20, 200)">Holographic Tensor T(t)</text>
-                    
-                    <!-- X-axis ticks -->
-                    <line x1="50" y1="350" x2="50" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="50" y="375" text-anchor="middle" font-size="14">0</text>
-                    <line x1="190" y1="350" x2="190" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="190" y="375" text-anchor="middle" font-size="14">2</text>
-                    <line x1="330" y1="350" x2="330" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="330" y="375" text-anchor="middle" font-size="14">4</text>
-                    <line x1="470" y1="350" x2="470" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="470" y="375" text-anchor="middle" font-size="14">6</text>
-                    <line x1="610" y1="350" x2="610" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="610" y="375" text-anchor="middle" font-size="14">8</text>
-                    <line x1="750" y1="350" x2="750" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="750" y="375" text-anchor="middle" font-size="14">10</text>
-                    
-                    <!-- Y-axis ticks -->
-                    <line x1="45" y1="350" x2="50" y2="350" stroke="black" stroke-width="2"/>
-                    <text x="35" y="355" text-anchor="end" font-size="14">0</text>
-                    <line x1="45" y1="290" x2="50" y2="290" stroke="black" stroke-width="2"/>
-                    <text x="35" y="295" text-anchor="end" font-size="14">1</text>
-                    <line x1="45" y1="230" x2="50" y2="230" stroke="black" stroke-width="2"/>
-                    <text x="35" y="235" text-anchor="end" font-size="14">2</text>
-                    <line x1="45" y1="170" x2="50" y2="170" stroke="black" stroke-width="2"/>
-                    <text x="35" y="175" text-anchor="end" font-size="14">3</text>
-                    <line x1="45" y1="110" x2="50" y2="110" stroke="black" stroke-width="2"/>
-                    <text x="35" y="115" text-anchor="end" font-size="14">4</text>
-                    <line x1="45" y1="50" x2="50" y2="50" stroke="black" stroke-width="2"/>
-                    <text x="35" y="55" text-anchor="end" font-size="14">5</text>
-                    
-                    <!-- Grid lines -->
-                    <line x1="50" y1="290" x2="750" y2="290" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="50" y1="230" x2="750" y2="230" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="50" y1="170" x2="750" y2="170" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="50" y1="110" x2="750" y2="110" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    
-                    <line x1="190" y1="50" x2="190" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="330" y1="50" x2="330" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="470" y1="50" x2="470" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="610" y1="50" x2="610" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    
-                    <!-- Linear trend -->
-                    <path d="M50,350 L750,50" stroke="#FFA500" stroke-width="2" stroke-dasharray="6,4" fill="none"/>
-                    
-                    <!-- Multi-scale oscillations -->
-                    <path d="M50,350 
-                             C60,345 70,340 80,330 
-                             C90,320 100,315 110,310 
-                             C120,305 130,310 140,318
-                             C150,326 160,330 170,326
-                             C180,322 190,315 200,300
-                             C210,285 220,275 230,270
-                             C240,265 250,270 260,278
-                             C270,286 280,290 290,286
-                             C300,282 310,270 320,255
-                             C330,240 340,230 350,225
-                             C360,220 370,225 380,235
-                             C390,245 400,250 410,242
-                             C420,234 430,220 440,205
-                             C450,190 460,180 470,178
-                             C480,176 490,182 500,190
-                             C510,198 520,202 530,198
-                             C540,194 550,180 560,162
-                             C570,144 580,130 590,126
-                             C600,122 610,128 620,138
-                             C630,148 640,154 650,146
-                             C660,138 670,120 680,105
-                             C690,90 700,80 710,76
-                             C720,72 730,78 740,86
-                             C750,94 760,98 770,90" 
-                          stroke="#008B8B" stroke-width="3" fill="none"/>
-                    
-                    <!-- Legend -->
-                    <rect x="560" y="70" width="180" height="70" fill="white" stroke="#ccc" rx="5"/>
-                    <line x1="570" y1="90" x2="600" y2="90" stroke="#008B8B" stroke-width="3"/>
-                    <text x="610" y="95" font-size="14">Multi-Scale Effects</text>
-                    <line x1="570" y1="120" x2="600" y2="120" stroke="#FFA500" stroke-width="2" stroke-dasharray="6,4"/>
-                    <text x="610" y="125" font-size="14">Linear Trend</text>
-                </svg>
-            </div>
+            <div class="svg-container" id="graph1"></div>
         </div>
     </div>
 
     <div class="equation-section">
-        <h2>7. Projected Time-Dependent Unified Equation in 4D</h2>
+        <h2>2. Extended Unified Equation in 11D</h2>
         <div class="equation-container">
             <div class="latex-equation">
-                R<sub>μν</sub>(t) - (1/2)R(t)g<sub>μν</sub>(t) = 8πGT<sup>info</sup><sub>μν</sub>(t)<br>
-                T<sup>info</sup><sub>μν</sub>(t) = (δ/δg<sup>μν</sup>(t))(A<sub>proj</sub>(t)/(4Għ) - Tr(ρ(t)log⁡ρ(t)))
+                G<sup>11D</sup><sub>μν</sub> + Λg<sup>11D</sup><sub>μν</sub> = 8πG<sup>11D</sup>[1/(4G<sup>11D</sup>ħ)(δA<sub>proj</sub>/δg<sup>μν</sup><sub>11D</sub>) - (δ/δg<sup>μν</sup><sub>11D</sub>)Tr(ρ<sub>11D</sub>log⁡ρ<sub>11D</sub>)]
             </div>
             <div class="simplified-form">
-                Simplified Form: R(t) ~ 8πG((A<sub>0</sub>t)/(2Għ) - (δS<sub>e</sub>/δt))
+                Simplified Form: Effective energy density ρ<sup>11D</sup><sub>eff</sub>(t) = (A<sub>0</sub>t)/(2G<sup>11D</sup>ħ)
             </div>
             <div class="description">
-                <p>The Projected Unified Equation in 4D reveals interference patterns and emergent behaviors that appear when higher-dimensional dynamics project into 4D spacetime. This visualization shows how the initially flat cancellation develops both oscillatory patterns (representing quantum interference) and a gradual emergence term (representing the cosmic acceleration). These subtle deviations from perfect cancellation might explain why the cosmological constant is small but non-zero.</p>
+                <p>The effective energy density in 11D shows a linear trend with dimensional resonance patterns superimposed. These resonance patterns emerge from the geometric structure of the compact extra dimensions, creating periodic variations in energy density. In HQR, these patterns demonstrate how the geometry of hidden dimensions affects the energy content of the universe, potentially explaining dark energy fluctuations observed in cosmological data.</p>
             </div>
-            <div class="svg-container">
-                <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Axes -->
-                    <line x1="50" y1="200" x2="750" y2="200" stroke="black" stroke-width="2"/>
-                    <line x1="50" y1="50" x2="50" y2="350" stroke="black" stroke-width="2"/>
-                    
-                    <!-- Axis labels -->
-                    <text x="400" y="390" text-anchor="middle" font-size="16">Time (t)</text>
-                    <text x="20" y="200" text-anchor="middle" font-size="16" transform="rotate(-90, 20, 200)">Projected Dynamics R(t)</text>
-                    
-                    <!-- X-axis ticks -->
-                    <line x1="50" y1="205" x2="50" y2="195" stroke="black" stroke-width="2"/>
-                    <text x="50" y="225" text-anchor="middle" font-size="14">0</text>
-                    <line x1="190" y1="205" x2="190" y2="195" stroke="black" stroke-width="2"/>
-                    <text x="190" y="225" text-anchor="middle" font-size="14">2</text>
-                    <line x1="330" y1="205" x2="330" y2="195" stroke="black" stroke-width="2"/>
-                    <text x="330" y="225" text-anchor="middle" font-size="14">4</text>
-                    <line x1="470" y1="205" x2="470" y2="195" stroke="black" stroke-width="2"/>
-                    <text x="470" y="225" text-anchor="middle" font-size="14">6</text>
-                    <line x1="610" y1="205" x2="610" y2="195" stroke="black" stroke-width="2"/>
-                    <text x="610" y="225" text-anchor="middle" font-size="14">8</text>
-                    <line x1="750" y1="205" x2="750" y2="195" stroke="black" stroke-width="2"/>
-                    <text x="750" y="225" text-anchor="middle" font-size="14">10</text>
-                    
-                    <!-- Y-axis ticks -->
-                    <line x1="45" y1="350" x2="55" y2="350" stroke="black" stroke-width="2"/>
-                    <text x="35" y="355" text-anchor="end" font-size="14">-0.3</text>
-                    <line x1="45" y1="275" x2="55" y2="275" stroke="black" stroke-width="2"/>
-                    <text x="35" y="280" text-anchor="end" font-size="14">-0.15</text>
-                    <line x1="45" y1="200" x2="55" y2="200" stroke="black" stroke-width="2"/>
-                    <text x="35" y="205" text-anchor="end" font-size="14">0</text>
-                    <line x1="45" y1="125" x2="55" y2="125" stroke="black" stroke-width="2"/>
-                    <text x="35" y="130" text-anchor="end" font-size="14">0.15</text>
-                    <line x1="45" y1="50" x2="55" y2="50" stroke="black" stroke-width="2"/>
-                    <text x="35" y="55" text-anchor="end" font-size="14">0.3</text>
-                    
-                    <!-- Grid lines -->
-                    <line x1="50" y1="275" x2="750" y2="275" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="50" y1="125" x2="750" y2="125" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    
-                    <line x1="190" y1="50" x2="190" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="330" y1="50" x2="330" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="470" y1="50" x2="470" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="610" y1="50" x2="610" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    
-                    <!-- Zero line -->
-                    <line x1="50" y1="200" x2="750" y2="200" stroke="#666" stroke-width="1" stroke-dasharray="2,2"/>
-                    
-                    <!-- Interference pattern -->
-                    <path d="M50,200 
-                             C70,210 90,215 110,210 
-                             C130,205 150,195 170,185 
-                             C190,175 210,170 230,175
-                             C250,180 270,190 290,200
-                             C310,210 330,215 350,210
-                             C370,205 390,195 410,185
-                             C430,175 450,170 470,175
-                             C490,180 510,190 530,195
-                             C550,200 570,198 590,190
-                             C610,182 630,175 650,170
-                             C670,165 690,160 710,160
-                             C730,160 750,165 770,170" 
-                          stroke="#B22222" stroke-width="3" fill="none"/>
-                    
-                    <!-- Legend -->
-                    <rect x="560" y="70" width="180" height="70" fill="white" stroke="#ccc" rx="5"/>
-                    <line x1="570" y1="90" x2="600" y2="90" stroke="#B22222" stroke-width="3"/>
-                    <text x="610" y="95" font-size="14">Interference Pattern</text>
-                    <line x1="570" y1="120" x2="600" y2="120" stroke="#666" stroke-width="1" stroke-dasharray="2,2"/>
-                    <text x="610" y="125" font-size="14">Zero Baseline</text>
-                </svg>
-            </div>
+            <div class="svg-container" id="graph2"></div>
         </div>
     </div>
 
-    <div class="constants-note">
-        <h3>Notes on Visualizations</h3>
-        <p><strong>Physical Interpretation:</strong> These visualizations represent the behavior of key equations in the Holonomic Quantum Reality framework, showing both standard trends and more complex patterns that emerge from higher-dimensional dynamics.</p>
-        <p><strong>Visual Features:</strong> The graphs incorporate quantum fluctuations, resonance patterns, multi-component analysis, phase transitions, and interference effects to illustrate how HQR's unified framework explains phenomena ranging from quantum mechanics to cosmology.</p>
-        <p><strong>Context:</strong> These visualizations are qualitative representations designed to highlight theoretical concepts rather than precise numerical predictions. They demonstrate how HQR unifies quantum mechanics, gravity, and information theory by modeling reality as a holographic projection from 11D to 4D.</p>
-    </div>
-
-    <footer>
-        <p>Holonomic Quantum Reality (HQR) - A Unified Theory of Physics, Consciousness, and Hyperdimensional Order</p>
-        <p>&copy; Jeff Ricks</p>
-    </footer>    <div class="equation-section">
+    <div class="equation-section">
         <h2>3. Quantum Stress Tensor in 11D</h2>
         <div class="equation-container">
             <div class="latex-equation">
@@ -211,113 +165,7 @@
             <div class="description">
                 <p>The Quantum Stress Tensor visualized here shows the decomposition into multiple components, revealing how different aspects of quantum stress evolve over time. The trace component follows the main holographic trend, while the scalar and vacuum energy components show distinct oscillatory patterns. In HQR, this multi-component analysis reveals how quantum fields in higher dimensions contribute differently to the overall stress-energy, with potential implications for dark energy's variable equation of state.</p>
             </div>
-            <div class="svg-container">
-                <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Axes -->
-                    <line x1="50" y1="350" x2="750" y2="350" stroke="black" stroke-width="2"/>
-                    <line x1="50" y1="50" x2="50" y2="350" stroke="black" stroke-width="2"/>
-                    
-                    <!-- Axis labels -->
-                    <text x="400" y="390" text-anchor="middle" font-size="16">Time (t)</text>
-                    <text x="20" y="200" text-anchor="middle" font-size="16" transform="rotate(-90, 20, 200)">Stress Tensor Components</text>
-                    
-                    <!-- X-axis ticks -->
-                    <line x1="50" y1="350" x2="50" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="50" y="375" text-anchor="middle" font-size="14">0</text>
-                    <line x1="190" y1="350" x2="190" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="190" y="375" text-anchor="middle" font-size="14">2</text>
-                    <line x1="330" y1="350" x2="330" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="330" y="375" text-anchor="middle" font-size="14">4</text>
-                    <line x1="470" y1="350" x2="470" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="470" y="375" text-anchor="middle" font-size="14">6</text>
-                    <line x1="610" y1="350" x2="610" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="610" y="375" text-anchor="middle" font-size="14">8</text>
-                    <line x1="750" y1="350" x2="750" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="750" y="375" text-anchor="middle" font-size="14">10</text>
-                    
-                    <!-- Y-axis ticks -->
-                    <line x1="45" y1="350" x2="50" y2="350" stroke="black" stroke-width="2"/>
-                    <text x="35" y="355" text-anchor="end" font-size="14">0</text>
-                    <line x1="45" y1="290" x2="50" y2="290" stroke="black" stroke-width="2"/>
-                    <text x="35" y="295" text-anchor="end" font-size="14">1</text>
-                    <line x1="45" y1="230" x2="50" y2="230" stroke="black" stroke-width="2"/>
-                    <text x="35" y="235" text-anchor="end" font-size="14">2</text>
-                    <line x1="45" y1="170" x2="50" y2="170" stroke="black" stroke-width="2"/>
-                    <text x="35" y="175" text-anchor="end" font-size="14">3</text>
-                    <line x1="45" y1="110" x2="50" y2="110" stroke="black" stroke-width="2"/>
-                    <text x="35" y="115" text-anchor="end" font-size="14">4</text>
-                    <line x1="45" y1="50" x2="50" y2="50" stroke="black" stroke-width="2"/>
-                    <text x="35" y="55" text-anchor="end" font-size="14">5</text>
-                    
-                    <!-- Grid lines -->
-                    <line x1="50" y1="290" x2="750" y2="290" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="50" y1="230" x2="750" y2="230" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="50" y1="170" x2="750" y2="170" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="50" y1="110" x2="750" y2="110" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    
-                    <line x1="190" y1="50" x2="190" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="330" y1="50" x2="330" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="470" y1="50" x2="470" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="610" y1="50" x2="610" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    
-                    <!-- Trace Component -->
-                    <path d="M50,350 
-                             C70,345 90,335 110,325 
-                             C130,315 150,305 170,295 
-                             C190,285 210,275 230,265
-                             C250,255 270,247 290,240
-                             C310,233 330,229 350,220
-                             C370,211 390,203 410,195
-                             C430,187 450,178 470,170
-                             C490,162 510,153 530,145
-                             C550,137 570,128 590,120
-                             C610,112 630,103 650,95
-                             C670,87 690,80 710,75
-                             C730,70 750,65 770,60" 
-                          stroke="#2E8B57" stroke-width="3" fill="none"/>
-                    
-                    <!-- Scalar Component -->
-                    <path d="M50,350 
-                             C70,343 90,336 110,328 
-                             C130,320 150,315 170,305 
-                             C190,295 210,290 230,280
-                             C250,270 270,265 290,255
-                             C310,245 330,240 350,230
-                             C370,220 390,212 410,205
-                             C430,198 450,189 470,180
-                             C490,171 510,165 530,155
-                             C550,145 570,140 590,130
-                             C610,120 630,115 650,105
-                             C670,95 690,90 710,80
-                             C730,70 750,65 770,60" 
-                          stroke="#4682B4" stroke-width="3" fill="none"/>
-                    
-                    <!-- Vacuum Energy Component -->
-                    <path d="M50,330 
-                             C70,328 90,326 110,324 
-                             C130,322 150,321 170,319 
-                             C190,317 210,316 230,314
-                             C250,312 270,311 290,309
-                             C310,307 330,306 350,304
-                             C370,302 390,300 410,298
-                             C430,296 450,294 470,292
-                             C490,290 510,288 530,286
-                             C550,284 570,283 590,282
-                             C610,281 630,280 650,280
-                             C670,280 690,280 710,280
-                             C730,280 750,280 770,280" 
-                          stroke="#9400D3" stroke-width="3" fill="none"/>
-                    
-                    <!-- Legend -->
-                    <rect x="560" y="70" width="180" height="120" fill="white" stroke="#ccc" rx="5"/>
-                    <line x1="570" y1="90" x2="600" y2="90" stroke="#2E8B57" stroke-width="3"/>
-                    <text x="610" y="95" font-size="14">Trace Component</text>
-                    <line x1="570" y1="120" x2="600" y2="120" stroke="#4682B4" stroke-width="3"/>
-                    <text x="610" y="125" font-size="14">Scalar Component</text>
-                    <line x1="570" y1="150" x2="600" y2="150" stroke="#9400D3" stroke-width="3"/>
-                    <text x="610" y="155" font-size="14">Vacuum Energy</text>
-                </svg>
-            </div>
+            <div class="svg-container" id="graph3"></div>
         </div>
     </div>
 
@@ -333,106 +181,7 @@
             <div class="description">
                 <p>The entanglement entropy evolution shows a parabolic growth pattern with two distinct phase transitions. These transitions represent critical points where the entropy undergoes rapid reorganization, possibly due to topological shifts in the quantum state structure. In HQR, these phase transitions may correspond to cosmological events like the end of inflation or dark energy dominance, where the underlying quantum correlations across dimensions fundamentally reorganize.</p>
             </div>
-            <div class="svg-container">
-                <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Axes -->
-                    <line x1="50" y1="350" x2="750" y2="350" stroke="black" stroke-width="2"/>
-                    <line x1="50" y1="50" x2="50" y2="350" stroke="black" stroke-width="2"/>
-                    
-                    <!-- Axis labels -->
-                    <text x="400" y="390" text-anchor="middle" font-size="16">Time (t)</text>
-                    <text x="20" y="200" text-anchor="middle" font-size="16" transform="rotate(-90, 20, 200)">Entanglement Entropy S<tspan dy="-5" font-size="12">e</tspan>(t)</text>
-                    
-                    <!-- X-axis ticks -->
-                    <line x1="50" y1="350" x2="50" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="50" y="375" text-anchor="middle" font-size="14">0</text>
-                    <line x1="190" y1="350" x2="190" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="190" y="375" text-anchor="middle" font-size="14">2</text>
-                    <line x1="330" y1="350" x2="330" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="330" y="375" text-anchor="middle" font-size="14">4</text>
-                    <line x1="470" y1="350" x2="470" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="470" y="375" text-anchor="middle" font-size="14">6</text>
-                    <line x1="610" y1="350" x2="610" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="610" y="375" text-anchor="middle" font-size="14">8</text>
-                    <line x1="750" y1="350" x2="750" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="750" y="375" text-anchor="middle" font-size="14">10</text>
-                    
-                    <!-- Y-axis ticks -->
-                    <line x1="45" y1="350" x2="50" y2="350" stroke="black" stroke-width="2"/>
-                    <text x="35" y="355" text-anchor="end" font-size="14">1</text>
-                    <line x1="45" y1="290" x2="50" y2="290" stroke="black" stroke-width="2"/>
-                    <text x="35" y="295" text-anchor="end" font-size="14">5</text>
-                    <line x1="45" y1="230" x2="50" y2="230" stroke="black" stroke-width="2"/>
-                    <text x="35" y="235" text-anchor="end" font-size="14">10</text>
-                    <line x1="45" y1="170" x2="50" y2="170" stroke="black" stroke-width="2"/>
-                    <text x="35" y="175" text-anchor="end" font-size="14">15</text>
-                    <line x1="45" y1="110" x2="50" y2="110" stroke="black" stroke-width="2"/>
-                    <text x="35" y="115" text-anchor="end" font-size="14">20</text>
-                    <line x1="45" y1="50" x2="50" y2="50" stroke="black" stroke-width="2"/>
-                    <text x="35" y="55" text-anchor="end" font-size="14">25</text>
-                    
-                    <!-- Grid lines -->
-                    <line x1="50" y1="290" x2="750" y2="290" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="50" y1="230" x2="750" y2="230" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="50" y1="170" x2="750" y2="170" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="50" y1="110" x2="750" y2="110" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    
-                    <line x1="190" y1="50" x2="190" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="330" y1="50" x2="330" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="470" y1="50" x2="470" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="610" y1="50" x2="610" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    
-                    <!-- Base parabolic curve -->
-                    <path d="M50,350 
-                             C70,349 90,348 110,345 
-                             C130,342 150,338 170,334 
-                             C190,330 210,325 230,320
-                             C250,315 270,309 290,302
-                             C310,295 330,287 350,278
-                             C370,269 390,259 410,248
-                             C430,237 450,225 470,212
-                             C490,199 510,185 530,170
-                             C550,155 570,139 590,122
-                             C610,105 630,87 650,68
-                             C670,49 690,29 710,15
-                             C730,8 750,1 770,0" 
-                          stroke="#1E90FF" stroke-width="2" stroke-dasharray="6,4" fill="none"/>
-                    
-                    <!-- Entanglement entropy with phase transitions -->
-                    <path d="M50,350 
-                             C70,349 90,348 110,345 
-                             C130,342 150,338 170,334 
-                             C190,330 210,325 230,320
-                             C250,315 270,309 290,302
-                             C310,295 330,287 350,278
-                             C370,269 390,259 410,240
-                             C430,230 450,220 470,210
-                             C490,200 510,185 530,170
-                             C550,155 570,139 590,120
-                             C610,100 630,80 650,60
-                             C670,40 690,20 710,10
-                             C730,5 750,0 770,0" 
-                          stroke="#DC143C" stroke-width="3" fill="none"/>
-                    
-                    <!-- Phase transition points -->
-                    <circle cx="400" cy="240" r="6" fill="#DC143C"/>
-                    <circle cx="590" cy="120" r="6" fill="#DC143C"/>
-                    
-                    <!-- Phase transition labels -->
-                    <text x="380" y="215" text-anchor="middle" font-size="12" fill="#DC143C">Phase</text>
-                    <text x="380" y="230" text-anchor="middle" font-size="12" fill="#DC143C">Transition 1</text>
-                    
-                    <text x="570" y="95" text-anchor="middle" font-size="12" fill="#DC143C">Phase</text>
-                    <text x="570" y="110" text-anchor="middle" font-size="12" fill="#DC143C">Transition 2</text>
-                    
-                    <!-- Legend -->
-                    <rect x="560" y="280" width="180" height="70" fill="white" stroke="#ccc" rx="5"/>
-                    <line x1="570" y1="300" x2="600" y2="300" stroke="#DC143C" stroke-width="3"/>
-                    <text x="610" y="305" font-size="14">With Phase Transitions</text>
-                    <line x1="570" y1="330" x2="600" y2="330" stroke="#1E90FF" stroke-width="2" stroke-dasharray="6,4"/>
-                    <text x="610" y="335" font-size="14">Base Parabolic Growth</text>
-                </svg>
-            </div>
+            <div class="svg-container" id="graph4"></div>
         </div>
     </div>
 
@@ -449,452 +198,7 @@
             <div class="description">
                 <p>The Time-Dependent Unified Field Equation demonstrates the dynamic balance between holographic terms and entanglement counter-terms. Rather than perfect cancellation, this visualization shows how small oscillations around equilibrium occur as these forces balance. These oscillations may correspond to vacuum energy fluctuations and could explain small deviations from expected cosmological constants observed in precision measurements.</p>
             </div>
-            <div class="svg-container">
-                <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Axes -->
-                    <line x1="50" y1="200" x2="750" y2="200" stroke="black" stroke-width="2"/>
-                    <line x1="50" y1="50" x2="50" y2="350" stroke="black" stroke-width="2"/>
-                    
-                    <!-- Axis labels -->
-                    <text x="400" y="390" text-anchor="middle" font-size="16">Time (t)</text>
-                    <text x="20" y="200" text-anchor="middle" font-size="16" transform="rotate(-90, 20, 200)">Field Dynamics T(t)</text>
-                    
-                    <!-- X-axis ticks -->
-                    <line x1="50" y1="205" x2="50" y2="195" stroke="black" stroke-width="2"/>
-                    <text x="50" y="225" text-anchor="middle" font-size="14">0</text>
-                    <line x1="190" y1="205" x2="190" y2="195" stroke="black" stroke-width="2"/>
-                    <text x="190" y="225" text-anchor="middle" font-size="14">2</text>
-                    <line x1="330" y1="205" x2="330" y2="195" stroke="black" stroke-width="2"/>
-                    <text x="330" y="225" text-anchor="middle" font-size="14">4</text>
-                    <line x1="470" y1="205" x2="470" y2="195" stroke="black" stroke-width="2"/>
-                    <text x="470" y="225" text-anchor="middle" font-size="14">6</text>
-                    <line x1="610" y1="205" x2="610" y2="195" stroke="black" stroke-width="2"/>
-                    <text x="610" y="225" text-anchor="middle" font-size="14">8</text>
-                    <line x1="750" y1="205" x2="750" y2="195" stroke="black" stroke-width="2"/>
-                    <text x="750" y="225" text-anchor="middle" font-size="14">10</text>
-                    
-                    <!-- Y-axis ticks -->
-                    <line x1="45" y1="350" x2="55" y2="350" stroke="black" stroke-width="2"/>
-                    <text x="35" y="355" text-anchor="end" font-size="14">-0.3</text>
-                    <line x1="45" y1="275" x2="55" y2="275" stroke="black" stroke-width="2"/>
-                    <text x="35" y="280" text-anchor="end" font-size="14">-0.15</text>
-                    <line x1="45" y1="200" x2="55" y2="200" stroke="black" stroke-width="2"/>
-                    <text x="35" y="205" text-anchor="end" font-size="14">0</text>
-                    <line x1="45" y1="125" x2="55" y2="125" stroke="black" stroke-width="2"/>
-                    <text x="35" y="130" text-anchor="end" font-size="14">0.15</text>
-                    <line x1="45" y1="50" x2="55" y2="50" stroke="black" stroke-width="2"/>
-                    <text x="35" y="55" text-anchor="end" font-size="14">0.3</text>
-                    
-                    <!-- Grid lines -->
-                    <line x1="50" y1="275" x2="750" y2="275" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="50" y1="125" x2="750" y2="125" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    
-                    <line x1="190" y1="50" x2="190" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="330" y1="50" x2="330" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="470" y1="50" x2="470" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="610" y1="50" x2="610" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    
-                    <!-- Zero line -->
-                    <line x1="50" y1="200" x2="750" y2="200" stroke="#666" stroke-width="1"/>
-                    
-                    <!-- Holographic term -->
-                    <path d="M50,200 L750,50" stroke="#008000" stroke-width="2" stroke-dasharray="6,4" fill="none"/>
-                    
-                    <!-- Entanglement counter-term -->
-                    <path d="M50,200 L750,350" stroke="#FF4500" stroke-width="2" stroke-dasharray="6,4" fill="none"/>
-                    
-                    <!-- Net unified field dynamics -->
-                    <path d="M50,200 
-                             C70,190 90,180 110,185 
-                             C130,190 150,200 170,195 
-                             C190,190 210,180 230,175
-                             C250,170 270,165 290,170
-                             C310,175 330,185 350,190
-                             C370,195 390,200 410,195
-                             C430,190 450,180 470,175
-                             C490,170 510,165 530,170
-                             C550,175 570,185 590,190
-                             C610,195 630,200 650,195
-                             C670,190 690,180 710,175
-                             C730,170 750,165 770,170" 
-                          stroke="#800080" stroke-width="3" fill="none"/>
-                    
-                    <!-- Legend -->
-                    <rect x="560" y="70" width="180" height="120" fill="white" stroke="#ccc" rx="5"/>
-                    <line x1="570" y1="90" x2="600" y2="90" stroke="#800080" stroke-width="3"/>
-                    <text x="610" y="95" font-size="14">Net Field Dynamics</text>
-                    <line x1="570" y1="120" x2="600" y2="120" stroke="#008000" stroke-width="2" stroke-dasharray="6,4"/>
-                    <text x="610" y="125" font-size="14">Holographic Term</text>
-                    <line x1="570" y1="150" x2="600" y2="150" stroke="#FF4500" stroke-width="2" stroke-dasharray="6,4"/>
-                    <text x="610" y="155" font-size="14">Entanglement Term</text>
-                </svg>
-            </div>
-        </div>
-    </div><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Holonomic Quantum Reality Equations</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js"></script>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f8f9fa;
-        }
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #ddd;
-        }
-        h1 {
-            color: #0d47a1;
-            margin-bottom: 10px;
-        }
-        h2 {
-            color: #1565c0;
-            margin-top: 30px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
-        }
-        .equation-section {
-            background-color: white;
-            padding: 25px;
-            margin-bottom: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .equation-container {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 20px;
-        }
-        .latex-equation {
-            font-style: italic;
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 18px;
-            margin: 15px 0;
-            padding: 10px;
-            background-color: #f5f5f5;
-            border-radius: 4px;
-            overflow-x: auto;
-        }
-        .simplified-form {
-            font-style: italic;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-        .description {
-            margin: 15px 0;
-            line-height: 1.8;
-        }
-        .graph-container {
-            width: 100%;
-            height: 400px;
-            margin: 20px 0;
-            position: relative;
-        }
-        .static-graph {
-            width: 100%;
-            height: 350px;
-            background-color: #f8f9fa;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        .static-graph img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-        }
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
-            font-size: 14px;
-            color: #666;
-        }
-        .constants-note {
-            margin-top: 40px;
-            padding: 15px;
-            background-color: #e3f2fd;
-            border-left: 5px solid #1565c0;
-            border-radius: 4px;
-        }
-        .math-symbol {
-            font-family: 'Times New Roman', Times, serif;
-            font-style: italic;
-        }
-        .svg-container {
-            width: 100%;
-            height: 350px;
-            margin: 20px 0;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Holonomic Quantum Reality</h1>
-        <p>Visualizing the Simplified Unified Equations</p>
-    </header>
-
-    <div class="equation-section">
-        <h2>1. Initial Unified Equation in 4D</h2>
-        <div class="equation-container">
-            <div class="latex-equation">
-                R<sub>μν</sub> - (1/2)Rg<sub>μν</sub> = 8πG[1/(4G̅ħ)(δA<sub>proj</sub>/δg<sup>μν</sup>) - (δ/δg<sup>μν</sup>)Tr(ρlog⁡ρ)]
-            </div>
-            <div class="simplified-form">
-                Simplified Form: R(t) ~ (4πA<sub>0</sub>t)/ħ
-            </div>
-            <div class="description">
-                <p>The Ricci scalar R(t) shows a linear increase over time, reflecting the holographic contribution from the growing boundary area A<sub>proj</sub>. Unlike classical general relativity, quantum fluctuations create subtle variations around this linear trend, indicating the influence of hidden order from higher dimensions on spacetime curvature. These fluctuations represent the projection of deterministic 11D dynamics onto our 4D universe.</p>
-            </div>
-            <div class="svg-container">
-                <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Axes -->
-                    <line x1="50" y1="350" x2="750" y2="350" stroke="black" stroke-width="2"/>
-                    <line x1="50" y1="50" x2="50" y2="350" stroke="black" stroke-width="2"/>
-                    
-                    <!-- Axis labels -->
-                    <text x="400" y="390" text-anchor="middle" font-size="16">Time (t)</text>
-                    <text x="20" y="200" text-anchor="middle" font-size="16" transform="rotate(-90, 20, 200)">Ricci Scalar R(t)</text>
-                    
-                    <!-- X-axis ticks -->
-                    <line x1="50" y1="350" x2="50" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="50" y="375" text-anchor="middle" font-size="14">0</text>
-                    <line x1="190" y1="350" x2="190" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="190" y="375" text-anchor="middle" font-size="14">2</text>
-                    <line x1="330" y1="350" x2="330" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="330" y="375" text-anchor="middle" font-size="14">4</text>
-                    <line x1="470" y1="350" x2="470" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="470" y="375" text-anchor="middle" font-size="14">6</text>
-                    <line x1="610" y1="350" x2="610" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="610" y="375" text-anchor="middle" font-size="14">8</text>
-                    <line x1="750" y1="350" x2="750" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="750" y="375" text-anchor="middle" font-size="14">10</text>
-                    
-                    <!-- Y-axis ticks -->
-                    <line x1="45" y1="350" x2="50" y2="350" stroke="black" stroke-width="2"/>
-                    <text x="35" y="355" text-anchor="end" font-size="14">0</text>
-                    <line x1="45" y1="290" x2="50" y2="290" stroke="black" stroke-width="2"/>
-                    <text x="35" y="295" text-anchor="end" font-size="14">20</text>
-                    <line x1="45" y1="230" x2="50" y2="230" stroke="black" stroke-width="2"/>
-                    <text x="35" y="235" text-anchor="end" font-size="14">40</text>
-                    <line x1="45" y1="170" x2="50" y2="170" stroke="black" stroke-width="2"/>
-                    <text x="35" y="175" text-anchor="end" font-size="14">60</text>
-                    <line x1="45" y1="110" x2="50" y2="110" stroke="black" stroke-width="2"/>
-                    <text x="35" y="115" text-anchor="end" font-size="14">80</text>
-                    <line x1="45" y1="50" x2="50" y2="50" stroke="black" stroke-width="2"/>
-                    <text x="35" y="55" text-anchor="end" font-size="14">100</text>
-                    
-                    <!-- Grid lines -->
-                    <line x1="50" y1="290" x2="750" y2="290" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="50" y1="230" x2="750" y2="230" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="50" y1="170" x2="750" y2="170" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="50" y1="110" x2="750" y2="110" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    
-                    <line x1="190" y1="50" x2="190" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="330" y1="50" x2="330" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="470" y1="50" x2="470" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="610" y1="50" x2="610" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    
-                    <!-- Classical prediction - dashed line -->
-                    <path d="M50,350 L750,50" stroke="#FF6347" stroke-width="2" stroke-dasharray="6,4" fill="none"/>
-                    
-                    <!-- Quantum fluctuations curve -->
-                    <path d="M50,350 
-                             C70,345 90,335 110,330 
-                             C130,325 150,315 170,305 
-                             C190,295 210,285 230,270
-                             C250,255 270,245 290,230
-                             C310,215 330,200 350,185
-                             C370,170 390,160 410,145
-                             C430,130 450,120 470,105
-                             C490,90  510,80  530,70
-                             C550,60  570,55  590,50
-                             C610,45  630,45  650,50
-                             C670,55  690,65  710,60
-                             C730,55  750,50  770,50" 
-                          stroke="#4169E1" stroke-width="3" fill="none"/>
-                    
-                    <!-- Legend -->
-                    <rect x="560" y="70" width="180" height="70" fill="white" stroke="#ccc" rx="5"/>
-                    <line x1="570" y1="90" x2="600" y2="90" stroke="#4169E1" stroke-width="3"/>
-                    <text x="610" y="95" font-size="14">Quantum HQR</text>
-                    <line x1="570" y1="120" x2="600" y2="120" stroke="#FF6347" stroke-width="2" stroke-dasharray="6,4"/>
-                    <text x="610" y="125" font-size="14">Classical Prediction</text>
-                </svg>
-            </div>
-        </div>
-    </div>
-
-    <div class="equation-section">
-        <h2>2. Extended Unified Equation in 11D</h2>
-        <div class="equation-container">
-            <div class="latex-equation">
-                G<sup>11D</sup><sub>μν</sub> + Λg<sup>11D</sup><sub>μν</sub> = 8πG<sup>11D</sup>[1/(4G<sup>11D</sup>ħ)(δA<sub>proj</sub>/δg<sup>μν</sup><sub>11D</sub>) - (δ/δg<sup>μν</sup><sub>11D</sub>)Tr(ρ<sub>11D</sub>log⁡ρ<sub>11D</sub>)]
-            </div>
-            <div class="simplified-form">
-                Simplified Form: Effective energy density ρ<sup>11D</sup><sub>eff</sub>(t) = (A<sub>0</sub>t)/(2G<sup>11D</sup>ħ)
-            </div>
-            <div class="description">
-                <p>The effective energy density in 11D shows a linear trend with dimensional resonance patterns superimposed. These resonance patterns emerge from the geometric structure of the compact extra dimensions, creating periodic variations in energy density. In HQR, these patterns demonstrate how the geometry of hidden dimensions affects the energy content of the universe, potentially explaining dark energy fluctuations observed in cosmological data.</p>
-            </div>
-            <div class="svg-container">
-                <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Axes -->
-                    <line x1="50" y1="350" x2="750" y2="350" stroke="black" stroke-width="2"/>
-                    <line x1="50" y1="50" x2="50" y2="350" stroke="black" stroke-width="2"/>
-                    
-                    <!-- Axis labels -->
-                    <text x="400" y="390" text-anchor="middle" font-size="16">Time (t)</text>
-                    <text x="20" y="200" text-anchor="middle" font-size="16" transform="rotate(-90, 20, 200)">Energy Density ρ(t)</text>
-                    
-                    <!-- X-axis ticks -->
-                    <line x1="50" y1="350" x2="50" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="50" y="375" text-anchor="middle" font-size="14">0</text>
-                    <line x1="190" y1="350" x2="190" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="190" y="375" text-anchor="middle" font-size="14">2</text>
-                    <line x1="330" y1="350" x2="330" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="330" y="375" text-anchor="middle" font-size="14">4</text>
-                    <line x1="470" y1="350" x2="470" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="470" y="375" text-anchor="middle" font-size="14">6</text>
-                    <line x1="610" y1="350" x2="610" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="610" y="375" text-anchor="middle" font-size="14">8</text>
-                    <line x1="750" y1="350" x2="750" y2="355" stroke="black" stroke-width="2"/>
-                    <text x="750" y="375" text-anchor="middle" font-size="14">10</text>
-                    
-                    <!-- Y-axis ticks -->
-                    <line x1="45" y1="350" x2="50" y2="350" stroke="black" stroke-width="2"/>
-                    <text x="35" y="355" text-anchor="end" font-size="14">0</text>
-                    <line x1="45" y1="290" x2="50" y2="290" stroke="black" stroke-width="2"/>
-                    <text x="35" y="295" text-anchor="end" font-size="14">1</text>
-                    <line x1="45" y1="230" x2="50" y2="230" stroke="black" stroke-width="2"/>
-                    <text x="35" y="235" text-anchor="end" font-size="14">2</text>
-                    <line x1="45" y1="170" x2="50" y2="170" stroke="black" stroke-width="2"/>
-                    <text x="35" y="175" text-anchor="end" font-size="14">3</text>
-                    <line x1="45" y1="110" x2="50" y2="110" stroke="black" stroke-width="2"/>
-                    <text x="35" y="115" text-anchor="end" font-size="14">4</text>
-                    <line x1="45" y1="50" x2="50" y2="50" stroke="black" stroke-width="2"/>
-                    <text x="35" y="55" text-anchor="end" font-size="14">5</text>
-                    
-                    <!-- Grid lines -->
-                    <line x1="50" y1="290" x2="750" y2="290" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="50" y1="230" x2="750" y2="230" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="50" y1="170" x2="750" y2="170" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="50" y1="110" x2="750" y2="110" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    
-                    <line x1="190" y1="50" x2="190" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="330" y1="50" x2="330" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="470" y1="50" x2="470" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    <line x1="610" y1="50" x2="610" y2="350" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-                    
-                    <!-- Linear prediction - dashed line -->
-                    <path d="M50,350 L750,50" stroke="#FFA500" stroke-width="2" stroke-dasharray="6,4" fill="none"/>
-                    
-                    <!-- Energy density with resonance patterns -->
-                    <path d="M50,350 
-                             C60,345 70,340 80,335 
-                             C90,330 100,320 110,310 
-                             C120,300 130,290 140,285
-                             C150,280 160,275 170,265
-                             C180,255 190,245 200,240
-                             C210,235 220,230 230,225
-                             C240,220 250,215 260,205
-                             C270,195 280,190 290,185
-                             C300,180 310,175 320,170
-                             C330,165 340,160 350,155
-                             C360,150 370,145 380,140
-                             C390,135 400,130 410,125
-                             C420,120 430,115 440,110
-                             C450,105 460,100 470,95
-                             C480,90 490,83 500,80
-                             C510,77 520,74 530,69
-                             C540,64 550,61 560,65
-                             C570,69 580,73 590,70
-                             C600,67 610,64 620,59
-                             C630,54 640,51 650,54
-                             C660,57 670,60 680,55
-                             C690,50 700,45 710,50
-                             C720,55 730,60 740,55
-                             C750,50 760,45 770,50" 
-                          stroke="#4B0082" stroke-width="3" fill="none"/>
-                    
-                    <!-- Legend -->
-                    <rect x="560" y="70" width="180" height="70" fill="white" stroke="#ccc" rx="5"/>
-                    <line x1="570" y1="90" x2="600" y2="90" stroke="#4B0082" stroke-width="3"/>
-                    <text x="610" y="95" font-size="14">11D with Resonance</text>
-                    <line x1="570" y1="120" x2="600" y2="120" stroke="#FFA500" stroke-width="2" stroke-dasharray="6,4"/>
-                    <text x="610" y="125" font-size="14">Linear Approximation</text>
-                </svg>
-            </div>
-        </div>
-    </div>
-
-    <div class="equation-section">
-        <h2>3. Quantum Stress Tensor in 11D</h2>
-        <div class="equation-container">
-            <div class="latex-equation">
-                Q<sub>μν</sub> = 1/(4G<sup>11D</sup>ħ)(δA<sub>proj</sub>/δg<sup>μν</sup><sub>11D</sub>) - (δ/δg<sup>μν</sup><sub>11D</sub>)Tr(ρ<sub>11D</sub>log⁡ρ<sub>11D</sub>)
-            </div>
-            <div class="simplified-form">
-                Simplified Form: Scalar stress-energy Q(t) = (A<sub>0</sub>t)/(2G<sup>11D</sup>ħ)
-            </div>
-            <div class="description">
-                <p>This plot is identical to Equation 2, showing a linear increase in the scalar component of the quantum stress tensor. In HQR, this confirms that the quantum stress tensor sources 11D curvature through holographic projections, with entanglement as a constant offset.</p>
-            </div>
-            <div class="graph-container">
-                <canvas id="graph3"></canvas>
-            </div>
-        </div>
-    </div>
-
-    <div class="equation-section">
-        <h2>4. Approximated Entanglement Entropy Evolution in 11D</h2>
-        <div class="equation-container">
-            <div class="latex-equation">
-                d/dt(-Tr(ρ<sub>11D</sub>log⁡ρ<sub>11D</sub>)) ≈ -1/τ(A<sub>proj</sub>/(4G<sup>11D</sup>ħ) - Tr(ρ<sub>11D</sub>log⁡ρ<sub>11D</sub>)) + ξ(-Tr(ρ<sub>11D</sub>log⁡ρ<sub>11D</sub>))
-            </div>
-            <div class="simplified-form">
-                Simplified Form: S<sub>e</sub>(t) ~ S<sub>0</sub> + (A<sub>0</sub>t<sup>2</sup>)/(4G<sup>11D</sup>ħ)
-            </div>
-            <div class="description">
-                <p>The plot shows a parabolic increase in entanglement entropy over time, starting from an initial value S<sub>0</sub>. In HQR, this illustrates how quantum correlations in 11D grow with the holographic entropy, moderated by hidden-order effects, potentially stabilizing black hole entropy.</p>
-            </div>
-            <div class="graph-container">
-                <canvas id="graph4"></canvas>
-            </div>
-        </div>
-    </div>
-
-    <div class="equation-section">
-        <h2>5. Time-Dependent Unified Field Equation in 11D</h2>
-        <div class="equation-container">
-            <div class="latex-equation">
-                G<sup>11D</sup><sub>μν</sub>(t) + Λg<sup>11D</sup><sub>μν</sub>(t) = 8πG<sup>11D</sup>T<sup>info,11D</sup><sub>μν</sub>(t)<br>
-                T<sup>info,11D</sup><sub>μν</sub>(t) = (δ/δg<sup>μν</sup><sub>11D</sub>(t))(A<sub>proj</sub>(t)/(4G<sup>11D</sup>ħ) - Tr(ρ<sub>11D</sub>(t)log⁡ρ<sub>11D</sub>(t)))
-            </div>
-            <div class="simplified-form">
-                Simplified Form: Effective energy density T(t) ~ (A<sub>0</sub>t)/(2G<sup>11D</sup>ħ) - (δS<sub>e</sub>/δt)
-            </div>
-            <div class="description">
-                <p>Due to the simplified cancellation, the plot is approximately flat at 0, but if we adjust parameters (e.g., ξ ≠ 1/τ), T(t) would show a modified linear trend. In HQR, this reflects the dynamic balance between holographic growth and entanglement evolution in 11D.</p>
-            </div>
-            <div class="graph-container">
-                <canvas id="graph5"></canvas>
-            </div>
+            <div class="svg-container" id="graph5"></div>
         </div>
     </div>
 
@@ -908,11 +212,9 @@
                 Simplified Form: T(t) ~ (A<sub>0</sub>t)/(2G<sup>11D</sup>ħ)
             </div>
             <div class="description">
-                <p>The plot is identical to Equations 2 and 3, showing a linear increase. In HQR, this reinforces the holographic origin of the stress-energy tensor, connecting bulk dynamics to boundary effects via AdS/CFT.</p>
+                <p>The Holographic Stress-Energy Tensor demonstrates multi-scale behavior with several overlapping periodic components. This visualization reveals how information flows across dimensional boundaries at different scales, with shorter wavelength oscillations corresponding to quantum-scale effects and longer wavelength patterns representing cosmological-scale phenomena. The linear trend represents the overall expansion of information content as the universe evolves.</p>
             </div>
-            <div class="graph-container">
-                <canvas id="graph6"></canvas>
-            </div>
+            <div class="svg-container" id="graph6"></div>
         </div>
     </div>
 
@@ -927,19 +229,17 @@
                 Simplified Form: R(t) ~ 8πG((A<sub>0</sub>t)/(2Għ) - (δS<sub>e</sub>/δt))
             </div>
             <div class="description">
-                <p>The plot is flat at 0a due to the same cancellation as Equation 5, but with adjusted parameters, it would show a modified linear trend. In HQR, this shows how 4D curvature evolves as a projection of 11D dynamics, balancing holographic and entanglement effects.</p>
+                <p>The Projected Unified Equation in 4D reveals interference patterns and emergent behaviors that appear when higher-dimensional dynamics project into 4D spacetime. This visualization shows how the initially flat cancellation develops both oscillatory patterns (representing quantum interference) and a gradual emergence term (representing the cosmic acceleration). These subtle deviations from perfect cancellation might explain why the cosmological constant is small but non-zero.</p>
             </div>
-            <div class="graph-container">
-                <canvas id="graph7"></canvas>
-            </div>
+            <div class="svg-container" id="graph7"></div>
         </div>
     </div>
 
     <div class="constants-note">
-        <h3>Notes on Simplifications</h3>
-        <p><strong>Constants:</strong> For simplicity, we set A<sub>0</sub> = 1, ħ = 1, G = 1, G<sup>11D</sup> = 1, and adjusted other parameters to make the trends clear. In a real model, these would depend on physical scales (e.g., Planck scale, compactification radius).</p>
-        <p><strong>Flat Graphs:</strong> Equations 5 and 7 appear flat due to the simplified cancellation, but in a full model with ξ ≠ 1/τ, they would show dynamic trends reflecting the interplay of holographic and entanglement terms.</p>
-        <p><strong>Context:</strong> These graphs are qualitative representations to illustrate the trends (linear, quadratic) predicted by HQR's equations, focusing on how holographic projections and entanglement influence curvature and energy over time.</p>
+        <h3>Notes on Visualizations</h3>
+        <p><strong>Physical Interpretation:</strong> These visualizations represent the behavior of key equations in the Holonomic Quantum Reality framework, showing both standard trends and more complex patterns that emerge from higher-dimensional dynamics.</p>
+        <p><strong>Visual Features:</strong> The graphs incorporate quantum fluctuations, resonance patterns, multi-component analysis, phase transitions, and interference effects to illustrate how HQR's unified framework explains phenomena ranging from quantum mechanics to cosmology.</p>
+        <p><strong>Context:</strong> These visualizations are qualitative representations designed to highlight theoretical concepts rather than precise numerical predictions. They demonstrate how HQR unifies quantum mechanics, gravity, and information theory by modeling reality as a holographic projection from 11D to 4D.</p>
     </div>
 
     <footer>
@@ -947,482 +247,7 @@
         <p>&copy; Jeff Ricks</p>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Graph 1: Ricci Scalar in 4D - Show linear growth with fluctuations to suggest quantum effects
-            const ctx1 = document.getElementById('graph1').getContext('2d');
-            const tValues = Array.from({ length: 100 }, (_, i) => i / 10);
-            
-            // Create subtle quantum fluctuations around the linear trend
-            function quantumFluctuation(t, amplitude = 0.2) {
-                return (4 * Math.PI * t) * (1 + amplitude * Math.sin(t * 5) * Math.exp(-t/10));
-            }
-            
-            new Chart(ctx1, {
-                type: 'line',
-                data: {
-                    labels: tValues,
-                    datasets: [{
-                        label: 'Ricci Scalar with Quantum Fluctuations',
-                        data: tValues.map(t => ({x: t, y: quantumFluctuation(t)})),
-                        borderColor: 'rgb(65, 105, 225)',
-                        backgroundColor: 'rgba(65, 105, 225, 0.1)',
-                        borderWidth: 2,
-                        fill: true,
-                        tension: 0.3
-                    }, {
-                        label: 'Classical Prediction',
-                        data: tValues.map(t => ({x: t, y: 4 * Math.PI * t})),
-                        borderColor: 'rgba(220, 20, 60, 0.6)',
-                        borderDash: [5, 5],
-                        borderWidth: 1.5,
-                        fill: false,
-                        pointRadius: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: { 
-                            title: { display: true, text: 'Time (t)', font: { weight: 'bold' } }
-                        },
-                        y: { 
-                            title: { display: true, text: 'Ricci Scalar R(t)', font: { weight: 'bold' } }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top',
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.dataset.label}: ${context.parsed.y.toFixed(3)}`;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-
-            // Graph 2: Effective Energy Density in 11D - Showing resonance patterns
-            const ctx2 = document.getElementById('graph2').getContext('2d');
-            
-            function energyDensity11D(t) {
-                // Base linear growth with dimensional resonance patterns
-                const base = (t) / (2);
-                const resonance = 0.15 * Math.sin(t * 4) * Math.sin(t * 6) * (1 - Math.exp(-t/5));
-                return base + resonance;
-            }
-            
-            new Chart(ctx2, {
-                type: 'line',
-                data: {
-                    labels: tValues,
-                    datasets: [{
-                        label: 'Energy Density with Dimensional Resonance',
-                        data: tValues.map(t => ({x: t, y: energyDensity11D(t)})),
-                        borderColor: 'rgb(75, 0, 130)',
-                        backgroundColor: 'rgba(75, 0, 130, 0.1)',
-                        borderWidth: 2,
-                        fill: true,
-                        tension: 0.2
-                    }, {
-                        label: 'Linear Approximation',
-                        data: tValues.map(t => ({x: t, y: t/2})),
-                        borderColor: 'rgba(255, 140, 0, 0.6)',
-                        borderDash: [5, 5],
-                        borderWidth: 1.5,
-                        fill: false,
-                        pointRadius: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: { 
-                            title: { display: true, text: 'Time (t)', font: { weight: 'bold' } }
-                        },
-                        y: { 
-                            title: { display: true, text: 'Energy Density ρ(t)', font: { weight: 'bold' } }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top',
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.dataset.label}: ${context.parsed.y.toFixed(3)}`;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-
-            // Graph 3: Quantum Stress Tensor in 11D - Multiple component visualization
-            const ctx3 = document.getElementById('graph3').getContext('2d');
-            
-            new Chart(ctx3, {
-                type: 'line',
-                data: {
-                    labels: tValues,
-                    datasets: [{
-                        label: 'Trace Component',
-                        data: tValues.map(t => ({x: t, y: t/2 + 0.1*Math.sin(t*8)})),
-                        borderColor: 'rgb(46, 139, 87)',
-                        backgroundColor: 'rgba(46, 139, 87, 0.1)',
-                        borderWidth: 2,
-                        fill: true,
-                        tension: 0.2
-                    }, {
-                        label: 'Scalar Component',
-                        data: tValues.map(t => ({x: t, y: (t/2)*(1 + 0.05*Math.sin(t*12))})),
-                        borderColor: 'rgb(70, 130, 180)',
-                        backgroundColor: 'rgba(70, 130, 180, 0.1)',
-                        borderWidth: 2,
-                        fill: true,
-                        tension: 0.2
-                    }, {
-                        label: 'Vacuum Energy Component',
-                        data: tValues.map(t => ({x: t, y: 0.2 + 0.03*t + 0.05*Math.sin(t*4)*Math.exp(-t/20)})),
-                        borderColor: 'rgb(148, 0, 211)',
-                        backgroundColor: 'rgba(148, 0, 211, 0.1)',
-                        borderWidth: 2,
-                        fill: true,
-                        tension: 0.2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: { 
-                            title: { display: true, text: 'Time (t)', font: { weight: 'bold' } }
-                        },
-                        y: { 
-                            title: { display: true, text: 'Stress Tensor Components', font: { weight: 'bold' } }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top',
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.dataset.label}: ${context.parsed.y.toFixed(3)}`;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-
-            // Graph 4: Entanglement Entropy Evolution - Show parabolic growth with phase transitions
-            const ctx4 = document.getElementById('graph4').getContext('2d');
-            
-            function entropyWithPhaseTransitions(t) {
-                const base = 1 + (t**2)/4;
-                // Add phase transition effects at t=3 and t=6
-                const phaseTransition1 = t > 3 ? 0.4 * (1 - Math.exp(-(t-3)/0.5)) : 0;
-                const phaseTransition2 = t > 6 ? 0.7 * (1 - Math.exp(-(t-6)/0.8)) : 0;
-                return base + phaseTransition1 + phaseTransition2;
-            }
-            
-            // Create annotation points for phase transitions
-            const phaseTransitionAnnotations = {
-                annotations: {
-                    point1: {
-                        type: 'point',
-                        xValue: 3,
-                        yValue: entropyWithPhaseTransitions(3),
-                        backgroundColor: 'rgba(255, 0, 0, 0.8)',
-                        radius: 5
-                    },
-                    point2: {
-                        type: 'point',
-                        xValue: 6,
-                        yValue: entropyWithPhaseTransitions(6),
-                        backgroundColor: 'rgba(255, 0, 0, 0.8)',
-                        radius: 5
-                    },
-                    label1: {
-                        type: 'label',
-                        xValue: 3,
-                        yValue: entropyWithPhaseTransitions(3) + 0.8,
-                        content: ['Phase', 'Transition 1'],
-                        font: {
-                            size: 12
-                        },
-                        color: 'rgb(255, 0, 0)'
-                    },
-                    label2: {
-                        type: 'label',
-                        xValue: 6,
-                        yValue: entropyWithPhaseTransitions(6) + 1,
-                        content: ['Phase', 'Transition 2'],
-                        font: {
-                            size: 12
-                        },
-                        color: 'rgb(255, 0, 0)'
-                    }
-                }
-            };
-            
-            new Chart(ctx4, {
-                type: 'line',
-                data: {
-                    labels: tValues,
-                    datasets: [{
-                        label: 'Entanglement Entropy with Phase Transitions',
-                        data: tValues.map(t => ({x: t, y: entropyWithPhaseTransitions(t)})),
-                        borderColor: 'rgb(220, 20, 60)',
-                        backgroundColor: 'rgba(220, 20, 60, 0.1)',
-                        borderWidth: 2,
-                        fill: true,
-                        tension: 0.3
-                    }, {
-                        label: 'Base Parabolic Growth',
-                        data: tValues.map(t => ({x: t, y: 1 + (t**2)/4})),
-                        borderColor: 'rgba(30, 144, 255, 0.6)',
-                        borderDash: [5, 5],
-                        borderWidth: 1.5,
-                        fill: false,
-                        pointRadius: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: { 
-                            title: { display: true, text: 'Time (t)', font: { weight: 'bold' } }
-                        },
-                        y: { 
-                            title: { display: true, text: 'Entanglement Entropy S_e(t)', font: { weight: 'bold' } }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top',
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.dataset.label}: ${context.parsed.y.toFixed(3)}`;
-                                }
-                            }
-                        },
-                        annotation: phaseTransitionAnnotations
-                    }
-                }
-            });
-
-            // Graph 5: Time-Dependent Unified Field Equation in 11D - Show balanced forces with fluctuations
-            const ctx5 = document.getElementById('graph5').getContext('2d');
-            
-            function unifiedFieldDynamics(t) {
-                // No longer flat, but showing dynamic balance near zero
-                const holographicTerm = t/2;
-                const entanglementCounter = (t/2) * (1 - 0.1*Math.sin(t*2));
-                return holographicTerm - entanglementCounter;
-            }
-            
-            new Chart(ctx5, {
-                type: 'line',
-                data: {
-                    labels: tValues,
-                    datasets: [{
-                        label: 'Net Unified Field Dynamics',
-                        data: tValues.map(t => ({x: t, y: unifiedFieldDynamics(t)})),
-                        borderColor: 'rgb(128, 0, 128)',
-                        backgroundColor: 'rgba(128, 0, 128, 0.1)',
-                        borderWidth: 2,
-                        fill: true,
-                        tension: 0.2
-                    }, {
-                        label: 'Holographic Term',
-                        data: tValues.map(t => ({x: t, y: t/2})),
-                        borderColor: 'rgba(0, 128, 0, 0.6)',
-                        borderDash: [5, 5],
-                        borderWidth: 1.5,
-                        fill: false,
-                        pointRadius: 0
-                    }, {
-                        label: 'Entanglement Counter-Term',
-                        data: tValues.map(t => ({x: t, y: (t/2) * (1 - 0.1*Math.sin(t*2))})),
-                        borderColor: 'rgba(255, 69, 0, 0.6)',
-                        borderDash: [5, 5],
-                        borderWidth: 1.5,
-                        fill: false,
-                        pointRadius: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: { 
-                            title: { display: true, text: 'Time (t)', font: { weight: 'bold' } }
-                        },
-                        y: { 
-                            title: { display: true, text: 'Field Dynamics T(t)', font: { weight: 'bold' } },
-                            suggestedMin: -0.2,
-                            suggestedMax: 0.2
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top',
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.dataset.label}: ${context.parsed.y.toFixed(3)}`;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-
-            // Graph 6: Holographic Stress-Energy Tensor - Show multi-scale behavior
-            const ctx6 = document.getElementById('graph6').getContext('2d');
-            
-            function holographicTensor(t) {
-                // Base linear with multi-scale effects
-                return t/2 + 0.2*Math.sin(t) + 0.1*Math.sin(t*3) + 0.05*Math.sin(t*9);
-            }
-            
-            new Chart(ctx6, {
-                type: 'line',
-                data: {
-                    labels: tValues,
-                    datasets: [{
-                        label: 'Holographic Tensor with Multi-Scale Effects',
-                        data: tValues.map(t => ({x: t, y: holographicTensor(t)})),
-                        borderColor: 'rgb(0, 139, 139)',
-                        backgroundColor: 'rgba(0, 139, 139, 0.1)',
-                        borderWidth: 2,
-                        fill: true,
-                        tension: 0.1
-                    }, {
-                        label: 'Linear Trend',
-                        data: tValues.map(t => ({x: t, y: t/2})),
-                        borderColor: 'rgba(255, 140, 0, 0.6)',
-                        borderDash: [5, 5],
-                        borderWidth: 1.5,
-                        fill: false,
-                        pointRadius: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: { 
-                            title: { display: true, text: 'Time (t)', font: { weight: 'bold' } }
-                        },
-                        y: { 
-                            title: { display: true, text: 'Holographic Tensor T(t)', font: { weight: 'bold' } }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top',
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.dataset.label}: ${context.parsed.y.toFixed(3)}`;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-
-            // Graph 7: Projected Unified Equation in 4D - Showing interference patterns
-            const ctx7 = document.getElementById('graph7').getContext('2d');
-            
-            function projectedEquation(t) {
-                // Show interesting projection effects rather than flat cancellation
-                const baseTerm = 8 * Math.PI * ((t/2) - (t/2));
-                // Add interference pattern from higher dimensions
-                const interference = 0.3 * Math.sin(t*4) * Math.cos(t*7) * Math.exp(-t/15);
-                // Add gradual emergence term
-                const emergence = 0.02 * t * (1 - Math.exp(-t/8));
-                return baseTerm + interference + emergence;
-            }
-            
-            new Chart(ctx7, {
-                type: 'line',
-                data: {
-                    labels: tValues,
-                    datasets: [{
-                        label: 'Projected 4D Dynamics with Interference',
-                        data: tValues.map(t => ({x: t, y: projectedEquation(t)})),
-                        borderColor: 'rgb(178, 34, 34)',
-                        backgroundColor: 'rgba(178, 34, 34, 0.1)',
-                        borderWidth: 2,
-                        fill: true,
-                        tension: 0.2
-                    }, {
-                        label: 'Zero Baseline',
-                        data: tValues.map(t => ({x: t, y: 0})),
-                        borderColor: 'rgba(100, 100, 100, 0.5)',
-                        borderDash: [2, 2],
-                        borderWidth: 1,
-                        fill: false,
-                        pointRadius: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: { 
-                            title: { display: true, text: 'Time (t)', font: { weight: 'bold' } }
-                        },
-                        y: { 
-                            title: { display: true, text: 'Projected Dynamics R(t)', font: { weight: 'bold' } }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top',
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.dataset.label}: ${context.parsed.y.toFixed(3)}`;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        });
-        });
-    </script>
+    <!-- Load the Graphs.js script -->
+    <script src="Graphs.js"></script>
 </body>
 </html>
