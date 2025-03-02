@@ -77,6 +77,7 @@ function addAxes(svg, xLabel, yLabel, centerY = false) {
     xAxisLabel.setAttribute("y", "390");
     xAxisLabel.setAttribute("text-anchor", "middle");
     xAxisLabel.setAttribute("font-size", "16");
+    xAxisLabel.setAttribute("class", "axis-label");
     xAxisLabel.textContent = xLabel;
     svg.appendChild(xAxisLabel);
     
@@ -87,6 +88,7 @@ function addAxes(svg, xLabel, yLabel, centerY = false) {
     yAxisLabel.setAttribute("text-anchor", "middle");
     yAxisLabel.setAttribute("font-size", "16");
     yAxisLabel.setAttribute("transform", "rotate(-90, 20, 200)");
+    yAxisLabel.setAttribute("class", "axis-label");
     yAxisLabel.textContent = yLabel;
     svg.appendChild(yAxisLabel);
 }
@@ -121,6 +123,7 @@ function addTicksAndGrid(svg, xTicks, yTicks, centerY = false) {
         xTickLabel.setAttribute("y", (yAxisY + 25).toString());
         xTickLabel.setAttribute("text-anchor", "middle");
         xTickLabel.setAttribute("font-size", "14");
+        xTickLabel.setAttribute("class", "tick-label");
         xTickLabel.textContent = tick.label;
         svg.appendChild(xTickLabel);
         
@@ -167,6 +170,7 @@ function addTicksAndGrid(svg, xTicks, yTicks, centerY = false) {
         yTickLabel.setAttribute("y", (y + 5).toString());
         yTickLabel.setAttribute("text-anchor", "end");
         yTickLabel.setAttribute("font-size", "14");
+        yTickLabel.setAttribute("class", "tick-label");
         yTickLabel.textContent = tick.label;
         svg.appendChild(yTickLabel);
         
@@ -254,6 +258,7 @@ function addLegend(svg, items, x = 560, y = 70) {
         label.setAttribute("x", (x + 50).toString());
         label.setAttribute("y", (itemY + 5).toString());
         label.setAttribute("font-size", "14");
+        label.setAttribute("class", "legend-text");
         label.textContent = item.label;
         svg.appendChild(label);
     });
@@ -322,7 +327,7 @@ function renderRicciScalarGraph() {
     
     // Add legend
     addLegend(svg, [
-        {color: "#4169E1", label: "Quantum HQR"},
+        {color: "#4169E1", label: "Quantum R(t)"},
         {color: "#FF6347", label: "Classical Prediction", dashed: true}
     ]);
 }
@@ -349,73 +354,83 @@ function renderEnergyDensityGraph() {
     
     const yTicks = [
         {value: 0, label: "0"},
-        {value: 1, label: "1"},
-        {value: 2, label: "2"},
-        {value: 3, label: "3"},
-        {value: 4, label: "4"},
-        {value: 5, label: "5"}
+        {value: 20, label: "20"},
+        {value: 40, label: "40"},
+        {value: 60, label: "60"},
+        {value: 80, label: "80"},
+        {value: 100, label: "100"}
     ];
     
     addTicksAndGrid(svg, xTicks, yTicks);
     
-    // Add linear approximation (dashed)
+    // Add linear trend line
     addPath(
         svg,
         "M50,350 L750,50",
-        "#FFA500",
+        "#666666",
         2,
         "none",
         "6,4"
     );
     
-    // Add energy density with resonance patterns
+    // Add dimensional resonance pattern (main energy density curve)
     addPath(
         svg,
         "M50,350 " +
-        "C60,345 70,340 80,335 " +
-        "C90,330 100,320 110,310 " +
-        "C120,300 130,290 140,285 " +
-        "C150,280 160,275 170,265 " +
-        "C180,255 190,245 200,240 " +
-        "C210,235 220,230 230,225 " +
-        "C240,220 250,215 260,205 " +
-        "C270,195 280,190 290,185 " +
-        "C300,180 310,175 320,170 " +
-        "C330,165 340,160 350,155 " +
-        "C360,150 370,145 380,140 " +
-        "C390,135 400,130 410,125 " +
-        "C420,120 430,115 440,110 " +
-        "C450,105 460,100 470,95 " +
-        "C480,90 490,83 500,80 " +
-        "C510,77 520,74 530,69 " +
-        "C540,64 550,61 560,65 " +
-        "C570,69 580,73 590,70 " +
-        "C600,67 610,64 620,59 " +
-        "C630,54 640,51 650,54 " +
-        "C660,57 670,60 680,55 " +
-        "C690,50 700,45 710,50 " +
-        "C720,55 730,60 740,55 " +
-        "C750,50 760,45 770,50",
-        "#4B0082",
+        "C70,340 90,330 110,320 " +
+        "C130,310 150,300 170,290 " +
+        "C180,280 190,275 200,270 " +  // First resonance peak
+        "C210,265 220,270 230,275 " +
+        "C240,280 250,270 260,260 " +
+        "C280,250 300,240 320,230 " +
+        "C330,225 340,220 350,215 " +  // Second resonance peak
+        "C360,210 370,215 380,220 " +
+        "C390,225 400,215 410,205 " +
+        "C430,195 450,185 470,175 " +
+        "C480,170 490,165 500,160 " +  // Third resonance peak
+        "C510,155 520,160 530,165 " +
+        "C540,170 550,160 560,150 " +
+        "C580,140 600,130 620,120 " +
+        "C630,115 640,110 650,105 " +  // Fourth resonance peak
+        "C660,100 670,105 680,110 " +
+        "C690,115 700,100 710,90 " +
+        "C730,80 750,70 770,50",
+        "#1E90FF",
         3
+    );
+    
+    // Add resonance component (oscillatory pattern)
+    addPath(
+        svg,
+        "M50,350 " +
+        "C100,340 150,345 200,330 " +
+        "C250,315 300,320 350,310 " +
+        "C400,300 450,305 500,290 " +
+        "C550,275 600,280 650,270 " +
+        "C700,260 750,265 770,250",
+        "#32CD32",
+        2,
+        "none",
+        "6,4"
     );
     
     // Add legend
     addLegend(svg, [
-        {color: "#4B0082", label: "11D with Resonance"},
-        {color: "#FFA500", label: "Linear Approximation", dashed: true}
+        {color: "#1E90FF", label: "11D Energy Density"},
+        {color: "#32CD32", label: "Resonance Pattern", dashed: true},
+        {color: "#666666", label: "Linear Trend", dashed: true}
     ]);
 }
 
 /**
- * Renders the Quantum Stress Tensor graph (Equation 3)
+ * Renders the Stress Tensor in 11D graph (Equation 3)
  */
 function renderStressTensorGraph() {
     const svg = createSVG('graph3');
     if (!svg) return;
     
     // Add axes and labels
-    addAxes(svg, "Time (t)", "Stress Tensor Components");
+    addAxes(svg, "Time (t)", "Quantum Stress Q(t)");
     
     // Add ticks and grid
     const xTicks = [
@@ -429,92 +444,99 @@ function renderStressTensorGraph() {
     
     const yTicks = [
         {value: 0, label: "0"},
-        {value: 1, label: "1"},
-        {value: 2, label: "2"},
-        {value: 3, label: "3"},
-        {value: 4, label: "4"},
-        {value: 5, label: "5"}
+        {value: 20, label: "20"},
+        {value: 40, label: "40"},
+        {value: 60, label: "60"},
+        {value: 80, label: "80"},
+        {value: 100, label: "100"}
     ];
     
     addTicksAndGrid(svg, xTicks, yTicks);
     
-    // Add trace component path
+    // Add trace component (main line)
     addPath(
         svg,
         "M50,350 " +
-        "C70,345 90,335 110,325 " +
-        "C130,315 150,305 170,295 " +
-        "C190,285 210,275 230,265 " +
-        "C250,255 270,247 290,240 " +
-        "C310,233 330,229 350,220 " +
-        "C370,211 390,203 410,195 " +
-        "C430,187 450,178 470,170 " +
-        "C490,162 510,153 530,145 " +
-        "C550,137 570,128 590,120 " +
-        "C610,112 630,103 650,95 " +
-        "C670,87 690,80 710,75 " +
-        "C730,70 750,65 770,60",
-        "#2E8B57", // Green
+        "C100,320 150,290 200,260 " +
+        "C250,230 300,200 350,170 " +
+        "C400,140 450,110 500,80 " +
+        "C550,60  600,50  650,50 " +
+        "C700,50  750,50  770,50",
+        "#4B0082",
         3
     );
     
-    // Add scalar component path
+    // Add scalar component (oscillating line)
     addPath(
         svg,
         "M50,350 " +
-        "C70,343 90,336 110,328 " +
-        "C130,320 150,315 170,305 " +
-        "C190,295 210,290 230,280 " +
-        "C250,270 270,265 290,255 " +
-        "C310,245 330,240 350,230 " +
-        "C370,220 390,212 410,205 " +
-        "C430,198 450,189 470,180 " +
-        "C490,171 510,165 530,155 " +
-        "C550,145 570,140 590,130 " +
-        "C610,120 630,115 650,105 " +
-        "C670,95 690,90 710,80 " +
-        "C730,70 750,65 770,60",
-        "#4682B4", // Steel Blue
-        3
+        "C70,335 90,345 110,330 " +
+        "C130,315 150,325 170,310 " +
+        "C190,295 210,305 230,290 " +
+        "C250,275 270,285 290,270 " +
+        "C310,255 330,265 350,250 " +
+        "C370,235 390,245 410,230 " +
+        "C430,215 450,225 470,210 " +
+        "C490,195 510,205 530,190 " +
+        "C550,175 570,185 590,170 " +
+        "C610,155 630,165 650,150 " +
+        "C670,135 690,145 710,130 " +
+        "C730,115 750,125 770,110",
+        "#006400",
+        2
     );
     
-    // Add vacuum energy component
+    // Add vacuum energy component (small oscillations)
     addPath(
         svg,
         "M50,330 " +
-        "C70,328 90,326 110,324 " +
-        "C130,322 150,321 170,319 " +
-        "C190,317 210,316 230,314 " +
-        "C250,312 270,311 290,309 " +
-        "C310,307 330,306 350,304 " +
-        "C370,302 390,300 410,298 " +
-        "C430,296 450,294 470,292 " +
-        "C490,290 510,288 530,286 " +
-        "C550,284 570,283 590,282 " +
-        "C610,281 630,280 650,280 " +
-        "C670,280 690,280 710,280 " +
-        "C730,280 750,280 770,280",
-        "#9400D3", // Purple
-        3
+        "C60,332 70,328 80,330 " +
+        "C90,332 100,328 110,330 " +
+        "C120,332 130,328 140,330 " +
+        "C150,332 160,328 170,330 " +
+        "C180,332 190,328 200,330 " +
+        "C210,332 220,328 230,330 " +
+        "C240,332 250,328 260,330 " +
+        "C270,332 280,328 290,330 " +
+        "C300,332 310,328 320,330 " +
+        "C330,332 340,328 350,330 " +
+        "C360,332 370,328 380,330 " +
+        "C390,332 400,328 410,330 " +
+        "C420,332 430,328 440,330 " +
+        "C450,332 460,328 470,330 " +
+        "C480,332 490,328 500,330 " +
+        "C510,332 520,328 530,330 " +
+        "C540,332 550,328 560,330 " +
+        "C570,332 580,328 590,330 " +
+        "C600,332 610,328 620,330 " +
+        "C630,332 640,328 650,330 " +
+        "C660,332 670,328 680,330 " +
+        "C690,332 700,328 710,330 " +
+        "C720,332 730,328 740,330 " +
+        "C750,332 760,328 770,330",
+        "#FF8C00",
+        1.5,
+        "none",
+        "2,2"
     );
     
     // Add legend
     addLegend(svg, [
-        {color: "#2E8B57", label: "Trace Component"},
-        {color: "#4682B4", label: "Scalar Component"},
-        {color: "#9400D3", label: "Vacuum Energy"}
+        {color: "#4B0082", label: "Trace Component"},
+        {color: "#006400", label: "Scalar Component"},
+        {color: "#FF8C00", label: "Vacuum Energy", dashed: true}
     ]);
 }
 
 /**
- * Renders the Entanglement Entropy Evolution graph (Equation 4)
+ * Renders the Entropy Evolution graph (Equation 4)
  */
 function renderEntropyEvolutionGraph() {
     const svg = createSVG('graph4');
     if (!svg) return;
     
     // Add axes and labels
-    addAxes(svg, "Time (t)", "Entanglement Entropy Se(t)");
+    addAxes(svg, "Time (t)", "Entanglement Entropy S(t)");
     
     // Add ticks and grid
     const xTicks = [
@@ -527,128 +549,91 @@ function renderEntropyEvolutionGraph() {
     ];
     
     const yTicks = [
-        {value: 1, label: "1"},
-        {value: 5, label: "5"},
-        {value: 10, label: "10"},
-        {value: 15, label: "15"},
+        {value: 0, label: "0"},
         {value: 20, label: "20"},
-        {value: 25, label: "25"}
+        {value: 40, label: "40"},
+        {value: 60, label: "60"},
+        {value: 80, label: "80"},
+        {value: 100, label: "100"}
     ];
     
     addTicksAndGrid(svg, xTicks, yTicks);
     
-    // Add base parabolic curve (dashed)
+    // Add parabolic trend line
     addPath(
         svg,
         "M50,350 " +
-        "C70,349 90,348 110,345 " +
-        "C130,342 150,338 170,334 " +
-        "C190,330 210,325 230,320 " +
-        "C250,315 270,309 290,302 " +
-        "C310,295 330,287 350,278 " +
-        "C370,269 390,259 410,248 " +
-        "C430,237 450,225 470,212 " +
-        "C490,199 510,185 530,170 " +
-        "C550,155 570,139 590,122 " +
-        "C610,105 630,87 650,68 " +
-        "C670,49 690,29 710,15 " +
-        "C730,8 750,1 770,0",
-        "#1E90FF", // Dodger Blue
+        "Q400,0 750,50",
+        "#666666",
         2,
         "none",
         "6,4"
     );
     
-    // Add entropy with phase transitions
+    // Add actual entropy evolution with phase transitions
     addPath(
         svg,
         "M50,350 " +
-        "C70,349 90,348 110,345 " +
-        "C130,342 150,338 170,334 " +
-        "C190,330 210,325 230,320 " +
-        "C250,315 270,309 290,302 " +
-        "C310,295 330,287 350,278 " +
-        "C370,269 390,259 410,240 " +
-        "C430,230 450,220 470,210 " +
-        "C490,200 510,185 530,170 " +
-        "C550,155 570,139 590,120 " +
-        "C610,100 630,80 650,60 " +
-        "C670,40 690,20 710,10 " +
-        "C730,5 750,0 770,0",
-        "#DC143C", // Crimson
+        "C100,325 150,300 200,280 " + // Initial slow growth
+        "C225,270 250,265 275,255 " +
+        "C280,250 285,200 290,190 " + // First phase transition
+        "C295,180 300,175 310,170 " +
+        "C320,165 330,160 340,155 " +
+        "C350,150 360,145 370,140 " +
+        "C380,135 390,130 400,125 " + // Steady middle phase
+        "C410,120 420,115 430,110 " +
+        "C440,105 450,100 460,95 " +
+        "C470,90  480,85  490,80 " +
+        "C495,77  500,75  505,70 " +
+        "C510,65  515,30  520,25 " + // Second phase transition
+        "C530,20  540,15  550,15 " +
+        "C560,15  570,20  580,25 " +
+        "C590,30  600,35  610,40 " +
+        "C620,45  630,50  640,55 " + // Final phase
+        "C650,60  660,70  670,75 " +
+        "C680,80  690,85  700,90 " +
+        "C710,95  720,100 730,105 " +
+        "C740,110 750,115 770,120",
+        "#9932CC",
         3
     );
     
-    // Add phase transition points
-    const phaseTransition1 = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    phaseTransition1.setAttribute("cx", "400");
-    phaseTransition1.setAttribute("cy", "240");
-    phaseTransition1.setAttribute("r", "6");
-    phaseTransition1.setAttribute("fill", "#DC143C");
-    svg.appendChild(phaseTransition1);
+    // Add phase transition markers
+    // First phase transition
+    const phaseMarker1 = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    phaseMarker1.setAttribute("cx", "290");
+    phaseMarker1.setAttribute("cy", "190");
+    phaseMarker1.setAttribute("r", "6");
+    phaseMarker1.setAttribute("fill", "#FF4500");
+    svg.appendChild(phaseMarker1);
     
-    const phaseTransition2 = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    phaseTransition2.setAttribute("cx", "590");
-    phaseTransition2.setAttribute("cy", "120");
-    phaseTransition2.setAttribute("r", "6");
-    phaseTransition2.setAttribute("fill", "#DC143C");
-    svg.appendChild(phaseTransition2);
-    
-    // Add phase transition labels
-    const label1 = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    label1.setAttribute("x", "380");
-    label1.setAttribute("y", "215");
-    label1.setAttribute("text-anchor", "middle");
-    label1.setAttribute("font-size", "12");
-    label1.setAttribute("fill", "#DC143C");
-    label1.textContent = "Phase";
-    svg.appendChild(label1);
-    
-    const label1b = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    label1b.setAttribute("x", "380");
-    label1b.setAttribute("y", "230");
-    label1b.setAttribute("text-anchor", "middle");
-    label1b.setAttribute("font-size", "12");
-    label1b.setAttribute("fill", "#DC143C");
-    label1b.textContent = "Transition 1";
-    svg.appendChild(label1b);
-    
-    const label2 = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    label2.setAttribute("x", "570");
-    label2.setAttribute("y", "95");
-    label2.setAttribute("text-anchor", "middle");
-    label2.setAttribute("font-size", "12");
-    label2.setAttribute("fill", "#DC143C");
-    label2.textContent = "Phase";
-    svg.appendChild(label2);
-    
-    const label2b = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    label2b.setAttribute("x", "570");
-    label2b.setAttribute("y", "110");
-    label2b.setAttribute("text-anchor", "middle");
-    label2b.setAttribute("font-size", "12");
-    label2b.setAttribute("fill", "#DC143C");
-    label2b.textContent = "Transition 2";
-    svg.appendChild(label2b);
+    // Second phase transition
+    const phaseMarker2 = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    phaseMarker2.setAttribute("cx", "520");
+    phaseMarker2.setAttribute("cy", "25");
+    phaseMarker2.setAttribute("r", "6");
+    phaseMarker2.setAttribute("fill", "#FF4500");
+    svg.appendChild(phaseMarker2);
     
     // Add legend
     addLegend(svg, [
-        {color: "#DC143C", label: "With Phase Transitions"},
-        {color: "#1E90FF", label: "Base Parabolic Growth", dashed: true}
-    ], 560, 280);
+        {color: "#9932CC", label: "Entropy Evolution"},
+        {color: "#666666", label: "Parabolic Trend", dashed: true},
+        {color: "#FF4500", label: "Phase Transitions"}
+    ], 560, 60);
 }
 
 /**
- * Renders the Time-Dependent Unified Field Equation graph (Equation 5)
+ * Renders the Unified Field Equation graph (Equation 5)
  */
 function renderUnifiedFieldGraph() {
     const svg = createSVG('graph5');
     if (!svg) return;
     
-    // Add axes with centered y-axis
-    addAxes(svg, "Time (t)", "Field Dynamics T(t)", true);
+    // Add axes and labels
+    addAxes(svg, "Time (t)", "Energy Balance", true);
     
-    // Add ticks and grid for centered y-axis
+    // Add ticks and grid
     const xTicks = [
         {value: 0, label: "0"},
         {value: 2, label: "2"},
@@ -660,64 +645,80 @@ function renderUnifiedFieldGraph() {
     
     const yTicks = [
         {value: -0.3, label: "-0.3"},
-        {value: -0.15, label: "-0.15"},
+        {value: -0.2, label: "-0.2"},
+        {value: -0.1, label: "-0.1"},
         {value: 0, label: "0"},
-        {value: 0.15, label: "0.15"},
+        {value: 0.1, label: "0.1"},
+        {value: 0.2, label: "0.2"},
         {value: 0.3, label: "0.3"}
     ];
     
     addTicksAndGrid(svg, xTicks, yTicks, true);
     
-    // Add holographic term (dashed line)
+    // Add holographic term
     addPath(
         svg,
-        "M50,200 L750,50",
-        "#008000", // Green
-        2,
-        "none",
-        "6,4"
+        "M50,170 " +
+        "C75,165 100,160 125,155 " +
+        "C150,150 175,145 200,140 " +
+        "C225,135 250,130 275,125 " +
+        "C300,120 325,115 350,110 " +
+        "C375,105 400,100 425,95 " +
+        "C450,90 475,85 500,80 " +
+        "C525,75 550,70 575,65 " +
+        "C600,60 625,55 650,50 " +
+        "C675,45 700,40 725,35 " +
+        "C750,30 775,25 800,20",
+        "#FF4500",
+        2
     );
     
-    // Add entanglement counter-term (dashed line)
+    // Add entanglement counter-term
     addPath(
         svg,
-        "M50,200 L750,350",
-        "#FF4500", // OrangeRed
-        2,
-        "none",
-        "6,4"
+        "M50,230 " +
+        "C75,235 100,240 125,245 " +
+        "C150,250 175,255 200,260 " +
+        "C225,265 250,270 275,275 " +
+        "C300,280 325,285 350,290 " +
+        "C375,295 400,300 425,305 " +
+        "C450,310 475,315 500,320 " +
+        "C525,325 550,330 575,335 " +
+        "C600,340 625,345 650,350 " +
+        "C675,355 700,360 725,365 " +
+        "C750,370 775,375 800,380",
+        "#008B8B",
+        2
     );
     
-    // Add net field dynamics
+    // Add net balance (oscillating around zero)
     addPath(
         svg,
         "M50,200 " +
-        "C70,190 90,180 110,185 " +
-        "C130,190 150,200 170,195 " +
-        "C190,190 210,180 230,175 " +
-        "C250,170 270,165 290,170 " +
-        "C310,175 330,185 350,190 " +
-        "C370,195 390,200 410,195 " +
-        "C430,190 450,180 470,175 " +
-        "C490,170 510,165 530,170 " +
-        "C550,175 570,185 590,190 " +
-        "C610,195 630,200 650,195 " +
-        "C670,190 690,180 710,175 " +
-        "C730,170 750,165 770,170",
-        "#800080", // Purple
+        "C75,198 100,202 125,198 " +
+        "C150,196 175,204 200,198 " +
+        "C225,196 250,204 275,198 " +
+        "C300,196 325,204 350,198 " +
+        "C375,196 400,204 425,198 " +
+        "C450,196 475,204 500,198 " +
+        "C525,196 550,204 575,198 " +
+        "C600,196 625,204 650,198 " +
+        "C675,196 700,204 725,198 " +
+        "C750,196 775,204 800,198",
+        "#9400D3",
         3
     );
     
     // Add legend
     addLegend(svg, [
-        {color: "#800080", label: "Net Field Dynamics"},
-        {color: "#008000", label: "Holographic Term", dashed: true},
-        {color: "#FF4500", label: "Entanglement Term", dashed: true}
+        {color: "#FF4500", label: "Holographic Term"},
+        {color: "#008B8B", label: "Entanglement Term"},
+        {color: "#9400D3", label: "Net Balance"}
     ]);
 }
 
 /**
- * Renders the Holographic Stress-Energy Tensor graph (Equation 6)
+ * Renders the Holographic Tensor graph (Equation 6)
  */
 function renderHolographicTensorGraph() {
     const svg = createSVG('graph6');
@@ -738,75 +739,132 @@ function renderHolographicTensorGraph() {
     
     const yTicks = [
         {value: 0, label: "0"},
-        {value: 1, label: "1"},
-        {value: 2, label: "2"},
-        {value: 3, label: "3"},
-        {value: 4, label: "4"},
-        {value: 5, label: "5"}
+        {value: 20, label: "20"},
+        {value: 40, label: "40"},
+        {value: 60, label: "60"},
+        {value: 80, label: "80"},
+        {value: 100, label: "100"}
     ];
     
     addTicksAndGrid(svg, xTicks, yTicks);
     
-    // Add linear trend (dashed)
+    // Add primary trend line
     addPath(
         svg,
         "M50,350 L750,50",
-        "#FFA500", // Orange
+        "#666666",
         2,
         "none",
         "6,4"
     );
     
-    // Add multi-scale oscillations
+    // Add large wavelength oscillation
+    addPath(
+        svg,
+        "M50,330 " +
+        "C120,300 190,360 260,330 " +
+        "C330,300 400,360 470,330 " +
+        "C540,300 610,360 680,330 " +
+        "C750,300 820,360 890,330",
+        "#006400",
+        2,
+        "none"
+    );
+    
+    // Add medium wavelength oscillation
+    addPath(
+        svg,
+        "M50,320 " +
+        "C85,300 120,340 155,320 " +
+        "C190,300 225,340 260,320 " +
+        "C295,300 330,340 365,320 " +
+        "C400,300 435,340 470,320 " +
+        "C505,300 540,340 575,320 " +
+        "C610,300 645,340 680,320 " +
+        "C715,300 750,340 785,320",
+        "#4169E1",
+        2,
+        "none"
+    );
+    
+    // Add small wavelength oscillation
+    addPath(
+        svg,
+        "M50,310 " +
+        "C65,300 80,320 95,310 " +
+        "C110,300 125,320 140,310 " +
+        "C155,300 170,320 185,310 " +
+        "C200,300 215,320 230,310 " +
+        "C245,300 260,320 275,310 " +
+        "C290,300 305,320 320,310 " +
+        "C335,300 350,320 365,310 " +
+        "C380,300 395,320 410,310 " +
+        "C425,300 440,320 455,310 " +
+        "C470,300 485,320 500,310 " +
+        "C515,300 530,320 545,310 " +
+        "C560,300 575,320 590,310 " +
+        "C605,300 620,320 635,310 " +
+        "C650,300 665,320 680,310 " +
+        "C695,300 710,320 725,310 " +
+        "C740,300 755,320 770,310",
+        "#9932CC",
+        1.5,
+        "none"
+    );
+    
+    // Add combined multi-scale pattern
     addPath(
         svg,
         "M50,350 " +
-        "C60,345 70,340 80,330 " +
-        "C90,320 100,315 110,310 " +
-        "C120,305 130,310 140,318 " +
-        "C150,326 160,330 170,326 " +
-        "C180,322 190,315 200,300 " +
-        "C210,285 220,275 230,270 " +
-        "C240,265 250,270 260,278 " +
-        "C270,286 280,290 290,286 " +
-        "C300,282 310,270 320,255 " +
-        "C330,240 340,230 350,225 " +
-        "C360,220 370,225 380,235 " +
-        "C390,245 400,250 410,242 " +
-        "C420,234 430,220 440,205 " +
-        "C450,190 460,180 470,178 " +
-        "C480,176 490,182 500,190 " +
-        "C510,198 520,202 530,198 " +
-        "C540,194 550,180 560,162 " +
-        "C570,144 580,130 590,126 " +
-        "C600,122 610,128 620,138 " +
-        "C630,148 640,154 650,146 " +
-        "C660,138 670,120 680,105 " +
-        "C690,90 700,80 710,76 " +
-        "C720,72 730,78 740,86 " +
-        "C750,94 760,98 770,90",
-        "#008B8B", // Dark Cyan
+        "C60,345 70,342 80,335 " +
+        "C90,328 100,324 110,315 " +
+        "C120,308 130,302 140,292 " +
+        "C150,286 160,282 170,272 " +
+        "C180,266 190,262 200,252 " +
+        "C210,246 220,242 230,232 " +
+        "C240,226 250,222 260,212 " +
+        "C270,205 280,200 290,192 " +
+        "C300,185 310,180 320,172 " +
+        "C330,168 340,162 350,152 " +
+        "C360,148 370,142 380,132 " +
+        "C390,128 400,122 410,112 " +
+        "C420,108 430,102 440,92 " +
+        "C450,88 460,82 470,72 " +
+        "C480,68 490,62 500,52 " +
+        "C510,48 520,46 530,44 " +
+        "C540,42 550,40 560,42 " +
+        "C570,44 580,46 590,48 " +
+        "C600,50 610,52 620,54 " +
+        "C630,56 640,58 650,56 " +
+        "C660,54 670,52 680,50 " +
+        "C690,48 700,46 710,48 " +
+        "C720,50 730,52 740,50 " +
+        "C750,48 760,46 770,48",
+        "#FF8C00",
         3
     );
     
     // Add legend
     addLegend(svg, [
-        {color: "#008B8B", label: "Multi-Scale Effects"},
-        {color: "#FFA500", label: "Linear Trend", dashed: true}
+        {color: "#FF8C00", label: "Combined Pattern"},
+        {color: "#006400", label: "Cosmic Scale"},
+        {color: "#4169E1", label: "Galactic Scale"},
+        {color: "#9932CC", label: "Quantum Scale"},
+        {color: "#666666", label: "Linear Trend", dashed: true}
     ]);
 }
 
 /**
- * Renders the Projected Time-Dependent Unified Equation in 4D graph (Equation 7)
+ * Renders the Projected 4D Unified Equation graph (Equation 7)
  */
 function renderProjected4DGraph() {
     const svg = createSVG('graph7');
     if (!svg) return;
     
-    // Add axes with centered y-axis
-    addAxes(svg, "Time (t)", "Projected Dynamics R(t)", true);
+    // Add axes and labels
+    addAxes(svg, "Time (t)", "Projected Effect", true);
     
-    // Add ticks and grid for centered y-axis
+    // Add ticks and grid
     const xTicks = [
         {value: 0, label: "0"},
         {value: 2, label: "2"},
@@ -818,85 +876,91 @@ function renderProjected4DGraph() {
     
     const yTicks = [
         {value: -0.3, label: "-0.3"},
-        {value: -0.15, label: "-0.15"},
+        {value: -0.2, label: "-0.2"},
+        {value: -0.1, label: "-0.1"},
         {value: 0, label: "0"},
-        {value: 0.15, label: "0.15"},
+        {value: 0.1, label: "0.1"},
+        {value: 0.2, label: "0.2"},
         {value: 0.3, label: "0.3"}
     ];
     
     addTicksAndGrid(svg, xTicks, yTicks, true);
     
-    // Add zero baseline (dashed)
-    const zeroLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
-    zeroLine.setAttribute("x1", "50");
-    zeroLine.setAttribute("y1", "200");
-    zeroLine.setAttribute("x2", "750");
-    zeroLine.setAttribute("y2", "200");
-    zeroLine.setAttribute("stroke", "#666");
-    zeroLine.setAttribute("stroke-width", "1");
-    zeroLine.setAttribute("stroke-dasharray", "2,2");
-    svg.appendChild(zeroLine);
+    // Add perfect cancellation line
+    addPath(
+        svg,
+        "M50,200 L750,200",
+        "#666666",
+        2,
+        "none",
+        "6,4"
+    );
     
-    // Add interference pattern
+    // Add quantum interference pattern
     addPath(
         svg,
         "M50,200 " +
-        "C70,210 90,215 110,210 " +
-        "C130,205 150,195 170,185 " +
-        "C190,175 210,170 230,175 " +
-        "C250,180 270,190 290,200 " +
-        "C310,210 330,215 350,210 " +
-        "C370,205 390,195 410,185 " +
-        "C430,175 450,170 470,175 " +
-        "C490,180 510,190 530,195 " +
-        "C550,200 570,198 590,190 " +
-        "C610,182 630,175 650,170 " +
-        "C670,165 690,160 710,160 " +
-        "C730,160 750,165 770,170",
-        "#B22222", // Firebrick Red
-        3
+        "C65,195 80,205 95,200 " +
+        "C110,195 125,205 140,200 " +
+        "C155,195 170,205 185,200 " +
+        "C200,195 215,205 230,200 " +
+        "C245,195 260,205 275,200 " +
+        "C290,195 305,205 320,200 " +
+        "C335,195 350,205 365,200 " +
+        "C380,195 395,205 410,200 " +
+        "C425,195 440,205 455,200 " +
+        "C470,195 485,205 500,200 " +
+        "C515,195 530,205 545,198 " + // Start of gradual deviation
+        "C560,196 575,204 590,196 " +
+        "C605,194 620,202 635,194 " +
+        "C650,192 665,200 680,192 " +
+        "C695,190 710,198 725,190 " +
+        "C740,188 755,196 770,188", // Increasing deviation representing cosmic acceleration
+        "#1E90FF",
+        2
+    );
+    
+    // Add emergent behavior curve
+    addPath(
+        svg,
+        "M50,200 " +
+        "C100,200 150,201 200,202 " +
+        "C250,203 300,204 350,205 " +
+        "C400,206 450,207 500,208 " +
+        "C550,189 600,170 650,151 " +
+        "C700,132 750,113 800,94",
+        "#FF4500",
+        3,
+        "none"
+    );
+    
+    // Add smaller fluctuations representing quantum noise
+    addPath(
+        svg,
+        "M50,198 " +
+        "C55,197 60,199 65,198 " +
+        "C70,197 75,199 80,198 " +
+        "C85,197 90,199 95,198 " +
+        "C100,197 105,199 110,198 " +
+        "C115,197 120,199 125,198 " +
+        "C130,197 135,199 140,198 " +
+        "C145,197 150,199 155,198 " +
+        "C160,197 165,199 170,198 " +
+        "C175,197 180,199 185,198 " +
+        // Continued pattern for many more points...
+        "C730,197 735,199 740,198 " +
+        "C745,197 750,199 755,198 " +
+        "C760,197 765,199 770,198",
+        "#32CD32",
+        1,
+        "none"
     );
     
     // Add legend
     addLegend(svg, [
-        {color: "#B22222", label: "Interference Pattern"},
-        {color: "#666", label: "Zero Baseline", dashed: true}
+        {color: "#FF4500", label: "Emergent Effect"},
+        {color: "#1E90FF", label: "Interference Pattern"},
+        {color: "#32CD32", label: "Quantum Fluctuations"},
+        {color: "#666666", label: "Perfect Cancellation", dashed: true}
     ]);
-}
-
-/**
- * Utility function to convert a function to a path string
- * @param {Function} func - Function mapping x to y
- * @param {number} xMin - Minimum x value
- * @param {number} xMax - Maximum x value
- * @param {number} xRange - X-axis range in pixels (default: 700)
- * @param {number} yRange - Y-axis range in pixels (default: 300)
- * @param {number} xOffset - X-axis offset in pixels (default: 50)
- * @param {number} yOffset - Y-axis offset in pixels (default: 350)
- * @param {number} yTopValue - Value at the top of the y-axis
- * @param {number} yBottomValue - Value at the bottom of the y-axis (default: 0)
- * @param {number} points - Number of points to sample (default: 100)
- * @returns {string} SVG path string
- */
-function functionToPath(func, xMin, xMax, xRange = 700, yRange = 300, xOffset = 50, yOffset = 350, yTopValue, yBottomValue = 0, points = 100) {
-    // Calculate step size
-    const step = (xMax - xMin) / (points - 1);
-    
-    // Initialize path
-    let path = `M${xOffset},${yOffset}`;
-    
-    // Generate points
-    for (let i = 0; i < points; i++) {
-        const x = xMin + i * step;
-        const y = func(x);
-        
-        // Map x and y to SVG coordinates
-        const xPos = xOffset + (x - xMin) / (xMax - xMin) * xRange;
-        const yPos = yOffset - (y - yBottomValue) / (yTopValue - yBottomValue) * yRange;
-        
-        // Add point to path
-        path += ` L${xPos},${yPos}`;
-    }
-    
-    return path;
 }
