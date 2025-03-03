@@ -168,6 +168,9 @@
     <script>
         // Realistic Data: Quantum Information Stress Tensor and Ricci Curvature
         const time = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        if (typeof time === 'undefined') {
+    const time = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+}
 
         // Ricci Scalar R(t) from FLRW cosmology (normalized values)
         const ricciScalar = [0, 0.2, 0.5, 0.9, 1.5, 2.5, 3.8, 5.2, 6.7, 8.3, 10.0];
@@ -263,8 +266,14 @@
             font: { color: '#fff' },
             legend: { bgcolor: 'rgba(0,0,0,0)' } // Transparent legend background
         };
+        console.log("Time:", time);
+console.log("Standard Entropy:", standardEntropy);
+console.log("Corrected Entropy:", correctedEntropy);
 
-        Plotly.newPlot('black-hole-entropy-graph', [standardTrace, correctedTrace], entropyLayout);
+window.onload = function() {
+    Plotly.newPlot('black-hole-entropy-graph', [standardTrace, correctedTrace], entropyLayout);
+};
+
     </script>
 
     
