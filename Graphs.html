@@ -233,8 +233,7 @@
       
 
         // Standard Black Hole Entropy Decay (Hawking Radiation Model)
-        const standardEntropy = time.map(t => Math.exp(-t / 3)); // Exponential decay
-
+       
         // HQR Corrected Entropy (with hidden order correction term)
         const hiddenCorrection = time.map(t => 0.05 * Math.sin(0.5 * t)); // Small quantum fluctuation
         const correctedEntropy = time.map((t, i) => standardEntropy[i] + hiddenCorrection[i]);
