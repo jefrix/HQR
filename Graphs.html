@@ -266,12 +266,16 @@
             font: { color: '#fff' },
             legend: { bgcolor: 'rgba(0,0,0,0)' } // Transparent legend background
         };
-        console.log("Time:", time);
-console.log("Standard Entropy:", standardEntropy);
-console.log("Corrected Entropy:", correctedEntropy);
-
+    );
 window.onload = function() {
+    // Debugging logs to check if data is valid
+    console.log("Time:", time);
+    console.log("Standard Entropy:", standardEntropy);
+    console.log("Corrected Entropy:", correctedEntropy);
+
     Plotly.newPlot('black-hole-entropy-graph', [standardTrace, correctedTrace], entropyLayout);
+};
+
 };
 
     </script>
