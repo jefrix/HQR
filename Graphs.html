@@ -73,28 +73,39 @@
     <!-- Equation 1: Holographic Entropy with Hidden Order Contributions -->
     <div class="equation-container">
         <h2>1. Holographic Entropy with Hidden Order Contributions</h2>
-
-        <!-- MathJax Equation -->
         <div class="latex-equation">
             $$ S_{HQR} = \frac{A_{proj}}{4G\hbar} + S_{hidden} $$
         </div>
-
         <div class="description">
             <p>
                 This equation represents entropy as a combination of a holographic term 
                 (projected area) and a hidden-order contribution from higher dimensions. 
-                It extends the standard holographic entropy formula by incorporating effects 
-                beyond 4D spacetime.
             </p>
         </div>
-
-        <!-- Placeholder for Graph -->
         <div id="entropy-graph" class="graph-container"></div>
+    </div>
+
+    <!-- Equation 2: Higher-Dimensional Field Equations in HQR -->
+    <div class="equation-container">
+        <h2>2. Higher-Dimensional Field Equations in HQR</h2>
+        <div class="latex-equation">
+            $$ G_{\mu\nu}^{higher} + \Lambda g_{\mu\nu} = \kappa Q_{\mu\nu} $$
+        </div>
+        <div class="description">
+            <p>
+                This equation extends Einstein’s field equations into **higher dimensions**, incorporating 
+                a quantum stress-energy tensor \( Q_{\mu\nu} \). The inclusion of \( Q_{\mu\nu} \) accounts 
+                for quantum effects that emerge from the interaction between holographic projections and 
+                higher-dimensional geometry.
+            </p>
+        </div>
+        <div id="field-equation-graph" class="graph-container"></div>
     </div>
 
     <!-- Plotly.js Script for Graphing Entropy Evolution -->
     <script>
-        const trace1 = {
+        // Graph for Equation 1 (Holographic Entropy)
+        const entropyTrace = {
             x: [0, 1, 2, 3, 4, 5, 6],
             y: [1, 2, 3.5, 5.1, 7.8, 10.5, 14.3],
             mode: 'lines+markers',
@@ -102,7 +113,7 @@
             line: { color: 'cyan' }
         };
 
-        const layout = {
+        const entropyLayout = {
             title: 'Holographic Entropy Over Time',
             xaxis: { title: 'Time (t)', color: '#fff' },
             yaxis: { title: 'Entropy S_HQR', color: '#fff' },
@@ -111,7 +122,27 @@
             font: { color: '#fff' }
         };
 
-        Plotly.newPlot('entropy-graph', [trace1], layout);
+        Plotly.newPlot('entropy-graph', [entropyTrace], entropyLayout);
+
+        // Graph for Equation 2 (Quantum Stress Tensor in Higher Dimensions)
+        const fieldTrace = {
+            x: [0, 1, 2, 3, 4, 5, 6],
+            y: [0, 0.2, 0.5, 1.2, 2.0, 3.5, 5.0],
+            mode: 'lines+markers',
+            name: 'Quantum Stress Tensor Q_μν',
+            line: { color: 'magenta' }
+        };
+
+        const fieldLayout = {
+            title: 'Quantum Stress Tensor Evolution',
+            xaxis: { title: 'Time (t)', color: '#fff' },
+            yaxis: { title: 'Q_μν Magnitude', color: '#fff' },
+            paper_bgcolor: '#222',
+            plot_bgcolor: '#222',
+            font: { color: '#fff' }
+        };
+
+        Plotly.newPlot('field-equation-graph', [fieldTrace], fieldLayout);
     </script>
 
 </body>
