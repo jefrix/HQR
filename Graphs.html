@@ -193,15 +193,16 @@
             line: { color: 'orange' }
         };
 
-        const quantumLayout = {
-            title: 'Quantum Information Flow & Spacetime Curvature',
-            xaxis: { title: 'Time (t)', color: '#fff' },
-            yaxis: { title: 'Magnitude', color: '#fff' },
-            paper_bgcolor: '#222',
-            legend: { bgcolor: 'rgba(0,0,0,0)' },
-            plot_bgcolor: '#222',
-            font: { color: '#fff' }
-        };
+       const quantumLayout = {
+    title: 'Quantum Information Flow & Spacetime Curvature',
+    xaxis: { title: 'Time (t)', color: '#fff' },
+    yaxis: { title: 'Magnitude', color: '#fff' },
+    paper_bgcolor: '#222',
+    plot_bgcolor: '#222',
+    font: { color: '#fff' },
+    legend: { bgcolor: 'rgba(0,0,0,0)' }  // <- This line removes the white box
+};
+
 
         Plotly.newPlot('quantum-info-graph', [ricciTrace, quantumTrace], quantumLayout);
     </script>
