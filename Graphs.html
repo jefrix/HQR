@@ -227,17 +227,25 @@
         <div id="black-hole-entropy-graph" class="graph-container"></div>
     </div>
 
-    <!-- Plotly.js Script for Graphing Black Hole Entropy Evolution -->
-    <script>
-        // Realistic Data: Black Hole Entropy Decay + Hidden Order Corrections
-      
-
+   <!-- Plotly.js Script for Graphing Black Hole Entropy Evolution -->
+<script>
+    // Ensure this script runs after the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        // Realistic Data: Black Hole Entropy Evolution Time Points
+        const time = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        
         // Standard Black Hole Entropy Decay (Hawking Radiation Model)
-       
-        // HQR Corrected Entropy (with hidden order correction term)
-        const hiddenCorrection = time.map(t => 0.05 * Math.sin(0.5 * t)); // Small quantum fluctuation
-       
-
+        // Initial entropy value of 100 with exponential decay (tau = 10)
+        const standardEntropy = time.map(t => 100 * Math.exp(-t/10));
+        
+        // Hidden order correction - quantum fluctuations
+        const hiddenCorrection = time.map(t => 5 * Math.sin(t) + 2 * Math.cos(2*t)); 
+        
+        // HQR Corrected Entropy (with hidden order contribution)
+        const correctedEntropy = time.map((t, i) => 
+            standardEntropy[i] + hiddenCorrection[i] + 3 * (1 - Math.exp(-t/5))
+        );
+        
         // Plot Standard Entropy Decay
         const standardTrace = {
             x: time,
@@ -246,7 +254,7 @@
             name: 'Standard Entropy Decay',
             line: { color: 'red', dash: 'dash' }
         };
-
+        
         // Plot Corrected Entropy (HQR Effects)
         const correctedTrace = {
             x: time,
@@ -255,8 +263,22 @@
             name: 'HQR-Corrected Entropy',
             line: { color: 'cyan' }
         };
-
-
+        
+        // Layout for the black hole entropy plot
+        const entropyLayout = {
+            title: 'Black Hole Entropy Evolution with HQR Corrections',
+            xaxis: { title: 'Time (t)', color: '#fff' },
+            yaxis: { title: 'Entropy S', color: '#fff' },
+            paper_bgcolor: '#222',
+            plot_bgcolor: '#222',
+            font: { color: '#fff' },
+            legend: { bgcolor: 'rgba(0,0,0,0)', font: { color: '#fff' } }
+        };
+        
+        // Render the plot
+        Plotly.newPlot('black-hole-entropy-graph', [standardTrace, correctedTrace], entropyLayout);
+    });
+</script>
    
 window.onload = function() {
     // Debugging logs to check if data is valid
