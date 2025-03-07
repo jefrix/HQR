@@ -514,7 +514,50 @@ function setup() {
 // Create p5 instances
 new p5(hiddenOrderSketch);
 new p5(holographicSketch);
+// sketch.js (Modular)
+let hqrVisualizations = {
+    hiddenOrderSketch: null,
+    hqrSketch: null
+};
 
+function setupHQRVisualizations() {
+    hqrVisualizations.hiddenOrderSketch = new p5((p) => {
+        let equationText;
+        p.setup = () => {
+            let c = p.createCanvas(800, 400);
+            c.parent('hidden-order-canvas');
+            equationText = document.getElementById('equation-text-hidden');
+            p.noLoop();
+        };
+        p.draw = () => {
+            // [Same draw logic as Option 1 for Hidden Order]
+        };
+    });
+
+    hqrVisualizations.hqrSketch = new p5((p) => {
+        let equationText;
+        p.setup = () => {
+            let c = p.createCanvas(800, 400);
+            c.parent('hqr-canvas');
+            equationText = document.getElementById('equation-text-hqr');
+            p.noLoop();
+        };
+        p.draw = () => {
+            // [Same draw logic as Option 1 for HQR]
+        };
+    });
+
+    p5.prototype.setLineDash = function(dash) {
+        this.drawingContext.setLineDash(dash);
+    };
+}
+
+window.addEventListener('load', () => {
+    if (document.getElementById('hidden-order-canvas')) {
+        setupHQRVisualizations();
+    }
+    // Add other page-specific setup logic here
+});
 // Smooth scrolling
 document.querySelectorAll('nav a').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
