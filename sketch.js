@@ -229,6 +229,21 @@ let holographicSketch = function(p) {
     };
 };
 
+// sketch.js
+let equationTextElement;
+
+function setup() {
+    // Create a canvas (optional, for future enhancements)
+    let c = createCanvas(200, 50);
+    c.parent('equation-display'); // Attach to the equation-display div
+    equationTextElement = select('#equation-text'); // Get the text element
+}
+
+function draw() {
+    // No drawing needed for now, just update text
+    // This could be enhanced to graph the equation later
+}
+
 // Create p5 instances
 new p5(hiddenOrderSketch);
 new p5(holographicSketch);
