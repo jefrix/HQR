@@ -300,6 +300,126 @@
             animation: fadeIn 0.5s ease-in-out;
         }
     </style>
+    <script>
+    // DOM Elements
+    const dimSelect = document.getElementById('dim-select');
+    const orderParameter = document.getElementById('order-parameter');
+    const hiddenOrderApply = document.getElementById('hidden-order-apply');
+    const hiddenOrderSvg = document.getElementById('hidden-order-svg');
+    const bohmianWavePath = document.getElementById('bohmian-wave-path');
+    const hiddenOrderPath = document.getElementById('hidden-order-path');
+    const correlationLength = document.getElementById('correlation-length');
+    const orderParameterValue = document.getElementById('order-parameter-value');
+    const dimensionalityValue = document.getElementById('dimensionality-value');
+    const hiddenOrderLoading = document.getElementById('hidden-order-loading');
+    const hiddenOrderStatus = document.getElementById('hidden-order-status');
+
+    const modelType = document.getElementById('model-type');
+    const complexity = document.getElementById('complexity');
+    const hqrApply = document.getElementById('hqr-apply');
+    const hqrSvg = document.getElementById('hqr-svg');
+    const pilotWave = document.getElementById('pilot-wave');
+    const fieldPotential = document.getElementById('field-potential');
+    const projectedWave = document.getElementById('projected-wave');
+    const hqrLoading = document.getElementById('hqr-loading');
+    const hqrStatus = document.getElementById('hqr-status');
+    const bohmianInfluence = document.getElementById('bohmian-influence');
+    const holographicProjection = document.getElementById('holographic-projection');
+    const stringCoupling = document.getElementById('string-coupling');
+    const integrationFactor = document.getElementById('integration-factor');
+
+    // Update parameter displays
+    function updateParameterDisplays() {
+        orderParameterValue.textContent = orderParameter.value;
+        dimensionalityValue.textContent = dimSelect.value.toUpperCase();
+        correlationLength.textContent = (1.73 + parseFloat(orderParameter.value) * 0.5).toFixed(2);
+        complexityValue.textContent = complexity.value;
+        bohmianInfluence.textContent = (0.68 + parseFloat(complexity.value) * 0.02).toFixed(2);
+        holographicProjection.textContent = (0.47 + parseFloat(complexity.value) * 0.01).toFixed(2);
+        stringCoupling.textContent = (0.39 - parseFloat(complexity.value) * 0.01).toFixed(2);
+        integrationFactor.textContent = (0.71 + parseFloat(complexity.value) * 0.01).toFixed(2);
+    }
+
+    // Update Hidden Order Graph
+    function updateHiddenOrderGraph() {
+        const orderParam = parseFloat(orderParameter.value);
+        const dim = dimSelect.value;
+        let bohmianPath = 'M50,250 ';
+        let hiddenPath = 'M50,250 ';
+        const amplitude = dim === '11d' ? 50 * orderParam : 30 * orderParam;
+        for (let i = 0; i < 5; i++) {
+            const x = 50 + i * 100;
+            const yBohm = 250 - amplitude * Math.sin(i * Math.PI / 2.5);
+            const yHidden = 250 + amplitude * Math.cos(i * Math.PI / 2.5);
+            bohmianPath += `C${x-50},${yBohm+20} ${x-20},${yBohm-20} ${x},${yBohm} `;
+            hiddenPath += `C${x-50},${yHidden+10} ${x-20},${yHidden-10} ${x},${yHidden} `;
+        }
+        bohmianPath += '750,180';
+        hiddenPath += '750,230';
+        bohmianWavePath.setAttribute('d', bohmianPath);
+        hiddenOrderPath.setAttribute('d', hiddenPath);
+        hiddenOrderSvg.classList.add('updating');
+        setTimeout(() => hiddenOrderSvg.classList.remove('updating'), 500);
+    }
+
+    // Update HQR Graph
+    function updateHQRGraph() {
+        const complexityVal = parseFloat(complexity.value);
+        const model = modelType.value;
+        let pilotPath = 'M-150,0 ';
+        let fieldPath = 'M-150,0 ';
+        let projPath = 'M-200,0 ';
+        const amp = 20 + complexityVal * 5;
+        const freq = model === 'integrated' ? 0.1 : 0.2;
+        for (let i = 0; i < 5; i++) {
+            const x = -150 + i * 75;
+            pilotPath += `C${x+30},${amp*Math.sin(i*freq)} ${x+45},${amp*Math.cos(i*freq)} ${x+75},${amp*Math.sin((i+1)*freq)} `;
+            fieldPath += `C${x+30},-${amp*Math.cos(i*freq)} ${x+45},-${amp*Math.sin(i*freq)} ${x+75},-${amp*Math.cos((i+1)*freq)} `;
+            projPath += `C${x+40},${amp*0.5*Math.sin(i*0.15)} ${x+60},${amp*0.5*Math.cos(i*0.15)} ${x+80},${amp*0.5*Math.sin((i+1)*0.15)} `;
+        }
+        pilotPath += '150,10';
+        fieldPath += '150,-30';
+        projPath += '200,0';
+        pilotWave.setAttribute('d', pilotPath);
+        fieldPotential.setAttribute('d', fieldPath);
+        projectedWave.setAttribute('d', projPath);
+        hqrSvg.classList.add('updating');
+        setTimeout(() => hqrSvg.classList.remove('updating'), 500);
+    }
+
+    // Event Listeners
+    orderParameter.addEventListener('input', updateParameterDisplays);
+    dimSelect.addEventListener('change', updateParameterDisplays);
+    complexity.addEventListener('input', updateParameterDisplays);
+    modelType.addEventListener('change', updateParameterDisplays);
+
+    hiddenOrderApply.addEventListener('click', () => {
+        hiddenOrderLoading.classList.add('active');
+        hiddenOrderStatus.classList.remove('show');
+        setTimeout(() => {
+            updateHiddenOrderGraph();
+            updateParameterDisplays();
+            hiddenOrderLoading.classList.remove('active');
+            hiddenOrderStatus.classList.add('show');
+        }, 1000);
+    });
+
+    hqrApply.addEventListener('click', () => {
+        hqrLoading.classList.add('active');
+        hqrStatus.classList.remove('show');
+        setTimeout(() => {
+            updateHQRGraph();
+            updateParameterDisplays();
+            hqrLoading.classList.remove('active');
+            hqrStatus.classList.add('show');
+        }, 1000);
+    });
+
+    // Initial Render
+    updateParameterDisplays();
+    updateHiddenOrderGraph();
+    updateHQRGraph();
+</script>
 </head>
 <body>
     <div class="header">
