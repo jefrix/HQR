@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equation Grapher with Buttons</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.18.2/plotly.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .control-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        .parameter-controls {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .parameter-control {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+            min-width: 120px;
+        }
+        input, select {
+            margin: 5px 0;
+            padding: 8px;
+        }
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        #plotDiv {
+            width: 100%;
+            height: 500px;
+        }
+        .preset-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .preset-buttons button {
+            background-color: #2196F3;
+        }
+        .preset-buttons button:hover {
+            background-color: #0b7dda;
+        }
+    </style>
+</head>
+<body>
+    <h1>Equation Grapher with Interactive Controls</h1>
+    
+    <div class="controls">
+        <div class="control-group">
+            <label for="equation">Equation:</label>
+            <input type="text" id="equation" value="a*sin(b*x) + c" style="width: 90%;">
+        </div>
+        <div class="control-group">
+            <label for="xmin">X Min:</label>
+            <input type="number" id="xmin" value="-10" step="1">
+            <label for="xmax">X Max:</label>
+            <input type="number" id="xmax" value="10" step="1">
+        </div>
+    </div>
+    
+    <div class="preset-buttons">
+        <h3>Preset Equations:</h3>
+        <button onclick="loadPreset('a*sin(b*x) + c', {a: 1, b: 1, c: 0})">Sine Wave</button>
+        <button onclick="loadPreset('a*x^2 + b*x + c', {a: 1, b: 0, c: 0})">Parabola</button>
+        <button onclick="loadPreset('a*e^(b*x) + c', {a: 1, b: 1, c: 0})">Exponential</button>
+        <button onclick="loadPreset('a*log(b*x) + c', {a: 1, b: 1, c: 0})">Logarithmic</button>
+        <button onclick="loadPreset('a*sin(b*x) * cos(c*x)', {a: 1, b: 2, c: 3})">Wave Product</button>
+    </div>
+    
+    <div id="parameterControls" class="parameter-controls">
+        <!-- Parameter controls will be generated here -->
+    </div>
+    
+    <div class="button-group">
+        <button id="plotButton" onclick="plotEquation()">Plot Equation</button>
+        <button id="animateButton" onclick="toggleAnimation()">Animate Parameter</button>
+        <button id="resetButton" onclick="resetParameters()">Reset Parameters</button>
+    </div>
+    
+    <div id="plotDiv"></div>
+    
+    <script>
+        // Global variables
+        let currentParams = {};
+        let animationId = null;
+        let animatingParam = null;
+        
+        // Initialize the page
+        window.onload = function() {
+            generateParameterControls();
+            plotEquation();
+        };
+        
+        // Extract parameters from equation
+        function extractParameters(equation) {
+            const paramRegex = /\b([a-zA-Z](?!\())(?!\s*\()\b/g;
+            const matches = equation.match(paramRegex) || [];
+            return [...new Set(matches.filter(p => p !== 'x'))];
+        }
+        
+        // Generate parameter control UI
+        function generateParameterControls() {
+            const equation = document.getElementById('equation').value;
+            const parameters = extractParameters(equation);
+            const controlsDiv = document.getElementById('parameterControls');
+            
+            // Clear existing controls
+            controlsDiv.innerHTML = '';
+            
+            // Reset current parameters
+            currentParams = {};
+            
+            // Create controls for each parameter
+            parameters.forEach(param => {
+                currentParams[param] = 1; // Default value
+                
+                const paramDiv = document.createElement('div');
+                paramDiv.className = 'parameter-control';
+                
+                const paramLabel = document.createElement('label');
+                paramLabel.textContent = `Parameter ${param}:`;
+                paramLabel.htmlFor = `param-${param}`;
+                
+                const paramInput = document.createElement('input');
+                paramInput.type = 'number';
+                paramInput.id = `param-${param}`;
+                paramInput.value = 1;
+                paramInput.step = 0.1;
+                paramInput.onchange = function() {
+                    currentParams[param] = parseFloat(this.value);
+                };
+                
+                const animateCheckbox = document.createElement('input');
+                animateCheckbox.type = 'checkbox';
+                animateCheckbox.id = `animate-${param}`;
+                animateCheckbox.name = `animate-param`;
+                animateCheckbox.value = param;
+                animateCheckbox.onchange = function() {
+                    document.querySelectorAll('input[name="animate-param"]').forEach(cb => {
+                        if (cb.id !== this.id) cb.checked = false;
+                    });
+                    animatingParam = this.checked ? param : null;
+                };
+                
+                const animateLabel = document.createElement('label');
+                animateLabel.htmlFor = `animate-${param}`;
+                animateLabel.textContent = 'Animate';
+                
+                paramDiv.appendChild(paramLabel);
+                paramDiv.appendChild(paramInput);
+                paramDiv.appendChild(animateCheckbox);
+                paramDiv.appendChild(animateLabel);
+                
+                controlsDiv.appendChild(paramDiv);
+            });
+        }
+        
+        // Update parameter values from UI
+        function updateParametersFromUI() {
+            const parameters = Object.keys(currentParams);
+            parameters.forEach(param => {
+                const input = document.getElementById(`param-${param}`);
+                if (input) {
+                    currentParams[param] = parseFloat(input.value);
+                }
+            });
+            return currentParams;
+        }
+        
+        // Plot the equation
+        function plotEquation() {
+            const equation = document.getElementById('equation').value;
+            const xmin = parseFloat(document.getElementById('xmin').value);
+            const xmax = parseFloat(document.getElementById('xmax').value);
+            
+            // Update parameters from UI
+            const params = updateParametersFromUI();
+            
+            // Generate x values
+            const numPoints = 1000;
+            const xValues = Array.from({length: numPoints}, (_, i) => xmin + (xmax - xmin) * i / (numPoints - 1));
+            
+            // Evaluate the equation for each x
+            let yValues = [];
+            
+            try {
+                // Create a function scope with parameters
+                const scope = { x: 0, ...params };
+                
+                // Compile the expression once
+                const expr = math.compile(equation);
+                
+                // Evaluate for each x
+                yValues = xValues.map(x => {
+                    scope.x = x;
+                    return expr.evaluate(scope);
+                });
+                
+                // Plot the data
+                const trace = {
+                    x: xValues,
+                    y: yValues,
+                    mode: 'lines',
+                    line: { color: 'blue', width: 2 }
+                };
+                
+                const layout = {
+                    title: 'Equation Graph',
+                    xaxis: { title: 'x' },
+                    yaxis: { title: 'y' }
+                };
+                
+                Plotly.newPlot('plotDiv', [trace], layout);
+                
+            } catch (error) {
+                console.error('Error evaluating equation:', error);
+                alert('Error in equation: ' + error.message);
+            }
+        }
+        
+        // Animation functions
+        function toggleAnimation() {
+            if (animationId) {
+                // Stop animation
+                cancelAnimationFrame(animationId);
+                animationId = null;
+                document.getElementById('animateButton').textContent = 'Animate Parameter';
+            } else if (animatingParam) {
+                // Start animation
+                document.getElementById('animateButton').textContent = 'Stop Animation';
+                animate();
+            } else {
+                alert('Please select a parameter to animate first!');
+            }
+        }
+        
+        function animate() {
+            if (!animatingParam) return;
+            
+            const paramInput = document.getElementById(`param-${animatingParam}`);
+            let value = parseFloat(paramInput.value);
+            
+            // Increment the parameter value
+            value += 0.1;
+            if (value > 10) value = -10; // Loop back
+            
+            // Update UI and plot
+            paramInput.value = value;
+            currentParams[animatingParam] = value;
+            plotEquation();
+            
+            // Continue animation
+            animationId = requestAnimationFrame(animate);
+        }
+        
+        // Handle equation input changes
+        document.getElementById('equation').addEventListener('change', function() {
+            generateParameterControls();
+            plotEquation();
+        });
+        
+        // Reset parameters to default
+        function resetParameters() {
+            Object.keys(currentParams).forEach(param => {
+                document.getElementById(`param-${param}`).value = 1;
+                currentParams[param] = 1;
+            });
+            plotEquation();
+        }
+        
+        // Load preset equations
+        function loadPreset(equation, params) {
+            document.getElementById('equation').value = equation;
+            generateParameterControls();
+            
+            // Set parameter values
+            Object.keys(params).forEach(param => {
+                const input = document.getElementById(`param-${param}`);
+                if (input) {
+                    input.value = params[param];
+                    currentParams[param] = params[param];
+                }
+            });
+            
+            plotEquation();
+        }
+    </script>
+</body>
+</html>
