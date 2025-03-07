@@ -243,7 +243,274 @@ function draw() {
     // No drawing needed for now, just update text
     // This could be enhanced to graph the equation later
 }
+// sketch.js
+let hiddenOrderSketch;
+let hqrSketch;
 
+function setup() {
+    // Hidden Order Graph
+    hiddenOrderSketch = (p) => {
+        let params = { orderParam: 0.5, dim: '4d' };
+        let equationText;
+
+        p.setup = () => {
+            let c = p.createCanvas(800, 400);
+            c.parent('hidden-order-canvas');
+            equationText = document.getElementById('equation-text-hidden');
+            p.noLoop();
+        };
+
+        p.draw = () => {
+            // Update parameters
+            params.orderParam = hiddenOrderParams.orderParam;
+            params.dim = hiddenOrderParams.dim;
+
+            // Background
+            p.background('#16213e');
+
+            // Grid lines
+            p.stroke('#30363d');
+            p.strokeWeight(1);
+            p.line(50, 350, 750, 350); // X-axis
+            p.line(50, 50, 50, 350);   // Y-axis
+
+            // Horizontal grid lines
+            p.strokeWeight(0.5);
+            p.setLineDash([5, 5]);
+            p.line(50, 50, 750, 50);
+            p.line(50, 150, 750, 150);
+            p.line(50, 250, 750, 250);
+
+            // Vertical grid lines
+            p.line(190, 50, 190, 350);
+            p.line(330, 50, 330, 350);
+            p.line(470, 50, 470, 350);
+            p.line(610, 50, 610, 350);
+            p.line(750, 50, 750, 350);
+            p.setLineDash([]);
+
+            // Axes labels
+            p.fill('#a2a8d3');
+            p.noStroke();
+            p.textSize(12);
+            p.textAlign(p.CENTER);
+            p.text('Position', 400, 380);
+            p.push();
+            p.translate(20, 200);
+            p.rotate(-p.HALF_PI);
+            p.text('Order Parameter', 0, 0);
+            p.pop();
+
+            // X-axis ticks
+            p.textSize(10);
+            p.text('0', 50, 370);
+            p.text('1', 190, 370);
+            p.text('2', 330, 370);
+            p.text('3', 470, 370);
+            p.text('4', 610, 370);
+            p.text('5', 750, 370);
+
+            // Y-axis ticks
+            p.textAlign(p.RIGHT);
+            p.text('-1.0', 40, 350);
+            p.text('0.0', 40, 250);
+            p.text('1.0', 40, 150);
+            p.text('2.0', 40, 50);
+
+            // Plot Bohmian Wave
+            p.stroke('#8884d8');
+            p.strokeWeight(2);
+            p.noFill();
+            p.beginShape();
+            const amplitude = params.dim === '11d' ? 50 * params.orderParam : 30 * params.orderParam;
+            for (let x = 50; x <= 750; x++) {
+                let y = 250 - amplitude * Math.sin((x - 50) / 100);
+                p.vertex(x, y);
+            }
+            p.endShape();
+
+            // Plot Hidden Order
+            p.stroke('#e94560');
+            p.setLineDash([5, 3]);
+            p.beginShape();
+            for (let x = 50; x <= 750; x++) {
+                let y = 250 + amplitude * Math.cos((x - 50) / 100);
+                p.vertex(x, y);
+            }
+            p.endShape();
+            p.setLineDash([]);
+
+            // Legend
+            p.fill('#0f3460');
+            p.stroke('#0f3460');
+            p.rect(580, 70, 150, 80, 5, 5);
+            p.fill('#a2a8d3');
+            p.noStroke();
+            p.textSize(12);
+            p.text('Legend:', 590, 90);
+            p.stroke('#8884d8');
+            p.strokeWeight(2);
+            p.line(590, 110, 620, 110);
+            p.noStroke();
+            p.textSize(10);
+            p.text('Bohmian Wave', 630, 113);
+            p.stroke('#e94560');
+            p.setLineDash([5, 3]);
+            p.line(590, 130, 620, 130);
+            p.setLineDash([]);
+            p.noStroke();
+            p.text('Hidden Order', 630, 133);
+
+            // Update equation text
+            equationText.textContent = `Equation: y = ${amplitude.toFixed(2)} * sin((x - 50) / 100)`;
+        };
+
+        p.setLineDash = (dash) => {
+            p.drawingContext.setLineDash(dash);
+        };
+    };
+
+    // HQR Graph
+    hqrSketch = (p) => {
+        let params = { complexity: 5, model: 'integrated' };
+        let equationText;
+
+        p.setup = () => {
+            let c = p.createCanvas(800, 400);
+            c.parent('hqr-canvas');
+            equationText = document.getElementById('equation-text-hqr');
+            p.noLoop();
+        };
+
+        p.draw = () => {
+            // Update parameters
+            params.complexity = hqrParams.complexity;
+            params.model = hqrParams.model;
+
+            // Background
+            p.background('#16213e');
+
+            // Grid for 4D projection (bottom half)
+            p.stroke('#a2a8d3');
+            p.strokeWeight(1);
+            p.noFill();
+            p.rect(200, 270, 400, 60);
+            p.line(200, 300, 600, 300);
+            p.strokeWeight(0.5);
+            p.setLineDash([5, 5]);
+            p.line(250, 270, 250, 330);
+            p.line(300, 270, 300, 330);
+            p.line(350, 270, 350, 330);
+            p.line(400, 270, 400, 330);
+            p.line(450, 270, 450, 330);
+            p.line(500, 270, 500, 330);
+            p.line(550, 270, 550, 330);
+            p.setLineDash([]);
+
+            // Labels for 4D projection
+            p.fill('#a2a8d3');
+            p.noStroke();
+            p.textSize(12);
+            p.textAlign(p.CENTER);
+            p.text('Position', 400, 360);
+            p.push();
+            p.translate(170, 300);
+            p.rotate(-p.HALF_PI);
+            p.text('Amplitude', 0, 0);
+            p.pop();
+
+            // X-axis ticks
+            p.textSize(10);
+            p.text('-2', 200, 350);
+            p.text('-1', 300, 350);
+            p.text('0', 400, 350);
+            p.text('1', 500, 350);
+            p.text('2', 600, 350);
+
+            // Y-axis ticks
+            p.textAlign(p.RIGHT);
+            p.text('-30', 190, 330);
+            p.text('0', 190, 300);
+            p.text('30', 190, 270);
+
+            // Higher-dimensional representation (top half)
+            p.stroke('#6a7cb2');
+            p.strokeWeight(1);
+            p.noFill();
+            p.ellipse(400, 100, 400, 160);
+            p.ellipse(400, 100, 400, 160, 0, 0, p.TWO_PI, false, 60);
+            p.ellipse(400, 100, 400, 160, 0, 0, p.TWO_PI, false, 120);
+
+            // Plot Pilot Wave
+            p.stroke('#e94560');
+            p.strokeWeight(3);
+            p.beginShape();
+            const amp = 20 + params.complexity * 5;
+            const freq = params.model === 'integrated' ? 0.1 : 0.2;
+            for (let x = -150; x <= 150; x++) {
+                let y = amp * Math.sin(x * freq);
+                p.vertex(400 + x, 100 + y);
+            }
+            p.endShape();
+
+            // Plot Field Potential
+            p.stroke('#4169e1');
+            p.strokeWeight(2);
+            p.beginShape();
+            for (let x = -150; x <= 150; x++) {
+                let y = -amp * Math.cos(x * freq);
+                p.vertex(400 + x, 100 + y);
+            }
+            p.endShape();
+
+            // Plot Projected Wave
+            p.stroke('#e94560');
+            p.strokeWeight(2);
+            p.beginShape();
+            for (let x = -200; x <= 200; x++) {
+                let y = (amp * 0.5) * Math.sin(x * 0.15);
+                p.vertex(400 + x, 300 + y);
+            }
+            p.endShape();
+
+            // Legend
+            p.fill('#0f3460');
+            p.stroke('#0f3460');
+            p.rect(580, 310, 170, 80, 5, 5);
+            p.fill('#a2a8d3');
+            p.noStroke();
+            p.textSize(12);
+            p.text('Legend:', 590, 330);
+            p.stroke('#e94560');
+            p.strokeWeight(2);
+            p.line(590, 350, 620, 350);
+            p.noStroke();
+            p.textSize(10);
+            p.text('Pilot Wave', 630, 353);
+            p.stroke('#4169e1');
+            p.strokeWeight(2);
+            p.line(590, 370, 620, 370);
+            p.noStroke();
+            p.text('Quantum Potential', 630, 373);
+            p.fill('#ffffff');
+            p.stroke('#ffffff');
+            p.ellipse(605, 390, 10, 10);
+            p.noStroke();
+            p.text('Particles', 630, 393);
+
+            // Update equation text
+            equationText.textContent = `Equation: y = ${amp.toFixed(2)} * sin(${freq.toFixed(2)}x)`;
+        };
+
+        p.setLineDash = (dash) => {
+            p.drawingContext.setLineDash(dash);
+        };
+    };
+
+    // Initialize sketches
+    new p5(hiddenOrderSketch);
+    new p5(hqrSketch);
+}
 // Create p5 instances
 new p5(hiddenOrderSketch);
 new p5(holographicSketch);
