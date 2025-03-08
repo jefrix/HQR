@@ -1,0 +1,157 @@
+<html>
+<body>
+import React, { useState, useEffect } from 'react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
+const QuantumStateVisualization = () => {
+  const [dimension, setDimension] = useState('4D');
+  const [waveData, setWaveData] = useState([]);
+  
+  // Generate wave function data for Bohmian mechanics
+  useEffect(() => {
+    const data = [];
+    for (let x = -10; x <= 10; x += 0.2) {
+      // Gaussian packet modulated by phase
+      const amplitude = Math.exp(-x*x / 4);
+      const phase = x*x / 2;
+      // Different complexity for different dimensions
+      const complexity = dimension === '4D' ? 1 : 2.5;
+      
+      // Wave function components R and S in Ψ = R e^(iS/ℏ)
+      const r = amplitude;
+      const s = phase * complexity;
+      
+      // Bohmian velocity from guiding equation dx/dt = ∇S/m
+      // Approximating ∇S with finite difference
+      const gradS = (x === -10) ? (s - 0) / 0.2 : (s - data[data.length-1]?.s || 0) / 0.2;
+      const velocity = gradS / 1; // m = 1 for simplicity
+      
+      // Hidden order correlation
+      // Simulate correlation function with exponential decay modulated by oscillations
+      const hiddenOrder = amplitude * Math.cos(complexity * x / 2) * Math.exp(-Math.abs(x) / 5);
+      
+      data.push({
+        x,
+        r,
+        s,
+        velocity,
+        hiddenOrder,
+        // Real and imaginary parts of the wave function
+        realPart: r * Math.cos(s),
+        imagPart: r * Math.sin(s),
+        // Probability density
+        probability: r * r
+      });
+    }
+    setWaveData(data);
+  }, [dimension]);
+  
+  // Handle dimension change
+  const handleDimensionChange = (e) => {
+    setDimension(e.target.value);
+  };
+  
+  // Custom tooltip formatter
+  const tooltipFormatter = (value, name) => {
+    const displayNames = {
+      realPart: 'Real Part (Re[Ψ])',
+      imagPart: 'Imaginary Part (Im[Ψ])',
+      velocity: 'Bohmian Velocity (∇S/m)',
+      hiddenOrder: 'Hidden Order ⟨O(x)O(0)⟩'
+    };
+    
+    return [value.toFixed(4), displayNames[name] || name];
+  };
+  
+  return (
+    <div className="flex flex-col p-4 bg-gray-900 text-white">
+      <h2 className="text-xl font-bold mb-2">Bohmian Mechanics Wave Function (Ψ = Re<sup>iS/ℏ</sup>)</h2>
+      <p className="mb-4 text-sm">Visualizing components of the wave function and hidden order in HQR theory</p>
+      
+      <div className="mb-4 flex items-center">
+        <label className="mr-2">Dimension:</label>
+        <select 
+          value={dimension} 
+          onChange={handleDimensionChange}
+          className="bg-gray-800 text-white border border-gray-600 rounded p-1"
+        >
+          <option value="4D">4D Reality</option>
+          <option value="11D">11D M-Theory</option>
+        </select>
+        <span className="ml-4 text-sm text-gray-300">
+          Currently viewing: {dimension} representation
+        </span>
+      </div>
+      
+      <div className="h-64 w-full">
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart
+            data={waveData}
+            margin={{ top: 5, right: 30, left: 10, bottom: 5 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" stroke="#444" />
+            <XAxis 
+              dataKey="x" 
+              label={{ value: 'Position (x)', position: 'insideBottomRight', offset: -10, fill: '#ccc' }} 
+              stroke="#ccc"
+            />
+            <YAxis 
+              domain={[-1.2, 1.2]} 
+              label={{ value: 'Value', angle: -90, position: 'insideLeft', fill: '#ccc' }} 
+              stroke="#ccc"
+            />
+            <Tooltip formatter={tooltipFormatter} />
+            <Legend />
+            <Line 
+              type="monotone" 
+              dataKey="realPart" 
+              stroke="#8884d8" 
+              name="Real Part (Re[Ψ])" 
+              dot={false} 
+              strokeWidth={2} 
+            />
+            <Line 
+              type="monotone" 
+              dataKey="imagPart" 
+              stroke="#82ca9d" 
+              name="Imaginary Part (Im[Ψ])" 
+              dot={false}
+              strokeWidth={2} 
+            />
+            <Line 
+              type="monotone" 
+              dataKey="velocity" 
+              stroke="#ff7300" 
+              name="Bohmian Velocity (∇S/m)" 
+              dot={false}
+              strokeWidth={2} 
+            />
+            <Line 
+              type="monotone" 
+              dataKey="hiddenOrder" 
+              stroke="#ff0000" 
+              name="Hidden Order ⟨O(x)O(0)⟩" 
+              dot={false}
+              strokeWidth={2}
+              strokeDasharray="3 3" 
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+      
+      <div className="mt-4 text-sm text-gray-300">
+        <p>This visualization shows key components of quantum state representation in HQR theory:</p>
+        <ul className="list-disc pl-5 mt-2 space-y-1">
+          <li>The <span className="text-purple-400">real</span> and <span className="text-green-400">imaginary</span> components of the wave function</li>
+          <li>The <span className="text-yellow-500">Bohmian velocity field</span> that guides particle trajectories deterministically</li>
+          <li>The <span className="text-red-500">hidden order correlation function</span> that emerges from higher dimensions</li>
+        </ul>
+        <p className="mt-2">In the {dimension === '11D' ? '11D representation' : '4D representation'}, notice how {dimension === '11D' ? 'the complexity increases with higher frequency oscillations, reflecting the additional dimensional structure' : 'the wave function has simpler patterns, as expected in standard 4D quantum mechanics'}.</p>
+      </div>
+</body>
+</html>
+    </div>
+  );
+};
+
+export default QuantumStateVisualization;
