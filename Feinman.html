@@ -1,6 +1,6 @@
 <html>
   <body>
-    <script>
+  
       <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js">
 let particles = [];
 let interactions = [];
@@ -54,7 +54,7 @@ function drawCurvedPropagator(start, end, col) {
   let control = createVector((start.x + end.x) / 2, (start.y + end.y) / 2 - 50); // Curve it upward
   bezier(start.x, start.y, control.x, control.y, control.x, control.y, end.x, end.y);
 }
-</script>
+
     </script>
   </body>
 </html>
