@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holonomic Quantum Reality Visualizations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .visualization-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+        .visualization {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px;
+            transition: transform 0.3s ease;
+        }
+        .visualization:hover {
+            transform: scale(1.02);
+        }
+        .visualization h2 {
+            font-size: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #444;
+        }
+        .visualization p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .visualization svg {
+            width: 100%;
+            height: auto;
+            max-height: 300px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+        .download-button {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            padding: 8px 12px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        .download-button:hover {
+            background-color: #45a049;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <h1>Holonomic Quantum Reality: Key Visualizations</h1>
+    
+    <div class="visualization-container">
+        <!-- Visualization 1 -->
+        <div class="visualization">
+            <h2>Figure 1: The Holonomic Action Principle</h2>
+            <p>An 11D quantum information field projects through curvature and quantum layers to form our 4D universe</p>
+            <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+                <!-- Background -->
+                <rect width="400" height="300" fill="#f0f0f0" />
+                
+                <!-- Title -->
+                <text x="200" y="20" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold">The Holonomic Action Principle</text>
+                
+                <!-- 11D Base -->
+                <rect x="50" y="250" width="300" height="15" fill="#003366" rx="2" ry="2" />
+                <text x="200" y="260" text-anchor="middle" font-family="Arial" font-size="8" fill="white">11D Quantum Information Field</text>
+                
+                <!-- Projections upward with labels -->
+                <!-- Layer 1: R term -->
+                <path d="M 75,250 L 125,200 L 225,200 L 175,250 Z" fill="#4169E1" opacity="0.8" />
+                <text x="150" y="225" text-anchor="middle" font-family="Arial" font-size="10" fill="white">R</text>
+                
+                <!-- Layer 2: R_D term -->
+                <path d="M 125,200 L 175,150 L 275,150 L 225,200 Z" fill="#9370DB" opacity="0.8" />
+                <text x="200" y="175" text-anchor="middle" font-family="Arial" font-size="10" fill="white">R_D</text>
+                
+                <!-- Layer 3: T_quantum term -->
+                <path d="M 175,150 L 225,100 L 325,100 L 275,150 Z" fill="#20B2AA" opacity="0.8" />
+                <text x="250" y="125" text-anchor="middle" font-family="Arial" font-size="8" fill="white">T_μν^quantum</text>
+                
+                <!-- Layer 4: L_gauge term -->
+                <path d="M 225,100 L 275,50 L 375,50 L 325,100 Z" fill="#FF6347" opacity="0.8" />
+                <text x="300" y="75" text-anchor="middle" font-family="Arial" font-size="10" fill="white">L_gauge</text>
+                
+                <!-- 4D Spacetime -->
+                <ellipse cx="200" cy="50" rx="125" ry="15" fill="#FFD700" opacity="0.9" />
+                <text x="200" y="52" text-anchor="middle" font-family="Arial" font-size="9" font-weight="bold">4D Spacetime</text>
+                
+                <!-- Arrows indicating flow of information -->
+                <defs>
+                  <marker id="arrowhead1" markerWidth="5" markerHeight="3.5" refX="0" refY="1.75" orient="auto">
+                    <polygon points="0 0, 5 1.75, 0 3.5" fill="#333" />
+                  </marker>
+                </defs>
+                
+                <!-- Projection arrows -->
+                <line x1="200" y1="242" x2="200" y2="205" stroke="#333" stroke-width="1" marker-end="url(#arrowhead1)" />
+                <line x1="200" y1="192" x2="200" y2="155" stroke="#333" stroke-width="1" marker-end="url(#arrowhead1)" />
+                <line x1="200" y1="142" x2="200" y2="105" stroke="#333" stroke-width="1" marker-end="url(#arrowhead1)" />
+                <line x1="200" y1="92" x2="200" y2="65" stroke="#333" stroke-width="1" marker-end="url(#arrowhead1)" />
+                
+                <!-- Action Formula -->
+                <rect x="50" y="275" width="300" height="15" rx="2" ry="2" fill="#f8f8f8" stroke="#333" stroke-width="0.5" />
+                <text x="200" y="285" text-anchor="middle" font-family="Arial" font-size="8" font-style="italic">
+                  S = ∫√(-g)(R + αR_D + β⟨T_μν^quantum⟩g^μν + γL_gauge)d⁴x
+                </text>
+            </svg>
+        </div>
+        
+        <!-- Visualization 2 -->
+        <div class="visualization">
+            <h2>Figure 2: Quantum Cosmos Field Equation</h2>
+            <p>Information density in 11D (color gradients) shapes spacetime curvature, driving 4D gravity</p>
+            <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+                <!-- Background -->
+                <rect width="400" height="300" fill="#f0f0f0" />
+                
+                <!-- Title -->
+                <text x="200" y="20" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold">Quantum Cosmos Field Equation</text>
+                
+                <!-- Definitions for gradients -->
+                <defs>
+                  <linearGradient id="informationGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#0000FF" /> <!-- Blue: Low information density -->
+                    <stop offset="50%" stop-color="#800080" /> <!-- Purple: Medium information density -->
+                    <stop offset="100%" stop-color="#FF0000" /> <!-- Red: High information density -->
+                  </linearGradient>
+                  
+                  <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur" />
+                    <feOffset in="blur" dx="2" dy="2" result="offsetBlur" />
+                    <feComponentTransfer in="offsetBlur">
+                      <feFuncA type="linear" slope="0.5" />
+                    </feComponentTransfer>
+                    <feMerge>
+                      <feMergeNode />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                  
+                  <marker id="arrowhead2" markerWidth="5" markerHeight="3.5" refX="0" refY="1.75" orient="auto">
+                    <polygon points="0 0, 5 1.75, 0 3.5" fill="#333" />
+                  </marker>
+                </defs>
+                
+                <!-- 11D Manifold with information density gradient -->
+                <g transform="translate(200, 125)" filter="url(#shadow)">
+                  <!-- Curved surface with information density -->
+                  <path d="M -125,0 C -100,-40 -50,-50 0,-45 C 50,-50 100,-40 125,0 C 100,40 50,50 0,45 C -50,50 -100,40 -125,0 Z" 
+                        fill="url(#informationGradient)" stroke="#333" stroke-width="1" />
+                  
+                  <!-- Information density labels -->
+                  <text x="-110" y="-5" text-anchor="middle" font-family="Arial" font-size="7" fill="white">Low Density</text>
+                  <text x="0" y="-35" text-anchor="middle" font-family="Arial" font-size="7" fill="white">Medium Density</text>
+                  <text x="110" y="-5" text-anchor="middle" font-family="Arial" font-size="7" fill="white">High Density</text>
+                </g>
+                
+                <!-- 4D Grid below manifold -->
+                <g transform="translate(200, 225)">
+                  <!-- Horizontal grid lines -->
+                  <line x1="-125" y1="-25" x2="125" y2="-25" stroke="#333" stroke-width="0.5" stroke-dasharray="2,2" />
+                  <line x1="-125" y1="0" x2="125" y2="0" stroke="#333" stroke-width="0.5" stroke-dasharray="2,2" />
+                  <line x1="-125" y1="25" x2="125" y2="25" stroke="#333" stroke-width="0.5" stroke-dasharray="2,2" />
+                  
+                  <!-- Vertical grid lines -->
+                  <line x1="-125" y1="-25" x2="-125" y2="25" stroke="#333" stroke-width="0.5" stroke-dasharray="2,2" />
+                  <line x1="-62" y1="-25" x2="-62" y2="25" stroke="#333" stroke-width="0.5" stroke-dasharray="2,2" />
+                  <line x1="0" y1="-25" x2="0" y2="25" stroke="#333" stroke-width="0.5" stroke-dasharray="2,2" />
+                  <line x1="62" y1="-25" x2="62" y2="25" stroke="#333" stroke-width="0.5" stroke-dasharray="2,2" />
+                  <line x1="125" y1="-25" x2="125" y2="25" stroke="#333" stroke-width="0.5" stroke-dasharray="2,2" />
+                  
+                  <!-- 4D Label -->
+                  <text x="0" y="40" text-anchor="middle" font-family="Arial" font-size="9" font-weight="bold">4D Spacetime Grid</text>
+                </g>
+                
+                <!-- Projection arrows connecting manifold and grid -->
+                <line x1="125" y1="125" x2="125" y2="200" stroke="#333" stroke-width="1" marker-end="url(#arrowhead2)" />
+                <line x1="200" y1="165" x2="200" y2="200" stroke="#333" stroke-width="1" marker-end="url(#arrowhead2)" />
+                <line x1="275" y1="125" x2="275" y2="200" stroke="#333" stroke-width="1" marker-end="url(#arrowhead2)" />
+                
+                <!-- Graph showing warped spacetime from information -->
+                <path d="M 75,225 C 100,215 125,225 150,210 C 175,220 200,195 225,220 C 250,210 275,225 300,215 C 325,225" 
+                      fill="none" stroke="#4169E1" stroke-width="1.5" />
+                      
+                <!-- Field Equation -->
+                <rect x="75" y="260" width="250" height="20" rx="2" ry="2" fill="#f8f8f8" stroke="#333" stroke-width="0.5" />
+                <text x="200" y="272" text-anchor="middle" font-family="Arial" font-size="9" font-style="italic">
+                  G_μν^higher + Λg_μν = κQ_μν
+                </text>
+            </svg>
+        </div>
+        
+        <!-- Visualization 3 -->
+        <div class="visualization">
+            <h2>Figure 3: Elevenfold Unity Equation</h2>
+            <p>The evolution of 11D spacetime curvature reflects changes in quantum information over time</p>
+            <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+                <!-- Background -->
+                <rect width="400" height="300" fill="#f0f0f0" />
+                
+                <!-- Title -->
+                <text x="200" y="20" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold">Elevenfold Unity Equation</text>
+                
+                <!-- Definitions for gradients -->
+                <defs>
+                  <linearGradient id="informationGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#0000FF" />
+                    <stop offset="50%" stop-color="#800080" />
+                    <stop offset="100%" stop-color="#FF0000" />
+                  </linearGradient>
+                  
+                  <linearGradient id="informationGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#FF0000" />
+                    <stop offset="50%" stop-color="#800080" />
+                    <stop offset="100%" stop-color="#0000FF" />
+                  </linearGradient>
+                  
+                  <linearGradient id="informationGradient3" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#0000FF" />
+                    <stop offset="100%" stop-color="#FF0000" />
+                  </linearGradient>
+                  
+                  <linearGradient id="informationGradient4" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#00FFFF" />
+                    <stop offset="50%" stop-color="#800080" />
+                    <stop offset="100%" stop-color="#FF00FF" />
+                  </linearGradient>
+                  
+                  <filter id="shadow3" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur" />
+                    <feOffset in="blur" dx="1" dy="1" result="offsetBlur" />
+                    <feComponentTransfer in="offsetBlur">
+                      <feFuncA type="linear" slope="0.3" />
+                    </feComponentTransfer>
+                    <feMerge>
+                      <feMergeNode />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                  
+                  <marker id="arrowhead3" markerWidth="5" markerHeight="3.5" refX="0" refY="1.75" orient="auto">
+                    <polygon points="0 0, 5 1.75, 0 3.5" fill="#333" />
+                  </marker>
+                </defs>
+                
+                <!-- Timeline -->
+                <line x1="50" y1="250" x2="350" y2="250" stroke="#333" stroke-width="1" />
+                <polygon points="355,250 350,247.5 350,252.5" fill="#333" />
+                
+                <!-- Time labels -->
+                <text x="50" y="260" text-anchor="middle" font-family="Arial" font-size="8">t₁</text>
+                <text x="150" y="260" text-anchor="middle" font-family="Arial" font-size="8">t₂</text>
+                <text x="250" y="260" text-anchor="middle" font-family="Arial" font-size="8">t₃</text>
+                <text x="350" y="260" text-anchor="middle" font-family="Arial" font-size="8">t₄</text>
+                <text x="375" y="250" text-anchor="start" font-family="Arial" font-size="8">Time</text>
+                
+                <!-- Manifold at time t₁ -->
+                <g transform="translate(50, 125)" filter="url(#shadow3)">
+                  <ellipse cx="0" cy="0" rx="40" ry="20" fill="url(#informationGradient1)" stroke="#333" stroke-width="0.75" />
+                  <ellipse cx="0" cy="0" rx="40" ry="20" fill="none" stroke="#333" stroke-width="0.5" stroke-dasharray="2,1.5" transform="rotate(45)" />
+                  <ellipse cx="0" cy="0" rx="40" ry="20" fill="none" stroke="#333" stroke-width="0.5" stroke-dasharray="2,1.5" transform="rotate(90)" />
+                  
+                  <!-- 11D Label -->
+                  <text x="0" y="35" text-anchor="middle" font-family="Arial" font-size="7">t₁</text>
+                </g>
+                
+                <!-- Manifold at time t₂ -->
+                <g transform="translate(150, 125)" filter="url(#shadow3)">
+                  <ellipse cx="0" cy="0" rx="45" ry="17.5" fill="url(#informationGradient2)" stroke="#333" stroke-width="0.75" />
+                  <ellipse cx="0" cy="0" rx="45" ry="17.5" fill="none" stroke="#333" stroke-width="0.5" stroke-dasharray="2,1.5" transform="rotate(45)" />
+                  <ellipse cx="0" cy="0" rx="45" ry="17.5" fill="none" stroke="#333" stroke-width="0.5" stroke-dasharray="2,1.5" transform="rotate(90)" />
+                  
+                  <!-- 11D Label -->
+                  <text x="0" y="35" text-anchor="middle" font-family="Arial" font-size="7">t₂</text>
+                </g>
+                
+                <!-- Manifold at time t₃ -->
+                <g transform="translate(250, 125)" filter="url(#shadow3)">
+                  <ellipse cx="0" cy="0" rx="37.5" ry="25" fill="url(#informationGradient3)" stroke="#333" stroke-width="0.75" />
+                  <ellipse cx="0" cy="0" rx="37.5" ry="25" fill="none" stroke="#333" stroke-width="0.5" stroke-dasharray="2,1.5" transform="rotate(45)" />
+                  <ellipse cx="0" cy="0" rx="37.5" ry="25" fill="none" stroke="#333" stroke-width="0.5" stroke-dasharray="2,1.5" transform="rotate(90)" />
+                  
+                  <!-- 11D Label -->
+                  <text x="0" y="35" text-anchor="middle" font-family="Arial" font-size="7">t₃</text>
+                </g>
+                
+                <!-- Manifold at time t₄ -->
+                <g transform="translate(350, 125)" filter="url(#shadow3)">
+                  <ellipse cx="0" cy="0" rx="42.5" ry="20" fill="url(#informationGradient4)" stroke="#333" stroke-width="0.75" />
+                  <ellipse cx="0" cy="0" rx="42.5" ry="20" fill="none" stroke="#333" stroke-width="0.5" stroke-dasharray="2,1.5" transform="rotate(45)" />
+                  <ellipse cx="0" cy="0" rx="42.5" ry="20" fill="none" stroke="#333" stroke-width="0.5" stroke-dasharray="2,1.5" transform="rotate(90)" />
+                  
+                  <!-- 11D Label -->
+                  <text x="0" y="35" text-anchor="middle" font-family="Arial" font-size="7">t₄</text>
+                </g>
+                
+                <!-- Time progression arrows -->
+                <line x1="75" y1="175" x2="125" y2="175" stroke="#333" stroke-width="0.75" marker-end="url(#arrowhead3)" />
+                <line x1="175" y1="175" x2="225" y2="175" stroke="#333" stroke-width="0.75" marker-end="url(#arrowhead3)" />
+                <line x1="275" y1="175" x2="325" y2="175" stroke="#333" stroke-width="0.75" marker-end="url(#arrowhead3)" />
+                
+                <!-- Legend -->
+                <rect x="260" y="50" width="100" height="40" rx="2" ry="2" fill="white" stroke="#333" stroke-width="0.5" />
+                <text x="310" y="60" text-anchor="middle" font-family="Arial" font-size="7" font-weight="bold">Information Density</text>
+                <rect x="270" y="67" width="10" height="7" fill="#0000FF" />
+                <text x="285" y="73" text-anchor="start" font-family="Arial" font-size="6">Low</text>
+                <rect x="305" y="67" width="10" height="7" fill="#800080" />
+                <text x="320" y="73" text-anchor="start" font-family="Arial" font-size="6">Medium</text>
+                <rect x="270" y="80" width="10" height="7" fill="#FF0000" />
+                <text x="285" y="86" text-anchor="start" font-family="Arial" font-size="6">High</text>
+                
+                <!-- Elevenfold Unity Equation -->
+                <rect x="57" y="200" width="285" height="20" rx="2" ry="2" fill="#f8f8f8" stroke="#333" stroke-width="0.5" />
+                <text x="200" y="212" text-anchor="middle" font-family="Arial" font-size="8" font-style="italic">
+                  G_μν^11D(t) + Λg_μν^11D(t) = 8πG^11D T_μν^info,11D(t)
+                </text>
+            </svg>
+        </div>
+        
+        <!-- Visualization 4 -->
+        <div class="visualization">
+            <h2>Figure 4: Holographic Stress Equation</h2>
+            <p>Entanglement on the 11D boundary drives bulk stress-energy, shaping 4D spacetime</p>
+            <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+                <!-- Background -->
+                <rect width="400" height="300" fill="#f0f0f0" />
+                
+                <!-- Title -->
+                <text x="200" y="20" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold">Holographic Stress Equation</text>
+                
+                <!-- Definitions -->
+                <defs>
+                  <linearGradient id="boundaryGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#9932CC" />
+                    <stop offset="50%" stop-color="#8A2BE2" />
+                    <stop offset="100%" stop-color="#9400D3" />
+                  </linearGradient>
+                  
+                  <linearGradient id="bulkGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="rgba(30, 144, 255, 0.4)" />
+                    <stop offset="100%" stop-color="rgba(65, 105, 225, 0.8)" />
+                  </linearGradient>
+                  
+                  <linearGradient id="projectionGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#FFD700" />
+                    <stop offset="100%" stop-color="#FFA500" />
+                  </linearGradient>
+                  
+                  <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur" />
+                    <feFlood flood-color="#8A2BE2" flood-opacity="0.5" result="coloredBlur" />
+                    <feComposite in="coloredBlur" in2="blur" operator="in" result="coloredBlurAlpha" />
+                    <feMerge>
+                      <feMergeNode in="coloredBlurAlpha" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                  
+                  <marker id="arrowhead4" markerWidth="5" markerHeight="3.5" refX="0" refY="1.75" orient="auto">
+                    <polygon points="0 0, 5 1.75, 0 3.5" fill="#333" />
+                  </marker>
+                </defs>
+                
+                <!-- Boundary surface with entangled states -->
+                <g transform="translate(75, 125)">
+                  <rect x="-60" y="-50" width="120" height="100" rx="5" ry="5" fill="url(#boundaryGradient)" stroke="#333" stroke-width="1" />
+                  
+                  <!-- Entangled particles on boundary -->
+                  <circle cx="-40" cy="-30" r="3" fill="#fff" filter="url(#glow)" />
+                  <circle cx="-15" cy="-35" r="3" fill="#fff" filter="url(#glow)" />
+                  <circle cx="10" cy="-25" r="3" fill="#fff" filter="url(#glow)" />
+                  <circle cx="35" cy="-35" r="3" fill="#fff" filter="url(#glow)" />
+                  
+                  <circle cx="-40" cy="0" r="3" fill="#fff" filter="url(#glow)" />
+                  <circle cx="-10" cy="5" r="3" fill="#fff" filter="url(#glow)" />
+                  <circle cx="20" cy="-5" r="3" fill="#fff" filter="url(#glow)" />
+                  <circle cx="40" cy="0" r="3" fill="#fff" filter="url(#glow)" />
+                  
+                  <circle cx="-35" cy="30" r="3" fill="#fff" filter="url(#glow)" />
+                  <circle cx="-10" cy="35" r="3" fill="#fff" filter="url(#glow)" />
+                  <circle cx="15" cy="25" r="3" fill="#fff" filter="url(#glow)" />
+                  <circle cx="35" cy="35" r="3" fill="#fff" filter="url(#glow)" />
+                  
+                  <!-- Entanglement connections -->
+                  <line x1="-40" y1="-30" x2="-15" y2="-35" stroke="#fff" stroke-width="0.75" opacity="0.7" />
+                  <line x1="-15" y1="-35" x2="10" y2="-25" stroke="#fff" stroke-width="0.75" opacity="0.7" />
+                  <line x1="10" y1="-25" x2="35" y2="-35" stroke="#fff" stroke-width="0.75" opacity="0.7" />
+                  
+                  <line x1="-40" y1="0" x2="-10" y2="5" stroke="#fff" stroke-width="0.75" opacity="0.7" />
+                  <line x1="-10" y1="5" x2="20" y2="-5" stroke="#fff" stroke-width="0.75" opacity="0.7" />
+                  <line x1="20" y1="-5" x2="40" y2="0" stroke="#fff" stroke-width="0.75" opacity="0.7" />
+                  
+                  <line x1="-35" y1="30" x2="-10" y2="35" stroke="#fff" stroke-width="0.75" opacity="0.7" />
+                  <line x1="-10" y1="35" x2="15" y2="25" stroke="#fff" stroke-width="0.75" opacity="0.7" />
+                  <line x1="15" y1="25" x2="35" y2="35" stroke="#fff" stroke-width="0.75" opacity="0.7" />
+                </body>
+                </html>
