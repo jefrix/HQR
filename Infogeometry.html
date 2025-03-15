@@ -1,17 +1,3 @@
-Here's an enhanced, fully functional HTML + JavaScript webpage that numerically solves and interactively visualizes your chosen HQR equation, complete with clearly visible labels and a professional look. This setup includes:
-
-- **Interactive user inputs** for initial conditions.
-- **Dynamic visualization** of the equation.
-- **Clear definitions** of symbols and terms.
-- **Good color contrast** for readability.
-
----
-
-### 🚀 **Webpage Code (HTML + JavaScript):**
-
-Copy and paste this into a `.html` file:
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +10,23 @@ Copy and paste this into a `.html` file:
         input, button { margin: 10px; padding: 8px; font-size: 1em; }
         label { display: inline-block; margin-top: 10px; }
     </style>
+    <!-- Include MathJax CDN in your HTML head -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<div style="color:white; font-size:1.2em; text-align:center; margin-top:20px;">
+    <strong>Equation Details</strong>
+    <p>
+        \( R_{\mu\nu}^{QI} = \frac{\partial_{\mu} I \, \partial_{\nu} I}{I^2} \)
+    </div>
+    <div style="color:white; font-size:1em; text-align:left; margin-left:30px;">
+        <b>Definitions:</b>
+        <ul>
+            <li><b>\(R_{\mu\nu}^{QI}\)</b>: Infogeometric curvature tensor</li>
+            <li><b>\(I\)</b>: Quantum information density scalar field</li>
+            <li><b>\(\partial_{\mu}, \partial_{\nu}\)</b>: Partial derivative operators with respect to coordinates</li>
+        </ul>
+    </div>
+
 </head>
 <body>
 
@@ -143,20 +146,4 @@ plotHQR();
     </ul>
 </h4>
 
----
 
-## 📗 **Why this Visualization Works**
-
-- Clearly shows the dependence of informational curvature on information density.
-- Immediately interactive, reinforcing understanding of the foundational equation.
-- Easily expandable to additional equations and complexity.
-
----
-
-## 🔧 **Next Steps for Expansion**
-
-- **Additional equations:** Expand visualization for your other equations sequentially.
-- **3D rendering**: Extend to visualize 3D or higher-dimensional structures using WebGL or Three.js.
-- **Analytical exploration**: Add numerical solutions for more complex cases, including black hole entropy, KK particle spectra, or the fine-structure constant prediction.
-
-You're now ready to deploy this page and visualize your groundbreaking HQR equations!
