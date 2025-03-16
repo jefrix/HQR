@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gravitational Lensing: HQR vs. General Relativity</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #151e3f;
+            color: #e0e0e0;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #e94560;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: #a2a8d3;
+        }
+        canvas {
+            background: #0a0c18;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            margin: 0 auto 20px;
+        }
+        .controls {
+            margin: 20px auto;
+            width: 80%;
+            max-width: 500px;
+            background-color: #16213e;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        .slider {
+            width: 300px;
+            margin: 0 10px;
+        }
+        label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .legend-color {
+            width: 20px;
+            height: 3px;
+            border-radius: 3px;
+        }
+        .explanation {
+            width: 80%;
+            max-width: 800px;
+            margin: 30px auto;
+            text-align: left;
+            background-color: #16213e;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <h1>Gravitational Lensing</h1>
+    <div class="subtitle">Comparing General Relativity vs. HQR Predictions</div>
+    
+    <div class="controls">
+        <label for="massSlider">Gravitational Mass:</label>
+        <input type="range" id="massSlider" class="slider" min="5000" max="20000" value="10000">
+        <span id="massValue">10000</span> units
+    </div>
+    
+    <canvas id="lensingCanvas" width="800" height="500"></canvas>
+    
+    <div class="legend">
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: blue;"></div>
+            <div>General Relativity Prediction</div>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: red;"></div>
+            <div>HQR Prediction</div>
+        </div>
+    </div>
+    
+    <div class="explanation">
+        <p>This visualization demonstrates the differences in gravitational lensing predictions between standard General Relativity and Holonomic Quantum Reality (HQR). As light passes near a massive object, its path bends due to the curvature of spacetime.</p>
+        
+        <p>HQR predicts additional bending due to quantum informational structures in higher dimensions that affect spacetime geometry. This leads to a measurable difference in lensing angle that could potentially be detected with next-generation gravitational wave detectors and astronomical observations.</p>
+        
+        <p>Use the slider to adjust the mass of the gravitational lens and observe how the light paths differ between the two theories. Notice that HQR consistently predicts slightly stronger lensing effects, which become more pronounced with increasing mass.</p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById("lensingCanvas");
+        const ctx = canvas.getContext("2d");
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const lensRadius = 40;
+        const numLightRays = 25;
+        let massFactor = 10000; // Default mass factor
+
+        document.getElementById("massSlider").addEventListener("input", function() {
+            massFactor = parseInt(this.value);
+            document.getElementById("massValue").innerText = massFactor;
+            render();
+        });
+        
+        function drawLens() {
+            // Draw massive body (lens)
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, lensRadius, 0, Math.PI * 2);
+            ctx.fillStyle = "white";
+            ctx.fill();
+            
+            // Add glow effect
+            const gradient = ctx.createRadialGradient(
+                centerX, centerY, lensRadius,
+                centerX, centerY, lensRadius * 2
+            );
+            gradient.addColorStop(0, "rgba(255, 255, 255, 0.3)");
+            gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
+            
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, lensRadius * 2, 0, Math.PI * 2);
+            ctx.fillStyle = gradient;
+            ctx.fill();
+        }
+        
+        function drawLightPaths() {
+            // Draw background stars
+            for (let i = 0; i < 200; i++) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                const size = Math.random() * 1.5;
+                
+                ctx.beginPath();
+                ctx.arc(x, y, size, 0, Math.PI * 2);
+                ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
+                ctx.fill();
+            }
+            
+            // Draw light rays
+            for (let i = -numLightRays / 2; i < numLightRays / 2; i++) {
+                let startX = 50;
+                let startY = centerY + i * 15;
+                let endX = canvas.width - 50;
+                
+                // GR Bending (blue)
+                ctx.beginPath();
+                ctx.moveTo(startX, startY);
+                
+                // Draw light path segments
+                for (let x = startX; x < endX; x += 5) {
+                    // Calculate curvature factor - stronger near the lens
+                    let dx = x - centerX;
+                    let dy = startY - centerY;
+                    let distance = Math.sqrt(dx*dx + dy*dy);
+                    
+                    // Avoid division by zero and make effect stronger near center
+                    let curveFactor = massFactor / (Math.pow(distance, 1.5) + 100);
+                    let y = startY + curveFactor * (startY > centerY ? 1 : -1);
+                    
+                    ctx.lineTo(x, y);
+                }
+                
+                ctx.strokeStyle = "rgba(30, 144, 255, 0.8)";
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // HQR Bending (red, more deviation)
+                ctx.beginPath();
+                ctx.moveTo(startX, startY);
+                
+                for (let x = startX; x < endX; x += 5) {
+                    let dx = x - centerX;
+                    let dy = startY - centerY;
+                    let distance = Math.sqrt(dx*dx + dy*dy);
+                    
+                    // HQR predicts stronger effect due to quantum-informational structure
+                    let curveFactor = (massFactor * 1.18) / (Math.pow(distance, 1.4) + 90);
+                    let y = startY + curveFactor * (startY > centerY ? 1.1 : -1.1);
+                    
+                    ctx.lineTo(x, y);
+                }
+                
+                ctx.strokeStyle = "rgba(255, 80, 80, 0.8)";
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
+        }
+        
+        function render() {
+            ctx.fillStyle = "#0a0c18";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            drawLightPaths();
+            drawLens();
+        }
+
+        render();
+    </script>
+</body>
+</html>
