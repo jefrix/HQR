@@ -152,27 +152,7 @@
             if (animationId) {
                 cancelAnimationFrame(animationId);
             }
-        }
-        
-        // Event listeners
-        dimensionSlider.addEventListener("input", function() {
-            dimension = parseInt(this.value);
-            dimensionValue.textContent = `${dimension}D`;
-        });
-        
-        hiddenOrderSlider.addEventListener("input", function() {
-            hiddenOrderStrength = parseFloat(this.value);
-            hiddenOrderValue.textContent = hiddenOrderStrength.toFixed(1);
-        });
-        
-        resetButton.addEventListener("click", initSimulation);
-        
-        // Initialize the simulation on page load
-        initSimulation();
-    </script>
-</body>
-</html>
-            
+
             // Clear arrays
             particles = [];
             connections = [];
@@ -245,58 +225,7 @@
                         // Simple circular patterns in lower dimensions
                         particle.vx += Math.cos(angle) * orderInfluence;
                         particle.vy += Math.sin(angle) * orderInfluence;
-                    }
-                    
-                    if (x === 0) {
-                        ctx.moveTo(x, y);
-                    } else {
-                        ctx.lineTo(x, y);
-                    }
-                }
-                
-                // Draw with color based on dimension
-                const hue = 270 - (dimension - 4) * 5;
-                ctx.strokeStyle = `hsla(${hue}, 80%, 70%, 0.6)`;
-                ctx.lineWidth = 1 + dimFactor;
-                ctx.stroke();
-            }
-            
-            ctx.globalAlpha = 1.0;
-            
-            // Draw circular pattern suggesting higher-dimensional orbits
-            if (dimension >= 8) {
-                ctx.beginPath();
-                const centerX = canvas.width / 2;
-                const centerY = canvas.height / 2;
-                const radius = 150 * dimFactor;
-                
-                ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-                ctx.strokeStyle = `rgba(147, 112, 219, ${0.2 * dimFactor})`;
-                ctx.lineWidth = 2;
-                ctx.stroke();
-                
-                // Additional orbital paths for even higher dimensions
-                if (dimension >= 10) {
-                    ctx.beginPath();
-                    const phase2 = Date.now() * 0.0002;
-                    const ovalRadius1 = 180 * dimFactor;
-                    const ovalRadius2 = 120 * dimFactor;
-                    
-                    for (let t = 0; t < Math.PI * 2; t += 0.1) {
-                        const x = centerX + Math.cos(t) * ovalRadius1 * Math.cos(phase2);
-                        const y = centerY + Math.sin(t) * ovalRadius2;
-                        
-                        if (t === 0) {
-                            ctx.moveTo(x, y);
-                        } else {
-                            ctx.lineTo(x, y);
-                        }
-                    }
-                    
-                    ctx.strokeStyle = `rgba(147, 112, 219, ${0.15 * dimFactor})`;
-                    ctx.stroke();
-                }
-            } else if (dimension <= 8) {
+                    } else if (dimension <= 8) {
                         // More complex toroidal patterns
                         const secondAngle = particle.phase * 2 + Date.now() * 0.0005;
                         particle.vx += Math.cos(angle) * Math.sin(secondAngle) * orderInfluence * 1.5;
@@ -443,5 +372,74 @@
                               + Math.sin(x * 0.04 - angle * 2 + phase * 1.5) * amplitude * 0.3
                               + Math.sin(x * 0.01 + angle * 3 - phase * 0.7) * amplitude * 0.2;
                     }
-                    </body>
-                    </html>
+                    
+                    if (x === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+                
+                // Draw with color based on dimension
+                const hue = 270 - (dimension - 4) * 5;
+                ctx.strokeStyle = `hsla(${hue}, 80%, 70%, 0.6)`;
+                ctx.lineWidth = 1 + dimFactor;
+                ctx.stroke();
+            }
+            
+            ctx.globalAlpha = 1.0;
+            
+            // Draw circular pattern suggesting higher-dimensional orbits
+            if (dimension >= 8) {
+                ctx.beginPath();
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
+                const radius = 150 * dimFactor;
+                
+                ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+                ctx.strokeStyle = `rgba(147, 112, 219, ${0.2 * dimFactor})`;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                
+                // Additional orbital paths for even higher dimensions
+                if (dimension >= 10) {
+                    ctx.beginPath();
+                    const phase2 = Date.now() * 0.0002;
+                    const ovalRadius1 = 180 * dimFactor;
+                    const ovalRadius2 = 120 * dimFactor;
+                    
+                    for (let t = 0; t < Math.PI * 2; t += 0.1) {
+                        const x = centerX + Math.cos(t) * ovalRadius1 * Math.cos(phase2);
+                        const y = centerY + Math.sin(t) * ovalRadius2;
+                        
+                        if (t === 0) {
+                            ctx.moveTo(x, y);
+                        } else {
+                            ctx.lineTo(x, y);
+                        }
+                    }
+                    
+                    ctx.strokeStyle = `rgba(147, 112, 219, ${0.15 * dimFactor})`;
+                    ctx.stroke();
+                }
+            }
+        }
+        
+        // Event listeners
+        dimensionSlider.addEventListener("input", function() {
+            dimension = parseInt(this.value);
+            dimensionValue.textContent = `${dimension}D`;
+        });
+        
+        hiddenOrderSlider.addEventListener("input", function() {
+            hiddenOrderStrength = parseFloat(this.value);
+            hiddenOrderValue.textContent = hiddenOrderStrength.toFixed(1);
+        });
+        
+        resetButton.addEventListener("click", initSimulation);
+        
+        // Initialize the simulation on page load
+        initSimulation();
+    </script>
+</body>
+</html>
