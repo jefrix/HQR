@@ -80,5 +80,166 @@
             drawVisualization();
         };
     </script>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Background with gradient -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#151e3f" />
+      <stop offset="100%" stop-color="#0e1229" />
+    </linearGradient>
+    
+    <!-- Glow effects -->
+    <filter id="text-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feFlood flood-color="#ffffff" flood-opacity="0.3" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <filter id="blue-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#00ccff" flood-opacity="0.4" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <filter id="white-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feFlood flood-color="#ffffff" flood-opacity="0.5" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <!-- Metric tensor gradient -->
+    <radialGradient id="metric-gradient" cx="0.5" cy="0.5" r="0.7">
+      <stop offset="0%" stop-color="#00ccff" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#00ccff" stop-opacity="0"/>
+    </radialGradient>
+    
+    <!-- Arrow markers -->
+    <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#00ccff" />
+    </marker>
+    
+    <marker id="arrow-white" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ffffff" />
+    </marker>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="800" height="600" fill="url(#bg-gradient)" />
+  
+  <!-- Title -->
+  <text x="400" y="40" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" filter="url(#text-glow)" font-weight="bold">Quantum Information Metric Tensor</text>
+  <text x="400" y="70" fill="#ffffff" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" opacity="0.8">Curvature from Quantum Correlations</text>
+  
+  <!-- Main Equation -->
+  <g transform="translate(400, 120)">
+    <rect x="-180" y="-20" width="360" height="40" rx="10" ry="10" fill="rgba(0, 204, 255, 0.1)" stroke="#00ccff" stroke-width="1" />
+    <text x="0" y="5" font-family="Arial, sans-serif" font-size="18" fill="#ffffff" text-anchor="middle" filter="url(#blue-glow)">Q<tspan font-size="14" baseline-shift="sub">μν</tspan> = <tspan font-size="22">δ</tspan><tspan font-size="11" baseline-shift="super">2</tspan>S<tspan font-size="12" baseline-shift="sub">QI</tspan> / δg<tspan font-size="10" baseline-shift="sub">μν</tspan>δg<tspan font-size="10" baseline-shift="sub">ρσ</tspan> ρ<tspan font-size="10" baseline-shift="sub">ρσ</tspan></text>
+  </g>
+  
+  <!-- Curved Manifold with Quantum Correlations -->
+  <g transform="translate(400, 300)">
+    <!-- Base curved surface -->
+    <ellipse cx="0" cy="0" rx="250" ry="120" fill="none" stroke="#30363d" stroke-width="1" />
+    
+    <!-- Information density gradient (varies with quantum correlations) -->
+    <ellipse cx="0" cy="0" rx="250" ry="120" fill="url(#metric-gradient)" opacity="0.3" />
+    
+    <!-- Coordinate grid lines -->
+    <g stroke="#30363d" stroke-width="0.5" opacity="0.4">
+      <!-- Horizontal grid lines -->
+      <path d="M-250,0 C-200,-40 -100,-50 0,-40 C100,-30 200,-40 250,0" fill="none" />
+      <path d="M-250,-40 C-200,-80 -100,-90 0,-80 C100,-70 200,-80 250,-40" fill="none" />
+      <path d="M-250,40 C-200,0 -100,-10 0,0 C100,10 200,0 250,40" fill="none" />
+      <path d="M-250,80 C-200,40 -100,30 0,40 C100,50 200,40 250,80" fill="none" />
+      
+      <!-- Vertical grid lines -->
+      <path d="M-200,-80 C-190,-40 -190,0 -200,80" fill="none" />
+      <path d="M-100,-90 C-90,-50 -90,10 -100,80" fill="none" />
+      <path d="M0,-80 C10,-40 10,0 0,40" fill="none" />
+      <path d="M100,-70 C110,-30 110,20 100,50" fill="none" />
+      <path d="M200,-80 C210,-40 210,0 200,80" fill="none" />
+    </g>
+    
+    <!-- Points of high quantum correlation (causing curvature) -->
+    <g>
+      <!-- High correlation point A -->
+      <circle cx="-100" cy="-20" r="15" fill="#00ccff" opacity="0.6" filter="url(#blue-glow)" />
+      <text x="-100" y="-20" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">A</text>
+      
+      <!-- Local curvature from point A -->
+      <ellipse cx="-100" cy="-20" rx="40" ry="20" fill="none" stroke="#00ccff" stroke-width="1.5" stroke-dasharray="4,2" opacity="0.8" transform="rotate(-30, -100, -20)" />
+      
+      <!-- High correlation point B -->
+      <circle cx="120" cy="30" r="15" fill="#00ccff" opacity="0.6" filter="url(#blue-glow)" />
+      <text x="120" y="30" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">B</text>
+      
+      <!-- Local curvature from point B -->
+      <ellipse cx="120" cy="30" rx="40" ry="25" fill="none" stroke="#00ccff" stroke-width="1.5" stroke-dasharray="4,2" opacity="0.8" transform="rotate(15, 120, 30)" />
+      
+      <!-- Entanglement between points -->
+      <path d="M-85,-20 C-20,-60 50,0 105,30" fill="none" stroke="#00ccff" stroke-width="2" opacity="0.7" stroke-dasharray="5,5" />
+      <text x="0" y="-30" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle" filter="url(#text-glow)">Quantum Entanglement</text>
+    </g>
+    
+    <!-- Tangent vectors and tensors -->
+    <g>
+      <!-- Reference point for tensor -->
+      <circle cx="0" cy="0" r="6" fill="#ffffff" filter="url(#white-glow)" />
+      
+      <!-- Basis vectors -->
+      <line x1="0" y1="0" x2="40" y2="-20" stroke="#ffffff" stroke-width="2" opacity="0.9" marker-end="url(#arrow-white)" />
+      <line x1="0" y1="0" x2="-20" y2="40" stroke="#ffffff" stroke-width="2" opacity="0.9" marker-end="url(#arrow-white)" />
+      
+      <!-- Vector labels -->
+      <text x="45" y="-25" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)">e₁</text>
+      <text x="-25" y="45" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)">e₂</text>
+      
+      <!-- Tensor visualization -->
+      <ellipse cx="0" cy="0" rx="30" ry="15" fill="none" stroke="#00ccff" stroke-width="2" opacity="0.8" transform="rotate(-30, 0, 0)" />
+      <text x="0" y="-40" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)">Q<tspan baseline-shift="sub" font-size="10">μν</tspan></text>
+    </g>
+  </g>
+  
+  <!-- Key Explanations -->
+  <g transform="translate(400, 485)">
+    <rect x="-300" y="-25" width="600" height="90" rx="10" ry="10" fill="rgba(0, 0, 0, 0.3)" stroke="#30363d" stroke-width="1" />
+    
+    <text x="0" y="-5" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="bold" filter="url(#text-glow)">Quantum Information Metric in HQR Theory</text>
+    <text x="0" y="20" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle" opacity="0.9">
+      The Quantum Information Metric Tensor (Q<tspan baseline-shift="sub" font-size="8">μν</tspan>) quantifies how quantum correlations (ρ<tspan baseline-shift="sub" font-size="8">ρσ</tspan>) generate
+    </text>
+    <text x="0" y="40" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle" opacity="0.9">
+      spacetime curvature. HQR predicts measurable gravitational effects from quantum entanglement
+    </text>
+    <text x="0" y="60" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle" opacity="0.9">
+      alone, providing a natural bridge between quantum mechanics and gravity.
+    </text>
+  </g>
+  
+  <!-- Examples of Experimental Applications -->
+  <g transform="translate(180, 190)">
+    <rect x="-130" y="-30" width="260" height="100" rx="10" ry="10" fill="rgba(0, 0, 0, 0.3)" stroke="#30363d" stroke-width="1" />
+    
+    <text x="0" y="-10" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="bold" filter="url(#text-glow)">Experimental Signatures</text>
+    
+    <text x="-120" y="15" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• Gravitational lensing anomalies</text>
+    <text x="-120" y="40" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• Black hole entropy modifications</text>
+    <text x="-120" y="65" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• Non-local correlations in URu₂Si₂</text>
+  </g>
+  
+  <!-- Prediction with Measurement Scale -->
+  <g transform="translate(620, 190)">
+    <rect x="-130" y="-30" width="260" height="100" rx="10" ry="10" fill="rgba(0, 0, 0, 0.3)" stroke="#30363d" stroke-width="1" />
+    
+    <text x="0" y="-10" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="bold" filter="url(#text-glow)">Detection Thresholds</text>
+    
+    <text x="-120" y="15" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• LIGO/Einstein Telescope: Δf/f ≈ 10⁻⁵</text>
+    <text x="-120" y="40" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• Neutron scattering: ΔE ≈ 1 meV</text>
+    <text x="-120" y="65" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• STM: Fano resonances at 2-10 mV</text>
+  </g>
+</svg>
 </body>
 </html>
