@@ -2178,6 +2178,698 @@
             }
         }, 2000);
     </script>
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Background with gradient -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#151e3f" />
+      <stop offset="100%" stop-color="#0e1229" />
+    </linearGradient>
     
+    <!-- Glow effects -->
+    <filter id="text-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feFlood flood-color="#ffffff" flood-opacity="0.3" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <filter id="blue-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#00ccff" flood-opacity="0.4" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <filter id="white-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feFlood flood-color="#ffffff" flood-opacity="0.5" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <!-- Metric tensor gradient -->
+    <radialGradient id="metric-gradient" cx="0.5" cy="0.5" r="0.7">
+      <stop offset="0%" stop-color="#00ccff" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#00ccff" stop-opacity="0"/>
+    </radialGradient>
+    
+    <!-- Arrow markers -->
+    <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#00ccff" />
+    </marker>
+    
+    <marker id="arrow-white" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ffffff" />
+    </marker>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="800" height="600" fill="url(#bg-gradient)" />
+  
+  <!-- Title -->
+  <text x="400" y="40" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" filter="url(#text-glow)" font-weight="bold">Quantum Information Metric Tensor</text>
+  <text x="400" y="70" fill="#ffffff" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" opacity="0.8">Curvature from Quantum Correlations</text>
+  
+  <!-- Main Equation -->
+  <g transform="translate(400, 120)">
+    <rect x="-180" y="-20" width="360" height="40" rx="10" ry="10" fill="rgba(0, 204, 255, 0.1)" stroke="#00ccff" stroke-width="1" />
+    <text x="0" y="5" font-family="Arial, sans-serif" font-size="18" fill="#ffffff" text-anchor="middle" filter="url(#blue-glow)">Q<tspan font-size="14" baseline-shift="sub">μν</tspan> = <tspan font-size="22">δ</tspan><tspan font-size="11" baseline-shift="super">2</tspan>S<tspan font-size="12" baseline-shift="sub">QI</tspan> / δg<tspan font-size="10" baseline-shift="sub">μν</tspan>δg<tspan font-size="10" baseline-shift="sub">ρσ</tspan> ρ<tspan font-size="10" baseline-shift="sub">ρσ</tspan></text>
+  </g>
+  
+  <!-- Curved Manifold with Quantum Correlations -->
+  <g transform="translate(400, 300)">
+    <!-- Base curved surface -->
+    <ellipse cx="0" cy="0" rx="250" ry="120" fill="none" stroke="#30363d" stroke-width="1" />
+    
+    <!-- Information density gradient (varies with quantum correlations) -->
+    <ellipse cx="0" cy="0" rx="250" ry="120" fill="url(#metric-gradient)" opacity="0.3" />
+    
+    <!-- Coordinate grid lines -->
+    <g stroke="#30363d" stroke-width="0.5" opacity="0.4">
+      <!-- Horizontal grid lines -->
+      <path d="M-250,0 C-200,-40 -100,-50 0,-40 C100,-30 200,-40 250,0" fill="none" />
+      <path d="M-250,-40 C-200,-80 -100,-90 0,-80 C100,-70 200,-80 250,-40" fill="none" />
+      <path d="M-250,40 C-200,0 -100,-10 0,0 C100,10 200,0 250,40" fill="none" />
+      <path d="M-250,80 C-200,40 -100,30 0,40 C100,50 200,40 250,80" fill="none" />
+      
+      <!-- Vertical grid lines -->
+      <path d="M-200,-80 C-190,-40 -190,0 -200,80" fill="none" />
+      <path d="M-100,-90 C-90,-50 -90,10 -100,80" fill="none" />
+      <path d="M0,-80 C10,-40 10,0 0,40" fill="none" />
+      <path d="M100,-70 C110,-30 110,20 100,50" fill="none" />
+      <path d="M200,-80 C210,-40 210,0 200,80" fill="none" />
+    </g>
+    
+    <!-- Points of high quantum correlation (causing curvature) -->
+    <g>
+      <!-- High correlation point A -->
+      <circle cx="-100" cy="-20" r="15" fill="#00ccff" opacity="0.6" filter="url(#blue-glow)" />
+      <text x="-100" y="-20" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">A</text>
+      
+      <!-- Local curvature from point A -->
+      <ellipse cx="-100" cy="-20" rx="40" ry="20" fill="none" stroke="#00ccff" stroke-width="1.5" stroke-dasharray="4,2" opacity="0.8" transform="rotate(-30, -100, -20)" />
+      
+      <!-- High correlation point B -->
+      <circle cx="120" cy="30" r="15" fill="#00ccff" opacity="0.6" filter="url(#blue-glow)" />
+      <text x="120" y="30" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">B</text>
+      
+      <!-- Local curvature from point B -->
+      <ellipse cx="120" cy="30" rx="40" ry="25" fill="none" stroke="#00ccff" stroke-width="1.5" stroke-dasharray="4,2" opacity="0.8" transform="rotate(15, 120, 30)" />
+      
+      <!-- Entanglement between points -->
+      <path d="M-85,-20 C-20,-60 50,0 105,30" fill="none" stroke="#00ccff" stroke-width="2" opacity="0.7" stroke-dasharray="5,5" />
+      <text x="0" y="-30" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle" filter="url(#text-glow)">Quantum Entanglement</text>
+    </g>
+    
+    <!-- Tangent vectors and tensors -->
+    <g>
+      <!-- Reference point for tensor -->
+      <circle cx="0" cy="0" r="6" fill="#ffffff" filter="url(#white-glow)" />
+      
+      <!-- Basis vectors -->
+      <line x1="0" y1="0" x2="40" y2="-20" stroke="#ffffff" stroke-width="2" opacity="0.9" marker-end="url(#arrow-white)" />
+      <line x1="0" y1="0" x2="-20" y2="40" stroke="#ffffff" stroke-width="2" opacity="0.9" marker-end="url(#arrow-white)" />
+      
+      <!-- Vector labels -->
+      <text x="45" y="-25" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)">e₁</text>
+      <text x="-25" y="45" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)">e₂</text>
+      
+      <!-- Tensor visualization -->
+      <ellipse cx="0" cy="0" rx="30" ry="15" fill="none" stroke="#00ccff" stroke-width="2" opacity="0.8" transform="rotate(-30, 0, 0)" />
+      <text x="0" y="-40" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" filter="url(#text-glow)">Q<tspan baseline-shift="sub" font-size="10">μν</tspan></text>
+    </g>
+  </g>
+  
+  <!-- Key Explanations -->
+  <g transform="translate(400, 485)">
+    <rect x="-300" y="-25" width="600" height="90" rx="10" ry="10" fill="rgba(0, 0, 0, 0.3)" stroke="#30363d" stroke-width="1" />
+    
+    <text x="0" y="-5" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="bold" filter="url(#text-glow)">Quantum Information Metric in HQR Theory</text>
+    <text x="0" y="20" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle" opacity="0.9">
+      The Quantum Information Metric Tensor (Q<tspan baseline-shift="sub" font-size="8">μν</tspan>) quantifies how quantum correlations (ρ<tspan baseline-shift="sub" font-size="8">ρσ</tspan>) generate
+    </text>
+    <text x="0" y="40" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle" opacity="0.9">
+      spacetime curvature. HQR predicts measurable gravitational effects from quantum entanglement
+    </text>
+    <text x="0" y="60" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle" opacity="0.9">
+      alone, providing a natural bridge between quantum mechanics and gravity.
+    </text>
+  </g>
+  
+  <!-- Examples of Experimental Applications -->
+  <g transform="translate(180, 190)">
+    <rect x="-130" y="-30" width="260" height="100" rx="10" ry="10" fill="rgba(0, 0, 0, 0.3)" stroke="#30363d" stroke-width="1" />
+    
+    <text x="0" y="-10" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="bold" filter="url(#text-glow)">Experimental Signatures</text>
+    
+    <text x="-120" y="15" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• Gravitational lensing anomalies</text>
+    <text x="-120" y="40" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• Black hole entropy modifications</text>
+    <text x="-120" y="65" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• Non-local correlations in URu₂Si₂</text>
+  </g>
+  
+  <!-- Prediction with Measurement Scale -->
+  <g transform="translate(620, 190)">
+    <rect x="-130" y="-30" width="260" height="100" rx="10" ry="10" fill="rgba(0, 0, 0, 0.3)" stroke="#30363d" stroke-width="1" />
+    
+    <text x="0" y="-10" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="bold" filter="url(#text-glow)">Detection Thresholds</text>
+    
+    <text x="-120" y="15" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• LIGO/Einstein Telescope: Δf/f ≈ 10⁻⁵</text>
+    <text x="-120" y="40" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• Neutron scattering: ΔE ≈ 1 meV</text>
+    <text x="-120" y="65" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• STM: Fano resonances at 2-10 mV</text>
+  </g>
+</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+  <!-- Background with gradient -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#151e3f" />
+      <stop offset="100%" stop-color="#0e1229" />
+    </linearGradient>
+    
+    <!-- Glow effects -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feFlood flood-color="#ffffff" flood-opacity="0.3" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <filter id="purple-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feFlood flood-color="#9370db" flood-opacity="0.6" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <filter id="blue-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feFlood flood-color="#00ccff" flood-opacity="0.6" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <!-- Information entanglement pattern -->
+    <pattern id="entanglement-pattern" patternUnits="userSpaceOnUse" width="30" height="30" patternTransform="rotate(45)">
+      <path d="M0,15 L30,15 M15,0 L15,30" stroke="#9370db" stroke-width="0.5" opacity="0.2" />
+    </pattern>
+    
+    <!-- Higher-dimensional background pattern -->
+    <radialGradient id="higher-dim-gradient" cx="0.5" cy="0.3" r="0.7" fx="0.5" fy="0.3">
+      <stop offset="0%" stop-color="#9370db" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#151e3f" stop-opacity="0"/>
+    </radialGradient>
+    
+    <linearGradient id="projection-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#9370db" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#00ccff" stop-opacity="0.4"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="900" height="600" fill="url(#bg-gradient)" />
+  
+  <!-- Title -->
+  <text x="450" y="40" fill="#ffffff" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" filter="url(#glow)" font-weight="bold">Holonomic Quantum Reality: 11D → 4D Projection</text>
+  <text x="450" y="70" fill="#ffffff" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" opacity="0.8">Quantum Information in Higher Dimensions</text>
+  
+  <!-- 11D Information Field -->
+  <g transform="translate(450, 200)">
+    <!-- Higher dimensional space visualization -->
+    <circle cx="0" cy="0" r="180" fill="url(#higher-dim-gradient)" />
+    <circle cx="0" cy="0" r="180" fill="url(#entanglement-pattern)" opacity="0.3" />
+    
+    <!-- Entanglement network in 11D -->
+    <g id="entanglement-network" stroke="#9370db" stroke-width="1.5" opacity="0.8" filter="url(#purple-glow)">
+      <!-- Nodes -->
+      <circle cx="-100" cy="-50" r="8" fill="#9370db" />
+      <circle cx="-50" cy="60" r="8" fill="#9370db" />
+      <circle cx="30" cy="-70" r="8" fill="#9370db" />
+      <circle cx="80" cy="20" r="8" fill="#9370db" />
+      <circle cx="130" cy="-40" r="8" fill="#9370db" />
+      <circle cx="0" cy="0" r="10" fill="#9370db" />
+      <circle cx="-130" cy="30" r="8" fill="#9370db" />
+      <circle cx="60" cy="70" r="8" fill="#9370db" />
+      
+      <!-- Connecting lines -->
+      <path d="M-100,-50 L-50,60 L30,-70 L80,20 L130,-40 L0,0 L-130,30 L60,70 L-100,-50" fill="none" />
+      <path d="M-100,-50 L30,-70 M-50,60 L80,20 M0,0 L-130,30 M0,0 L60,70" fill="none" />
+      <path d="M-100,-50 L0,0 M-50,60 L0,0 M30,-70 L0,0 M80,20 L0,0 M130,-40 L0,0" fill="none" />
+    </g>
+    
+    <!-- Hidden Order patterns -->
+    <g id="hidden-order" stroke="#9370db" stroke-width="2" opacity="0.6" stroke-dasharray="5,5">
+      <path d="M-160,0 C-120,-80 -40,-100 0,-80 C40,-60 120,-80 160,0" fill="none" />
+      <path d="M-160,0 C-120,80 -40,100 0,80 C40,60 120,80 160,0" fill="none" />
+    </g>
+  </g>
+  
+  <!-- Projection cones and rays -->
+  <g id="projection-rays">
+    <path d="M450,200 L300,450 M450,200 L400,450 M450,200 L500,450 M450,200 L600,450" 
+          stroke="#ffffff" stroke-width="1" opacity="0.3" stroke-dasharray="5,5" />
+    
+    <path d="M450,200 L300,450 L600,450 L450,200 Z" fill="url(#projection-gradient)" opacity="0.15" />
+  </g>
+  
+  <!-- 4D Spacetime Manifold -->
+  <g transform="translate(450, 450)">
+    <!-- 4D boundary visualization -->
+    <rect x="-200" y="-30" width="400" height="60" rx="30" fill="none" stroke="#00ccff" stroke-width="3" filter="url(#blue-glow)" />
+    
+    <!-- Wavefunctions and oscillations in 4D -->
+    <path d="M-180,0 C-150,-20 -120,20 -90,0 C-60,-20 -30,20 0,0 C30,-20 60,20 90,0 C120,-20 150,20 180,0" 
+          stroke="#00ccff" stroke-width="2" fill="none" opacity="0.8" />
+    
+    <!-- Projected particles -->
+    <circle cx="-120" cy="0" r="6" fill="#00ccff" filter="url(#blue-glow)" />
+    <circle cx="-60" cy="0" r="6" fill="#00ccff" filter="url(#blue-glow)" />
+    <circle cx="0" cy="0" r="6" fill="#00ccff" filter="url(#blue-glow)" />
+    <circle cx="60" cy="0" r="6" fill="#00ccff" filter="url(#blue-glow)" />
+    <circle cx="120" cy="0" r="6" fill="#00ccff" filter="url(#blue-glow)" />
+  </g>
+  
+  <!-- Equations and Labels -->
+  <g font-family="Arial, sans-serif" fill="#ffffff">
+    <!-- 11D Label and Equation -->
+    <text x="200" y="150" font-size="20" text-anchor="middle" filter="url(#purple-glow)">11-Dimensional M-Theory Space</text>
+    <text x="200" y="250" font-size="16" text-anchor="middle" font-style="italic">Hidden Order: ⟨O(x) O(y)⟩</text>
+    
+    <!-- 4D Label and Equation -->
+    <text x="200" y="450" font-size="20" text-anchor="middle" filter="url(#blue-glow)">4D Spacetime Reality</text>
+    <text x="200" y="480" font-size="16" text-anchor="middle" font-style="italic">Quantum Mechanics: Ψ = Re^(iS/ℏ)</text>
+    
+    <!-- Projection Label -->
+    <text x="700" y="320" font-size="18" text-anchor="middle" filter="url(#glow)">Holographic Projection</text>
+    <text x="700" y="350" font-size="16" text-anchor="middle" font-style="italic">AdS/CFT Correspondence</text>
+    <text x="700" y="380" font-size="14" text-anchor="middle" opacity="0.8">Z_CFT = ∫DΦe^(iS_bulk[Φ])</text>
+  </g>
+  
+  <!-- Key Components boxes -->
+  <g transform="translate(720, 170)">
+    <!-- Box for components -->
+    <rect x="-120" y="-30" width="240" height="120" rx="10" ry="10" fill="rgba(20, 30, 60, 0.5)" stroke="#9370db" stroke-width="1.5" />
+    <text x="0" y="-10" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" filter="url(#purple-glow)" font-weight="bold">HQR Key Components</text>
+    
+    <text x="-110" y="20" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• Hidden Order</text>
+    <text x="-110" y="45" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• String Theory / M-Theory</text>
+    <text x="-110" y="70" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• Bohmian Mechanics</text>
+  </g>
+  
+  <!-- Experimental Predictions -->
+  <g transform="translate(720, 450)">
+    <!-- Box for predictions -->
+    <rect x="-120" y="-30" width="240" height="120" rx="10" ry="10" fill="rgba(20, 30, 60, 0.5)" stroke="#00ccff" stroke-width="1.5" />
+    <text x="0" y="-10" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" filter="url(#blue-glow)" font-weight="bold">Observable Predictions</text>
+    
+    <text x="-110" y="20" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• Gravitational Lensing</text>
+    <text x="-110" y="45" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• Kaluza-Klein Particles</text>
+    <text x="-110" y="70" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• Fine Structure Constant</text>
+  </g>
+</svg>  
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Background with gradient -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#151e3f" />
+      <stop offset="100%" stop-color="#0e1229" />
+    </linearGradient>
+    
+    <!-- Glow effects -->
+    <filter id="text-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feFlood flood-color="#ffffff" flood-opacity="0.3" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <filter id="blue-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#00ccff" flood-opacity="0.4" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <filter id="red-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#ff3860" flood-opacity="0.4" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <!-- Density gradients -->
+    <radialGradient id="info-density-gradient" cx="0.5" cy="0.5" r="0.7">
+      <stop offset="0%" stop-color="#9370db" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#9370db" stop-opacity="0"/>
+    </radialGradient>
+    
+    <radialGradient id="spacetime-density-gradient" cx="0.5" cy="0.5" r="0.7">
+      <stop offset="0%" stop-color="#00ccff" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#00ccff" stop-opacity="0"/>
+    </radialGradient>
+    
+    <radialGradient id="imbalance-gradient" cx="0.5" cy="0.5" r="0.7">
+      <stop offset="0%" stop-color="#ff3860" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#ff3860" stop-opacity="0"/>
+    </radialGradient>
+    
+    <!-- Universe expansion pattern -->
+    <pattern id="expansion-pattern" patternUnits="userSpaceOnUse" width="50" height="50" patternTransform="scale(1.5)">
+      <path d="M25,0 L25,50 M0,25 L50,25" stroke="#ffffff" stroke-width="0.5" opacity="0.2" />
+      <path d="M0,0 L50,50 M50,0 L0,50" stroke="#ffffff" stroke-width="0.5" opacity="0.1" />
+    </pattern>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="800" height="600" fill="url(#bg-gradient)" />
+  
+  <!-- Title -->
+  <text x="400" y="40" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" filter="url(#text-glow)" font-weight="bold">Dark Energy from Informational Imbalance</text>
+  <text x="400" y="70" fill="#ffffff" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" opacity="0.8">HQR Explanation for Cosmic Acceleration</text>
+  
+  <!-- Main Equation -->
+  <g transform="translate(400, 120)">
+    <rect x="-200" y="-20" width="400" height="40" rx="10" ry="10" fill="rgba(255, 56, 96, 0.1)" stroke="#ff3860" stroke-width="1" />
+    <text x="0" y="5" font-family="Arial, sans-serif" font-size="18" fill="#ffffff" text-anchor="middle" filter="url(#red-glow)">Λ<tspan baseline-shift="sub" font-size="12">QI</tspan><tspan baseline-shift="super" font-size="12">(4D)</tspan> = 8πG<tspan baseline-shift="sub" font-size="12">4</tspan> (ρ<tspan baseline-shift="sub" font-size="12">QI</tspan><tspan baseline-shift="super" font-size="12">(4D)</tspan> - ρ<tspan baseline-shift="sub" font-size="12">ST</tspan><tspan baseline-shift="super" font-size="12">(4D)</tspan>)</text>
+  </g>
+  
+  <!-- 11D to 4D Dimensional Reduction Diagram -->
+  <g transform="translate(400, 300)">
+    <!-- 11D representation -->
+    <g transform="translate(0, -80)">
+      <circle cx="0" cy="0" r="60" fill="url(#info-density-gradient)" opacity="0.8" />
+      <circle cx="0" cy="0" r="60" fill="none" stroke="#9370db" stroke-width="2" opacity="0.9" />
+      <text x="0" y="0" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" filter="url(#text-glow)">11D M-Theory</text>
+      <text x="0" y="20" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle" opacity="0.8">Balanced Structure</text>
+    </g>
+    
+    <!-- Dimensional reduction arrows -->
+    <g transform="translate(0, -30)">
+      <path d="M-40,-30 L-80,30" stroke="#ffffff" stroke-width="1.5" opacity="0.6" stroke-dasharray="5,3" />
+      <path d="M0,-30 L0,30" stroke="#ffffff" stroke-width="1.5" opacity="0.6" stroke-dasharray="5,3" />
+      <path d="M40,-30 L80,30" stroke="#ffffff" stroke-width="1.5" opacity="0.6" stroke-dasharray="5,3" />
+      
+      <text x="0" y="0" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle" opacity="0.8">Dimensional</text>
+      <text x="0" y="15" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle" opacity="0.8">Reduction</text>
+    </g>
+    
+    <!-- 4D Projection - Information Density -->
+    <g transform="translate(-100, 80)">
+      <circle cx="0" cy="0" r="40" fill="url(#info-density-gradient)" opacity="0.6" />
+      <circle cx="0" cy="0" r="40" fill="none" stroke="#9370db" stroke-width="2" opacity="0.7" />
+      <text x="0" y="-15" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle" filter="url(#text-glow)">Quantum Information</text>
+      <text x="0" y="5" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle" filter="url(#text-glow)">Density (ρ<tspan baseline-shift="sub" font-size="8">QI</tspan>)</text>
+      <text x="0" y="25" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" opacity="0.9">Higher</text>
+    </g>
+    
+    <!-- 4D Projection - Spacetime Density -->
+    <g transform="translate(100, 80)">
+      <circle cx="0" cy="0" r="40" fill="url(#spacetime-density-gradient)" opacity="0.6" />
+      <circle cx="0" cy="0" r="40" fill="none" stroke="#00ccff" stroke-width="2" opacity="0.7" />
+      <text x="0" y="-15" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle" filter="url(#text-glow)">Spacetime</text>
+      <text x="0" y="5" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle" filter="url(#text-glow)">Density (ρ<tspan baseline-shift="sub" font-size="8">ST</tspan>)</text>
+      <text x="0" y="25" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" opacity="0.9">Lower</text>
+    </g>
+    
+    <!-- Imbalance indicator -->
+    <g transform="translate(0, 80)">
+      <path d="M-60,0 L60,0" stroke="#ff3860" stroke-width="2" opacity="0.8" stroke-dasharray="6,4" />
+      <text x="0" y="-15" font-family="Arial, sans-serif" font-size="14" fill="#ff3860" text-anchor="middle" filter="url(#red-glow)">Imbalance</text>
+      <text x="0" y="25" font-family="Arial, sans-serif" font-size="14" fill="#ff3860" text-anchor="middle" filter="url(#red-glow)">Λ<tspan baseline-shift="sub" font-size="10">QI</tspan> > 0</text>
+    </g>
+  </g>
+  
+  <!-- Cosmic Expansion Visualization -->
+  <g transform="translate(400, 450)">
+    <!-- Expansion background -->
+    <rect x="-150" y="-40" width="300" height="80" rx="10" ry="10" fill="url(#expansion-pattern)" />
+    
+    <!-- Accelerating galaxies -->
+    <g>
+      <!-- Galaxy 1 -->
+      <circle cx="-120" cy="0" r="6" fill="#ffffff" />
+      <path d="M-120,-10 L-130,-20 M-120,-10 L-110,-20 M-120,10 L-130,20 M-120,10 L-110,20" stroke="#ffffff" stroke-width="1" opacity="0.7" />
+      
+      <!-- Galaxy 2 -->
+      <circle cx="-60" cy="0" r="5" fill="#ffffff" />
+      <path d="M-60,-8 L-68,-16 M-60,-8 L-52,-16 M-60,8 L-68,16 M-60,8 L-52,16" stroke="#ffffff" stroke-width="1" opacity="0.7" />
+      
+      <!-- Galaxy 3 -->
+      <circle cx="0" cy="0" r="8" fill="#ffffff" />
+      <path d="M0,-12 L-12,-24 M0,-12 L12,-24 M0,12 L-12,24 M0,12 L12,24" stroke="#ffffff" stroke-width="1" opacity="0.7" />
+      
+      <!-- Galaxy 4 -->
+      <circle cx="60" cy="0" r="5" fill="#ffffff" />
+      <path d="M60,-8 L52,-16 M60,-8 L68,-16 M60,8 L52,16 M60,8 L68,16" stroke="#ffffff" stroke-width="1" opacity="0.7" />
+      
+      <!-- Galaxy 5 -->
+      <circle cx="120" cy="0" r="6" fill="#ffffff" />
+      <path d="M120,-10 L110,-20 M120,-10 L130,-20 M120,10 L110,20 M120,10 L130,20" stroke="#ffffff" stroke-width="1" opacity="0.7" />
+      
+      <!-- Acceleration arrows -->
+      <path d="M-120,0 L-140,-15" stroke="#ff3860" stroke-width="1.5" opacity="0.8" marker-end="url(#red-arrow)" />
+      <path d="M-60,0 L-70,-10" stroke="#ff3860" stroke-width="1.5" opacity="0.8" marker-end="url(#red-arrow)" />
+      <path d="M60,0 L70,-10" stroke="#ff3860" stroke-width="1.5" opacity="0.8" marker-end="url(#red-arrow)" />
+      <path d="M120,0 L140,-15" stroke="#ff3860" stroke-width="1.5" opacity="0.8" marker-end="url(#red-arrow)" />
+    </g>
+    
+    <!-- Dark energy field -->
+    <rect x="-150" y="-40" width="300" height="80" rx="10" ry="10" fill="url(#imbalance-gradient)" opacity="0.2" />
+    
+    <!-- Expansion label -->
+    <text x="0" y="50" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" text-anchor="middle" filter="url(#text-glow)">Accelerating Cosmic Expansion</text>
+  </g>
+  
+  <!-- Implications Box -->
+  <g transform="translate(180, 200)">
+    <rect x="-130" y="-30" width="260" height="110" rx="10" ry="10" fill="rgba(0, 0, 0, 0.3)" stroke="#30363d" stroke-width="1" />
+    
+    <text x="0" y="-10" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="bold" filter="url(#text-glow)">HQR Resolution of Cosmological Constant Problem</text>
+    
+    <text x="-120" y="15" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• No fine-tuning required</text>
+    <text x="-120" y="40" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• Natural emergence from dimensional reduction</text>
+    <text x="-120" y="65" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• Predicts dynamic evolution of dark energy</text>
+  </g>
+  
+  <!-- Experimental Predictions Box -->
+  <g transform="translate(620, 200)">
+    <rect x="-130" y="-30" width="260" height="110" rx="10" ry="10" fill="rgba(0, 0, 0, 0.3)" stroke="#30363d" stroke-width="1" />
+    
+    <text x="0" y="-10" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="bold" filter="url(#text-glow)">Testable Predictions</text>
+    
+    <text x="-120" y="15" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• CMB non-Gaussianity: f<tspan baseline-shift="super" font-size="8">NL</tspan><tspan baseline-shift="super" font-size="8">info</tspan> ≈ 10-50</text>
+    <text x="-120" y="40" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• Tensor-to-scalar ratio: r ≈ 0.001-0.01</text>
+    <text x="-120" y="65" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• Detectable with Euclid, LSST missions</text>
+  </g>
+  
+  <!-- Explanation Box -->
+  <g transform="translate(400, 550)">
+    <rect x="-350" y="-30" width="700" height="60" rx="10" ry="10" fill="rgba(0, 0, 0, 0.3)" stroke="#30363d" stroke-width="1" />
+    
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle" opacity="0.9">
+      HQR interprets dark energy as a natural consequence of dimensional reduction from 11D to 4D, where quantum informational density
+    </text>
+    <text x="0" y="20" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle" opacity="0.9">
+      exceeds spacetime density in our observable universe, creating an expansive pressure without requiring arbitrary fine-tuning.
+    </text>
+  </g>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="red-arrow" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ff3860" />
+    </marker>
+  </defs>
+</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Background with gradient -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#151e3f" />
+      <stop offset="100%" stop-color="#0e1229" />
+    </linearGradient>
+    
+    <!-- Glow effects -->
+    <filter id="text-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feFlood flood-color="#ffffff" flood-opacity="0.3" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <filter id="magenta-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#e94560" flood-opacity="0.4" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <!-- Density vs curvature gradients -->
+    <linearGradient id="ratio-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#9370db" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#4caf50" stop-opacity="0.7"/>
+    </linearGradient>
+    
+    <!-- Arrow markers -->
+    <marker id="arrow-magenta" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#e94560" />
+    </marker>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="800" height="600" fill="url(#bg-gradient)" />
+  
+  <!-- Title -->
+  <text x="400" y="40" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" filter="url(#text-glow)" font-weight="bold">Fine Structure Constant from Information Ratio</text>
+  <text x="400" y="70" fill="#ffffff" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" opacity="0.8">HQR Derivation of a Fundamental Constant</text>
+  
+  <!-- Main Equation -->
+  <g transform="translate(400, 120)">
+    <rect x="-150" y="-25" width="300" height="50" rx="10" ry="10" fill="rgba(233, 69, 96, 0.1)" stroke="#e94560" stroke-width="1.5" />
+    <text x="0" y="5" font-family="Arial, sans-serif" font-size="24" fill="#ffffff" text-anchor="middle" filter="url(#magenta-glow)">α<tspan font-size="18" baseline-shift="super">-1</tspan> ≈ 137 = <tspan>ρ</tspan><tspan font-size="16" baseline-shift="sub">QI</tspan>/<tspan>R</tspan><tspan font-size="16" baseline-shift="sub">QI</tspan></text>
+  </g>
+  
+  <!-- Comparison with Traditional Approaches -->
+  <g transform="translate(400, 180)">
+    <rect x="-280" y="-20" width="560" height="40" rx="8" ry="8" fill="rgba(255, 255, 255, 0.05)" stroke="#30363d" stroke-width="1" />
+    <text x="-270" y="5" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" opacity="0.7" text-anchor="start">Traditional View: Arbitrary Fundamental Constant</text>
+    <text x="270" y="5" font-family="Arial, sans-serif" font-size="14" fill="#e94560" opacity="0.9" text-anchor="end" filter="url(#magenta-glow)">HQR: Emergent from Informational Geometry</text>
+  </g>
+  
+  <!-- Visual Representation of Information Ratio -->
+  <g transform="translate(400, 300)">
+    <!-- Central axis line -->
+    <line x1="-200" y1="0" x2="200" y2="0" stroke="#ffffff" stroke-width="1" opacity="0.5" />
+    
+    <!-- Density side (left) -->
+    <g transform="translate(-120, 0)">
+      <circle cx="0" cy="0" r="80" fill="#9370db" opacity="0.2" />
+      <circle cx="0" cy="0" r="80" fill="none" stroke="#9370db" stroke-width="2" opacity="0.7" />
+      
+      <!-- Density visualization (dots at varying density) -->
+      <g id="info-density-dots" fill="#9370db" opacity="0.8">
+        <!-- Inner high-density region -->
+        <circle cx="-30" cy="-20" r="2" />
+        <circle cx="-25" cy="-35" r="2" />
+        <circle cx="-20" cy="-15" r="2" />
+        <circle cx="-15" cy="-25" r="2" />
+        <circle cx="-10" cy="-5" r="2" />
+        <circle cx="-5" cy="-30" r="2" />
+        <circle cx="0" cy="-10" r="2" />
+        <circle cx="5" cy="-20" r="2" />
+        <circle cx="10" cy="-30" r="2" />
+        <circle cx="15" cy="-5" r="2" />
+        <circle cx="20" cy="-25" r="2" />
+        <circle cx="25" cy="-15" r="2" />
+        <circle cx="30" cy="-35" r="2" />
+        <!-- Mid-density region -->
+        <circle cx="-45" cy="-10" r="2" />
+        <circle cx="-40" cy="15" r="2" />
+        <circle cx="-35" cy="-30" r="2" />
+        <circle cx="-30" cy="25" r="2" />
+        <circle cx="-25" cy="5" r="2" />
+        <circle cx="-15" cy="30" r="2" />
+        <circle cx="-5" cy="15" r="2" />
+        <circle cx="5" cy="25" r="2" />
+        <circle cx="15" cy="10" r="2" />
+        <circle cx="25" cy="30" r="2" />
+        <circle cx="35" cy="0" r="2" />
+        <circle cx="40" cy="20" r="2" />
+        <circle cx="45" cy="-15" r="2" />
+        <!-- Outer lower-density region -->
+        <circle cx="-60" cy="-40" r="2" />
+        <circle cx="-55" cy="35" r="2" />
+        <circle cx="-45" cy="-50" r="2" />
+        <circle cx="-35" cy="45" r="2" />
+        <circle cx="-25" cy="-55" r="2" />
+        <circle cx="-10" cy="55" r="2" />
+        <circle cx="10" cy="-60" r="2" />
+        <circle cx="25" cy="50" r="2" />
+        <circle cx="40" cy="-45" r="2" />
+        <circle cx="55" cy="30" r="2" />
+        <circle cx="60" cy="-20" r="2" />
+      </g>
+      
+      <text x="0" y="-90" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" text-anchor="middle" filter="url(#text-glow)">Quantum Informational</text>
+      <text x="0" y="-70" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" text-anchor="middle" filter="url(#text-glow)">Density (ρ<tspan font-size="12" baseline-shift="sub">QI</tspan>)</text>
+      <text x="0" y="100" font-family="Arial, sans-serif" font-size="24" fill="#9370db" text-anchor="middle" opacity="0.9">137</text>
+    </g>
+    
+    <!-- Curvature side (right) -->
+    <g transform="translate(120, 0)">
+      <circle cx="0" cy="0" r="80" fill="#4caf50" opacity="0.2" />
+      <circle cx="0" cy="0" r="80" fill="none" stroke="#4caf50" stroke-width="2" opacity="0.7" />
+      
+      <!-- Curvature visualization (curved grid lines) -->
+      <g stroke="#4caf50" stroke-width="1" opacity="0.5" fill="none">
+        <!-- Radial lines -->
+        <path d="M0,0 L0,-60" />
+        <path d="M0,0 L42,-42" />
+        <path d="M0,0 L60,0" />
+        <path d="M0,0 L42,42" />
+        <path d="M0,0 L0,60" />
+        <path d="M0,0 L-42,42" />
+        <path d="M0,0 L-60,0" />
+        <path d="M0,0 L-42,-42" />
+        
+        <!-- Concentric circles -->
+        <circle cx="0" cy="0" r="20" />
+        <circle cx="0" cy="0" r="40" />
+        <circle cx="0" cy="0" r="60" />
+        
+        <!-- Curved spacetime representation -->
+        <ellipse cx="0" cy="0" rx="60" ry="40" transform="rotate(45)" />
+        <ellipse cx="0" cy="0" rx="60" ry="20" transform="rotate(-30)" />
+      </g>
+      
+      <text x="0" y="-90" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" text-anchor="middle" filter="url(#text-glow)">Informational</text>
+      <text x="0" y="-70" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" text-anchor="middle" filter="url(#text-glow)">Curvature (R<tspan font-size="12" baseline-shift="sub">QI</tspan>)</text>
+      <text x="0" y="100" font-family="Arial, sans-serif" font-size="24" fill="#4caf50" text-anchor="middle" opacity="0.9">1</text>
+    </g>
+    
+    <!-- The ratio visualization -->
+    <g transform="translate(0, 20)">
+      <rect x="-40" y="-15" width="80" height="30" rx="15" ry="15" fill="url(#ratio-gradient)" opacity="0.8" />
+      <text x="0" y="5" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" filter="url(#text-glow)">Ratio = 137</text>
+      <path d="M0,-15 L0,-40" stroke="#e94560" stroke-width="2" opacity="0.9" marker-end="url(#arrow-magenta)" />
+      <text x="0" y="-50" font-family="Arial, sans-serif" font-size="14" fill="#e94560" text-anchor="middle" filter="url(#magenta-glow)">α<tspan font-size="10" baseline-shift="super">-1</tspan></text>
+    </g>
+  </g>
+  
+  <!-- Experimental Predictions Box -->
+  <g transform="translate(200, 450)">
+    <rect x="-150" y="-60" width="300" height="120" rx="10" ry="10" fill="rgba(0, 0, 0, 0.3)" stroke="#30363d" stroke-width="1" />
+    
+    <text x="0" y="-35" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" text-anchor="middle" font-weight="bold" filter="url(#text-glow)">Experimental Predictions</text>
+    
+    <text x="-135" y="-10" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• Ultracold atomic gases (sensitivity ≈ 10<tspan font-size="8" baseline-shift="super">-18</tspan>)</text>
+    <text x="-135" y="15" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• Quantum dot arrays with controlled</text>
+    <text x="-135" y="35" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">  entanglement (sensitivity ≈ 10<tspan font-size="8" baseline-shift="super">-12</tspan> - 10<tspan font-size="8" baseline-shift="super">-15</tspan>)</text>
+  </g>
+  
+  <!-- Advantages of HQR Approach Box -->
+  <g transform="translate(600, 450)">
+    <rect x="-150" y="-60" width="300" height="120" rx="10" ry="10" fill="rgba(0, 0, 0, 0.3)" stroke="#30363d" stroke-width="1" />
+    
+    <text x="0" y="-35" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" text-anchor="middle" font-weight="bold" filter="url(#text-glow)">Advantages of HQR Approach</text>
+    
+    <text x="-135" y="-10" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• Explains value without fine-tuning</text>
+    <text x="-135" y="15" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• Predicts subtle variations in systems</text>
+    <text x="-135" y="35" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">  with altered informational geometry</text>
+  </g>
+  
+  <!-- Bottom explanation -->
+  <g transform="translate(400, 550)">
+    <rect x="-350" y="-30" width="700" height="60" rx="10" ry="10" fill="rgba(0, 0, 0, 0.3)" stroke="#30363d" stroke-width="1" />
+    
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">
+      Rather than accepting the fine-structure constant (α ≈ 1/137) as an arbitrary value, HQR derives it from the ratio of quantum
+    </text>
+    <text x="0" y="20" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">
+      informational density to informational curvature, suggesting the value emerges naturally from the geometric structure of information itself.
+    </text>
+  </g>
+</svg>      
 </body>
 </html>
