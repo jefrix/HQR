@@ -584,6 +584,194 @@
     </marker>
   </defs>
 </svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Background with gradient -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#151e3f" />
+      <stop offset="100%" stop-color="#0e1229" />
+    </linearGradient>
     
+    <!-- Glow effects -->
+    <filter id="text-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feFlood flood-color="#ffffff" flood-opacity="0.3" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <filter id="magenta-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#e94560" flood-opacity="0.4" result="glow"/>
+      <feComposite in="glow" in2="blur" operator="in" result="softglow"/>
+      <feComposite in="SourceGraphic" in2="softglow" operator="over"/>
+    </filter>
+    
+    <!-- Density vs curvature gradients -->
+    <linearGradient id="ratio-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#9370db" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#4caf50" stop-opacity="0.7"/>
+    </linearGradient>
+    
+    <!-- Arrow markers -->
+    <marker id="arrow-magenta" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#e94560" />
+    </marker>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="800" height="600" fill="url(#bg-gradient)" />
+  
+  <!-- Title -->
+  <text x="400" y="40" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" filter="url(#text-glow)" font-weight="bold">Fine Structure Constant from Information Ratio</text>
+  <text x="400" y="70" fill="#ffffff" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" opacity="0.8">HQR Derivation of a Fundamental Constant</text>
+  
+  <!-- Main Equation -->
+  <g transform="translate(400, 120)">
+    <rect x="-150" y="-25" width="300" height="50" rx="10" ry="10" fill="rgba(233, 69, 96, 0.1)" stroke="#e94560" stroke-width="1.5" />
+    <text x="0" y="5" font-family="Arial, sans-serif" font-size="24" fill="#ffffff" text-anchor="middle" filter="url(#magenta-glow)">α<tspan font-size="18" baseline-shift="super">-1</tspan> ≈ 137 = <tspan>ρ</tspan><tspan font-size="16" baseline-shift="sub">QI</tspan>/<tspan>R</tspan><tspan font-size="16" baseline-shift="sub">QI</tspan></text>
+  </g>
+  
+  <!-- Comparison with Traditional Approaches -->
+  <g transform="translate(400, 180)">
+    <rect x="-280" y="-20" width="560" height="40" rx="8" ry="8" fill="rgba(255, 255, 255, 0.05)" stroke="#30363d" stroke-width="1" />
+    <text x="-270" y="5" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" opacity="0.7" text-anchor="start">Traditional View: Arbitrary Fundamental Constant</text>
+    <text x="270" y="5" font-family="Arial, sans-serif" font-size="14" fill="#e94560" opacity="0.9" text-anchor="end" filter="url(#magenta-glow)">HQR: Emergent from Informational Geometry</text>
+  </g>
+  
+  <!-- Visual Representation of Information Ratio -->
+  <g transform="translate(400, 300)">
+    <!-- Central axis line -->
+    <line x1="-200" y1="0" x2="200" y2="0" stroke="#ffffff" stroke-width="1" opacity="0.5" />
+    
+    <!-- Density side (left) -->
+    <g transform="translate(-120, 0)">
+      <circle cx="0" cy="0" r="80" fill="#9370db" opacity="0.2" />
+      <circle cx="0" cy="0" r="80" fill="none" stroke="#9370db" stroke-width="2" opacity="0.7" />
+      
+      <!-- Density visualization (dots at varying density) -->
+      <g id="info-density-dots" fill="#9370db" opacity="0.8">
+        <!-- Inner high-density region -->
+        <circle cx="-30" cy="-20" r="2" />
+        <circle cx="-25" cy="-35" r="2" />
+        <circle cx="-20" cy="-15" r="2" />
+        <circle cx="-15" cy="-25" r="2" />
+        <circle cx="-10" cy="-5" r="2" />
+        <circle cx="-5" cy="-30" r="2" />
+        <circle cx="0" cy="-10" r="2" />
+        <circle cx="5" cy="-20" r="2" />
+        <circle cx="10" cy="-30" r="2" />
+        <circle cx="15" cy="-5" r="2" />
+        <circle cx="20" cy="-25" r="2" />
+        <circle cx="25" cy="-15" r="2" />
+        <circle cx="30" cy="-35" r="2" />
+        <!-- Mid-density region -->
+        <circle cx="-45" cy="-10" r="2" />
+        <circle cx="-40" cy="15" r="2" />
+        <circle cx="-35" cy="-30" r="2" />
+        <circle cx="-30" cy="25" r="2" />
+        <circle cx="-25" cy="5" r="2" />
+        <circle cx="-15" cy="30" r="2" />
+        <circle cx="-5" cy="15" r="2" />
+        <circle cx="5" cy="25" r="2" />
+        <circle cx="15" cy="10" r="2" />
+        <circle cx="25" cy="30" r="2" />
+        <circle cx="35" cy="0" r="2" />
+        <circle cx="40" cy="20" r="2" />
+        <circle cx="45" cy="-15" r="2" />
+        <!-- Outer lower-density region -->
+        <circle cx="-60" cy="-40" r="2" />
+        <circle cx="-55" cy="35" r="2" />
+        <circle cx="-45" cy="-50" r="2" />
+        <circle cx="-35" cy="45" r="2" />
+        <circle cx="-25" cy="-55" r="2" />
+        <circle cx="-10" cy="55" r="2" />
+        <circle cx="10" cy="-60" r="2" />
+        <circle cx="25" cy="50" r="2" />
+        <circle cx="40" cy="-45" r="2" />
+        <circle cx="55" cy="30" r="2" />
+        <circle cx="60" cy="-20" r="2" />
+      </g>
+      
+      <text x="0" y="-90" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" text-anchor="middle" filter="url(#text-glow)">Quantum Informational</text>
+      <text x="0" y="-70" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" text-anchor="middle" filter="url(#text-glow)">Density (ρ<tspan font-size="12" baseline-shift="sub">QI</tspan>)</text>
+      <text x="0" y="100" font-family="Arial, sans-serif" font-size="24" fill="#9370db" text-anchor="middle" opacity="0.9">137</text>
+    </g>
+    
+    <!-- Curvature side (right) -->
+    <g transform="translate(120, 0)">
+      <circle cx="0" cy="0" r="80" fill="#4caf50" opacity="0.2" />
+      <circle cx="0" cy="0" r="80" fill="none" stroke="#4caf50" stroke-width="2" opacity="0.7" />
+      
+      <!-- Curvature visualization (curved grid lines) -->
+      <g stroke="#4caf50" stroke-width="1" opacity="0.5" fill="none">
+        <!-- Radial lines -->
+        <path d="M0,0 L0,-60" />
+        <path d="M0,0 L42,-42" />
+        <path d="M0,0 L60,0" />
+        <path d="M0,0 L42,42" />
+        <path d="M0,0 L0,60" />
+        <path d="M0,0 L-42,42" />
+        <path d="M0,0 L-60,0" />
+        <path d="M0,0 L-42,-42" />
+        
+        <!-- Concentric circles -->
+        <circle cx="0" cy="0" r="20" />
+        <circle cx="0" cy="0" r="40" />
+        <circle cx="0" cy="0" r="60" />
+        
+        <!-- Curved spacetime representation -->
+        <ellipse cx="0" cy="0" rx="60" ry="40" transform="rotate(45)" />
+        <ellipse cx="0" cy="0" rx="60" ry="20" transform="rotate(-30)" />
+      </g>
+      
+      <text x="0" y="-90" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" text-anchor="middle" filter="url(#text-glow)">Informational</text>
+      <text x="0" y="-70" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" text-anchor="middle" filter="url(#text-glow)">Curvature (R<tspan font-size="12" baseline-shift="sub">QI</tspan>)</text>
+      <text x="0" y="100" font-family="Arial, sans-serif" font-size="24" fill="#4caf50" text-anchor="middle" opacity="0.9">1</text>
+    </g>
+    
+    <!-- The ratio visualization -->
+    <g transform="translate(0, 20)">
+      <rect x="-40" y="-15" width="80" height="30" rx="15" ry="15" fill="url(#ratio-gradient)" opacity="0.8" />
+      <text x="0" y="5" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" filter="url(#text-glow)">Ratio = 137</text>
+      <path d="M0,-15 L0,-40" stroke="#e94560" stroke-width="2" opacity="0.9" marker-end="url(#arrow-magenta)" />
+      <text x="0" y="-50" font-family="Arial, sans-serif" font-size="14" fill="#e94560" text-anchor="middle" filter="url(#magenta-glow)">α<tspan font-size="10" baseline-shift="super">-1</tspan></text>
+    </g>
+  </g>
+  
+  <!-- Experimental Predictions Box -->
+  <g transform="translate(200, 450)">
+    <rect x="-150" y="-60" width="300" height="120" rx="10" ry="10" fill="rgba(0, 0, 0, 0.3)" stroke="#30363d" stroke-width="1" />
+    
+    <text x="0" y="-35" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" text-anchor="middle" font-weight="bold" filter="url(#text-glow)">Experimental Predictions</text>
+    
+    <text x="-135" y="-10" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• Ultracold atomic gases (sensitivity ≈ 10<tspan font-size="8" baseline-shift="super">-18</tspan>)</text>
+    <text x="-135" y="15" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• Quantum dot arrays with controlled</text>
+    <text x="-135" y="35" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">  entanglement (sensitivity ≈ 10<tspan font-size="8" baseline-shift="super">-12</tspan> - 10<tspan font-size="8" baseline-shift="super">-15</tspan>)</text>
+  </g>
+  
+  <!-- Advantages of HQR Approach Box -->
+  <g transform="translate(600, 450)">
+    <rect x="-150" y="-60" width="300" height="120" rx="10" ry="10" fill="rgba(0, 0, 0, 0.3)" stroke="#30363d" stroke-width="1" />
+    
+    <text x="0" y="-35" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" text-anchor="middle" font-weight="bold" filter="url(#text-glow)">Advantages of HQR Approach</text>
+    
+    <text x="-135" y="-10" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• Explains value without fine-tuning</text>
+    <text x="-135" y="15" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">• Predicts subtle variations in systems</text>
+    <text x="-135" y="35" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="start">  with altered informational geometry</text>
+  </g>
+  
+  <!-- Bottom explanation -->
+  <g transform="translate(400, 550)">
+    <rect x="-350" y="-30" width="700" height="60" rx="10" ry="10" fill="rgba(0, 0, 0, 0.3)" stroke="#30363d" stroke-width="1" />
+    
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">
+      Rather than accepting the fine-structure constant (α ≈ 1/137) as an arbitrary value, HQR derives it from the ratio of quantum
+    </text>
+    <text x="0" y="20" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">
+      informational density to informational curvature, suggesting the value emerges naturally from the geometric structure of information itself.
+    </text>
+  </g>
+</svg>    
 </body>
 </html>
