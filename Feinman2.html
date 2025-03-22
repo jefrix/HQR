@@ -1,49 +1,135 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Feynman Diagram: Kaluza-Klein Interaction</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        #controls {
+            margin-bottom: 20px;
+        }
+        #controls label {
+            margin-right: 10px;
+        }
+        #controls input {
+            width: 50px;
+            padding: 5px;
+            margin-right: 10px;
+        }
+        #controls button {
+            padding: 5px 10px;
+        }
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <label for="modeN">Mode n:</label>
+        <input type="number" id="modeN" value="1" step="1">
+        <label for="modeM">Mode m:</label>
+        <input type="number" id="modeM" value="1" step="1">
+        <button onclick="saveDiagram()">Download Diagram</button>
+    </div>
+    <script>
+        let modeN = 1;
+        let modeM = 1;
 
-import matplotlib.pyplot as plt
+        function setup() {
+            createCanvas(400, 400);
+            frameRate(10); // Update 10 times per second
+        }
 
-# Set up the figure and axis
-fig, ax = plt.subplots(figsize=(6, 4))
+        function draw() {
+            background(255); // White background
+            strokeWeight(2);
 
-# Define the vertex position (center of the diagram)
-vertex = (0, 0)
+            // Read the current values of modeN and modeM from the input fields
+            modeN = parseInt(document.getElementById('modeN').value);
+            modeM = parseInt(document.getElementById('modeM').value);
 
-# Define the endpoints of the three lines
-line1_start = (-1, -1)
-line1_end = vertex
-line2_start = (1, -1)
-line2_end = vertex
-line3_start = vertex
-line3_end = (0, 1)
+            // Define the vertex position (center of the diagram)
+            let vertexX = width / 2;
+            let vertexY = height / 2;
 
-# Draw the lines with arrows
-ax.arrow(line1_start[0], line1_start[1], 
-         line1_end[0] - line1_start[0], line1_end[1] - line1_start[1], 
-         head_width=0.05, head_length=0.1, fc='black', ec='black', length_includes_head=True)
-ax.arrow(line2_start[0], line2_start[1], 
-         line2_end[0] - line2_start[0], line2_end[1] - line2_start[1], 
-         head_width=0.05, head_length=0.1, fc='black', ec='black', length_includes_head=True)
-ax.arrow(line3_start[0], line3_start[1], 
-         line3_end[0] - line3_start[0], line3_end[1] - line3_start[1], 
-         head_width=0.05, head_length=0.1, fc='black', ec='black', length_includes_head=True)
+            // Define the endpoints of the three lines
+            // Incoming particle 1 (mode n): from bottom-left to vertex
+            let line1StartX = vertexX - 100;
+            let line1StartY = vertexY + 100;
+            // Incoming particle 2 (mode m): from bottom-right to vertex
+            let line2StartX = vertexX + 100;
+            let line2StartY = vertexY + 100;
+            // Outgoing particle (mode -n-m): from vertex to top
+            let line3EndX = vertexX;
+            let line3EndY = vertexY - 100;
 
-# Highlight the vertex with a red dot
-ax.plot(vertex[0], vertex[1], 'ro', markersize=10)
+            // Draw the lines with arrows
+            stroke(0); // Black lines
 
-# Add labels for the mode numbers
-ax.text(-0.7, -0.5, r'$n$', fontsize=12, color='blue')
-ax.text(0.7, -0.5, r'$m$', fontsize=12, color='blue')
-ax.text(0.2, 0.5, r'$-n-m$', fontsize=12, color='blue')
+            // Incoming line 1 (mode n)
+            drawArrow(line1StartX, line1StartY, vertexX, vertexY);
+            // Incoming line 2 (mode m)
+            drawArrow(line2StartX, line2StartY, vertexX, vertexY);
+            // Outgoing line (mode -n-m)
+            drawArrow(vertexX, vertexY, line3EndX, line3EndY);
 
-# Set axis limits and remove axes
-ax.set_xlim(-1.5, 1.5)
-ax.set_ylim(-1.5, 1.5)
-ax.axis('off')
+            // Highlight the vertex with a red dot
+            fill(255, 0, 0); // Red
+            noStroke();
+            ellipse(vertexX, vertexY, 10, 10);
 
-# Add a title
-plt.title('Feynman Diagram: Kaluza-Klein Interaction', fontsize=14)
+            // Add labels for the mode numbers
+            textSize(16);
+            textAlign(CENTER, CENTER);
+            fill(0, 0, 255); // Blue text
+            // Label for mode n (near the incoming line 1)
+            text(modeN.toString(), (line1StartX + vertexX) / 2 - 20, (line1StartY + vertexY) / 2);
+            // Label for mode m (near the incoming line 2)
+            text(modeM.toString(), (line2StartX + vertexX) / 2 + 20, (line2StartY + vertexY) / 2);
+            // Label for mode -n-m (near the outgoing line)
+            let modeOut = - (modeN + modeM);
+            text(modeOut.toString(), (vertexX + line3EndX) / 2, (vertexY + line3EndY) / 2 - 20);
 
-# Save the plot as a PNG
-plt.savefig('feynman_diagram.png', dpi=300, bbox_inches='tight')
-plt.close()
+            // Add a title
+            textSize(18);
+            fill(0);
+            text('Feynman Diagram: Kaluza-Klein Interaction', width / 2, 30);
+        }
+
+        // Function to draw an arrow between two points
+        function drawArrow(startX, startY, endX, endY) {
+            stroke(0);
+            line(startX, startY, endX, endY);
+
+            // Calculate the direction of the arrowhead
+            let angle = atan2(endY - startY, endX - startX);
+            let arrowSize = 10;
+
+            // Draw the arrowhead
+            push();
+            translate(endX, endY);
+            rotate(angle);
+            line(0, 0, -arrowSize, arrowSize / 2);
+            line(0, 0, -arrowSize, -arrowSize / 2);
+            pop();
+        }
+
+        // Function to save the canvas as a PNG
+        function saveDiagram() {
+            saveCanvas('feynman_diagram', 'png');
+        }
+    </script>
+</body>
 </html>
