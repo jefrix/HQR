@@ -1,116 +1,99 @@
-<html>
-  <body>
-  
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js">
-let particles = [];
-let interactions = [];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feynman Diagram: Kaluza-Klein Interaction</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function setup() {
+            createCanvas(400, 400);
+            noLoop(); // Draw only once
+        }
 
-function setup() {
-  createCanvas(800, 600);
-  noLoop(); // We only need to draw once
-}
+        function draw() {
+            background(255); // White background
+            strokeWeight(2);
 
-function draw() {
-  background(0);
-  strokeWeight(2);
-  
-  // Define particle positions (randomized for variation)
-  let p1 = createVector(100, height / 2);
-  let p2 = createVector(300, height / 3);
-  let p3 = createVector(500, height / 3);
-  let p4 = createVector(700, height / 2);
+            // Define the vertex position (center of the diagram)
+            let vertexX = width / 2;
+            let vertexY = height / 2;
 
-  // Interaction vertex (holographic node)
-  let vertex = createVector(width / 2, height / 2);
+            // Define the endpoints of the three lines (incoming and outgoing particles)
+            // Incoming particle 1 (mode n): from bottom-left to vertex
+            let line1StartX = vertexX - 100;
+            let line1StartY = vertexY + 100;
+            // Incoming particle 2 (mode m): from bottom-right to vertex
+            let line2StartX = vertexX + 100;
+            let line2StartY = vertexY + 100;
+            // Outgoing particle (mode -n-m): from vertex to top
+            let line3EndX = vertexX;
+            let line3EndY = vertexY - 100;
 
-  // Store particles
-  particles = [p1, p2, p3, p4];
+            // Draw the lines with arrows
+            stroke(0); // Black lines
 
-  // Draw entanglement-driven propagators (curved)
-  drawCurvedPropagator(p1, vertex, color(0, 255, 255));
-  drawCurvedPropagator(p2, vertex, color(255, 100, 255));
-  drawCurvedPropagator(vertex, p3, color(255, 255, 0));
-  drawCurvedPropagator(vertex, p4, color(255, 150, 50));
+            // Incoming line 1 (mode n)
+            drawArrow(line1StartX, line1StartY, vertexX, vertexY);
+            // Incoming line 2 (mode m)
+            drawArrow(line2StartX, line2StartY, vertexX, vertexY);
+            // Outgoing line (mode -n-m)
+            drawArrow(vertexX, vertexY, line3EndX, line3EndY);
 
-  // Draw particles
-  drawParticles();
+            // Highlight the vertex with a red dot
+            fill(255, 0, 0); // Red
+            noStroke();
+            ellipse(vertexX, vertexY, 10, 10);
 
-  // Draw interaction vertex
-  fill(255);
-  ellipse(vertex.x, vertex.y, 10, 10);
-}
+            // Add labels for the mode numbers
+            textSize(16);
+            textAlign(CENTER, CENTER);
+            fill(0, 0, 255); // Blue text
+            // Label for mode n (near the incoming line 1)
+            text('n', (line1StartX + vertexX) / 2 - 20, (line1StartY + vertexY) / 2);
+            // Label for mode m (near the incoming line 2)
+            text('m', (line2StartX + vertexX) / 2 + 20, (line2StartY + vertexY) / 2);
+            // Label for mode -n-m (near the outgoing line)
+            text('-n-m', (vertexX + line3EndX) / 2, (vertexY + line3EndY) / 2 - 20);
 
-function drawParticles() {
-  fill(255);
-  for (let p of particles) {
-    ellipse(p.x, p.y, 8, 8);
-  }
-}
+            // Add a title
+            textSize(18);
+            fill(0);
+            text('Feynman Diagram: Kaluza-Klein Interaction', width / 2, 30);
+        }
 
-function drawCurvedPropagator(start, end, col) {
-  stroke(col);
-  noFill();
-  
-  let control = createVector((start.x + end.x) / 2, (start.y + end.y) / 2 - 50); // Curve it upward
-  bezier(start.x, start.y, control.x, control.y, control.x, control.y, end.x, end.y);
-}
+        // Function to draw an arrow between two points
+        function drawArrow(startX, startY, endX, endY) {
+            stroke(0);
+            line(startX, startY, endX, endY);
 
+            // Calculate the direction of the arrowhead
+            let angle = atan2(endY - startY, endX - startX);
+            let arrowSize = 10;
+
+            // Draw the arrowhead
+            push();
+            translate(endX, endY);
+            rotate(angle);
+            line(0, 0, -arrowSize, arrowSize / 2);
+            line(0, 0, -arrowSize, -arrowSize / 2);
+            pop();
+        }
     </script>
-    import matplotlib.pyplot as plt
-import matplotlib.patches as patches
-
-# Set up the figure and axis
-fig, ax = plt.subplots(figsize=(6, 4))
-
-# Define the vertex position (center of the diagram)
-vertex = (0, 0)
-
-# Define the endpoints of the three lines (incoming and outgoing particles)
-# Incoming particle 1 (mode n): from bottom-left to vertex
-line1_start = (-1, -1)
-line1_end = vertex
-# Incoming particle 2 (mode m): from bottom-right to vertex
-line2_start = (1, -1)
-line2_end = vertex
-# Outgoing particle (mode -n-m): from vertex to top
-line3_start = vertex
-line3_end = (0, 1)
-
-# Draw the lines with arrows
-# Incoming line 1 (mode n)
-ax.arrow(line1_start[0], line1_start[1], 
-         line1_end[0] - line1_start[0], line1_end[1] - line1_start[1], 
-         head_width=0.05, head_length=0.1, fc='black', ec='black', length_includes_head=True)
-# Incoming line 2 (mode m)
-ax.arrow(line2_start[0], line2_start[1], 
-         line2_end[0] - line2_start[0], line2_end[1] - line2_start[1], 
-         head_width=0.05, head_length=0.1, fc='black', ec='black', length_includes_head=True)
-# Outgoing line (mode -n-m)
-ax.arrow(line3_start[0], line3_start[1], 
-         line3_end[0] - line3_start[0], line3_end[1] - line3_start[1], 
-         head_width=0.05, head_length=0.1, fc='black', ec='black', length_includes_head=True)
-
-# Highlight the vertex with a red dot
-ax.plot(vertex[0], vertex[1], 'ro', markersize=10)
-
-# Add labels for the mode numbers
-# Label for mode n (near the incoming line 1)
-ax.text(-0.7, -0.5, r'$n$', fontsize=12, color='blue')
-# Label for mode m (near the incoming line 2)
-ax.text(0.7, -0.5, r'$m$', fontsize=12, color='blue')
-# Label for mode -n-m (near the outgoing line)
-ax.text(0.2, 0.5, r'$-n-m$', fontsize=12, color='blue')
-
-# Set axis limits and remove axes for a clean diagram
-ax.set_xlim(-1.5, 1.5)
-ax.set_ylim(-1.5, 1.5)
-ax.axis('off')
-
-# Add a title
-plt.title('Feynman Diagram: Kaluza-Klein Interaction', fontsize=14)
-
-# Show the plot
-plt.show()
-  </body>
-  
+</body>
 </html>
