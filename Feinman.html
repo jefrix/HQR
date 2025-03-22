@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,6 +21,52 @@
     </style>
 </head>
 <body>
+    import matplotlib.pyplot as plt
+
+# Set up the figure and axis
+fig, ax = plt.subplots(figsize=(6, 4))
+
+# Define the vertex position (center of the diagram)
+vertex = (0, 0)
+
+# Define the endpoints of the three lines
+line1_start = (-1, -1)
+line1_end = vertex
+line2_start = (1, -1)
+line2_end = vertex
+line3_start = vertex
+line3_end = (0, 1)
+
+# Draw the lines with arrows
+ax.arrow(line1_start[0], line1_start[1], 
+         line1_end[0] - line1_start[0], line1_end[1] - line1_start[1], 
+         head_width=0.05, head_length=0.1, fc='black', ec='black', length_includes_head=True)
+ax.arrow(line2_start[0], line2_start[1], 
+         line2_end[0] - line2_start[0], line2_end[1] - line2_start[1], 
+         head_width=0.05, head_length=0.1, fc='black', ec='black', length_includes_head=True)
+ax.arrow(line3_start[0], line3_start[1], 
+         line3_end[0] - line3_start[0], line3_end[1] - line3_start[1], 
+         head_width=0.05, head_length=0.1, fc='black', ec='black', length_includes_head=True)
+
+# Highlight the vertex with a red dot
+ax.plot(vertex[0], vertex[1], 'ro', markersize=10)
+
+# Add labels for the mode numbers
+ax.text(-0.7, -0.5, r'$n$', fontsize=12, color='blue')
+ax.text(0.7, -0.5, r'$m$', fontsize=12, color='blue')
+ax.text(0.2, 0.5, r'$-n-m$', fontsize=12, color='blue')
+
+# Set axis limits and remove axes
+ax.set_xlim(-1.5, 1.5)
+ax.set_ylim(-1.5, 1.5)
+ax.axis('off')
+
+# Add a title
+plt.title('Feynman Diagram: Kaluza-Klein Interaction', fontsize=14)
+
+# Save the plot as a PNG
+plt.savefig('feynman_diagram.png', dpi=300, bbox_inches='tight')
+plt.close()
     <script>
         function setup() {
             createCanvas(400, 400);
