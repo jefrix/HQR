@@ -131,7 +131,6 @@ const calcInputX = document.getElementById('calcInputX');
 const calcResultP = document.getElementById('calcResultP');
 const roundNumberDisplay = document.getElementById('roundNumber');
 const frictionValueDisplay = document.getElementById('frictionValue');
-// Corrected potential typo from previous version
 const limitValueDisplay = document.getElementById('limitValue');
 const generalFormulaDisplay = document.getElementById('generalFormula');
 const specificFormulaDisplay = document.getElementById('specificFormula');
@@ -187,6 +186,10 @@ let totalError = 0;
 let currentFriction = 0.1;
 let currentLimit = 100.0;
 let gameActive = false; // Flag to indicate if an animation is in progress
+// *** FIX: Declare formula strings globally ***
+let generalFormulaString = "";
+let specificFormulaString = "";
+
 
 // --- Physics & Formula Definition ---
 // IMPORTANT: Define the actual physics model here.
@@ -438,7 +441,7 @@ function drawBackground(limit) {
 
     // Limit Line L
     const limitY = originY - (limit / maxPosition) * graphHeight;
-    if (limitY >= padding) { // Only draw if within graph bounds
+    if (limitY >= padding && limitY <= originY) { // Only draw if within graph bounds (adjusted check)
         ctx.strokeStyle = '#ef4444'; // Red color for limit
         ctx.lineWidth = 1.5;
         ctx.setLineDash([4, 4]); // Dashed line
@@ -496,7 +499,7 @@ function drawTrail(pathData) {
         const xCoord = originX + (point.t / maxTime) * graphWidth;
         let yCoord = originY - (point.p / maxPosition) * graphHeight;
 
-        // Clamp coordinates to prevent drawing outside graph area
+        // Clamp coordinates to prevent drawing outside graph area (padding)
         const clampedX = Math.max(originX, Math.min(canvas.width - padding, xCoord));
         const clampedY = Math.max(padding, Math.min(originY, yCoord));
 
@@ -504,13 +507,15 @@ function drawTrail(pathData) {
         if (index === 0) {
             ctx.moveTo(clampedX, clampedY);
         } else {
-             // Only draw line if it's within reasonable bounds (prevents huge lines on reset)
-            if (Math.abs(clampedX - ctx.canvas.width/2) < ctx.canvas.width && Math.abs(clampedY - ctx.canvas.height/2) < ctx.canvas.height) {
+             // Check if the point is reasonably within canvas bounds before drawing line segment
+             // This helps prevent huge lines if a calculation error results in extreme values
+            if (clampedX >= originX && clampedX <= canvas.width - padding &&
+                clampedY >= padding && clampedY <= originY) {
                  ctx.lineTo(clampedX, clampedY);
             } else {
-                 ctx.moveTo(clampedX, clampedY); // Start new line segment if jump is too large
+                 // If point is way off, just move to it to avoid drawing a long stray line
+                 ctx.moveTo(clampedX, clampedY);
             }
-
         }
     });
     ctx.stroke();
