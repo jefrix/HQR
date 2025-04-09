@@ -1,122 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edge Slider - Calculus Game</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        canvas {
-            display: block;
-            background-color: #f0f0f0;
-            border-radius: 0.5rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .info-panel {
-             background-color: #ffffff;
-             padding: 1rem;
-             border-radius: 0.5rem;
-             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-             margin-bottom: 1rem;
-        }
-        .calc-pad {
-            background-color: #f9fafb;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            border: 1px solid #e5e7eb;
-            margin-top: 1rem;
-        }
-    </style>
-</head>
-<body class="bg-gray-100 p-4 md:p-8 flex flex-col items-center">
-
-    <h1 class="text-2xl md:text-3xl font-bold mb-6 text-gray-800">Edge Slider</h1>
-
-    <div class="w-full max-w-4xl flex flex-col lg:flex-row gap-6">
-
-        <div class="flex-grow lg:w-2/3">
-            <canvas id="gameCanvas" width="800" height="400" class="w-full mb-4"></canvas>
-
-            <div class="flex flex-col sm:flex-row items-center gap-4 mb-4">
-                <label for="inputSlider" class="font-medium text-gray-700 whitespace-nowrap">Input Force (x):</label>
-                <input type="range" id="inputSlider" name="inputSlider" min="0" max="10" step="0.01" value="5" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 flex-grow">
-                <span id="sliderValue" class="font-mono text-sm text-gray-600 w-16 text-right">5.00</span>
-                <button id="launchButton" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-150 ease-in-out shadow">
-                    Launch
-                </button>
-            </div>
-        </div>
-
-        <div class="lg:w-1/3 flex flex-col">
-            <div id="roundInfo" class="info-panel">
-                <h2 class="text-lg font-semibold mb-2 text-gray-700">Round Info</h2>
-                <p class="text-sm text-gray-600">Round: <span id="roundNumber" class="font-medium">1</span></p>
-                <p class="text-sm text-gray-600">Friction (μ): <span id="frictionValue" class="font-medium">0.1</span></p>
-                <p class="text-sm text-gray-600">Edge Limit (L): <span id="limitValue" class="font-medium">100.0</span></p>
-            </div>
-
-            <div id="formulaInfo" class="info-panel">
-                 <h2 class="text-lg font-semibold mb-2 text-gray-700">Formula</h2>
-                 <p class="text-xs text-gray-500 mb-1">General: <span id="generalFormula">P(x, μ) = ...</span></p>
-                 <p class="text-sm text-gray-600 font-mono bg-gray-50 p-2 rounded">This Round: <span id="specificFormula">P(x) = ...</span></p>
-            </div>
-
-            <div id="calculationPad" class="calc-pad">
-                <h3 class="text-md font-semibold mb-2 text-gray-700">Precision Calculator</h3>
-                <div class="flex items-center gap-2 mb-2">
-                    <label for="calcInputX" class="text-sm text-gray-600">Test x:</label>
-                    <input type="number" id="calcInputX" step="0.01" class="flex-grow p-1 border border-gray-300 rounded text-sm shadow-sm">
-                </div>
-                <button id="calculateButton" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-3 rounded text-sm mb-2 transition duration-150 ease-in-out shadow">
-                    Calculate P(x)
-                </button>
-                 <p class="text-sm text-gray-600">Result: <span id="calcResultP" class="font-medium font-mono">--</span></p>
-            </div>
-
-             <div id="feedbackInfo" class="info-panel mt-4">
-                 <h2 class="text-lg font-semibold mb-2 text-gray-700">Feedback</h2>
-                 <p id="feedbackText" class="text-sm text-gray-600">Adjust the slider or use the calculator, then press Launch!</p>
-                 <p id="scoreText" class="text-sm text-gray-600 mt-1">Total Error: <span id="totalErrorScore" class="font-medium">0.00</span></p>
-            </div>
-        </div>
-    </div>
-    <script src="script.js" defer></script>
-</body>
-</html>
-```css
-/* style.css */
-/* Optional custom CSS - currently empty as Tailwind handles most styling */
-/* You can add custom styles here if needed, for example: */
-
-/* Example: Custom slider thumb style (requires browser prefixes usually) */
-/*
-input[type=range]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  background: #4a90e2;
-  cursor: pointer;
-  border-radius: 50%;
-}
-
-input[type=range]::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  background: #4a90e2;
-  cursor: pointer;
-  border-radius: 50%;
-  border: none;
-}
-*/
-```javascript
 // script.js - Initial setup and game logic
 console.log("Edge Slider script loaded.");
 
@@ -186,7 +67,7 @@ let totalError = 0;
 let currentFriction = 0.1;
 let currentLimit = 100.0;
 let gameActive = false; // Flag to indicate if an animation is in progress
-// *** FIX: Declare formula strings globally ***
+// Initialize formula strings
 let generalFormulaString = "";
 let specificFormulaString = "";
 
@@ -258,13 +139,13 @@ function setupNewRound() {
 
     // Example: Slightly increase friction each round, reset limit
     currentFriction = 0.08 + currentRound * 0.02;
-    currentLimit = 100.0 + (currentRound -1) * 10; // Make it slightly harder
+    currentLimit = 100.0 + (currentRound - 1) * 10; // Make it slightly harder
 
     // Update formula strings based on current constants
     // General formula explanation (conceptual)
     generalFormulaString = "P = v₀²/ (2 * μ * g) where v₀ = k * x";
     // Specific formula string for display (using the calculated stopping distance formula)
-    specificFormulaString = `P(x) = (${k_force}*x)² / (2 * ${currentFriction.toFixed(2)} * ${gravity})`;
+    specificFormulaString = `P(x) = (${k_force}×x)² / (2 × ${currentFriction.toFixed(2)} × ${gravity})`;
 
     updateUI(); // Update displays with new round info
     drawBackground(currentLimit); // Redraw background with potentially new limit
@@ -302,28 +183,28 @@ function animateLaunch(startX, friction, limit) {
 
         // --- Check Stop Conditions ---
         // Stop when velocity is zero (or effectively zero)
-        let shouldStop = currentVelocity <= 0.01;
+        let shouldStop = Math.abs(currentVelocity) <= 0.01;
 
         // Safety break if position goes way beyond limit (e.g., infinite travel if mu=0)
         if (currentPosition > limit * 1.5 || currentTime > 20) { // Added time limit
             console.warn("Stopping animation due to exceeding bounds or time limit.");
             shouldStop = true;
-             // If stopped artificially, use the theoretical final position for scoring
-             currentPosition = calculateStoppingPosition(startX, friction, limit);
+            // If stopped artificially, use the theoretical final position for scoring
+            currentPosition = calculateStoppingPosition(startX, friction, limit);
         }
-
 
         if (!shouldStop && gameActive) { // Check gameActive flag in case of external stop
             requestAnimationFrame(animationStep); // Continue animation
         } else {
             // --- Animation End ---
             if (!gameActive && !shouldStop) { // If stopped externally (e.g. reset button)
-                 console.log("Animation stopped externally.");
-                 return;
+                console.log("Animation stopped externally.");
+                return;
             }
             gameActive = false;
             // Ensure the final point is added accurately
-            const finalTime = (currentVelocity <= 0.01 && friction > 0) ? - (k_force * startX) / (-friction * gravity) : currentTime;
+            const finalTime = (Math.abs(currentVelocity) <= 0.01 && friction > 0) ? 
+                -(k_force * startX) / (-friction * gravity) : currentTime;
             const finalPosition = calculateStoppingPosition(startX, friction, limit);
             pathData.push({ t: finalTime, p: finalPosition });
 
@@ -348,12 +229,12 @@ function handleRoundEnd(finalPosition, limit) {
     let feedback = "";
 
     // Handle potential Infinity case (e.g., friction is zero)
-     if (!isFinite(finalPosition)) {
-         roundError = 500; // Large penalty for infinite travel
-         feedback = `Travelled infinitely (μ=${currentFriction})! Limit was ${limit.toFixed(1)}. Error penalty: ${roundError.toFixed(2)}`;
-         feedbackTextDisplay.classList.add('text-red-600');
-         feedbackTextDisplay.classList.remove('text-green-600');
-     } else if (finalPosition > limit) {
+    if (!isFinite(finalPosition)) {
+        roundError = 500; // Large penalty for infinite travel
+        feedback = `Travelled infinitely (μ=${currentFriction})! Limit was ${limit.toFixed(1)}. Error penalty: ${roundError.toFixed(2)}`;
+        feedbackTextDisplay.classList.add('text-red-600');
+        feedbackTextDisplay.classList.remove('text-green-600');
+    } else if (finalPosition > limit) {
         // Overshot
         roundError = 50 + (finalPosition - limit); // Penalty + overshoot amount
         feedback = `Overshot! Final Position: ${finalPosition.toFixed(2)}. Limit was ${limit.toFixed(1)}. Error penalty: ${roundError.toFixed(2)}`;
@@ -365,10 +246,10 @@ function handleRoundEnd(finalPosition, limit) {
         feedback = `Success! Final Position: ${finalPosition.toFixed(2)}. Distance from limit: ${distance.toFixed(2)}. Error: ${roundError.toFixed(2)}`;
         feedbackTextDisplay.classList.remove('text-red-600');
         feedbackTextDisplay.classList.add('text-green-600');
-         // Award bonus points for closeness
-         if (distance < 0.1) feedback += " Perfect!";
-         else if (distance < 1.0) feedback += " Excellent!";
-         else if (distance < 5.0) feedback += " Good!";
+        // Award bonus points for closeness
+        if (distance < 0.1) feedback += " Perfect!";
+        else if (distance < 1.0) feedback += " Excellent!";
+        else if (distance < 5.0) feedback += " Good!";
     }
 
     totalError += roundError;
@@ -417,6 +298,7 @@ function drawBackground(limit) {
     // Y-axis labels/ticks
     for (let p = 0; p <= maxPosition; p += maxPosition / 5) { // 5 ticks example
         const tickY = originY - (p / maxPosition) * graphHeight;
+        ctx.beginPath();
         ctx.moveTo(originX - 5, tickY);
         ctx.lineTo(originX, tickY);
         ctx.stroke();
@@ -429,15 +311,15 @@ function drawBackground(limit) {
     ctx.lineTo(canvas.width - padding, originY);
     ctx.stroke();
     ctx.fillText("Time (t)", canvas.width - padding - 15, originY + 15);
-     // X-axis labels/ticks
+    // X-axis labels/ticks
     for (let t = 0; t <= maxTime; t += maxTime / 5) { // 5 ticks example
         const tickX = originX + (t / maxTime) * graphWidth;
+        ctx.beginPath();
         ctx.moveTo(tickX, originY);
         ctx.lineTo(tickX, originY + 5);
         ctx.stroke();
         ctx.fillText(t.toFixed(1), tickX - 5, originY + 15);
     }
-
 
     // Limit Line L
     const limitY = originY - (limit / maxPosition) * graphHeight;
@@ -494,6 +376,9 @@ function drawTrail(pathData) {
     ctx.lineWidth = 2;
     ctx.beginPath();
 
+    // Use a flag to track if we need to use moveTo instead of lineTo
+    let needsMove = true;
+    
     pathData.forEach((point, index) => {
         // Scale time and position to canvas coordinates
         const xCoord = originX + (point.t / maxTime) * graphWidth;
@@ -503,18 +388,20 @@ function drawTrail(pathData) {
         const clampedX = Math.max(originX, Math.min(canvas.width - padding, xCoord));
         const clampedY = Math.max(padding, Math.min(originY, yCoord));
 
-
-        if (index === 0) {
+        if (index === 0 || needsMove) {
             ctx.moveTo(clampedX, clampedY);
+            needsMove = false;
         } else {
-             // Check if the point is reasonably within canvas bounds before drawing line segment
-             // This helps prevent huge lines if a calculation error results in extreme values
-            if (clampedX >= originX && clampedX <= canvas.width - padding &&
-                clampedY >= padding && clampedY <= originY) {
-                 ctx.lineTo(clampedX, clampedY);
+            // Check if the point is reasonably within canvas bounds before drawing line segment
+            // This helps prevent huge lines if a calculation error results in extreme values
+            if (isFinite(clampedX) && isFinite(clampedY) &&
+                Math.abs(clampedX - originX) < graphWidth * 1.5 &&
+                Math.abs(clampedY - originY) < graphHeight * 1.5) {
+                ctx.lineTo(clampedX, clampedY);
             } else {
-                 // If point is way off, just move to it to avoid drawing a long stray line
-                 ctx.moveTo(clampedX, clampedY);
+                // If point is way off, just move to it to avoid drawing a long stray line
+                ctx.moveTo(clampedX, clampedY);
+                needsMove = true;
             }
         }
     });
@@ -533,21 +420,25 @@ function updateUI() {
     calcResultP.textContent = "--";
     calcInputX.value = "";
 
-     // Reset button states and feedback text/color for new round
-     launchButton.disabled = false;
-     calculateButton.disabled = false;
-     launchButton.textContent = "Launch";
-     feedbackTextDisplay.classList.remove('text-red-600', 'text-green-600');
-     feedbackTextDisplay.textContent = `Round ${currentRound}: Adjust input and launch.`;
+    // Reset button states and feedback text/color for new round
+    launchButton.disabled = false;
+    calculateButton.disabled = false;
+    launchButton.textContent = "Launch";
+    feedbackTextDisplay.classList.remove('text-red-600', 'text-green-600');
+    feedbackTextDisplay.textContent = `Round ${currentRound}: Adjust input and launch.`;
 
-     // Ensure correct event listener is on launch button
-     launchButton.removeEventListener('click', nextRoundClickHandler);
-     launchButton.addEventListener('click', launchClickHandler);
+    // Ensure correct event listener is on launch button
+    launchButton.removeEventListener('click', nextRoundClickHandler);
+    launchButton.removeEventListener('click', launchClickHandler); // Remove first to avoid duplicates
+    launchButton.addEventListener('click', launchClickHandler);
 }
 
 // --- Initial Game Setup ---
 function initializeGame() {
     console.log("Initializing game...");
+    // Remove any existing event listeners to avoid duplicates
+    launchButton.removeEventListener('click', launchClickHandler);
+    launchButton.removeEventListener('click', nextRoundClickHandler);
     // Add the primary launch listener initially
     launchButton.addEventListener('click', launchClickHandler);
     // Setup the first round (which also calls updateUI)
@@ -560,4 +451,3 @@ function initializeGame() {
 
 // Start the game initialization process once the script loads
 initializeGame();
-
