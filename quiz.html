@@ -181,5 +181,62 @@
     // Initialize
     showCard(currentIndex);
   </script>
+  # Function for flashcard study mode
+def study_mode():
+    print("\n=== Flashcard Study Mode ===")
+    print("Press Enter to reveal the answer, 'q' to quit.")
+    random.shuffle(flashcards)  # Shuffle the flashcards
+    for card in flashcards:
+        print("\nFront:", card["front"])
+        user_input = input("Reveal answer? (Enter to continue, 'q' to quit): ")
+        if user_input.lower() == 'q':
+            break
+        print("Back:", card["back"])
+        time.sleep(1)  # Small delay for readability
+
+# Function for quiz mode
+def quiz_mode():
+    print("\n=== Quiz Mode ===")
+    print("You'll be given the answer (back of the card), and you need to guess the term (front).")
+    print("Press 'q' to quit.")
+    score = 0
+    total = len(flashcards)
+    random.shuffle(flashcards)  # Shuffle for quiz
+    for card in flashcards:
+        print("\nDefinition:", card["back"])
+        user_guess = input("What is the term? (or 'q' to quit): ")
+        if user_guess.lower() == 'q':
+            break
+        if user_guess.lower() == card["front"].lower():
+            print("Correct!")
+            score += 1
+        else:
+            print(f"Wrong! The term was: {card['front']}")
+        time.sleep(1)
+    print(f"\nQuiz finished! Your score: {score}/{total}")
+
+# Main program
+def main():
+    while True:
+        print("\n=== Calculus 1 Flashcard Study Guide ===")
+        print("1. Study Mode (View flashcards)")
+        print("2. Quiz Mode (Test yourself)")
+        print("3. Exit")
+        choice = input("Choose an option (1-3): ")
+
+        if choice == '1':
+            study_mode()
+        elif choice == '2':
+            quiz_mode()
+        elif choice == '3':
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice, please try again.")
+
+# Run the program
+if __name__ == "__main__":
+    main()
+
 </body>
 </html>
