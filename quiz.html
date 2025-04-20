@@ -4,28 +4,41 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Flashcard Explorer</title>
-  <script src="p5.js"></script>
-  <script src="sketch.js"></script>
-  <script src="graph.js"></script>
+  <!-- MathJax Configuration -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['\\[', '\\]'], ['$$', '$$']],
+        processEscapes: true
+      },
+      chtml: {
+        scale: 1.1
+      }
+    };
+  </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <style>
     body {
-      font-family: sans-serif;
-      background-color: #0e0e0e;
-      color: #eee;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      color: #333;
       text-align: center;
       padding: 2em;
     }
-    .card {
-      background: #1f1f1f;
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
+    .card, .quiz {
+      background: white;
       padding: 2em;
       border-radius: 12px;
-      max-width: 600px;
-      margin: auto;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      margin-bottom: 1em;
     }
-    .controls {
+    .controls, .mode-buttons {
       margin-top: 1em;
     }
     button {
@@ -35,41 +48,79 @@
       border-radius: 6px;
       font-size: 1em;
       cursor: pointer;
+      transition: background-color 0.2s;
     }
+    .mode-button { background-color: #6200ea; color: white; }
+    .mode-button:hover { background-color: #3700b3; }
     .reveal { background-color: #4caf50; color: white; }
-    .next { background-color: #2196f3; color: white; }
-    #backText { margin-top: 1em; display: none; }
+    .reveal:hover { background-color: #388e3c; }
+    .next, .prev { background-color: #2196f3; color: white; }
+    .next:hover, .prev:hover { background-color: #1976d2; }
+    .submit { background-color: #ff9800; color: white; }
+    .submit:hover { background-color: #f57c00; }
+    #card-front, #card-back, #quiz-question, #quiz-feedback {
+      font-size: 1.1em;
+      line-height: 1.5;
+    }
+    #card-back, #quiz-feedback { margin-top: 1em; display: none; }
+    #quiz-answer {
+      padding: 0.5em;
+      font-size: 1em;
+      width: 80%;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    #quiz-score {
+      font-weight: bold;
+      margin-top: 1em;
+    }
   </style>
 </head>
 <body>
   <h1>Flashcard Explorer</h1>
-  <div class="card">
-    <div id="frontText"></div>
-    <div id="backText"></div>
-    <div class="controls">
-      <button class="reveal" onclick="revealAnswer()">Reveal</button>
-      <button class="next" onclick="nextCard()">Next</button>
+  <div class="container">
+    <div class="card" id="flashcard-mode">
+      <div id="card-front"></div>
+      <div id="card-back"></div>
+      <div class="controls">
+        <button class="reveal" onclick="revealAnswer()">Reveal Answer</button>
+        <button class="prev" onclick="prevCard()">Previous</button>
+        <button class="next" onclick="nextCard()">Next</button>
+      </div>
+    </div>
+    <div class="quiz" id="quiz-mode" style="display: none;">
+      <div id="quiz-question"></div>
+      <input id="quiz-answer" type="text" placeholder="Enter the term" />
+      <div class="controls">
+        <button class="submit" onclick="checkAnswer()">Submit</button>
+        <button class="next" onclick="nextQuiz()">Next</button>
+      </div>
+      <div id="quiz-feedback"></div>
+      <div id="quiz-score">Score: 0/0</div>
+    </div>
+    <div class="mode-buttons">
+      <button class="mode-button" onclick="switchMode('flashcard')">Flashcard Mode</button>
+      <button class="mode-button" onclick="switchMode('quiz')">Quiz Mode</button>
     </div>
   </div>
 
   <script>
     const flashcards = [
-      // Newly added flashcards below
-      { front: "Limit", back: "The value a function approaches as the input approaches a specific value. Notation: $\lim_{x \to a} f(x) = L$" },
-      { front: "Continuity", back: "A function $f(x)$ is continuous at $x = a$ if: 1. $f(a)$ is defined, 2. $\lim_{x \to a} f(x)$ exists, 3. $\lim_{x \to a} f(x) = f(a)$" },
-      { front: "Derivative", back: "Measures the rate of change of a function. $f'(x) = \lim_{h\to0} \frac{f(x+h) - f(x)}{h}$. Represents the slope of the tangent line." },
+      { front: "Limit", back: "The value a function approaches as the input approaches a specific value. Notation: $\\lim_{x \\to a} f(x) = L$" },
+      { front: "Continuity", back: "A function $f(x)$ is continuous at $x = a$ if: 1. $f(a)$ is defined, 2. $\\lim_{x \\to a} f(x)$ exists, 3. $\\lim_{x \\to a} f(x) = f(a)$" },
+      { front: "Derivative", back: "Measures the rate of change of a function. $f'(x) = \\lim_{h\\to0} \\frac{f(x+h) - f(x)}{h}$. Represents the slope of the tangent line." },
       { front: "Power Rule", back: "For $f(x) = x^n$, the derivative is: $f'(x) = nx^{n-1}$. Example: $f(x) = x^3$, then $f'(x) = 3x^2$" },
-      { front: "Product Rule", back: "For $u(x)$ and $v(x)$, $(uv)' = u'v + uv'$. Example: $f(x) = x^2 \sin(x)$, $f'(x) = 2x \sin(x) + x^2 \cos(x)$" },
-      { front: "Quotient Rule", back: "For $u(x)$ and $v(x)$, $(u/v)' = \frac{u'v - uv'}{v^2}$. Example: $f(x) = \frac{x}{x+1}$, then $f'(x) = \frac{1}{(x+1)^2}$" },
-      { front: "Chain Rule", back: "For $f(g(x))$, $(f(g(x)))' = f'(g(x)) \cdot g'(x)$. Example: $f(x) = \sin(x^2)$, then $f'(x) = \cos(x^2) \cdot 2x$" },
-      { front: "Implicit Differentiation", back: "Differentiate both sides with respect to $x$, treating $y$ as a function of $x$. Example: $x^2 + y^2 = 1$, $\frac{dy}{dx} = -\frac{x}{y}$" },
+      { front: "Product Rule", back: "For $u(x)$ and $v(x)$, $(uv)' = u'v + uv'$. Example: $f(x) = x^2 \\sin(x)$, $f'(x) = 2x \\sin(x) + x^2 \\cos(x)$" },
+      { front: "Quotient Rule", back: "For $u(x)$ and $v(x)$, $(u/v)' = \\frac{u'v - uv'}{v^2}$. Example: $f(x) = \\frac{x}{x+1}$, then $f'(x) = \\frac{1}{(x+1)^2}$" },
+      { front: "Chain Rule", back: "For $f(g(x))$, $(f(g(x)))' = f'(g(x)) \\cdot g'(x)$. Example: $f(x) = \\sin(x^2)$, then $f'(x) = \\cos(x^2) \\cdot 2x$" },
+      { front: "Implicit Differentiation", back: "Differentiate both sides with respect to $x$, treating $y$ as a function of $x$. Example: $x^2 + y^2 = 1$, $\\frac{dy}{dx} = -\\frac{x}{y}$" },
       { front: "Critical Points", back: "Points where $f'(x) = 0$ or $f'(x)$ is undefined. Used to find local maxima, minima, or inflection points." },
       { front: "First Derivative Test", back: "If $f'(x)$ changes from positive to negative at a critical point, it’s a local maximum. If negative to positive, it’s a local minimum." },
       { front: "Second Derivative Test", back: "If $f''(x) > 0$ at a critical point, it’s a local minimum (concave up). If $f''(x) < 0$, it’s a local maximum (concave down)." },
-      { front: "Definite Integral", back: "Area under the curve from $a$ to $b$: $\int_a^b f(x) dx = F(b) - F(a)$, where $F(x)$ is the antiderivative of $f(x)$." },
-      { front: "Indefinite Integral", back: "Antiderivative of a function: $\int f(x) dx = F(x) + C$. Example: $\int x^2 dx = \frac{x^3}{3} + C$" },
-      { front: "Fundamental Theorem of Calculus", back: "Connects differentiation and integration: If $F(x) = \int_a^x f(t) dt$, then $F'(x) = f(x)$. Also, $\int_a^b f(x) dx = F(b) - F(a)$." },
-      { front: "U-Substitution", back: "Let $u = g(x)$, so $du = g'(x) dx$. Example: For $\int 2x e^{x^2} dx$, let $u = x^2$, then $\int e^u du = e^{x^2} + C$" },
+      { front: "Definite Integral", back: "Area under the curve from $a$ to $b$: $\\int_a^b f(x) dx = F(b) - F(a)$, where $F(x)$ is the antiderivative of $f(x)$." },
+      { front: "Indefinite Integral", back: "Antiderivative of a function: $\\int f(x) dx = F(x) + C$. Example: $\\int x^2 dx = \\frac{x^3}{3} + C$" },
+      { front: "Fundamental Theorem of Calculus", back: "Connects differentiation and integration: If $F(x) = \\int_a^x f(t) dt$, then $F'(x) = f(x)$. Also, $\\int_a^b f(x) dx = F(b) - F(a)$." },
+      { front: "U-Substitution", back: "Let $u = g(x)$, so $du = g'(x) dx$. Example: For $\\int 2x e^{x^2} dx$, let $u = x^2$, then $\\int e^u du = e^{x^2} + C$" },
       { front: "What is a differential equation?", back: "An equation involving derivatives of a function." },
       { front: "What is an ordinary differential equation (ODE)?", back: "A differential equation containing one independent variable." },
       { front: "What is a partial differential equation (PDE)?", back: "A differential equation with partial derivatives of a multivariable function." },
@@ -90,39 +141,132 @@
       { front: "What is a connected space?", back: "A space that cannot be divided into two disjoint nonempty open sets." },
       { front: "What is a Hausdorff space?", back: "A space where any two distinct points have disjoint neighborhoods." },
       { front: "What is a metric space?", back: "A space where distance between points is defined by a metric satisfying positivity, symmetry, and triangle inequality." },
-      { front: "Limit", back: "The value a function approaches as the input approaches a specific value. Notation: $\\lim_{x \\to a} f(x) = L$" },
-      { front: "Continuity", back: "A function $f(x)$ is continuous at $x = a$ if: 1. $f(a)$ is defined, 2. $\\lim_{x \\to a} f(x)$ exists, 3. $\\lim_{x \\to a} f(x) = f(a)$" },
-      { front: "Derivative", back: "Measures the rate of change of a function. $f'(x) = \\lim_{h\\to0} \\frac{f(x+h) - f(x)}{h}$" },
-      { front: "Power Rule", back: "For $f(x) = x^n$, the derivative is: $f'(x) = nx^{n-1}$. Example: $f(x) = x^3$, then $f'(x) = 3x^2$" },
-      { front: "Product Rule", back: "$(uv)' = u'v + uv'$. Example: $f(x) = x^2 \sin(x)$, $f'(x) = 2x \sin(x) + x^2 \cos(x)$" },
-      { front: "Quotient Rule", back: "$(u/v)' = \\frac{u'v - uv'}{v^2}$. Example: $f(x) = \\frac{x}{x+1}$, then $f'(x) = \\frac{1}{(x+1)^2}$" },
-      { front: "Chain Rule", back: "$(f(g(x)))' = f'(g(x)) \\cdot g'(x)$. Example: $f(x) = \\sin(x^2)$, then $f'(x) = \\cos(x^2) \\cdot 2x$" },
-      { front: "Implicit Differentiation", back: "Differentiate both sides with respect to $x$, treating $y$ as a function of $x$. Example: $x^2 + y^2 = 1$, $\\frac{dy}{dx} = -\\frac{x}{y}$" },
-      { front: "Critical Points", back: "Points where $f'(x) = 0$ or $f'(x)$ is undefined. Used to find extrema." },
-      { front: "First Derivative Test", back: "If $f'(x)$ changes sign, it indicates a max or min at that point." },
-      { front: "What is a differential equation?", back: "An equation involving derivatives of a function." },
-      { front: "What is a topological space?", back: "A set with a structure that defines continuity and convergence via open sets." },
       { front: "What is the Holographic Principle?", back: "All information in a volume can be described by data on its boundary." },
       { front: "What is M-Theory?", back: "A unifying theory of all string theories, suggesting 11 dimensions and branes." }
     ];
 
     let currentIndex = 0;
+    let mode = 'flashcard';
+    let score = 0;
+    let total = 0;
+    let shuffledFlashcards = [];
+
+    // Shuffle array (Fisher-Yates)
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
     function showCard(index) {
-      document.getElementById("frontText").innerHTML = flashcards[index].front;
-      document.getElementById("backText").innerHTML = flashcards[index].back;
-      document.getElementById("backText").style.display = "none";
-      MathJax.typeset();
+      if (!shuffledFlashcards.length) return;
+      if (index < 0 || index >= shuffledFlashcards.length) index = 0;
+      currentIndex = index;
+      const card = shuffledFlashcards[index];
+      const front = document.getElementById('card-front');
+      const back = document.getElementById('card-back');
+      if (!front || !back) {
+        console.error('Card elements not found');
+        return;
+      }
+      front.innerHTML = card.front;
+      back.innerHTML = card.back;
+      back.style.display = 'none';
+      // Trigger MathJax rendering
+      if (typeof MathJax !== 'undefined') {
+        MathJax.typesetPromise([front, back]).catch(err => console.error('MathJax error:', err));
+      }
     }
+
     function revealAnswer() {
-      document.getElementById("backText").style.display = "block";
-      MathJax.typeset();
+      const back = document.getElementById('card-back');
+      if (back) {
+        back.style.display = 'block';
+        if (typeof MathJax !== 'undefined') {
+          MathJax.typesetPromise([back]).catch(err => console.error('MathJax error:', err));
+        }
+      }
     }
+
     function nextCard() {
-      currentIndex = (currentIndex + 1) % flashcards.length;
+      currentIndex = (currentIndex + 1) % shuffledFlashcards.length;
       showCard(currentIndex);
     }
+
+    function prevCard() {
+      currentIndex = (currentIndex - 1 + shuffledFlashcards.length) % shuffledFlashcards.length;
+      showCard(currentIndex);
+    }
+
+    function showQuiz(index) {
+      if (!shuffledFlashcards.length) return;
+      if (index < 0 || index >= shuffledFlashcards.length) index = 0;
+      currentIndex = index;
+      const card = shuffledFlashcards[index];
+      const question = document.getElementById('quiz-question');
+      const answer = document.getElementById('quiz-answer');
+      const feedback = document.getElementById('quiz-feedback');
+      if (!question || !answer || !feedback) {
+        console.error('Quiz elements not found');
+        return;
+      }
+      question.innerHTML = card.back;
+      answer.value = '';
+      feedback.style.display = 'none';
+      feedback.innerText = '';
+      if (typeof MathJax !== 'undefined') {
+        MathJax.typesetPromise([question]).catch(err => console.error('MathJax error:', err));
+      }
+    }
+
+    function checkAnswer() {
+      const answer = document.getElementById('quiz-answer');
+      const feedback = document.getElementById('quiz-feedback');
+      if (!answer || !feedback) return;
+      const userInput = answer.value.trim().toLowerCase();
+      const correct = shuffledFlashcards[currentIndex].front.toLowerCase();
+      total++;
+      if (userInput === correct) {
+        score++;
+        feedback.innerText = 'Correct!';
+      } else {
+        feedback.innerText = `Incorrect. The term was: ${shuffledFlashcards[currentIndex].front}`;
+      }
+      feedback.style.display = 'block';
+      document.getElementById('quiz-score').innerText = `Score: ${score}/${total}`;
+    }
+
+    function nextQuiz() {
+      currentIndex = (currentIndex + 1) % shuffledFlashcards.length;
+      showQuiz(currentIndex);
+    }
+
+    function switchMode(newMode) {
+      mode = newMode;
+      document.getElementById('flashcard-mode').style.display = mode === 'flashcard' ? 'block' : 'none';
+      document.getElementById('quiz-mode').style.display = mode === 'quiz' ? 'block' : 'none';
+      currentIndex = 0;
+      if (mode === 'quiz') {
+        score = 0;
+        total = 0;
+        document.getElementById('quiz-score').innerText = `Score: ${score}/${total}`;
+        showQuiz(currentIndex);
+      } else {
+        showCard(currentIndex);
+      }
+    }
+
     // Initialize
-    showCard(currentIndex);
+    document.addEventListener('DOMContentLoaded', () => {
+      shuffledFlashcards = shuffle([...flashcards]);
+      if (shuffledFlashcards.length === 0) {
+        document.getElementById('card-front').innerText = 'No flashcards available';
+        return;
+      }
+      showCard(currentIndex);
+    });
   </script>
 </body>
 </html>
