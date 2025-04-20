@@ -44,15 +44,54 @@
   </div>
 
   <script>
-    const flashcards = [
-      { front: "What is Quantum Superposition?", back: "A system exists in all possible states until measured." },
-      { front: "What is the Pilot Wave in Bohmian Mechanics?", back: "A guiding field that determines the deterministic path of a particle." },
-      { front: "What does the Holographic Principle state?", back: "All information in a volume can be described by data on its boundary." },
-      { front: "What is M-Theory?", back: "A unifying theory of all string theories, suggesting 11 dimensions and branes." },
-      { front: "How does Holography relate to Black Holes?", back: "The entropy of a black hole is proportional to its surface area, not volume." },
-      { front: "Does Bohmian Mechanics allow hidden variables?", back: "Yes, it is a deterministic interpretation with hidden variables." },
-      { front: "In M-Theory, what replaces strings?", back: "Membranes (branes) in higher dimensions." },
-    ];
+ flashcards = [
+    {"front": "Limit", "back": "The value a function approaches as the input approaches a specific value. Notation: lim(x→a) f(x) = L."},
+    {"front": "Continuity", "back": "A function f(x) is continuous at x = a if: 1. f(a) is defined, 2. lim(x→a) f(x) exists, 3. lim(x→a) f(x) = f(a)."},
+    {"front": "Derivative", "back": "Measures the rate of change of a function. f'(x) = lim(h→0) [f(x+h) - f(x)]/h. Represents the slope of the tangent line."},
+    {"front": "Power Rule", "back": "For f(x) = x^n, the derivative is: f'(x) = n x^(n-1). Example: If f(x) = x^3, then f'(x) = 3x^2."},
+    {"front": "Product Rule", "back": "For u(x) and v(x), (uv)' = u'v + uv'. Example: If f(x) = x^2 * sin(x), then f'(x) = 2x sin(x) + x^2 cos(x)."},
+    {"front": "Quotient Rule", "back": "For u(x) and v(x), (u/v)' = (u'v - uv')/v^2. Example: If f(x) = x/(x+1), then f'(x) = 1/(x+1)^2."},
+    {"front": "Chain Rule", "back": "For f(g(x)), (f(g(x)))' = f'(g(x)) * g'(x). Example: If f(x) = sin(x^2), then f'(x) = cos(x^2) * 2x."},
+    {"front": "Implicit Differentiation", "back": "Differentiate both sides with respect to x, treating y as a function of x. Example: For x^2 + y^2 = 1, dy/dx = -x/y."},
+    {"front": "Critical Points", "back": "Points where f'(x) = 0 or f'(x) is undefined. Used to find local maxima, minima, or inflection points."},
+    {"front": "First Derivative Test", "back": "If f'(x) changes from positive to negative at a critical point, it’s a local maximum. If negative to positive, it’s a local minimum."},
+    {"front": "Second Derivative Test", "back": "If f''(x) > 0 at a critical point, it’s a local minimum (concave up). If f''(x) < 0, it’s a local maximum (concave down)."},
+    {"front": "Definite Integral", "back": "Area under the curve from a to b: ∣(a to b) f(x) dx = F(b) - F(a), where F(x) is the antiderivative of f(x)."},
+    {"front": "Indefinite Integral", "back": "Antiderivative of a function: ∣ f(x) dx = F(x) + C, where C is a constant. Example: ∣ x^2 dx = (x^3)/3 + C."},
+    {"front": "Fundamental Theorem of Calculus", "back": "Connects differentiation and integration: If F(x) = ∣(a to x) f(t) dt, then F'(x) = f(x). Also, ∣(a to b) f(x) dx = F(b) - F(a)."},
+    {"front": "U-Substitution", "back": "Let u = g(x), so du = g'(x) dx. Example: For ∣ 2x e^(x^2) dx, let u = x^2, then ∣ e^u du = e^(x^2) + C."},
+
+    {"front": "What is Quantum Superposition?", "back": "A system exists in all possible states until measured."},
+    {"front": "What is the Pilot Wave in Bohmian Mechanics?", "back": "A guiding field that determines the deterministic path of a particle."},
+    {"front": "What does the Holographic Principle state?", "back": "All information in a volume can be described by data on its boundary."},
+    {"front": "What is M-Theory?", "back": "A unifying theory of all string theories, suggesting 11 dimensions and branes."},
+    {"front": "How does Holography relate to Black Holes?", "back": "The entropy of a black hole is proportional to its surface area, not volume."},
+    {"front": "Does Bohmian Mechanics allow hidden variables?", "back": "Yes, it is a deterministic interpretation with hidden variables."},
+    {"front": "In M-Theory, what replaces strings?", "back": "Membranes (branes) in higher dimensions."},
+
+    {"front": "What is entanglement?", "back": "A quantum phenomenon where particles remain connected such that the state of one instantly influences the other."},
+    {"front": "What is the Copenhagen Interpretation?", "back": "A view where a quantum system remains in superposition until measured."},
+    {"front": "What is a wavefunction?", "back": "A mathematical function that describes the probability amplitude of a quantum system."},
+    {"front": "How is time treated in M-Theory?", "back": "Time can be embedded in higher-dimensional structures, potentially behaving differently across branes."},
+    {"front": "What is a quantum potential?", "back": "In Bohmian mechanics, a potential that guides particles along deterministic paths."},
+    {"front": "What is a brane?", "back": "A multidimensional object in M-Theory; our universe could be a 3-brane in higher dimensions."},
+    {"front": "What is quantum decoherence?", "back": "The loss of quantum coherence as a system interacts with the environment, making it behave classically."},
+    {"front": "What is holographic duality?", "back": "A conjectured equivalence between a gravitational theory in bulk space and a quantum field theory on its boundary."},
+    {"front": "Who proposed M-Theory?", "back": "Edward Witten in the mid-1990s."},
+    {"front": "What is the AdS/CFT correspondence?", "back": "A realization of holographic duality connecting Anti-de Sitter space and conformal field theories."},
+    {"front": "Can Bohmian mechanics explain the double-slit experiment?", "back": "Yes, it explains interference via deterministic trajectories guided by the wavefunction."},
+    {"front": "What is a compactified dimension?", "back": "An extra dimension that is curled up so small it is unobservable at low energies."},
+    {"front": "What is the role of observers in quantum mechanics?", "back": "In many interpretations, measurement by an observer causes wavefunction collapse."},
+    {"front": "What is non-locality?", "back": "A phenomenon where events are correlated beyond classical constraints of spacetime separation."},
+    {"front": "What are string modes?", "back": "Different vibration patterns of strings that determine particle properties like mass and charge."},
+    {"front": "What is a Calabi-Yau manifold?", "back": "A shape used in string theory to compactify extra dimensions while preserving supersymmetry."},
+    {"front": "What is the multiverse theory?", "back": "The hypothesis that many universes exist with different physical laws or constants."},
+    {"front": "What is Planck scale?", "back": "The energy scale at which quantum gravity effects become significant."},
+    {"front": "What are virtual particles?", "back": "Temporary particles that exist due to quantum fluctuations in a vacuum."},
+    {"front": "What is the uncertainty principle?", "back": "You cannot simultaneously know the exact position and momentum of a particle."},
+    {"front": "How many dimensions are proposed in M-Theory?", "back": "11 total: 10 spatial and 1 time dimension."}
+]
+
 
     let currentIndex = 0;
     let mode = 'flashcard';
