@@ -2,241 +2,209 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Quantum Mechanics Explorer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Physics Flashcard App</title>
   <style>
-    body { font-family: Arial, sans-serif; background-color: #111; color: #eee; text-align: center; padding: 2em; }
-    .card, .quiz { margin: 2em auto; padding: 1.5em; background: #222; border-radius: 10px; width: 80%; max-width: 600px; }
-    .button { margin: 1em; padding: 0.8em 1.5em; font-size: 1em; border: none; border-radius: 5px; cursor: pointer; }
-    .show { background-color: #4CAF50; color: white; }
-    .next { background-color: #008CBA; color: white; }
-    .answer-input { width: 80%; padding: 0.5em; font-size: 1em; border-radius: 5px; border: 1px solid #555; }
-    .score { margin-top: 1em; font-size: 1.2em; }
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .card {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    #card-back {
+      margin-top: 10px;
+      font-style: italic;
+    }
+    .quiz {
+      display: none;
+    }
+    .button {
+      padding: 10px 20px;
+      margin: 5px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+    }
+    .button:hover {
+      background-color: #0056b3;
+    }
+    .answer-input {
+      padding: 8px;
+      width: 80%;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    #quiz-feedback {
+      margin: 10px 0;
+      font-weight: bold;
+    }
+    .mode-buttons {
+      margin-bottom: 20px;
+    }
   </style>
 </head>
 <body>
-
-  <h1>Quantum Mechanics Explorer</h1>
-  <p>Learn Quantum Theory, Bohmian Mechanics, Holography, and M-Theory interactively.</p>
-
-  <div id="app">
-    <div class="card" id="flashcard-mode">
-      <h2>Flashcard</h2>
-      <div id="card-front"></div>
-      <div id="card-back" style="display:none; margin-top: 1em;"></div>
-      <button class="button show" onclick="revealAnswer()">Reveal</button>
-      <button class="button next" onclick="nextCard()">Next</button>
-    </div>
-
-    <div class="quiz" id="quiz-mode" style="display:none;">
-      <h2>Quiz</h2>
-      <div id="quiz-question"></div>
-      <input class="answer-input" id="quiz-answer" placeholder="Type your answer here" />
-      <br>
-      <button class="button show" onclick="checkAnswer()">Submit</button>
-      <div class="score" id="quiz-feedback"></div>
-      <button class="button next" onclick="nextQuiz()">Next</button>
-    </div>
-
-    <div>
+  <div class="container">
+    <h1>Physics Flashcard App</h1>
+    <div class="mode-buttons">
       <button class="button" onclick="switchMode('flashcard')">Flashcard Mode</button>
       <button class="button" onclick="switchMode('quiz')">Quiz Mode</button>
+    </div>
+
+    <div id="flashcard-mode" class="card">
+      <div id="card-front"></div>
+      <div id="card-back" style="display: none;"></div>
+      <button class="button" onclick="revealAnswer()">Reveal Answer</button>
+      <button class="button" onclick="nextCard()">Next</button>
+      <button class="button" onclick="prevCard()">Previous</button>
+    </div>
+
+    <div id="quiz-mode" class="card quiz">
+      <div id="quiz-question"></div>
+      <input id="quiz-answer" class="answer-input" placeholder="Enter the term">
+      <button class="button" onclick="checkAnswer()">Submit</button>
+      <div id="quiz-feedback"></div>
+      <button class="button" onclick="nextQuiz()">Next</button>
+      <div id="quiz-score">Score: 0/0</div>
     </div>
   </div>
 
   <script>
- flashcards = [
-    {"front": "Limit", "back": "The value a function approaches as the input approaches a specific value. Notation: lim(x→a) f(x) = L."},
-    {"front": "Continuity", "back": "A function f(x) is continuous at x = a if: 1. f(a) is defined, 2. lim(x→a) f(x) exists, 3. lim(x→a) f(x) = f(a)."},
-    {"front": "Derivative", "back": "Measures the rate of change of a function. f'(x) = lim(h→0) [f(x+h) - f(x)]/h. Represents the slope of the tangent line."},
-    {"front": "Power Rule", "back": "For f(x) = x^n, the derivative is: f'(x) = n x^(n-1). Example: If f(x) = x^3, then f'(x) = 3x^2."},
-    {"front": "Product Rule", "back": "For u(x) and v(x), (uv)' = u'v + uv'. Example: If f(x) = x^2 * sin(x), then f'(x) = 2x sin(x) + x^2 cos(x)."},
-    {"front": "Quotient Rule", "back": "For u(x) and v(x), (u/v)' = (u'v - uv')/v^2. Example: If f(x) = x/(x+1), then f'(x) = 1/(x+1)^2."},
-    {"front": "Chain Rule", "back": "For f(g(x)), (f(g(x)))' = f'(g(x)) * g'(x). Example: If f(x) = sin(x^2), then f'(x) = cos(x^2) * 2x."},
-    {"front": "Implicit Differentiation", "back": "Differentiate both sides with respect to x, treating y as a function of x. Example: For x^2 + y^2 = 1, dy/dx = -x/y."},
-    {"front": "Critical Points", "back": "Points where f'(x) = 0 or f'(x) is undefined. Used to find local maxima, minima, or inflection points."},
-    {"front": "First Derivative Test", "back": "If f'(x) changes from positive to negative at a critical point, it’s a local maximum. If negative to positive, it’s a local minimum."},
-    {"front": "Second Derivative Test", "back": "If f''(x) > 0 at a critical point, it’s a local minimum (concave up). If f''(x) < 0, it’s a local maximum (concave down)."},
-    {"front": "Definite Integral", "back": "Area under the curve from a to b: ∣(a to b) f(x) dx = F(b) - F(a), where F(x) is the antiderivative of f(x)."},
-    {"front": "Indefinite Integral", "back": "Antiderivative of a function: ∣ f(x) dx = F(x) + C, where C is a constant. Example: ∣ x^2 dx = (x^3)/3 + C."},
-    {"front": "Fundamental Theorem of Calculus", "back": "Connects differentiation and integration: If F(x) = ∣(a to x) f(t) dt, then F'(x) = f(x). Also, ∣(a to b) f(x) dx = F(b) - F(a)."},
-    {"front": "U-Substitution", "back": "Let u = g(x), so du = g'(x) dx. Example: For ∣ 2x e^(x^2) dx, let u = x^2, then ∣ e^u du = e^(x^2) + C."},
-
-    {"front": "What is Quantum Superposition?", "back": "A system exists in all possible states until measured."},
-    {"front": "What is the Pilot Wave in Bohmian Mechanics?", "back": "A guiding field that determines the deterministic path of a particle."},
-    {"front": "What does the Holographic Principle state?", "back": "All information in a volume can be described by data on its boundary."},
-    {"front": "What is M-Theory?", "back": "A unifying theory of all string theories, suggesting 11 dimensions and branes."},
-    {"front": "How does Holography relate to Black Holes?", "back": "The entropy of a black hole is proportional to its surface area, not volume."},
-    {"front": "Does Bohmian Mechanics allow hidden variables?", "back": "Yes, it is a deterministic interpretation with hidden variables."},
-    {"front": "In M-Theory, what replaces strings?", "back": "Membranes (branes) in higher dimensions."},
-
-    {"front": "What is entanglement?", "back": "A quantum phenomenon where particles remain connected such that the state of one instantly influences the other."},
-    {"front": "What is the Copenhagen Interpretation?", "back": "A view where a quantum system remains in superposition until measured."},
-    {"front": "What is a wavefunction?", "back": "A mathematical function that describes the probability amplitude of a quantum system."},
-    {"front": "How is time treated in M-Theory?", "back": "Time can be embedded in higher-dimensional structures, potentially behaving differently across branes."},
-    {"front": "What is a quantum potential?", "back": "In Bohmian mechanics, a potential that guides particles along deterministic paths."},
-    {"front": "What is a brane?", "back": "A multidimensional object in M-Theory; our universe could be a 3-brane in higher dimensions."},
-    {"front": "What is quantum decoherence?", "back": "The loss of quantum coherence as a system interacts with the environment, making it behave classically."},
-    {"front": "What is holographic duality?", "back": "A conjectured equivalence between a gravitational theory in bulk space and a quantum field theory on its boundary."},
-    {"front": "Who proposed M-Theory?", "back": "Edward Witten in the mid-1990s."},
-    {"front": "What is the AdS/CFT correspondence?", "back": "A realization of holographic duality connecting Anti-de Sitter space and conformal field theories."},
-    {"front": "Can Bohmian mechanics explain the double-slit experiment?", "back": "Yes, it explains interference via deterministic trajectories guided by the wavefunction."},
-    {"front": "What is a compactified dimension?", "back": "An extra dimension that is curled up so small it is unobservable at low energies."},
-    {"front": "What is the role of observers in quantum mechanics?", "back": "In many interpretations, measurement by an observer causes wavefunction collapse."},
-    {"front": "What is non-locality?", "back": "A phenomenon where events are correlated beyond classical constraints of spacetime separation."},
-    {"front": "What are string modes?", "back": "Different vibration patterns of strings that determine particle properties like mass and charge."},
-    {"front": "What is a Calabi-Yau manifold?", "back": "A shape used in string theory to compactify extra dimensions while preserving supersymmetry."},
-    {"front": "What is the multiverse theory?", "back": "The hypothesis that many universes exist with different physical laws or constants."},
-    {"front": "What is Planck scale?", "back": "The energy scale at which quantum gravity effects become significant."},
-    {"front": "What are virtual particles?", "back": "Temporary particles that exist due to quantum fluctuations in a vacuum."},
-    {"front": "What is the uncertainty principle?", "back": "You cannot simultaneously know the exact position and momentum of a particle."},
-    {"front": "How many dimensions are proposed in M-Theory?", "back": "11 total: 10 spatial and 1 time dimension."}
-    {"front": "Limit", "back": "The value a function approaches as the input approaches a specific value. Notation: lim(x→a) f(x) = L."},
-    {"front": "Continuity", "back": "A function f(x) is continuous at x = a if: 1. f(a) is defined, 2. lim(x→a) f(x) exists, 3. lim(x→a) f(x) = f(a)."},
-    {"front": "Derivative", "back": "Measures the rate of change of a function. f'(x) = lim(h→0) [f(x+h) - f(x)]/h. Represents the slope of the tangent line."},
-    {"front": "Power Rule", "back": "For f(x) = x^n, the derivative is: f'(x) = n x^(n-1). Example: If f(x) = x^3, then f'(x) = 3x^2."},
-    {"front": "Product Rule", "back": "For u(x) and v(x), (uv)' = u'v + uv'. Example: If f(x) = x^2 * sin(x), then f'(x) = 2x sin(x) + x^2 cos(x)."},
-    {"front": "Quotient Rule", "back": "For u(x) and v(x), (u/v)' = (u'v - uv')/v^2. Example: If f(x) = x/(x+1), then f'(x) = 1/(x+1)^2."},
-    {"front": "Chain Rule", "back": "For f(g(x)), (f(g(x)))' = f'(g(x)) * g'(x). Example: If f(x) = sin(x^2), then f'(x) = cos(x^2) * 2x."},
-    {"front": "Implicit Differentiation", "back": "Differentiate both sides with respect to x, treating y as a function of x. Example: For x^2 + y^2 = 1, dy/dx = -x/y."},
-    {"front": "Critical Points", "back": "Points where f'(x) = 0 or f'(x) is undefined. Used to find local maxima, minima, or inflection points."},
-    {"front": "First Derivative Test", "back": "If f'(x) changes from positive to negative at a critical point, it’s a local maximum. If negative to positive, it’s a local minimum."},
-    {"front": "Second Derivative Test", "back": "If f''(x) > 0 at a critical point, it’s a local minimum (concave up). If f''(x) < 0, it’s a local maximum (concave down)."},
-    {"front": "Definite Integral", "back": "Area under the curve from a to b: ∣(a to b) f(x) dx = F(b) - F(a), where F(x) is the antiderivative of f(x)."},
-    {"front": "Indefinite Integral", "back": "Antiderivative of a function: ∣ f(x) dx = F(x) + C, where C is a constant. Example: ∣ x^2 dx = (x^3)/3 + C."},
-    {"front": "Fundamental Theorem of Calculus", "back": "Connects differentiation and integration: If F(x) = ∣(a to x) f(t) dt, then F'(x) = f(x). Also, ∣(a to b) f(x) dx = F(b) - F(a)."},
-    {"front": "U-Substitution", "back": "Let u = g(x), so du = g'(x) dx. Example: For ∣ 2x e^(x^2) dx, let u = x^2, then ∣ e^u du = e^(x^2) + C."},
-
-    {"front": "What is a differential equation?", "back": "An equation involving derivatives of a function."},
-    {"front": "What is an ordinary differential equation (ODE)?", "back": "A differential equation containing one independent variable."},
-    {"front": "What is a partial differential equation (PDE)?", "back": "A differential equation with partial derivatives of a multivariable function."},
-    {"front": "What is the general solution to a differential equation?", "back": "A family of functions that includes all particular solutions."},
-    {"front": "What is a particular solution?", "back": "A specific function that satisfies both the differential equation and initial conditions."},
-    {"front": "What is an initial value problem?", "back": "A differential equation with a given value for the function at a specific point."},
-    {"front": "What is a homogeneous differential equation?", "back": "A differential equation where all terms involve the dependent variable or its derivatives."},
-    {"front": "What is an integrating factor?", "back": "A function used to simplify and solve a linear first-order differential equation."},
-    {"front": "What is separation of variables?", "back": "A method to solve differential equations by isolating variables on each side of the equation."},
-    {"front": "What is a slope field?", "back": "A graphical representation of the direction of solutions of a differential equation."},
-
-    {"front": "What is a topological space?", "back": "A set with a collection of open sets satisfying union, intersection, and identity rules."},
-    {"front": "What is an open set in topology?", "back": "A set where each point has a neighborhood entirely contained in the set."},
-    {"front": "What is a closed set in topology?", "back": "A set that contains all its limit points."},
-    {"front": "What is a basis in topology?", "back": "A collection of open sets from which all other open sets can be formed via unions."},
-    {"front": "What is continuity in topological terms?", "back": "A function f is continuous if the preimage of every open set is open."},
-    {"front": "What is a homeomorphism?", "back": "A continuous bijective function with a continuous inverse; a topological isomorphism."},
-    {"front": "What is a compact space?", "back": "A space where every open cover has a finite subcover."},
-    {"front": "What is a connected space?", "back": "A space that cannot be divided into two disjoint nonempty open sets."},
-    {"front": "What is a Hausdorff space?", "back": "A space where any two distinct points have disjoint neighborhoods."},
-    {"front": "What is a metric space?", "back": "A space where distance between points is defined by a metric satisfying positivity, symmetry, and triangle inequality."}
-]
-
+    const flashcards = [
+      { front: "What is Quantum Superposition?", back: "A system exists in all possible states until measured." },
+      { front: "What is the Pilot Wave in Bohmian Mechanics?", back: "A guiding field that determines the deterministic path of a particle." },
+      { front: "What does the Holographic Principle state?", back: "All information in a volume can be described by data on its boundary." },
+      { front: "What is M-Theory?", back: "A unifying theory of all string theories, suggesting 11 dimensions and branes." },
+      { front: "How does Holography relate to Black Holes?", back: "The entropy of a black hole is proportional to its surface area, not volume." },
+      { front: "Does Bohmian Mechanics allow hidden variables?", back: "Yes, it is a deterministic interpretation with hidden variables." },
+      { front: "In M-Theory, what replaces strings?", back: "Membranes (branes) in higher dimensions." }
+    ];
 
     let currentIndex = 0;
     let mode = 'flashcard';
+    let score = 0;
+    let totalQuestions = 0;
+
+    // Shuffle flashcards
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // Initialize flashcards
+    const shuffledFlashcards = shuffleArray([...flashcards]);
 
     function showCard(index) {
-      document.getElementById('card-front').innerText = flashcards[index].front;
-      document.getElementById('card-back').innerText = flashcards[index].back;
-      document.getElementById('card-back').style.display = 'none';
+      if (index < 0 || index >= shuffledFlashcards.length) {
+        currentIndex = 0;
+        index = 0;
+      }
+      const front = document.getElementById('card-front');
+      const back = document.getElementById('card-back');
+      if (front && back) {
+        front.innerText = shuffledFlashcards[index].front;
+        back.innerText = shuffledFlashcards[index].back;
+        back.style.display = 'none';
+      } else {
+        console.error('Card elements not found');
+      }
     }
 
     function revealAnswer() {
-      document.getElementById('card-back').style.display = 'block';
+      const back = document.getElementById('card-back');
+      if (back) back.style.display = 'block';
     }
 
     function nextCard() {
-      currentIndex = (currentIndex + 1) % flashcards.length;
+      currentIndex = (currentIndex + 1) % shuffledFlashcards.length;
       showCard(currentIndex);
     }
 
-    function switchMode(newMode) {
-      mode = newMode;
-      document.getElementById('flashcard-mode').style.display = newMode === 'flashcard' ? 'block' : 'none';
-      document.getElementById('quiz-mode').style.display = newMode === 'quiz' ? 'block' : 'none';
-      currentIndex = 0;
-      if (newMode === 'flashcard') showCard(currentIndex);
-      if (newMode === 'quiz') showQuiz(currentIndex);
+    function prevCard() {
+      currentIndex = (currentIndex - 1 + shuffledFlashcards.length) % shuffledFlashcards.length;
+      showCard(currentIndex);
     }
 
     function showQuiz(index) {
-      document.getElementById('quiz-question').innerText = flashcards[index].back;
-      document.getElementById('quiz-answer').value = '';
-      document.getElementById('quiz-feedback').innerText = '';
+      if (index < 0 || index >= shuffledFlashcards.length) {
+        currentIndex = 0;
+        index = 0;
+      }
+      const question = document.getElementById('quiz-question');
+      const answer = document.getElementById('quiz-answer');
+      const feedback = document.getElementById('quiz-feedback');
+      if (question && answer && feedback) {
+        question.innerText = shuffledFlashcards[index].back;
+        answer.value = '';
+        feedback.innerText = '';
+      } else {
+        console.error('Quiz elements not found');
+      }
     }
 
     function checkAnswer() {
-      const userInput = document.getElementById('quiz-answer').value.trim().toLowerCase();
-      const correct = flashcards[currentIndex].front.toLowerCase();
-      if (userInput === correct) {
-        document.getElementById('quiz-feedback').innerText = "Correct!";
-      } else {
-        document.getElementById('quiz-feedback').innerText = `Incorrect. Answer: ${flashcards[currentIndex].front}`;
+      const answer = document.getElementById('quiz-answer');
+      const feedback = document.getElementById('quiz-feedback');
+      const scoreDisplay = document.getElementById('quiz-score');
+      if (answer && feedback && scoreDisplay) {
+        totalQuestions++;
+        const userAnswer = answer.value.trim().toLowerCase();
+        const correctAnswer = shuffledFlashcards[currentIndex].front.toLowerCase();
+        if (userAnswer === correctAnswer) {
+          score++;
+          feedback.innerText = 'Correct!';
+        } else {
+          feedback.innerText = `Incorrect. The term was: ${shuffledFlashcards[currentIndex].front}`;
+        }
+        scoreDisplay.innerText = `Score: ${score}/${totalQuestions}`;
       }
     }
 
     function nextQuiz() {
-      currentIndex = (currentIndex + 1) % flashcards.length;
+      currentIndex = (currentIndex + 1) % shuffledFlashcards.length;
       showQuiz(currentIndex);
     }
 
-    // Initialize
-    showCard(currentIndex);
+    function switchMode(newMode) {
+      mode = newMode;
+      const flashcardMode = document.getElementById('flashcard-mode');
+      const quizMode = document.getElementById('quiz-mode');
+      if (flashcardMode && quizMode) {
+        flashcardMode.style.display = mode === 'flashcard' ? 'block' : 'none';
+        quizMode.style.display = mode === 'quiz' ? 'block' : 'none';
+        currentIndex = 0;
+        if (mode === 'flashcard') {
+          showCard(currentIndex);
+        } else {
+          score = 0;
+          totalQuestions = 0;
+          document.getElementById('quiz-score').innerText = 'Score: 0/0';
+          showQuiz(currentIndex);
+        }
+      }
+    }
+
+    // Initialize the app
+    document.addEventListener('DOMContentLoaded', () => {
+      showCard(currentIndex);
+    });
   </script>
-  # Function for flashcard study mode
-def study_mode():
-    print("\n=== Flashcard Study Mode ===")
-    print("Press Enter to reveal the answer, 'q' to quit.")
-    random.shuffle(flashcards)  # Shuffle the flashcards
-    for card in flashcards:
-        print("\nFront:", card["front"])
-        user_input = input("Reveal answer? (Enter to continue, 'q' to quit): ")
-        if user_input.lower() == 'q':
-            break
-        print("Back:", card["back"])
-        time.sleep(1)  # Small delay for readability
-
-# Function for quiz mode
-def quiz_mode():
-    print("\n=== Quiz Mode ===")
-    print("You'll be given the answer (back of the card), and you need to guess the term (front).")
-    print("Press 'q' to quit.")
-    score = 0
-    total = len(flashcards)
-    random.shuffle(flashcards)  # Shuffle for quiz
-    for card in flashcards:
-        print("\nDefinition:", card["back"])
-        user_guess = input("What is the term? (or 'q' to quit): ")
-        if user_guess.lower() == 'q':
-            break
-        if user_guess.lower() == card["front"].lower():
-            print("Correct!")
-            score += 1
-        else:
-            print(f"Wrong! The term was: {card['front']}")
-        time.sleep(1)
-    print(f"\nQuiz finished! Your score: {score}/{total}")
-
-# Main program
-def main():
-    while True:
-        print("\n=== Calculus 1 Flashcard Study Guide ===")
-        print("1. Study Mode (View flashcards)")
-        print("2. Quiz Mode (Test yourself)")
-        print("3. Exit")
-        choice = input("Choose an option (1-3): ")
-
-        if choice == '1':
-            study_mode()
-        elif choice == '2':
-            quiz_mode()
-        elif choice == '3':
-            print("Goodbye!")
-            break
-        else:
-            print("Invalid choice, please try again.")
-
-# Run the program
-if __name__ == "__main__":
-    main()
-
 </body>
 </html>
