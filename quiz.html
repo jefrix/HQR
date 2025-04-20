@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quantum Mechanics Explorer</title>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #111; color: #eee; text-align: center; padding: 2em; }
+    .card, .quiz { margin: 2em auto; padding: 1.5em; background: #222; border-radius: 10px; width: 80%; max-width: 600px; }
+    .button { margin: 1em; padding: 0.8em 1.5em; font-size: 1em; border: none; border-radius: 5px; cursor: pointer; }
+    .show { background-color: #4CAF50; color: white; }
+    .next { background-color: #008CBA; color: white; }
+    .answer-input { width: 80%; padding: 0.5em; font-size: 1em; border-radius: 5px; border: 1px solid #555; }
+    .score { margin-top: 1em; font-size: 1.2em; }
+  </style>
+</head>
+<body>
+
+  <h1>Quantum Mechanics Explorer</h1>
+  <p>Learn Quantum Theory, Bohmian Mechanics, Holography, and M-Theory interactively.</p>
+
+  <div id="app">
+    <div class="card" id="flashcard-mode">
+      <h2>Flashcard</h2>
+      <div id="card-front"></div>
+      <div id="card-back" style="display:none; margin-top: 1em;"></div>
+      <button class="button show" onclick="revealAnswer()">Reveal</button>
+      <button class="button next" onclick="nextCard()">Next</button>
+    </div>
+
+    <div class="quiz" id="quiz-mode" style="display:none;">
+      <h2>Quiz</h2>
+      <div id="quiz-question"></div>
+      <input class="answer-input" id="quiz-answer" placeholder="Type your answer here" />
+      <br>
+      <button class="button show" onclick="checkAnswer()">Submit</button>
+      <div class="score" id="quiz-feedback"></div>
+      <button class="button next" onclick="nextQuiz()">Next</button>
+    </div>
+
+    <div>
+      <button class="button" onclick="switchMode('flashcard')">Flashcard Mode</button>
+      <button class="button" onclick="switchMode('quiz')">Quiz Mode</button>
+    </div>
+  </div>
+
+  <script>
+    const flashcards = [
+      { front: "What is Quantum Superposition?", back: "A system exists in all possible states until measured." },
+      { front: "What is the Pilot Wave in Bohmian Mechanics?", back: "A guiding field that determines the deterministic path of a particle." },
+      { front: "What does the Holographic Principle state?", back: "All information in a volume can be described by data on its boundary." },
+      { front: "What is M-Theory?", back: "A unifying theory of all string theories, suggesting 11 dimensions and branes." },
+      { front: "How does Holography relate to Black Holes?", back: "The entropy of a black hole is proportional to its surface area, not volume." },
+      { front: "Does Bohmian Mechanics allow hidden variables?", back: "Yes, it is a deterministic interpretation with hidden variables." },
+      { front: "In M-Theory, what replaces strings?", back: "Membranes (branes) in higher dimensions." },
+    ];
+
+    let currentIndex = 0;
+    let mode = 'flashcard';
+
+    function showCard(index) {
+      document.getElementById('card-front').innerText = flashcards[index].front;
+      document.getElementById('card-back').innerText = flashcards[index].back;
+      document.getElementById('card-back').style.display = 'none';
+    }
+
+    function revealAnswer() {
+      document.getElementById('card-back').style.display = 'block';
+    }
+
+    function nextCard() {
+      currentIndex = (currentIndex + 1) % flashcards.length;
+      showCard(currentIndex);
+    }
+
+    function switchMode(newMode) {
+      mode = newMode;
+      document.getElementById('flashcard-mode').style.display = newMode === 'flashcard' ? 'block' : 'none';
+      document.getElementById('quiz-mode').style.display = newMode === 'quiz' ? 'block' : 'none';
+      currentIndex = 0;
+      if (newMode === 'flashcard') showCard(currentIndex);
+      if (newMode === 'quiz') showQuiz(currentIndex);
+    }
+
+    function showQuiz(index) {
+      document.getElementById('quiz-question').innerText = flashcards[index].back;
+      document.getElementById('quiz-answer').value = '';
+      document.getElementById('quiz-feedback').innerText = '';
+    }
+
+    function checkAnswer() {
+      const userInput = document.getElementById('quiz-answer').value.trim().toLowerCase();
+      const correct = flashcards[currentIndex].front.toLowerCase();
+      if (userInput === correct) {
+        document.getElementById('quiz-feedback').innerText = "Correct!";
+      } else {
+        document.getElementById('quiz-feedback').innerText = `Incorrect. Answer: ${flashcards[currentIndex].front}`;
+      }
+    }
+
+    function nextQuiz() {
+      currentIndex = (currentIndex + 1) % flashcards.length;
+      showQuiz(currentIndex);
+    }
+
+    // Initialize
+    showCard(currentIndex);
+  </script>
+</body>
+</html>
