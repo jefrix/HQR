@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Case for a Higher Federal Minimum Wage</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .kpi-value {
+            font-weight: 900;
+            font-size: 4rem;
+            line-height: 1;
+            color: #FF4E50;
+        }
+         .kpi-label {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #4A5568;
+        }
+        .flowchart-step {
+            position: relative;
+            padding: 1rem 1.5rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            text-align: center;
+            border-left: 4px solid #FC913A;
+        }
+        .flowchart-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 4rem;
+            color: #A0AEC0;
+            font-size: 2.5rem;
+            transform: rotate(90deg);
+        }
+        @media (min-width: 768px) {
+            .flowchart-arrow {
+                transform: rotate(0deg);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-black text-gray-900 mb-2">The Widening Gap</h1>
+            <p class="text-xl md:text-2xl text-gray-600">Re-evaluating the Federal Minimum Wage for the Modern American Worker</p>
+        </header>
+
+        <section id="stagnation" class="mb-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white rounded-lg shadow-md p-8 text-center">
+                    <div class="kpi-value">$7.25</div>
+                    <div class="kpi-label">Current Federal Minimum Wage</div>
+                    <p class="text-gray-500 mt-2">A rate that has remained unchanged for over a decade, failing to keep up with the cost of living.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-8 text-center">
+                    <div class="kpi-value" id="years-stagnant">16</div>
+                    <div class="kpi-label">Years of Stagnation</div>
+                    <p class="text-gray-500 mt-2">The longest period without an increase since the minimum wage was established in 1938.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="historical-divergence" class="mb-16">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-center mb-1 text-gray-900">The Broken Link: Wages vs. Productivity</h2>
+                <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">Historically, the minimum wage grew alongside worker productivity. Since 1968, that connection has been severed. While productivity has soared, the real value of the minimum wage has plummeted.</p>
+                <div class="chart-container h-96 md:h-[500px] max-w-4xl">
+                    <canvas id="productivityWageChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="living-wage" class="mb-16">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                 <h2 class="text-2xl font-bold text-center mb-1 text-gray-900">Poverty Wage vs. Living Wage</h2>
+                 <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">A full-time job at the federal minimum wage is not enough to live on. It falls short of the federal poverty line for a single adult and is dwarfed by the estimated national living wage needed to cover basic expenses.</p>
+                <div class="chart-container h-96 md:h-[500px] max-w-4xl">
+                    <canvas id="livingWageChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="demographics" class="mb-16">
+            <h2 class="text-2xl font-bold text-center mb-6 text-gray-900">Who Earns the Minimum Wage?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="font-bold text-xl text-center mb-4">Disproportionately Young Workers</h3>
+                    <p class="text-center text-gray-600 mb-4">While making up only one-fifth of hourly workers, those under 25 account for nearly half of all minimum wage earners.</p>
+                    <div class="chart-container h-72">
+                        <canvas id="demographicsAgeChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="font-bold text-xl text-center mb-4">Concentrated in Service Industries</h3>
+                    <p class="text-center text-gray-600 mb-4">The vast majority of minimum wage workers are in service roles, especially food preparation and serving.</p>
+                    <div class="chart-container h-72">
+                         <canvas id="demographicsIndustryChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cost-of-living" class="mb-16">
+             <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-center mb-1 text-gray-900">A Tale of 50 States: The Cost of Living Divide</h2>
+                <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">A single federal wage cannot account for the vast differences in living costs across the country. A wage that is barely adequate in one state is a poverty wage in another.</p>
+                <div class="chart-container h-96 md:h-[500px] max-w-5xl">
+                    <canvas id="costOfLivingChart"></canvas>
+                </div>
+             </div>
+        </section>
+
+        <section id="recommendation" class="mb-16 text-center bg-gradient-to-r from-[#FF4E50] to-[#FC913A] text-white rounded-lg shadow-xl p-8 md:p-12">
+            <h2 class="text-3xl md:text-4xl font-black mb-4">The Recommendation: A Path to a Fair Wage</h2>
+            <p class="text-lg md:text-xl mb-6 max-w-3xl mx-auto">Based on living wage needs and historical productivity, a significant adjustment is required to restore the value of the minimum wage.</p>
+            <div class="text-6xl md:text-8xl font-black my-4">$23 - $26</div>
+            <p class="font-bold text-xl">Proposed Hourly Wage Target</p>
+        </section>
+
+        <section id="llm-feature" class="mb-16 bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-bold text-center mb-4 text-gray-900">✨ What if We Adjusted the Wage? ✨</h2>
+            <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">Enter a hypothetical federal minimum wage, and our AI will provide a brief analysis of its potential impacts on the economy and American workers.</p>
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-6">
+                <label for="wageInput" class="text-lg font-medium text-gray-700">Proposed Wage ($/hr):</label>
+                <input type="number" id="wageInput" min="7.25" value="15.00" step="0.01" class="p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#FC913A] focus:border-transparent w-full md:w-auto">
+                <button id="analyzeWageBtn" class="bg-[#FF4E50] text-white font-bold py-2 px-6 rounded-md shadow-lg hover:bg-[#FC913A] transition-colors duration-300">
+                    Analyze Impact ✨
+                </button>
+            </div>
+            <div id="llmLoading" class="text-center text-gray-500 mb-4 hidden">Analyzing...</div>
+            <div id="llmResult" class="bg-gray-50 p-4 rounded-md border border-gray-200 text-gray-700 min-h-[100px] overflow-auto">
+                <p>Your analysis will appear here.</p>
+            </div>
+        </section>
+
+        <section id="implementation" class="mb-8">
+            <h2 class="text-2xl font-bold text-center mb-6 text-gray-900">How Do We Get There? A Phased Approach</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                <div class="flowchart-step">
+                    <h3 class="font-bold text-lg mb-2">1. Gradual Phase-In</h3>
+                    <p class="text-gray-600">Implement incremental annual increases over several years to allow businesses time to adapt to new labor costs without economic shock.</p>
+                </div>
+                <div class="flowchart-arrow">↓</div>
+                <div class="flowchart-step">
+                    <h3 class="font-bold text-lg mb-2">2. Index to Economy</h3>
+                    <p class="text-gray-600">Once the target is reached, automatically link the wage to a stable metric like median wage growth to prevent future value erosion.</p>
+                </div>
+                 <div class="flowchart-arrow">↓</div>
+                <div class="flowchart-step">
+                    <h3 class="font-bold text-lg mb-2">3. Complementary Policies</h3>
+                    <p class="text-gray-600">Support the wage increase with policies like an expanded EITC and job training programs to ensure broad economic security.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center text-gray-500 text-sm mt-16">
+            <p>Data sourced from the report "Re-evaluating the Federal Minimum Wage: A Comprehensive Analysis for Meeting American Worker Needs".</p>
+            <p>Infographic created for illustrative purposes. All data points are based on the provided source material.</p>
+        </footer>
+    </div>
+    <script>
+        const energeticPlayfulPalette = ['#FF4E50', '#FC913A', '#F9D423', '#EDE574', '#E1F5C4'];
+
+        function wrapText(text, maxLength) {
+            if (typeof text !== 'string' || text.length <= maxLength) {
+                return text;
+            }
+            const words = text.split(' ');
+            let lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > maxLength) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        }
+        
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+              return label.join(' ');
+            } else {
+              return label;
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const currentYear = new Date().getFullYear();
+            const yearsStagnant = currentYear - 2009;
+            document.getElementById('years-stagnant').textContent = yearsStagnant;
+            
+            new Chart(document.getElementById('productivityWageChart'), {
+                type: 'line',
+                data: {
+                    labels: ['1968', '1980', '1990', '2000', '2009', '2024'],
+                    datasets: [
+                        {
+                            label: 'Inflation-Adjusted Min. Wage (2024 $)',
+                            data: [14.00, 10.95, 8.89, 8.78, 9.90, 7.25],
+                            borderColor: energeticPlayfulPalette[1],
+                            backgroundColor: energeticPlayfulPalette[1] + '33',
+                            fill: false,
+                            tension: 0.1
+                        },
+                        {
+                            label: 'Productivity-Adjusted Min. Wage (2024 $)',
+                            data: [14.00, 17.50, 20.00, 22.50, 24.00, 26.00],
+                            borderColor: energeticPlayfulPalette[0],
+                            backgroundColor: energeticPlayfulPalette[0] + '33',
+                            fill: true,
+                            tension: 0.1,
+                            borderDash: [5, 5]
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toFixed(2);
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: { callbacks: { title: tooltipTitleCallback } }
+                    }
+                }
+            });
+
+            new Chart(document.getElementById('livingWageChart'), {
+                type: 'bar',
+                data: {
+                    labels: [
+                        wrapText('Single Adult (No Children)', 16), 
+                        wrapText('Two Adults (One Working, One Child)', 16),
+                        wrapText('Two Adults (Both Working, Two Children)', 16)
+                    ],
+                    datasets: [
+                        {
+                            label: 'Annual Income at Federal Min. Wage',
+                            data: [15080, 15080, 30160],
+                            backgroundColor: energeticPlayfulPalette[1],
+                        },
+                        {
+                            label: 'Estimated National Living Wage',
+                            data: [53353, 84256, 120861],
+                            backgroundColor: energeticPlayfulPalette[0],
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                             ticks: {
+                                callback: function(value) {
+                                    return '$' + new Intl.NumberFormat().format(value);
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: { callbacks: { title: tooltipTitleCallback } }
+                    }
+                }
+            });
+
+            new Chart(document.getElementById('demographicsAgeChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Under 25', '25 and Over'],
+                    datasets: [{
+                        label: 'Min. Wage Earners by Age',
+                        data: [44, 56],
+                        backgroundColor: [energeticPlayfulPalette[0], energeticPlayfulPalette[2]],
+                        borderColor: '#ffffff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: { callbacks: { title: tooltipTitleCallback } }
+                    }
+                }
+            });
+
+            new Chart(document.getElementById('demographicsIndustryChart'), {
+                type: 'pie',
+                data: {
+                    labels: [wrapText('Food Prep & Serving', 16), 'Other Service Occupations', 'All Other Industries'],
+                    datasets: [{
+                        label: '% of Minimum Wage Earners',
+                        data: [60, 20, 20],
+                        backgroundColor: [
+                            energeticPlayfulPalette[1],
+                            energeticPlayfulPalette[2],
+                            energeticPlayfulPalette[3]
+                        ],
+                         borderColor: '#ffffff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: { callbacks: { title: tooltipTitleCallback } }
+                    }
+                }
+            });
+            
+            new Chart(document.getElementById('costOfLivingChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Hawaii', 'D.C.', 'New York', 'West Virginia', 'Oklahoma'],
+                    datasets: [{
+                        label: 'Cost of Living Index (US Average = 100)',
+                        data: [181.85, 143.13, 133.34, 88.89, 88.76],
+                        backgroundColor: [
+                            energeticPlayfulPalette[0],
+                            '#FF6B6B',
+                            energeticPlayfulPalette[1], /* Corrected typo here */
+                            energeticPlayfulPalette[2],
+                            '#FAD02E'
+                        ],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { callbacks: { title: tooltipTitleCallback } }
+                    }
+                }
+            });
+
+            // LLM Feature Logic
+            const wageInput = document.getElementById('wageInput');
+            const analyzeWageBtn = document.getElementById('analyzeWageBtn');
+            const llmLoading = document.getElementById('llmLoading');
+            const llmResult = document.getElementById('llmResult');
+
+            analyzeWageBtn.addEventListener('click', async () => {
+                const proposedWage = parseFloat(wageInput.value);
+                if (isNaN(proposedWage) || proposedWage < 0) {
+                    llmResult.innerHTML = '<p class="text-red-500">Please enter a valid positive number for the wage.</p>';
+                    return;
+                }
+
+                llmLoading.classList.remove('hidden');
+                llmResult.innerHTML = ''; // Clear previous results
+
+                let chatHistory = [];
+                const prompt = `Analyze the potential economic and social impacts of setting the federal minimum wage to $${proposedWage.toFixed(2)} per hour in the United States. Consider effects on workers, businesses (especially small businesses), inflation, poverty rates, and consumer spending. Provide a concise summary of both potential positive and negative outcomes. Keep the response to approximately 150-200 words.`;
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+
+                const payload = { contents: chatHistory };
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const result = await response.json();
+
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        llmResult.innerHTML = `<p>${text}</p>`;
+                    } else {
+                        llmResult.innerHTML = '<p class="text-red-500">Could not get a response from the AI. Please try again.</p>';
+                    }
+                } catch (error) {
+                    llmResult.innerHTML = `<p class="text-red-500">Error: ${error.message}. Please check your network connection or try again later.</p>`;
+                } finally {
+                    llmLoading.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
