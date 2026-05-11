@@ -1,28 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
-    <!-- React and ReactDOM -->
-<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-
-<!-- Recharts (for visualization) -->
-<script src="https://unpkg.com/recharts@2.5.0/umd/Recharts.min.js"></script>
-
-<!-- Math.js for mathematical operations -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js"></script>
-
-<!-- Babel for JSX transformation -->
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
- <script type="text/babel" src="hqr-visualization.js"></script>   
-
-<div id="visualization-fallback" style="display:none;">
-  <p>Could not load visualization. Please ensure JavaScript is enabled.</p>
-</div>
 <script>
   window.addEventListener('error', function() {
-    document.getElementById('visualization-fallback').style.display = 'block';
+    const fallback = document.getElementById('visualization-fallback');
+    if (fallback) {
+      fallback.hidden = false;
+    }
   });
 </script>
     
@@ -52,7 +36,7 @@
     <link rel="stylesheet" href="menu.css"> <!-- New CSS for menu -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="visualization.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
+    <script src="p5.js"></script>
 </head>
 <body>
     <!-- Header Section -->
@@ -60,6 +44,10 @@
         <h1>Holonomic Quantum Reality</h1>
         <p class="subtitle">A Unified Theory of Hidden Order, String Theory, and Deterministic Quantum Mechanics</p>
     </header>
+
+    <div id="visualization-fallback" class="visualization-fallback" hidden>
+        <p>Could not load an interactive visualization. Please ensure JavaScript is enabled.</p>
+    </div>
 
 <nav class="main-nav">
     <div class="menu-toggle" aria-label="Toggle navigation menu">☰</div>
@@ -314,8 +302,8 @@
             <h3>The 11D Universe</h3>
             <div class="video-container">
                 <video controls preload="metadata" poster="11d_universe.png" class="visual-video">
-                    <source src="HQRvid.mp4" type="video/mp4">
-                    Your browser does not support the video tag. Please download the video <a href="HQRvid.mp4">here</a>.
+                    <source src="11d_universe.mp4" type="video/mp4">
+                    Your browser does not support the video tag. Please download the video <a href="11d_universe.mp4">here</a>.
                 </video>
             </div>
             <p>Our 4D reality as a slice of an 11D M-theory cosmos, dynamically illustrating strings, branes, and compactified dimensions. (Click to play)</p>
@@ -328,8 +316,8 @@
         <div class="visual-card">
             <h3>Pilot Wave Guidance</h3>
             <picture>
-                <source srcset="pilot_wave_guidance.png" type="image/png">
-                <img src="pilot_wave_guidance.png" alt="Bohmian Mechanics directing particle motion from 11D." class="visual-image" loading="eager" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'; console.log('Image failed to load: pilot_wave_guidance.png');">
+                <source srcset="pilot_wave_guidance.jpg" type="image/jpeg">
+                <img src="pilot_wave_guidance.jpg" alt="Bohmian Mechanics directing particle motion from 11D." class="visual-image" loading="eager" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'; console.log('Image failed to load: pilot_wave_guidance.jpg');">
                 <p class="image-fallback" style="display: none;">Image not available: Bohmian Mechanics directing particle motion from 11D, depicting a deterministic pilot wave guiding particles in a 4D grid.</p>
             </picture>
             <p>Bohmian Mechanics directing particle motion from 11D, depicting a deterministic pilot wave guiding particles in a 4D grid.</p>
@@ -393,15 +381,9 @@
         }
         
         /* Hide play button when video is playing */
-        .video-container:has(video[controls]:playing)::before,
-        .video-container:has(video[controls]:playing)::after {
-            display: none;
-        }
-        
-        /* Fallbacks for browsers that don't support :has */
-        video[controls]:playing + .video-container::before,
-        video[controls]:playing + .video-container::after {
-            display: none;
+        .video-container.playing::before,
+        .video-container.playing::after {
+            opacity: 0;
         }
     </style>
     

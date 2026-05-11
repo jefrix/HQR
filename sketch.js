@@ -1,568 +1,608 @@
-// Hidden Order Projection Sketch (with Interactivity)
-let hiddenOrderSketch = function(p) {
-    let particles = [];
-    let wave = 0;
-    let isPaused = false;
+(function () {
+    'use strict';
 
-    p.setup = function() {
-        let canvas = p.createCanvas(300, 200);
-        canvas.parent('hidden-order-canvas');
-        p.background(15, 52, 96); // Match #0f3460
-
-        // Initialize particles
-        for (let i = 0; i < 50; i++) {
-            particles.push({
-                x: p.random(p.width),
-                y: p.random(p.height),
-                vx: 0,
-                vy: 0
-            });
-        }
+    const COLORS = {
+        bg: '#07182d',
+        bg2: '#123b68',
+        panel: '#16213e',
+        grid: 'rgba(162, 168, 211, 0.16)',
+        line: '#56cfe1',
+        accent: '#e94560',
+        warm: '#f4d35e',
+        text: '#e8eefc',
+        muted: '#a2a8d3'
     };
 
-    p.draw = function() {
-        if (!isPaused) {
-            p.background(15, 52, 96, 50); // Semi-transparent for trail effect
+    function ready(callback) {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', callback);
+        } else {
+            callback();
+        }
+    }
 
-            // Simulate pilot wave from "higher dimension"
-            wave += 0.05;
-            let waveEffect = p.sin(wave);
+    function p5Available() {
+        if (typeof window.p5 === 'undefined') {
+            console.warn('p5.js is required for HQR visualizations.');
+            return false;
+        }
+        return true;
+    }
 
-            // Update particles with subtle order, influenced by mouse position
-            for (let particle of particles) {
-                let dx = particle.x - p.width / 2;
-                let dy = particle.y - p.height / 2;
-                let distance = p.sqrt(dx * dx + dy * dy);
-                let mouseInfluence = p.dist(particle.x, particle.y, p.mouseX, p.mouseY) / p.width;
-                let force = (waveEffect * 0.1 + (1 - mouseInfluence) * 0.05) / (distance + 1); // Mouse affects force
+    function measure(container, fallbackHeight) {
+        const rect = container.getBoundingClientRect();
+        const computed = window.getComputedStyle(container);
+        const cssHeight = parseFloat(computed.height);
 
-                particle.vx += dx * force;
-                particle.vy += dy * force;
-                particle.vx *= 0.95; // Damping
-                particle.vy *= 0.95;
+        return {
+            width: Math.max(260, Math.floor(rect.width || container.clientWidth || 320)),
+            height: Math.max(170, Math.floor(cssHeight || rect.height || fallbackHeight || 220))
+        };
+    }
 
-                particle.x += particle.vx;
-                particle.y += particle.vy;
+    function clear(container) {
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
+    }
 
-                // Bounce off edges
-                if (particle.x < 0 || particle.x > p.width) particle.vx *= -1;
-                if (particle.y < 0 || particle.y > p.height) particle.vy *= -1;
+    function buildCanvas(p, container, renderer, fallbackHeight) {
+        clear(container);
+        const size = measure(container, fallbackHeight);
+        p.pixelDensity(Math.min(window.devicePixelRatio || 1, 2));
+        const canvas = renderer
+            ? p.createCanvas(size.width, size.height, renderer)
+            : p.createCanvas(size.width, size.height);
+        canvas.parent(container);
+        canvas.elt.style.display = 'block';
+        canvas.elt.style.width = '100%';
+        canvas.elt.style.height = '100%';
+        return canvas;
+    }
 
-                p.fill(224, 224, 224); // #e0e0e0
-                p.noStroke();
-                p.ellipse(particle.x, particle.y, 5, 5);
+    function resizeCanvas(p, container, fallbackHeight, onResize) {
+        const size = measure(container, fallbackHeight);
+        p.resizeCanvas(size.width, size.height);
+        if (typeof onResize === 'function') {
+            onResize();
+        }
+    }
+
+    function pointerInside(p) {
+        return p.mouseX >= 0 && p.mouseX <= p.width && p.mouseY >= 0 && p.mouseY <= p.height;
+    }
+
+    function paintBackdrop(p) {
+        const ctx = p.drawingContext;
+        const gradient = ctx.createLinearGradient(0, 0, p.width, p.height);
+        gradient.addColorStop(0, COLORS.bg);
+        gradient.addColorStop(0.58, COLORS.bg2);
+        gradient.addColorStop(1, '#102444');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, p.width, p.height);
+
+        p.stroke(COLORS.grid);
+        p.strokeWeight(1);
+        const step = Math.max(26, Math.min(p.width, p.height) / 7);
+        for (let x = step; x < p.width; x += step) {
+            p.line(x, 0, x, p.height);
+        }
+        for (let y = step; y < p.height; y += step) {
+            p.line(0, y, p.width, y);
+        }
+    }
+
+    function drawGlowPoint(p, x, y, radius, color) {
+        p.noStroke();
+        p.fill(color);
+        p.circle(x, y, radius);
+        p.fill(p.color(color).setAlpha ? color : COLORS.text);
+    }
+
+    function createHiddenOrderSketch(container) {
+        new p5(function (p) {
+            let particles = [];
+            let phase = 0;
+            let paused = false;
+
+            function seedParticles() {
+                const count = Math.max(34, Math.min(64, Math.floor(p.width / 9)));
+                particles = Array.from({ length: count }, function (_, index) {
+                    return {
+                        angle: (index / count) * p.TWO_PI,
+                        radius: p.random(0.16, 0.46),
+                        drift: p.random(0.5, 1.8),
+                        offset: p.random(p.TWO_PI),
+                        x: 0,
+                        y: 0
+                    };
+                });
             }
 
-            // Connect particles to show hidden order
-            p.stroke(233, 69, 96, 100); // #e94560 with alpha
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    let d = p.dist(particles[i].x, particles[i].y, particles[j].x, particles[j].y);
-                    if (d < 50) {
-                        p.line(particles[i].x, particles[i].y, particles[j].x, particles[j].y);
+            function particlePosition(particle) {
+                const cx = p.width / 2;
+                const cy = p.height / 2;
+                const minDim = Math.min(p.width, p.height);
+                const mousePull = pointerInside(p)
+                    ? p.map(p.dist(p.mouseX, p.mouseY, cx, cy), 0, minDim, 0.22, -0.08, true)
+                    : 0;
+                const pulse = p.sin(phase * particle.drift + particle.offset);
+                const radius = minDim * (particle.radius + pulse * 0.035 + mousePull * 0.08);
+                const angle = particle.angle + p.sin(phase * 0.7 + particle.offset) * 0.42;
+
+                particle.x = cx + p.cos(angle) * radius + p.sin(phase + particle.offset) * 10;
+                particle.y = cy + p.sin(angle) * radius * 0.72 + p.cos(phase * 1.2 + particle.offset) * 8;
+            }
+
+            p.setup = function () {
+                const canvas = buildCanvas(p, container, null, 220);
+                canvas.elt.addEventListener('click', function () {
+                    paused = !paused;
+                });
+                seedParticles();
+            };
+
+            p.draw = function () {
+                if (!paused) {
+                    phase += 0.018;
+                }
+
+                paintBackdrop(p);
+
+                const cx = p.width / 2;
+                const cy = p.height / 2;
+                const ringRadius = Math.min(p.width, p.height) * 0.36;
+
+                p.noFill();
+                p.stroke('rgba(244, 211, 94, 0.28)');
+                p.strokeWeight(1.5);
+                p.ellipse(cx, cy, ringRadius * 2.15, ringRadius * 1.35);
+                p.stroke('rgba(86, 207, 225, 0.22)');
+                p.ellipse(cx, cy, ringRadius * 1.45, ringRadius * 0.9);
+
+                particles.forEach(particlePosition);
+
+                for (let i = 0; i < particles.length; i += 1) {
+                    for (let j = i + 1; j < particles.length; j += 1) {
+                        const d = p.dist(particles[i].x, particles[i].y, particles[j].x, particles[j].y);
+                        const limit = Math.min(p.width, p.height) * 0.24;
+                        if (d < limit) {
+                            const alpha = p.map(d, 0, limit, 150, 18);
+                            p.stroke(233, 69, 96, alpha);
+                            p.strokeWeight(1);
+                            p.line(particles[i].x, particles[i].y, particles[j].x, particles[j].y);
+                        }
                     }
                 }
-            }
-        }
-    };
 
-    // Pause/resume on click
-    p.mouseClicked = function() {
-        isPaused = !isPaused;
-        if (isPaused) {
-            p.background(15, 52, 96); // Clear canvas when paused
-        }
-    };
+                particles.forEach(function (particle, index) {
+                    const isAnchor = index % 7 === 0;
+                    p.noStroke();
+                    p.fill(isAnchor ? 'rgba(244, 211, 94, 0.24)' : 'rgba(86, 207, 225, 0.18)');
+                    p.circle(particle.x, particle.y, isAnchor ? 14 : 10);
+                    p.fill(isAnchor ? COLORS.warm : COLORS.text);
+                    p.circle(particle.x, particle.y, isAnchor ? 5.5 : 4.2);
+                });
 
-    // Influence particle movement with mouse position
-    p.mouseMoved = function() {
-        if (!isPaused) {
-            // Particle movement slightly influenced by mouse position (already in p.draw)
-        }
-    };
-};
-// Tensor Networks Sketch
-let tensorNetworkSketch = function(p) {
-    let nodes = [];
-    let connections = [];
-    let isPaused = false;
-
-    p.setup = function() {
-        let canvas = p.createCanvas(300, 200);
-        canvas.parent('tensor-network-canvas');
-        p.background(15, 52, 96); // Match #0f3460
-
-        // Initialize nodes (representing qubits or entanglement points)
-        for (let i = 0; i < 20; i++) {
-            nodes.push({
-                x: p.random(p.width),
-                y: p.random(p.height),
-                vx: 0,
-                vy: 0
-            });
-        }
-
-        // Initialize connections (randomly, based on entanglement)
-        for (let i = 0; i < nodes.length; i++) {
-            for (let j = i + 1; j < nodes.length; j++) {
-                if (p.random() < 0.3) { // 30% chance of connection (adjustable)
-                    connections.push({ from: i, to: j });
-                }
-            }
-        }
-    };
-
-    p.draw = function() {
-        if (!isPaused) {
-            p.background(15, 52, 96, 50); // Semi-transparent for trail effect
-
-            // Update nodes with subtle motion, influenced by mouse position
-            for (let node of nodes) {
-                let dx = node.x - p.width / 2;
-                let dy = node.y - p.height / 2;
-                let mouseInfluence = p.dist(node.x, node.y, p.mouseX, p.mouseY) / p.width;
-                let force = (0.05 + (1 - mouseInfluence) * 0.02); // Mouse affects motion
-
-                node.vx += dx * force;
-                node.vy += dy * force;
-                node.vx *= 0.95; // Damping
-                node.vy *= 0.95;
-
-                node.x += node.vx;
-                node.y += node.vy;
-
-                // Bounce off edges
-                if (node.x < 0 || node.x > p.width) node.vx *= -1;
-                if (node.y < 0 || node.y > p.height) node.vy *= -1;
-
-                p.fill(224, 224, 224); // #e0e0e0
                 p.noStroke();
-                p.ellipse(node.x, node.y, 5, 5);
-            }
+                p.fill('rgba(232, 238, 252, 0.72)');
+                p.textSize(11);
+                p.textAlign(p.LEFT, p.BOTTOM);
+                p.text(paused ? 'paused' : 'hidden correlations', 14, p.height - 12);
+            };
 
-            // Draw connections (tensor network structure)
-            p.stroke(233, 69, 96, 100); // #e94560 with alpha (red for connections)
-            for (let connection of connections) {
-                let fromNode = nodes[connection.from];
-                let toNode = nodes[connection.to];
-                p.line(fromNode.x, fromNode.y, toNode.x, toNode.y);
-            }
-        }
-    };
-
-    // Pause/resume on click
-    p.mouseClicked = function() {
-        isPaused = !isPaused;
-        if (isPaused) {
-            p.background(15, 52, 96); // Clear canvas when paused
-        }
-    };
-
-    // Influence node movement with mouse position
-    p.mouseMoved = function() {
-        if (!isPaused) {
-            // Nodes subtly adjust based on mouse proximity (already in p.draw)
-        }
-    };
-};
-
-// Create p5 instance for tensor networks
-new p5(tensorNetworkSketch);
-// Holographic Reality Sketch (with Interactivity)
-let holographicSketch = function(p) {
-    let angle = 0;
-    let isPaused = false;
-    let rotationSpeed = 0.02;
-
-    p.setup = function() {
-        let canvas = p.createCanvas(300, 200, p.WEBGL);
-        canvas.parent('holographic-canvas');
-    };
-
-    p.draw = function() {
-        if (!isPaused) {
-            p.background(15, 52, 96); // #0f3460
-
-            // Simulate 11D bulk as rotating sphere, influenced by mouse Y
-            p.push();
-            p.translate(0, -50, 0);
-            p.rotateY(angle);
-            p.noFill();
-            p.stroke(162, 168, 211); // #a2a8d3
-            p.sphere(30);
-            p.pop();
-
-            // 4D boundary as plane with "hidden order" ripples, influenced by mouse X
-            p.push();
-            p.translate(0, 50, 0);
-            p.rotateX(p.PI / 4);
-            p.fill(22, 33, 62, 150); // #16213e with alpha
-            p.noStroke();
-            for (let x = -100; x < 100; x += 20) {
-                for (let z = -100; z < 100; z += 20) {
-                    let y = p.sin(p.dist(x, z, 0, 0) * 0.05 + angle + p.map(p.mouseX, 0, p.width, -0.1, 0.1)) * 10;
-                    p.push();
-                    p.translate(x, y, z);
-                    p.box(10);
-                    p.pop();
-                }
-            }
-            p.pop();
-
-            angle += rotationSpeed * p.map(p.mouseY, 0, p.height, 0.5, 1.5); // Mouse Y controls rotation speed
-        }
-    };
-
-    // Pause/resume on click
-    p.mouseClicked = function() {
-        isPaused = !isPaused;
-        if (isPaused) {
-            p.background(15, 52, 96); // Clear canvas when paused
-        }
-    };
-
-    // Adjust rotation speed with mouse movement
-    p.mouseMoved = function() {
-        if (!isPaused) {
-            rotationSpeed = p.map(p.mouseY, 0, p.height, 0.01, 0.05); // Slower or faster rotation
-        }
-    };
-};
-
-// sketch.js
-let equationTextElement;
-
-function setup() {
-    // Create a canvas (optional, for future enhancements)
-    let c = createCanvas(200, 50);
-    c.parent('equation-display'); // Attach to the equation-display div
-    equationTextElement = select('#equation-text'); // Get the text element
-}
-
-function draw() {
-    // No drawing needed for now, just update text
-    // This could be enhanced to graph the equation later
-}
-// sketch.js
-let hiddenOrderSketch;
-let hqrSketch;
-
-function setup() {
-    // Hidden Order Graph
-    hiddenOrderSketch = (p) => {
-        let params = { orderParam: 0.5, dim: '4d' };
-        let equationText;
-
-        p.setup = () => {
-            let c = p.createCanvas(800, 400);
-            c.parent('hidden-order-canvas');
-            equationText = document.getElementById('equation-text-hidden');
-            p.noLoop();
-        };
-
-        p.draw = () => {
-            // Update parameters
-            params.orderParam = hiddenOrderParams.orderParam;
-            params.dim = hiddenOrderParams.dim;
-
-            // Background
-            p.background('#16213e');
-
-            // Grid lines
-            p.stroke('#30363d');
-            p.strokeWeight(1);
-            p.line(50, 350, 750, 350); // X-axis
-            p.line(50, 50, 50, 350);   // Y-axis
-
-            // Horizontal grid lines
-            p.strokeWeight(0.5);
-            p.setLineDash([5, 5]);
-            p.line(50, 50, 750, 50);
-            p.line(50, 150, 750, 150);
-            p.line(50, 250, 750, 250);
-
-            // Vertical grid lines
-            p.line(190, 50, 190, 350);
-            p.line(330, 50, 330, 350);
-            p.line(470, 50, 470, 350);
-            p.line(610, 50, 610, 350);
-            p.line(750, 50, 750, 350);
-            p.setLineDash([]);
-
-            // Axes labels
-            p.fill('#a2a8d3');
-            p.noStroke();
-            p.textSize(12);
-            p.textAlign(p.CENTER);
-            p.text('Position', 400, 380);
-            p.push();
-            p.translate(20, 200);
-            p.rotate(-p.HALF_PI);
-            p.text('Order Parameter', 0, 0);
-            p.pop();
-
-            // X-axis ticks
-            p.textSize(10);
-            p.text('0', 50, 370);
-            p.text('1', 190, 370);
-            p.text('2', 330, 370);
-            p.text('3', 470, 370);
-            p.text('4', 610, 370);
-            p.text('5', 750, 370);
-
-            // Y-axis ticks
-            p.textAlign(p.RIGHT);
-            p.text('-1.0', 40, 350);
-            p.text('0.0', 40, 250);
-            p.text('1.0', 40, 150);
-            p.text('2.0', 40, 50);
-
-            // Plot Bohmian Wave
-            p.stroke('#8884d8');
-            p.strokeWeight(2);
-            p.noFill();
-            p.beginShape();
-            const amplitude = params.dim === '11d' ? 50 * params.orderParam : 30 * params.orderParam;
-            for (let x = 50; x <= 750; x++) {
-                let y = 250 - amplitude * Math.sin((x - 50) / 100);
-                p.vertex(x, y);
-            }
-            p.endShape();
-
-            // Plot Hidden Order
-            p.stroke('#e94560');
-            p.setLineDash([5, 3]);
-            p.beginShape();
-            for (let x = 50; x <= 750; x++) {
-                let y = 250 + amplitude * Math.cos((x - 50) / 100);
-                p.vertex(x, y);
-            }
-            p.endShape();
-            p.setLineDash([]);
-
-            // Legend
-            p.fill('#0f3460');
-            p.stroke('#0f3460');
-            p.rect(580, 70, 150, 80, 5, 5);
-            p.fill('#a2a8d3');
-            p.noStroke();
-            p.textSize(12);
-            p.text('Legend:', 590, 90);
-            p.stroke('#8884d8');
-            p.strokeWeight(2);
-            p.line(590, 110, 620, 110);
-            p.noStroke();
-            p.textSize(10);
-            p.text('Bohmian Wave', 630, 113);
-            p.stroke('#e94560');
-            p.setLineDash([5, 3]);
-            p.line(590, 130, 620, 130);
-            p.setLineDash([]);
-            p.noStroke();
-            p.text('Hidden Order', 630, 133);
-
-            // Update equation text
-            equationText.textContent = `Equation: y = ${amplitude.toFixed(2)} * sin((x - 50) / 100)`;
-        };
-
-        p.setLineDash = (dash) => {
-            p.drawingContext.setLineDash(dash);
-        };
-    };
-
-    // HQR Graph
-    hqrSketch = (p) => {
-        let params = { complexity: 5, model: 'integrated' };
-        let equationText;
-
-        p.setup = () => {
-            let c = p.createCanvas(800, 400);
-            c.parent('hqr-canvas');
-            equationText = document.getElementById('equation-text-hqr');
-            p.noLoop();
-        };
-
-        p.draw = () => {
-            // Update parameters
-            params.complexity = hqrParams.complexity;
-            params.model = hqrParams.model;
-
-            // Background
-            p.background('#16213e');
-
-            // Grid for 4D projection (bottom half)
-            p.stroke('#a2a8d3');
-            p.strokeWeight(1);
-            p.noFill();
-            p.rect(200, 270, 400, 60);
-            p.line(200, 300, 600, 300);
-            p.strokeWeight(0.5);
-            p.setLineDash([5, 5]);
-            p.line(250, 270, 250, 330);
-            p.line(300, 270, 300, 330);
-            p.line(350, 270, 350, 330);
-            p.line(400, 270, 400, 330);
-            p.line(450, 270, 450, 330);
-            p.line(500, 270, 500, 330);
-            p.line(550, 270, 550, 330);
-            p.setLineDash([]);
-
-            // Labels for 4D projection
-            p.fill('#a2a8d3');
-            p.noStroke();
-            p.textSize(12);
-            p.textAlign(p.CENTER);
-            p.text('Position', 400, 360);
-            p.push();
-            p.translate(170, 300);
-            p.rotate(-p.HALF_PI);
-            p.text('Amplitude', 0, 0);
-            p.pop();
-
-            // X-axis ticks
-            p.textSize(10);
-            p.text('-2', 200, 350);
-            p.text('-1', 300, 350);
-            p.text('0', 400, 350);
-            p.text('1', 500, 350);
-            p.text('2', 600, 350);
-
-            // Y-axis ticks
-            p.textAlign(p.RIGHT);
-            p.text('-30', 190, 330);
-            p.text('0', 190, 300);
-            p.text('30', 190, 270);
-
-            // Higher-dimensional representation (top half)
-            p.stroke('#6a7cb2');
-            p.strokeWeight(1);
-            p.noFill();
-            p.ellipse(400, 100, 400, 160);
-            p.ellipse(400, 100, 400, 160, 0, 0, p.TWO_PI, false, 60);
-            p.ellipse(400, 100, 400, 160, 0, 0, p.TWO_PI, false, 120);
-
-            // Plot Pilot Wave
-            p.stroke('#e94560');
-            p.strokeWeight(3);
-            p.beginShape();
-            const amp = 20 + params.complexity * 5;
-            const freq = params.model === 'integrated' ? 0.1 : 0.2;
-            for (let x = -150; x <= 150; x++) {
-                let y = amp * Math.sin(x * freq);
-                p.vertex(400 + x, 100 + y);
-            }
-            p.endShape();
-
-            // Plot Field Potential
-            p.stroke('#4169e1');
-            p.strokeWeight(2);
-            p.beginShape();
-            for (let x = -150; x <= 150; x++) {
-                let y = -amp * Math.cos(x * freq);
-                p.vertex(400 + x, 100 + y);
-            }
-            p.endShape();
-
-            // Plot Projected Wave
-            p.stroke('#e94560');
-            p.strokeWeight(2);
-            p.beginShape();
-            for (let x = -200; x <= 200; x++) {
-                let y = (amp * 0.5) * Math.sin(x * 0.15);
-                p.vertex(400 + x, 300 + y);
-            }
-            p.endShape();
-
-            // Legend
-            p.fill('#0f3460');
-            p.stroke('#0f3460');
-            p.rect(580, 310, 170, 80, 5, 5);
-            p.fill('#a2a8d3');
-            p.noStroke();
-            p.textSize(12);
-            p.text('Legend:', 590, 330);
-            p.stroke('#e94560');
-            p.strokeWeight(2);
-            p.line(590, 350, 620, 350);
-            p.noStroke();
-            p.textSize(10);
-            p.text('Pilot Wave', 630, 353);
-            p.stroke('#4169e1');
-            p.strokeWeight(2);
-            p.line(590, 370, 620, 370);
-            p.noStroke();
-            p.text('Quantum Potential', 630, 373);
-            p.fill('#ffffff');
-            p.stroke('#ffffff');
-            p.ellipse(605, 390, 10, 10);
-            p.noStroke();
-            p.text('Particles', 630, 393);
-
-            // Update equation text
-            equationText.textContent = `Equation: y = ${amp.toFixed(2)} * sin(${freq.toFixed(2)}x)`;
-        };
-
-        p.setLineDash = (dash) => {
-            p.drawingContext.setLineDash(dash);
-        };
-    };
-
-    // Initialize sketches
-    new p5(hiddenOrderSketch);
-    new p5(hqrSketch);
-}
-// Create p5 instances
-new p5(hiddenOrderSketch);
-new p5(holographicSketch);
-// sketch.js (Modular)
-let hqrVisualizations = {
-    hiddenOrderSketch: null,
-    hqrSketch: null
-};
-
-function setupHQRVisualizations() {
-    hqrVisualizations.hiddenOrderSketch = new p5((p) => {
-        let equationText;
-        p.setup = () => {
-            let c = p.createCanvas(800, 400);
-            c.parent('hidden-order-canvas');
-            equationText = document.getElementById('equation-text-hidden');
-            p.noLoop();
-        };
-        p.draw = () => {
-            // [Same draw logic as Option 1 for Hidden Order]
-        };
-    });
-
-    hqrVisualizations.hqrSketch = new p5((p) => {
-        let equationText;
-        p.setup = () => {
-            let c = p.createCanvas(800, 400);
-            c.parent('hqr-canvas');
-            equationText = document.getElementById('equation-text-hqr');
-            p.noLoop();
-        };
-        p.draw = () => {
-            // [Same draw logic as Option 1 for HQR]
-        };
-    });
-
-    p5.prototype.setLineDash = function(dash) {
-        this.drawingContext.setLineDash(dash);
-    };
-}
-
-window.addEventListener('load', () => {
-    if (document.getElementById('hidden-order-canvas')) {
-        setupHQRVisualizations();
+            p.windowResized = function () {
+                resizeCanvas(p, container, 220, seedParticles);
+            };
+        });
     }
-    // Add other page-specific setup logic here
-});
-// Smooth scrolling
-document.querySelectorAll('nav a').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const section = document.querySelector(this.getAttribute('href'));
-        section.scrollIntoView({ behavior: 'smooth' });
-    });
-});
+
+    function createTensorNetworkSketch(container) {
+        new p5(function (p) {
+            let phase = 0;
+            let paused = false;
+
+            function nodeLayout() {
+                const levels = [1, 2, 4, 8, 16];
+                const nodes = [];
+                const top = p.height * 0.15;
+                const bottom = p.height * 0.84;
+                const maxSpread = p.width * 0.82;
+
+                levels.forEach(function (count, level) {
+                    const y = p.map(level, 0, levels.length - 1, top, bottom);
+                    const spread = p.map(level, 0, levels.length - 1, 0, maxSpread);
+                    for (let i = 0; i < count; i += 1) {
+                        const centered = count === 1 ? 0 : (i / (count - 1) - 0.5);
+                        const wave = p.sin(phase + level * 0.8 + i * 0.35) * (level + 1) * 0.9;
+                        nodes.push({
+                            level: level,
+                            index: i,
+                            x: p.width / 2 + centered * spread + wave,
+                            y: y + p.cos(phase * 1.4 + i) * 2.5
+                        });
+                    }
+                });
+                return { levels: levels, nodes: nodes };
+            }
+
+            function getNode(layout, level, index) {
+                let offset = 0;
+                for (let i = 0; i < level; i += 1) {
+                    offset += layout.levels[i];
+                }
+                return layout.nodes[offset + index];
+            }
+
+            p.setup = function () {
+                const canvas = buildCanvas(p, container, null, 260);
+                canvas.elt.addEventListener('click', function () {
+                    paused = !paused;
+                });
+            };
+
+            p.draw = function () {
+                if (!paused) {
+                    phase += 0.014;
+                }
+                paintBackdrop(p);
+
+                const layout = nodeLayout();
+
+                p.noFill();
+                p.stroke('rgba(86, 207, 225, 0.16)');
+                p.strokeWeight(1);
+                for (let r = 0.22; r <= 0.78; r += 0.14) {
+                    p.arc(p.width / 2, p.height * 0.92, p.width * r, p.height * r * 0.72, p.PI, p.TWO_PI);
+                }
+
+                for (let level = 0; level < layout.levels.length - 1; level += 1) {
+                    for (let i = 0; i < layout.levels[level]; i += 1) {
+                        const from = getNode(layout, level, i);
+                        const left = getNode(layout, level + 1, i * 2);
+                        const right = getNode(layout, level + 1, i * 2 + 1);
+                        [left, right].forEach(function (to) {
+                            p.stroke('rgba(233, 69, 96, 0.52)');
+                            p.strokeWeight(1.25);
+                            p.line(from.x, from.y, to.x, to.y);
+                        });
+                    }
+                }
+
+                layout.nodes.forEach(function (node) {
+                    const radius = p.map(node.level, 0, 4, 9, 4.5);
+                    p.noStroke();
+                    p.fill('rgba(86, 207, 225, 0.20)');
+                    p.circle(node.x, node.y, radius * 2.5);
+                    p.fill(node.level === 0 ? COLORS.warm : COLORS.text);
+                    p.circle(node.x, node.y, radius);
+                });
+
+                p.noStroke();
+                p.fill('rgba(232, 238, 252, 0.72)');
+                p.textSize(11);
+                p.textAlign(p.LEFT, p.BOTTOM);
+                p.text(paused ? 'paused' : 'MERA tensor layers', 14, p.height - 12);
+            };
+
+            p.windowResized = function () {
+                resizeCanvas(p, container, 260);
+            };
+        });
+    }
+
+    function createHolographicSketch(container) {
+        new p5(function (p) {
+            let phase = 0;
+            let paused = false;
+
+            p.setup = function () {
+                const canvas = buildCanvas(p, container, null, 220);
+                canvas.elt.addEventListener('click', function () {
+                    paused = !paused;
+                });
+            };
+
+            p.draw = function () {
+                if (!paused) {
+                    phase += 0.018;
+                }
+                paintBackdrop(p);
+
+                const cx = p.width / 2;
+                const sphereY = p.height * 0.38;
+                const boundaryY = p.height * 0.72;
+                const radius = Math.min(p.width, p.height) * 0.24;
+
+                p.stroke('rgba(244, 211, 94, 0.28)');
+                p.strokeWeight(1.1);
+                for (let i = -4; i <= 4; i += 1) {
+                    const x = cx + i * radius * 0.46;
+                    const bend = p.sin(phase + i) * 10;
+                    p.line(x, sphereY + radius * 0.62, x + bend, boundaryY - 16);
+                }
+
+                p.noFill();
+                p.stroke(COLORS.line);
+                p.strokeWeight(2);
+                p.circle(cx, sphereY, radius * 2);
+
+                p.stroke('rgba(86, 207, 225, 0.42)');
+                for (let i = -2; i <= 2; i += 1) {
+                    const squish = Math.abs(i) / 2;
+                    p.ellipse(cx, sphereY, radius * 2, radius * (1 - squish * 0.38));
+                }
+                for (let i = 0; i < 8; i += 1) {
+                    const angle = phase + (i / 8) * p.TWO_PI;
+                    const x = cx + p.cos(angle) * radius;
+                    p.line(cx, sphereY - radius, x, sphereY + radius);
+                }
+
+                p.noStroke();
+                p.fill('rgba(244, 211, 94, 0.95)');
+                p.circle(cx + p.cos(phase * 1.6) * radius * 0.64, sphereY + p.sin(phase) * radius * 0.28, 6);
+
+                p.stroke('rgba(233, 69, 96, 0.85)');
+                p.strokeWeight(2);
+                p.noFill();
+                p.beginShape();
+                for (let x = p.width * 0.12; x <= p.width * 0.88; x += 8) {
+                    const wave = p.sin((x * 0.045) + phase * 2.2) * 8;
+                    p.vertex(x, boundaryY + wave);
+                }
+                p.endShape();
+
+                p.stroke('rgba(162, 168, 211, 0.36)');
+                p.strokeWeight(1);
+                for (let i = 0; i < 5; i += 1) {
+                    const y = boundaryY + i * 13;
+                    p.line(p.width * 0.12, y, p.width * 0.88, y);
+                }
+                for (let i = 0; i < 9; i += 1) {
+                    const x = p.map(i, 0, 8, p.width * 0.12, p.width * 0.88);
+                    p.line(x, boundaryY - 16, x, boundaryY + 52);
+                }
+
+                p.noStroke();
+                p.fill('rgba(232, 238, 252, 0.72)');
+                p.textSize(11);
+                p.textAlign(p.LEFT, p.BOTTOM);
+                p.text(paused ? 'paused' : 'bulk to boundary projection', 14, p.height - 12);
+            };
+
+            p.windowResized = function () {
+                resizeCanvas(p, container, 220);
+            };
+        });
+    }
+
+    function getHiddenParams() {
+        if (typeof hiddenOrderParams !== 'undefined') {
+            return hiddenOrderParams;
+        }
+        return { orderParam: 0.5, dim: '4d' };
+    }
+
+    function getHqrParams() {
+        if (typeof hqrParams !== 'undefined') {
+            return hqrParams;
+        }
+        return { complexity: 5, model: 'integrated' };
+    }
+
+    function drawAxes(p, left, top, width, height, xLabel, yLabel) {
+        p.stroke('rgba(162, 168, 211, 0.45)');
+        p.strokeWeight(1);
+        p.line(left, top + height, left + width, top + height);
+        p.line(left, top, left, top + height);
+
+        p.stroke('rgba(162, 168, 211, 0.14)');
+        for (let i = 1; i <= 4; i += 1) {
+            const x = left + (width / 4) * i;
+            const y = top + (height / 4) * i;
+            p.line(x, top, x, top + height);
+            p.line(left, y, left + width, y);
+        }
+
+        p.noStroke();
+        p.fill(COLORS.muted);
+        p.textSize(11);
+        p.textAlign(p.CENTER, p.TOP);
+        p.text(xLabel, left + width / 2, top + height + 16);
+        p.push();
+        p.translate(left - 28, top + height / 2);
+        p.rotate(-p.HALF_PI);
+        p.text(yLabel, 0, 0);
+        p.pop();
+    }
+
+    function createAdvancedHiddenOrder(container) {
+        new p5(function (p) {
+            p.setup = function () {
+                buildCanvas(p, container, null, 360);
+            };
+
+            p.draw = function () {
+                const params = getHiddenParams();
+                paintBackdrop(p);
+
+                const left = 58;
+                const top = 42;
+                const width = p.width - 92;
+                const height = p.height - 104;
+                const amp = (params.dim === '11d' ? 0.43 : 0.31) * Number(params.orderParam || 0.5);
+
+                drawAxes(p, left, top, width, height, 'Position', 'Order parameter');
+
+                p.noFill();
+                p.stroke(COLORS.line);
+                p.strokeWeight(2.5);
+                p.beginShape();
+                for (let i = 0; i <= 240; i += 1) {
+                    const x = left + (i / 240) * width;
+                    const t = (i / 240) * p.TWO_PI * 2.2;
+                    const y = top + height * (0.52 - Math.sin(t) * amp);
+                    p.vertex(x, y);
+                }
+                p.endShape();
+
+                p.stroke(COLORS.accent);
+                p.strokeWeight(2);
+                p.drawingContext.setLineDash([7, 5]);
+                p.beginShape();
+                for (let i = 0; i <= 240; i += 1) {
+                    const x = left + (i / 240) * width;
+                    const t = (i / 240) * p.TWO_PI * 2.2;
+                    const y = top + height * (0.52 + Math.cos(t * 0.8) * amp * 0.82);
+                    p.vertex(x, y);
+                }
+                p.endShape();
+                p.drawingContext.setLineDash([]);
+
+                p.noStroke();
+                p.fill('rgba(7, 24, 45, 0.76)');
+                p.rect(p.width - 214, 28, 178, 72, 8);
+                p.fill(COLORS.text);
+                p.textSize(12);
+                p.textAlign(p.LEFT, p.TOP);
+                p.text('Bohmian wave', p.width - 178, 43);
+                p.text('Hidden order', p.width - 178, 68);
+                p.stroke(COLORS.line);
+                p.line(p.width - 198, 50, p.width - 184, 50);
+                p.stroke(COLORS.accent);
+                p.drawingContext.setLineDash([5, 4]);
+                p.line(p.width - 198, 75, p.width - 184, 75);
+                p.drawingContext.setLineDash([]);
+
+                const equation = document.getElementById('equation-text-hidden');
+                if (equation) {
+                    equation.textContent = 'Equation: y = ' + (amp * 100).toFixed(1) + ' * sin(kx), projection = ' + params.dim.toUpperCase();
+                }
+            };
+
+            p.windowResized = function () {
+                resizeCanvas(p, container, 360);
+            };
+        });
+    }
+
+    function createAdvancedHqr(container) {
+        new p5(function (p) {
+            let phase = 0;
+
+            p.setup = function () {
+                buildCanvas(p, container, null, 360);
+            };
+
+            p.draw = function () {
+                const params = getHqrParams();
+                phase += 0.01;
+                paintBackdrop(p);
+
+                const complexity = Number(params.complexity || 5);
+                const modelFactor = params.model === 'string' ? 1.35 : params.model === 'bohmian' ? 0.85 : 1;
+                const amp = (16 + complexity * 3.5) * modelFactor;
+
+                p.noFill();
+                p.stroke('rgba(86, 207, 225, 0.32)');
+                p.strokeWeight(1.2);
+                p.ellipse(p.width / 2, p.height * 0.3, p.width * 0.58, p.height * 0.28);
+                p.ellipse(p.width / 2, p.height * 0.3, p.width * 0.42, p.height * 0.2);
+
+                p.stroke(COLORS.accent);
+                p.strokeWeight(3);
+                p.beginShape();
+                for (let x = -p.width * 0.24; x <= p.width * 0.24; x += 4) {
+                    p.vertex(p.width / 2 + x, p.height * 0.3 + Math.sin(x * 0.04 + phase * 2) * amp);
+                }
+                p.endShape();
+
+                p.stroke(COLORS.line);
+                p.strokeWeight(2);
+                p.beginShape();
+                for (let x = -p.width * 0.24; x <= p.width * 0.24; x += 4) {
+                    p.vertex(p.width / 2 + x, p.height * 0.3 + Math.cos(x * 0.035 - phase) * amp * 0.65);
+                }
+                p.endShape();
+
+                const gridTop = p.height * 0.64;
+                const gridLeft = p.width * 0.16;
+                const gridWidth = p.width * 0.68;
+                const gridHeight = p.height * 0.16;
+                p.stroke('rgba(162, 168, 211, 0.42)');
+                p.noFill();
+                p.rect(gridLeft, gridTop, gridWidth, gridHeight, 6);
+                for (let i = 1; i < 8; i += 1) {
+                    const x = gridLeft + (gridWidth / 8) * i;
+                    p.line(x, gridTop, x, gridTop + gridHeight);
+                }
+                p.line(gridLeft, gridTop + gridHeight / 2, gridLeft + gridWidth, gridTop + gridHeight / 2);
+
+                p.noFill();
+                p.stroke(COLORS.warm);
+                p.strokeWeight(2);
+                p.beginShape();
+                for (let i = 0; i <= 180; i += 1) {
+                    const x = gridLeft + (i / 180) * gridWidth;
+                    const y = gridTop + gridHeight / 2 + Math.sin(i * 0.11 + phase * 2.4) * (gridHeight * 0.32);
+                    p.vertex(x, y);
+                }
+                p.endShape();
+
+                p.noStroke();
+                p.fill(COLORS.text);
+                for (let i = 0; i < 8; i += 1) {
+                    const x = gridLeft + (i / 7) * gridWidth;
+                    const y = gridTop + gridHeight / 2 + Math.sin(i + phase * 2) * gridHeight * 0.22;
+                    p.circle(x, y, 6);
+                }
+
+                p.fill('rgba(232, 238, 252, 0.78)');
+                p.textSize(12);
+                p.textAlign(p.LEFT, p.TOP);
+                p.text('Model: ' + String(params.model || 'integrated'), 18, 18);
+
+                const equation = document.getElementById('equation-text-hqr');
+                if (equation) {
+                    equation.textContent = 'Equation: y = ' + amp.toFixed(1) + ' * sin(kx), complexity = ' + complexity.toFixed(0);
+                }
+            };
+
+            p.windowResized = function () {
+                resizeCanvas(p, container, 360);
+            };
+        });
+    }
+
+    function initVisualizations() {
+        if (!p5Available()) {
+            return;
+        }
+
+        const hidden = document.getElementById('hidden-order-canvas');
+        if (hidden) {
+            if (hidden.classList.contains('interactive-canvas')) {
+                createAdvancedHiddenOrder(hidden);
+            } else {
+                createHiddenOrderSketch(hidden);
+            }
+        }
+
+        const tensor = document.getElementById('tensor-network-canvas');
+        if (tensor) {
+            createTensorNetworkSketch(tensor);
+        }
+
+        const holographic = document.getElementById('holographic-canvas');
+        if (holographic && holographic.tagName.toLowerCase() !== 'canvas') {
+            createHolographicSketch(holographic);
+        }
+
+        const hqr = document.getElementById('hqr-canvas');
+        if (hqr) {
+            createAdvancedHqr(hqr);
+        }
+    }
+
+    ready(initVisualizations);
+})();
