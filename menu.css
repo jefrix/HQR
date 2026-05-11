@@ -2,19 +2,14 @@
 .main-nav {
     background: rgba(15, 28, 56, 0.96);
     backdrop-filter: blur(10px);
-    padding: 8px 12px;
+    padding: 8px 14px 10px;
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
-    min-height: 58px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: none;
-}
-.main-nav::-webkit-scrollbar {
-    display: none;
+    min-height: 90px;
+    overflow: visible;
 }
 .menu-toggle {
     font-size: 24px;
@@ -55,14 +50,20 @@
     .menu-toggle {
         display: none;
     }
+    .main-nav {
+        min-height: 90px;
+    }
     .nav-list {
         display: flex;
         flex-direction: row;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
-        flex-wrap: nowrap;
-        gap: 6px;
-        min-width: max-content;
+        align-content: center;
+        flex-wrap: wrap;
+        gap: 6px 9px;
+        max-width: 1320px;
+        margin: 0 auto;
+        min-width: 0;
         padding: 0;
     }
     .nav-list li {
@@ -70,8 +71,8 @@
         margin: 0;
     }
     .nav-list li a {
-        padding: 8px 9px;
-        font-size: 14px;
+        padding: 6px 7px;
+        font-size: 12px;
     }
     .nav-list li a:hover {
         background-color: rgba(86, 207, 225, 0.12);
@@ -80,7 +81,7 @@
 }
 /* Ensure sections are not obscured by fixed nav */
 section {
-    scroll-margin-top: 80px;
+    scroll-margin-top: 110px;
 }
 /* Smooth scrolling */
 html {

@@ -16,7 +16,7 @@ body {
 /* Header */
 header {
     text-align: center;
-    padding: 80px 20px 50px; /* Default padding for desktop/laptop (increased from 70px to 80px to account for menu height + buffer) */
+    padding: 120px 20px 50px; /* Clears the fixed two-row desktop menu. */
     background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
     position: relative;
     z-index: 900; /* Below nav z-index */
@@ -37,7 +37,7 @@ header h1 {
 /* Responsive Header Padding for Different Screen Sizes */
 @media screen and (max-width: 1279px) and (min-width: 768px) { /* Laptop screens */
     header {
-        padding-top: 90px; /* Increase padding for laptops to ensure title clears menu */
+        padding-top: 125px; /* Clears the fixed two-row menu on narrower desktop screens. */
         padding-bottom: 40px; /* Reduce bottom padding for balance */
     }
 
@@ -144,7 +144,7 @@ main {
 
 section {
     margin-bottom: 50px;
-    scroll-margin-top: 80px; /* Updated to match default header padding, ensuring sections clear the menu */
+    scroll-margin-top: 115px; /* Updated to match the two-row fixed menu height. */
 }
 /* Headings and Text */
 h1, h2, h3 {
@@ -390,7 +390,7 @@ input[type="range"]:focus {
     }
 
     header {
-        padding: 30px 15px;
+        padding: 100px 15px 30px;
     }
 
     header h1 {
